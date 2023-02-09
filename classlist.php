@@ -1,6 +1,6 @@
 <?php
     class roles {
-        public $roles_id;
+        public $role_id;
         public $user_name;
         public $password_hash;
         public $employee_name;
@@ -10,7 +10,7 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ROLES_ID</td>
+                    <td>ROLE_ID</td>
                     <td>USER NAME</td>
                     <td>PASSWORD</td>
                     <td>EMPLOYEE NAME</td>
@@ -21,7 +21,7 @@
         }
         public function show_item() {
             echo '<tr>
-                    <td>'.$this->roles_id.'</td>
+                    <td>'.$this->role_id.'</td>
                     <td>'.$this->user_name.'</td>
                     <td>'.$this->password_hash.'</td>
                     <td>'.$this->employee_name.'</td>
@@ -51,8 +51,8 @@
         }
     }
 
-    class brand {
-        public $brand_id;
+    class branch {
+        public $branch_id;
         public $name;
         public $address;
         public $hotline;

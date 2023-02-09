@@ -41,7 +41,7 @@
 			</ul>
 		</div> -->
 
-		<h1 class="text-center mt-3">dashboardR PAGE</h1>
+		<h1 class="text-center mt-3">DASHBOARD PAGE</h1>
 		<table class="table table-dark home-menu w-100">
 			<tr>
 				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=roles" ><i class="bi bi-person"></i>  Account</a></td>
@@ -51,7 +51,7 @@
 			<tr>
 				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=category" ><i class="bi bi-bookmarks"></i> Category</a></td>
 				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=platform" ><i class="bi bi-apple"></i>  OS</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Bran</a></td>
+				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Brand</a></td>
 			</tr>
 			<tr>
 				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=product"><i class="bi bi-gift-fill"></i>  Product</a></td>
@@ -92,7 +92,7 @@
                 foreach($results as $row) {
                     $p->flag = $row["flag"];
                     if($p->flag == 1) {
-                        $p->roles_id = $row["roles_id"];
+                        $p->role_id = $row["roles_id"];
                         $p->user_name = $row["user_name"];
                         $p->password_hash = $row["password_hash"];
                         $p->employee_name = "nam";
