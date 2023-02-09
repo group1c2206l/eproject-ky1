@@ -11,7 +11,7 @@
             $dsn = "mysql:host=".$this->server_name.";dbname=".$this->database_name.";port=".$this->port.";charset=utf8";
             $option = [PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION];
             try {
-                $this->conn =  new PDO($dsn,$this->user_name,$this->pass_word,$option);
+                $this->conn =  new PDO($dsn,$this->user_name,$this->password,$option);
             } catch(PDOException $e) {
                 echo $e->getMessage();
             }
