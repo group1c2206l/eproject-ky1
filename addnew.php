@@ -1,4 +1,8 @@
+<?php
+    require "classlist.php";
 
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -15,40 +19,36 @@
             if(isset($_GET["select"])) {
                 $select = $_GET["select"];
                 switch($select) {
-                    case "roles":
+                    case "role":
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center">Add new roles</h3>
                                     <form action=""  method="POST">
                                         <div class="form-group mb-3 mt-6">
-                                            <label  for="brand_name">User name</label>
-                                            <input type="text" class="form-control" id="brand_name" name="brand_name">
+                                            <label  for="user_name">User name</label>
+                                            <input type="text" class="form-control" id="user_name" name="user_name">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="category_code">Password</label>
-                                            <input type="text" class="form-control" id="country" name="country">
+                                            <input type="password" class="form-control" id="password_hash" name="password_hash">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary mb-2" name="save" value="save">Save</button>
-                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="manage.php?select=brand">Back</a></button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=role">Back</a></button>
                                         <span><?php echo $mes ?></span>
                                     </form>
                                 </div>';
                         if(isset($_POST["save"])) {
-                            if(isset($_POST["brand_name"]) && isset($_POST["country"])) {
-                                require "show-manage.php";
-                                echo $_POST["brand_name"];
-                                $b = new brand;
-                                $b->name = $_POST["brand_name"];
-                                $b->country = $_POST["country"];
-                                $b->create_at = "NOW()";
-                                $b->addnew();
-                                header("location: manage.php?select=brand");
-                                
+                            if(isset($_POST["user_name"]) && isset($_POST["password_hash"])) {
+                                $r = new role;
+                                $r->user_name = $_POST["user_name"];
+                                $r->password_hash = sha1($_POST["password_hash"]);
+                                $r->addnew();
+                                header("location: dashboard.php?select=role");
                             }
                         }
                     break;
 
-                    case "category":
+                    case "branch":
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center">Add new Category</h3>
                                     <form action=""  method="POST">
