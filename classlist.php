@@ -142,6 +142,15 @@
                     <td><button class="btn btn-primary"><a  class="text-light"  >Delete</a></button></td> 
                 </tr>';
         }
+        public function arr_result($query) {
+            require_once "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT * FROM ".$query." ";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
         public function addnew() {
             require "config.php";
             $c = new config;
@@ -153,7 +162,6 @@
                     "name" => $this->name,
                     "address" => $this->address,
                     "hotline" => $this->hotline,
-                    "flag" => $this->flag,
                 )
             );
         }

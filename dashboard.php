@@ -99,6 +99,23 @@
                                 }
                             }
                             break;
+                        case "branch":
+                            $p = new branch;
+                            $p->show_header();
+                            $results = $p->arr_result("branch");
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->branch_id = $row["branch_id"];
+                                    $p->name = $row["name"];
+                                    $p->address = $row["address"];
+                                    $p->hotline = $row["hotline"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
                         // case "galery":  // hien thi danh muc galery
                         //     $a = new config;
                         //     $conn = $a->connect();

@@ -21,6 +21,7 @@
 
     switch($editid) {
         case "role":
+            
             $p = new role;
             if(isset($_GET["role_id"])) {
                 $p->role_id = $_GET["role_id"];
