@@ -1,6 +1,17 @@
 <?php
-    require "classlist.php";
-
+    require "../classlist.php";
+    $select = "";
+    if(isset($_GET["select"])) {
+        $select = $_GET["select"];
+    }
+    $search_data = "";
+    if(isset($_GET["search_data"])) {
+        $search_data = $_GET["search_data"];
+    }
+    $search_list = "";
+    if(isset($_GET["search_list"])) {
+        $search_list = $_GET["search_list"];
+    }
 
 
 ?>
@@ -12,7 +23,7 @@
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
-	<title>dashboard</title>
+	<title>Dashboard</title>
 	<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet">
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -28,6 +39,15 @@
 		 }
         .table-result td {
             color: white;
+        }
+        #search-box {
+            margin-left: 40px;
+            padding: 2px 5px 4px 5px;
+            border-radius: 5px;
+        }
+        #search_list {
+            padding: 2px 5px 4px 5px;
+            border-radius: 5px;
         }
     </style>
 </head>
@@ -66,26 +86,50 @@
 				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"></a></td>
 			</tr>
 		</table>
-
-        <?php
-            if(isset($_GET["select"])) {
-                $select = $_GET["select"];
-            }
-        ?>
-         <button class="btn btn-primary <?php if($select == "galery") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
-        
+        <!-- Khoi tim kiem -->
+        <div class="">
+            <form action="" method="GET" class="<?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
+                <button class="btn btn-primary <?php if($select == "galery") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
+                <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
+                <input type="text" id="search-box" name="search_data">
+                <select name="search_list" id="search_list">
+                   <?php
+                       switch($select) {
+                           case "role":
+                               $s = new role;
+                               $s->search_list();
+                               break;
+                           case "branch":
+                               $s = new branch;
+                               $s->search_list();
+                               break;
+                       }
+                   ?>
+                </select>
+                
+                <button type="submit" class="btn btn-primary" value="send">Search</button>
+            </form>
+        </div>
+     
          <table class="table table-result">
             <?php
                 
 
-                if(isset($_GET["select"])) {
-                    $select = $_GET["select"];
 
                     switch($select) {
+                        
                         case "role":
                             $p = new role;
                             $p->show_header();
-                            $results = $p->arr_result("role");
+                            if($search_data == NULL) {
+                                $results = $p->arr_result("role");
+                                
+                            } else {
+                                $results = $p->search_item('role', $search_list,$search_data);
+                                if(count($results)<1) {
+                                    echo "khong co gia tri nao phu hop";
+                                }
+                             }
                             foreach($results as $row) {
                                 $p->flag = $row["flag"];
                                 if($p->flag == 1) {
@@ -98,11 +142,19 @@
                                     $p->show_item();
                                 }
                             }
-                            break;
+                        
+                            
+                        break;
                         case "branch":
                             $p = new branch;
                             $p->show_header();
-                            $results = $p->arr_result("branch");
+                            if($search_data == NULL) {
+                                $results = $p->arr_result("branch");
+                            } else {
+                                $results = $p->search_item('branch', $search_list,$search_data);
+                                if(count($results)<1) {
+                                    echo "khong co gia tri nao phu hop";
+                                }}
                             foreach($results as $row) {
                                 $p->flag = $row["flag"];
                                 if($p->flag == 1) {
@@ -158,8 +210,7 @@
                         //     $conn = NULL;
                         //     break;
 
-                    }                   
-                }
+                    }                 
                 
             ?>
         </table>
@@ -168,5 +219,6 @@
 
 
     </div>
+    <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

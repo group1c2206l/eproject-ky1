@@ -30,7 +30,7 @@
                     <td>'.$this->flag.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?editid=role&role_id='.$this->role_id.'&user_name='.$this->user_name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=role&role_id='.$this->role_id.'&user_name='.$this->user_name.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light"  >Delete</a></button></td> 
                 </tr>';
         }
@@ -106,6 +106,29 @@
             );
         }
 
+        public function search_list() {
+            $arr = ["user_name"];
+            foreach($arr as $item) {
+                echo '
+                    <option value="'.$item.'">'.$item.'</option>
+                ';
+            }
+        }
+
+        public function search_item($table,$search_list,$search_data) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":search_data" => '%'.$search_data.'%'
+                )
+            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
     }
 
     class branch {
@@ -116,6 +139,7 @@
         public $flag;
         public $create_at;
         public $update_at;
+        public $search_list;
 
         public function show_header() {
             echo "<tr>
@@ -123,7 +147,6 @@
                     <td>NAME</td>
                     <td>ADDRESS</td>
                     <td>HOTLINE</td>
-                    <td>FLAG</td>
                     <td>CREATE_AT</td>
                     <td>UPDATE_AT</td>
                     <td colspan='2'>ACTION</td>
@@ -135,11 +158,10 @@
                     <td>'.$this->name.'</td>
                     <td>'.$this->address.'</td>
                     <td>'.$this->hotline.'</td>
-                    <td>'.$this->flag.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light"  >Delete</a></button></td> 
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&branch_id='.$this->branch_id.'&name='.$this->name.'&address='.$this->address.'&hotline='.$this->hotline.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=branch&branch_id='.$this->branch_id.' ">Delete</a></button></td> 
                 </tr>';
         }
         public function arr_result($query) {
@@ -155,13 +177,13 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO brand(name,address,hotline,flag,create_at) VALUES (:name,:address,:hotline,:flag,NOW())';
+            $sql = 'INSERT INTO branch(name,address,hotline,create_at) VALUES (:name,:address,:hotline,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    "name" => $this->name,
-                    "address" => $this->address,
-                    "hotline" => $this->hotline,
+                    ":name" => $this->name,
+                    ":address" => $this->address,
+                    ":hotline" => $this->hotline,
                 )
             );
         }
@@ -170,16 +192,52 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE brand SET name = :name,address = :address,hotline = :hotline,flag = :flag,update_at = NOW() WHERE roles_id = :role_id;';
+            $sql = 'UPDATE branch SET name = :name,address = :address,hotline = :hotline,update_at = NOW() WHERE branch_id = :branch_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    "name" => $this->name,
-                    "address" => $this->address,
-                    "hotline" => $this->hotline,
-                    "flag" => $this->flag,
+                    ":branch_id" => $this->branch_id,
+                    ":name" => $this->name,
+                    ":address" => $this->address,
+                    ":hotline" => $this->hotline,
                 )
             );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE branch SET flag = 0,update_at = NOW() WHERE branch_id = :branch_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":branch_id" => $this->branch_id
+                )
+            );
+        }
+
+        public function search_list() {
+            $arr = ["name","address","hotline"];
+            foreach($arr as $item) {
+                echo '
+                    <option value="'.$item.'">'.$item.'</option>
+                ';
+            }
+        }
+
+        public function search_item($table,$search_list,$search_data) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":search_data" => '%'.$search_data.'%'
+                )
+            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
     }

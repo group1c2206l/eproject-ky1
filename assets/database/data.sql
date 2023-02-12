@@ -18,6 +18,7 @@ CREATE TABLE branch(
     name VARCHAR(50) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
     address VARCHAR(100) CHARACTER SET utf8 COLLATE utf8_unicode_ci,
     hotline VARCHAR(15),
+    flag INT DEFAULT 1,
     create_at DATETIME,
     update_at DATETIME,
     CONSTRAINT PK_branch PRIMARY KEY (branch_id)

@@ -1,5 +1,5 @@
 <?php
-    require "classlist.php";
+    require "../classlist.php";
 
 
 ?>
@@ -71,9 +71,9 @@
                                 </div>';
                         if(isset($_POST["save"])) {
                             if(isset($_POST["branch_name"]) && isset($_POST["address"]) && isset($_POST["hotline"])) {
-                                require "classlist.php.php";
+                                
                                 $b = new branch;
-                                $b->name = $_POST["category_name"];
+                                $b->name = $_POST["branch_name"];
                                 $b->address = $_POST["address"];
                                 $b->hotline = $_POST["hotline"];
                                 $b->addnew();
