@@ -243,7 +243,55 @@
     }
 
     class employee {
-        
+        public $employee_id;
+        public $fname;
+        public $mname;
+        public $lname;
+        public $dob;
+        public $address;
+        public $phone_number;
+        public $person_id;
+        public $email;
+        public $contact_name;
+        public $contact_phone;
+        public $type;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>FNAME</td>
+                    <td>MNAME</td>
+                    <td>LNAME</td>
+                    <td>DOB</td>
+                    <td>ADDRESS</td>
+                    <td>PHONE NUMBER</td>
+                    <td>PERSON ID</td>
+                    <td>EMAIL</td>
+                    <td>CONTACT NAME</td>
+                    <td>CONTACT PHONE</td>
+                    <td>TYPE</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->employee_id.'</td>
+                    <td>'.$this->fname.'</td>
+                    <td>'.$this->mname.'</td>
+                    <td>'.$this->lname.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&employee_id='.$this->employee_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=branch&employee_id='.$this->employee_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+
     }
 
     class galery {
