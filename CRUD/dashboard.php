@@ -4,11 +4,11 @@
     if(isset($_GET["select"])) {
         $select = $_GET["select"];
     }
-    $search_data = "";
+    $search_data = NULL;
     if(isset($_GET["search_data"])) {
         $search_data = $_GET["search_data"];
     }
-    $search_list = "";
+    $search_list = NULL;
     if(isset($_GET["search_list"])) {
         $search_list = $_GET["search_list"];
     }
@@ -36,6 +36,10 @@
 			padding-left: 20px !important;
 			color: red !important;
 		};
+        body {
+            position: relative;
+            z-index: 0;
+        }
 		.dashboard {
 			min-width: 1200px;
 		 }
@@ -50,6 +54,15 @@
         #search_list {
             padding: 2px 5px 4px 5px;
             border-radius: 5px;
+        }
+        .noti {
+            display: inline-block;
+            padding: 30px;
+            border: 1px solid chocolate;
+            background-color: orange;
+            position: absolute;
+            z-index: 10;
+            top: 0;
         }
     </style>
 </head>
@@ -66,28 +79,30 @@
 		</div> -->
 
 		<h1 class="text-center mt-3">DASHBOARD PAGE</h1>
-		<table class="table table-dark home-menu w-100">
-			<tr>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></td>
-			</tr>
-			<tr>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=category" ><i class="bi bi-bookmarks"></i> Member</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=platform" ><i class="bi bi-apple"></i>  Utilities</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Device</a></td>
-			</tr>
-			<tr>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=product"><i class="bi bi-gift-fill"></i>  Service</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=description" ><i class="bi bi-images"></i>  Package</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galer</a></td>
-			</tr>
-			<tr>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></td>
-				<td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"></a></td>
-			</tr>
-		</table>
+        <div class="menu-body bg-dark">
+            <table class="table table-dark home-menu container-lg">
+                <tr>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></td>
+                </tr>
+                <tr>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=category" ><i class="bi bi-bookmarks"></i> Member</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=platform" ><i class="bi bi-apple"></i>  Utilities</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Device</a></td>
+                </tr>
+                <tr>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=product"><i class="bi bi-gift-fill"></i>  Service</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=description" ><i class="bi bi-images"></i>  Package</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galer</a></td>
+                </tr>
+                <tr>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></td>
+                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"></a></td>
+                </tr>
+            </table>
+        </div>
         <!-- Khoi tim kiem -->
         <div class="">
             <form action="" method="GET" class="<?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
@@ -105,11 +120,15 @@
                                $s = new branch;
                                $s->search_list();
                                break;
+                           case "employee":
+                               $s = new employee;
+                               $s->search_list();
+                               break;
                        }
                    ?>
                 </select>
                 
-                <button type="submit" class="btn btn-primary" value="send">Search</button>
+                <button type="submit" class="btn btn-primary" value="send" name="search">Search</button>
             </form>
         </div>
      
@@ -150,13 +169,20 @@
                         case "branch":
                             $p = new branch;
                             $p->show_header();
-                            if($search_data == NULL) {
+                            if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("branch");
                             } else {
-                                $results = $p->search_item('branch', $search_list,$search_data);
-                                if(count($results)<1) {
-                                    echo "khong co gia tri nao phu hop";
-                                }}
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('branch', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
                             foreach($results as $row) {
                                 $p->flag = $row["flag"];
                                 if($p->flag == 1) {
@@ -167,6 +193,37 @@
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
                                     $p->show_item();
+                                }
+                            }
+                            break;
+                        case "employee":
+                            $e = new employee;
+                            $e->show_header();
+                            if($search_data == NULL) {
+                                $results = $e->arr_result("employee");
+                            } else {
+                                $results = $e->search_item('employee', $search_list,$search_data);
+                                if(count($results)<1) {
+                                    echo "khong co gia tri nao phu hop";
+                                }}
+                            foreach($results as $row) {
+                                $e->flag = $row["flag"];
+                                if($e->flag == 1) {
+                                    $e->employee_id = $row["employee_id"];
+                                    $e->fname = $row["fname"];
+                                    $e->mname = $row["mname"];
+                                    $e->lname = $row["lname"];
+                                    $e->dob = $row["dob"];
+                                    $e->address = $row["address"];
+                                    $e->phone_number = $row["phone_number"];
+                                    $e->person_id = $row["person_id"];
+                                    $e->email = $row["email"];
+                                    $e->contact_name = $row["contact_name"];
+                                    $e->contact_phone = $row["contact_phone"];
+                                    $e->type = $row["type"];
+                                    $e->create_at = $row["create_at"];
+                                    $e->update_at = $row["update_at"];
+                                    $e->show_item();
                                 }
                             }
                             break;
@@ -216,7 +273,9 @@
                 
             ?>
         </table>
-
+        <div class="noti d-none">
+            <h5>vui long nhap du thong tin</h5>
+        </div>            
 
 
 

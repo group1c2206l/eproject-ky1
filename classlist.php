@@ -173,6 +173,7 @@
             $stmt->execute();
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
         public function addnew() {
             require "config.php";
             $c = new config;
@@ -284,6 +285,14 @@
                     <td>'.$this->fname.'</td>
                     <td>'.$this->mname.'</td>
                     <td>'.$this->lname.'</td>
+                    <td>'.$this->dob.'</td>
+                    <td>'.$this->address.'</td>
+                    <td>'.$this->phone_number.'</td>
+                    <td>'.$this->person_id.'</td>
+                    <td>'.$this->email.'</td>
+                    <td>'.$this->contact_name.'</td>
+                    <td>'.$this->contact_phone.'</td>
+                    <td>'.$this->type.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&employee_id='.$this->employee_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'">Edit</a></button></td>
@@ -291,6 +300,101 @@
                 </tr>';
         }
 
+        public function arr_result($query) {
+            require_once "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT * FROM ".$query." ";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO employee(fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":person_id" => $this->person_id,
+                    ":email" => $this->email,
+                    ":contact_name" => $this->contact_name,
+                    ":contact_phone" => $this->contact_phone,
+                    ":type" => $this->type,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE employee SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,person_id = :person_id,email = :email,contact_name = :contact_name,contact_phone = :contact_phone,type = :type,update_at = NOW() WHERE employee_id = :employee_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":person_id" => $this->person_id,
+                    ":email" => $this->email,
+                    ":contact_name" => $this->contact_name,
+                    ":contact_phone" => $this->contact_phone,
+                    ":type" => $this->type,
+                    ":employee_id" => $this->employee_id,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE employee SET flag = 0,update_at = NOW() WHERE employee_id = :employee_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":employee_id" => $this->employee_id
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function search_list() {
+            $arr = ["lname","dob","address","phone_number","person_id","email"];
+            foreach($arr as $item) {
+                echo '
+                    <option value="'.$item.'">'.$item.'</option>
+                ';
+            }
+        }
+
+        public function search_item($table,$search_list,$search_data) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":search_data" => '%'.$search_data.'%'
+                )
+            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
 
     }
 
