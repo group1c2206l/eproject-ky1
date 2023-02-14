@@ -456,6 +456,10 @@
         public $flag;
         public $create_at;
         public $update_at;
+
+        public function show() {
+            
+        }
     }
 
 
