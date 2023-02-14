@@ -37,7 +37,7 @@
     <section class="home">
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-1.jpeg');">
+                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-2.jpeg');">
                     <div class="content">
                         <h3>join prime-fitness today</h3>
                         <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem modi distinctio facere ut. Inventore, facere.</p>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 
-                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-2.jpeg');">
+                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-3.jpeg');">
                     <div class="content">
                         <h3>health is wealth</h3>
                         <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem modi distinctio facere ut. Inventore, facere.</p>
@@ -171,7 +171,7 @@
             </div>
 
             <div class="box">
-                <img src="./assets/image/service/pic-4.jpeg" alt="">
+                <img src="./assets/image/swimming/swimming-couse.jpeg" alt="">
             </div>
             <div class="box">
                 <div class="content">
@@ -208,7 +208,7 @@
                 <div class="swiper-slide box">
                     <a href="">
                         <div class="image">
-                            <img src="./assets/image/PT/trainer-1.jpeg" alt="">
+                            <img src="./assets/image/PT/trainer-1.png" alt="">
                         </div>
                         <div class="info-trainer">
                             <h1>name trainer</h1>
@@ -233,6 +233,18 @@
                     <a href="">
                         <div class="image">
                             <img src="./assets/image/PT/trainer-4.jpeg" alt="">
+                        </div>
+                        <div class="info-trainer">
+                            <h1>name trainer</h1>
+                            <p>trainer job</p>
+                        </div>
+                    </a>
+                </div>
+
+                <div class="swiper-slide box">
+                    <a href="">
+                        <div class="image">
+                            <img src="./assets/image/PT/swimming_pt.jpg" alt="">
                         </div>
                         <div class="info-trainer">
                             <h1>name trainer</h1>
