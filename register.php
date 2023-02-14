@@ -10,12 +10,10 @@
     }
     if(isset($_POST["login"])) {
         if($p->user_name != NULL && $p->password_hash != NULL) {
-            if($p->check_current_pass()) {
-                header("location: ./CRUD/dashboard.php");
-            } else {
-                $mes = "wrong user name or password !";
+            if(isset($_POST["saveme"])) {
+                $p->saveme = $_POST["saveme"];
             }
-
+            $p->logins();
         }
     }
 
@@ -75,7 +73,7 @@
                 <input type="password" name="l_pwd" placeholder="Password">
             </div>
             <div class="remember">
-                <input type="checkbox" id="save_me" name="save_me">
+                <input type="checkbox" id="save_me" name="saveme" value="saveme">
                 <label for="save_me">Remember me</label>
             </div>
             <div class="group-btn">

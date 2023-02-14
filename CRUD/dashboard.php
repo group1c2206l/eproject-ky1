@@ -1,4 +1,5 @@
 <?php
+    require "../request.php";
     require "../classlist.php";
     $select = "";
     if(isset($_GET["select"])) {
@@ -107,7 +108,7 @@
                 </tr>
                 <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="../logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="logout.php"></a></div></td>
                 </tr>
             </table>

@@ -38,6 +38,7 @@
         public $password_hash;
         public $new_password_hash;
         public $employee_name;
+        public $saveme;
         public $flag;
         public $create_at;
         public $update_at;
@@ -86,6 +87,26 @@
                 return true;
             } else {
                 return false;
+            }
+        }
+
+        public function logins() {
+            if($this->check_current_pass()) {
+                $name = $this->user_name;
+                setcookie("id",md5($name),time()+6000,"/");
+
+                if($this->saveme == "saveme") {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    setcookie("loggedin",$name,time()+6000,"/");
+                    header("location: ./CRUD/dashboard.php");
+                } else {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    header("location: ./CRUD/dashboard.php");
+                }
+            } else {
+                echo "Invalid username or password";
             }
         }
 
@@ -435,6 +456,10 @@
         public $flag;
         public $create_at;
         public $update_at;
+
+        public function show() {
+            
+        }
     }
 
 
