@@ -23,6 +23,7 @@
             <a href="#">Services</a>
             <a href="#">Trainer</a>
             <a href="#">Contact</a>
+            <a href="./register.php">Login</a>
         </nav>
 
         <div class="icons">

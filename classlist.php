@@ -1,5 +1,38 @@
 <?php
-    class role {
+    class main {
+        public function arr_result($query) {
+            require_once "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT * FROM ".$query." ";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+        public function search_list($arr) {
+            foreach($arr as $item) {
+                echo '
+                    <option value="'.$item.'">'.$item.'</option>
+                ';
+            }
+        }
+
+        public function search_item($table,$search_list,$search_data) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":search_data" => '%'.$search_data.'%'
+                )
+            );
+            return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+    }
+    class role extends main {
         public $role_id;
         public $user_name;
         public $password_hash;
@@ -49,7 +82,6 @@
                 )
             );
             $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
-            echo count($results);
             if(count($results) == 1) {
                 return true;
             } else {
@@ -67,17 +99,6 @@
             }
         }
     
-
-        public function arr_result($query) {
-            require_once "config.php";
-            $c = new config;
-            $conn = $c->connect();
-            $sql = "SELECT * FROM ".$query." ";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-
         public function addnew() {
             require_once "config.php";
             $c = new config;
@@ -106,32 +127,9 @@
             );
         }
 
-        public function search_list() {
-            $arr = ["user_name"];
-            foreach($arr as $item) {
-                echo '
-                    <option value="'.$item.'">'.$item.'</option>
-                ';
-            }
-        }
-
-        public function search_item($table,$search_list,$search_data) {
-            require "config.php";
-            $c = new config;
-            $conn = $c->connect();
-            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(
-                array (
-                    ":search_data" => '%'.$search_data.'%'
-                )
-            );
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-
     }
 
-    class branch {
+    class branch extends main {
         public $branch_id;
         public $name;
         public $address;
@@ -163,15 +161,6 @@
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&branch_id='.$this->branch_id.'&name='.$this->name.'&address='.$this->address.'&hotline='.$this->hotline.'">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=branch&branch_id='.$this->branch_id.' ">Delete</a></button></td> 
                 </tr>';
-        }
-        public function arr_result($query) {
-            require_once "config.php";
-            $c = new config;
-            $conn = $c->connect();
-            $sql = "SELECT * FROM ".$query." ";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function addnew() {
@@ -218,32 +207,9 @@
             );
         }
 
-        public function search_list() {
-            $arr = ["name","address","hotline"];
-            foreach($arr as $item) {
-                echo '
-                    <option value="'.$item.'">'.$item.'</option>
-                ';
-            }
-        }
-
-        public function search_item($table,$search_list,$search_data) {
-            require "config.php";
-            $c = new config;
-            $conn = $c->connect();
-            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(
-                array (
-                    ":search_data" => '%'.$search_data.'%'
-                )
-            );
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
-        }
-
     }
 
-    class employee {
+    class employee extends main {
         public $employee_id;
         public $fname;
         public $mname;
@@ -295,19 +261,9 @@
                     <td>'.$this->type.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&employee_id='.$this->employee_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=branch&employee_id='.$this->employee_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=employee&employee_id='.$this->employee_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&contact_name='.$this->contact_name.'&contact_phone='.$this->contact_phone.'&type='.$this->type.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=employee&employee_id='.$this->employee_id.' ">Delete</a></button></td> 
                 </tr>';
-        }
-
-        public function arr_result($query) {
-            require_once "config.php";
-            $c = new config;
-            $conn = $c->connect();
-            $sql = "SELECT * FROM ".$query." ";
-            $stmt = $conn->prepare($sql);
-            $stmt->execute();
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
         public function addnew() {
@@ -373,33 +329,112 @@
             $conn = NULL;
         }
 
-        public function search_list() {
-            $arr = ["lname","dob","address","phone_number","person_id","email"];
-            foreach($arr as $item) {
-                echo '
-                    <option value="'.$item.'">'.$item.'</option>
-                ';
-            }
+    }
+
+    class utilities extends main {
+        public $utilities_id;
+        public $name;
+        public $points;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>POINT</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->utilities_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->points.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=utilities&utilities_id='.$this->utilities_id.'&name='.$this->name.'&points='.$this->points.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=utilities&utilities_id='.$this->utilities_id.' ">Delete</a></button></td> 
+                </tr>';
         }
 
-        public function search_item($table,$search_list,$search_data) {
+        public function addnew() {
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
+            $sql = 'INSERT INTO utilities(name,points,create_at) VALUES (:name,:points,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":search_data" => '%'.$search_data.'%'
+                    ":name" => $this->name,
+                    ":points" => $this->points,
                 )
             );
-            return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE utilities SET name = :name,points = :points,update_at = NOW() WHERE utilities_id = :utilities_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":utilities_id" => $this->utilities_id,
+                    ":name" => $this->name,
+                    ":points" => $this->points,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE utilities SET flag = 0,update_at = NOW() WHERE utilities_id = :utilities_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":utilities_id" => $this->utilities_id
+                )
+            );
+        }
+
+
+
 
     }
 
-    class galery {
 
+
+
+
+
+
+
+
+
+    class member extends main {
+        public $member_id;
+        public $card_id;
+        public $password_hash;
+        public $fname;
+        public $mname;
+        public $lname;
+        public $dob;
+        public $address;
+        public $phone_number;
+        public $email;
+        public $vip;
+        public $package_id;
+        public $course_id;
+        public $points;
+        public $flag;
+        public $create_at;
+        public $update_at;
     }
 
 

@@ -30,29 +30,38 @@
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
     <style>
-    	.mmm {height: 50px};
-		a	{
-			display: inline-block;
-			padding-left: 20px !important;
-			color: red !important;
-		};
         body {
             position: relative;
             z-index: 0;
         }
-		.dashboard {
-			min-width: 1200px;
-		 }
+        .dashboard {
+            min-width: 1200px;
+         }
+         .menu-body {
+            width: 100%;
+         }
+    	.mmm {
+            min-width: 33.3%;
+            display: inline-block;
+            height: 50px;
+        }
         .table-result td {
             color: white;
         }
+        .search-bar {
+            width: 100%;
+            height: 40px;
+        }
         #search-box {
             margin-left: 40px;
-            padding: 2px 5px 4px 5px;
+            height: 100%;
+            padding: 0 5px;
             border-radius: 5px;
+            margin-top: 2px;
         }
         #search_list {
-            padding: 2px 5px 4px 5px;
+            height: 100%;
+            padding: 0 5px;
             border-radius: 5px;
         }
         .noti {
@@ -78,34 +87,34 @@
 			</ul>
 		</div> -->
 
-		<h1 class="text-center mt-3">DASHBOARD PAGE</h1>
+		<h1 class="text-center text-warn mt-3">DASHBOARD PAGE</h1>
         <div class="menu-body bg-dark">
             <table class="table table-dark home-menu container-lg">
                 <tr>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=category" ><i class="bi bi-bookmarks"></i> Member</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=platform" ><i class="bi bi-apple"></i>  Utilities</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Device</a></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=product"><i class="bi bi-gift-fill"></i>  Service</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=description" ><i class="bi bi-images"></i>  Package</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galer</a></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></td>
-                    <td class="text-start align-middle mmm"><a class="fw-bold text-light open text-decoration-none" style="padding-left: 20px;" href="logout.php"></a></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="logout.php"></a></div></td>
                 </tr>
             </table>
         </div>
         <!-- Khoi tim kiem -->
         <div class="">
-            <form action="" method="GET" class="<?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
+            <form action="" method="GET" class="search-bar <?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
                 <button class="btn btn-primary <?php if($select == "galery") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
                 <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
                 <input type="text" id="search-box" name="search_data">
@@ -113,17 +122,25 @@
                    <?php
                        switch($select) {
                            case "role":
-                               $s = new role;
-                               $s->search_list();
-                               break;
+                                $arr = ["user_name"];
+                                $s = new role;
+                                $s->search_list($arr);
+                                break;
                            case "branch":
-                               $s = new branch;
-                               $s->search_list();
-                               break;
+                                $arr = ["name","address","hotline"];
+                                $s = new branch;
+                                $s->search_list($arr);
+                                break;
                            case "employee":
-                               $s = new employee;
-                               $s->search_list();
-                               break;
+                                $arr = ["lname","dob","address","phone_number","person_id","email"];
+                                $s = new employee;
+                                $s->search_list($arr);
+                                break;
+                           case "utilities":
+                                $arr = ["name","points"];
+                                $s = new utilities;
+                                $s->search_list($arr);
+                                break;
                        }
                    ?>
                 </select>
@@ -166,6 +183,7 @@
                         
                             
                         break;
+
                         case "branch":
                             $p = new branch;
                             $p->show_header();
@@ -197,33 +215,70 @@
                             }
                             break;
                         case "employee":
-                            $e = new employee;
-                            $e->show_header();
-                            if($search_data == NULL) {
-                                $results = $e->arr_result("employee");
+                            $p = new employee;
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result("employee");
                             } else {
-                                $results = $e->search_item('employee', $search_list,$search_data);
-                                if(count($results)<1) {
-                                    echo "khong co gia tri nao phu hop";
-                                }}
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('employee', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
                             foreach($results as $row) {
-                                $e->flag = $row["flag"];
-                                if($e->flag == 1) {
-                                    $e->employee_id = $row["employee_id"];
-                                    $e->fname = $row["fname"];
-                                    $e->mname = $row["mname"];
-                                    $e->lname = $row["lname"];
-                                    $e->dob = $row["dob"];
-                                    $e->address = $row["address"];
-                                    $e->phone_number = $row["phone_number"];
-                                    $e->person_id = $row["person_id"];
-                                    $e->email = $row["email"];
-                                    $e->contact_name = $row["contact_name"];
-                                    $e->contact_phone = $row["contact_phone"];
-                                    $e->type = $row["type"];
-                                    $e->create_at = $row["create_at"];
-                                    $e->update_at = $row["update_at"];
-                                    $e->show_item();
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->employee_id = $row["employee_id"];
+                                    $p->fname = $row["fname"];
+                                    $p->mname = $row["mname"];
+                                    $p->lname = $row["lname"];
+                                    $p->dob = $row["dob"];
+                                    $p->address = $row["address"];
+                                    $p->phone_number = $row["phone_number"];
+                                    $p->person_id = $row["person_id"];
+                                    $p->email = $row["email"];
+                                    $p->contact_name = $row["contact_name"];
+                                    $p->contact_phone = $row["contact_phone"];
+                                    $p->type = $row["type"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+                        
+                        case "utilities":
+                            $p = new utilities;
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result("utilities");
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->utilities_id = $row["utilities_id"];
+                                    $p->name = $row["name"];
+                                    $p->points = $row["points"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
                                 }
                             }
                             break;

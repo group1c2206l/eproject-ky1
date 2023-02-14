@@ -1,0 +1,119 @@
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+body {
+    background-color: rgb(26, 23, 23);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+.container {
+    background-color: rgb(68, 7, 87);
+    width: 600px;
+    margin: 100px auto 0 auto;
+    border-radius: 5px;
+}
+.select {
+    width: 100%;
+    height: 50px;
+    display: flex;
+}
+.reg,.login {
+    flex: 50%;
+}
+.btn-select {
+    cursor: pointer;
+    font-size: 18px;
+    font-weight: bold;
+    color: rgb(109, 93, 93);
+    display: inline-block;
+    background-color: rgb(196, 241, 208);
+    width: 80px;
+    text-align: center;
+    line-height: 50px;
+    text-decoration: none;
+}
+.reg {
+    text-align: end;
+}
+
+form {
+    width: 100%;
+    padding: 20px 50px;
+
+}
+h2 {
+    font-size: 30px;
+    text-align: center;
+    color:aliceblue;
+    margin-bottom: 20px;
+}
+.group-item {
+    width: 100%;
+    display: flex;
+    justify-content:space-between;
+    margin-bottom: 10px;
+}
+.group-item label {
+    width: 100px;
+    font-weight: 500;
+    display: inline-block;
+    color: aliceblue;
+}
+.group-item input {
+    font-size: 16px;
+    width: 300px;
+    padding: 10px 10px;
+    border: none;
+    border-radius: 3px;
+}
+.group-item input:hover {
+    border: chocolate;
+    box-shadow: 2px 2px 5px violet;
+}
+.remember {
+   
+    width: 100%;
+    height: 50px;
+    color: aliceblue;
+}
+input[type = "checkbox"] {
+    cursor: pointer;
+    width: 15px;
+    height: 15px;
+}
+
+input[type="submit"] {
+    display:inline-block;
+    padding: 10px 60px;
+    background-color: yellow;
+    font-size: 16px;
+    border-radius: 5px;
+    text-align:center;
+    border: none;
+    color: rgb(19, 68, 39);
+    cursor: pointer;
+}
+input[type="submit"]:hover {
+    /* background-color: rgb(66, 24, 24);
+    color: aliceblue; */
+    box-shadow: 2px 2px 9px rgb(226, 73, 219);
+}
+input[type="submit"]:active {
+    transform: translateY(5px);
+}
+.group-btn {
+    display: flex;
+    justify-content: center;
+}
+
+.active {
+    background-color: violet !important;
+    color: aliceblue !important;
+}
+
+.mes {
+    margin-top: 20px;
+    text-align: center;
+    color: rgb(245, 253, 206);
+}

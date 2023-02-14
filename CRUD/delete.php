@@ -17,6 +17,17 @@
             } else {
                 header("location: dashboard.php?select=branch");
             }
+            break;
+        case "employee":
+            $p = new employee;
+            $p->employee_id = $_GET["employee_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=employee");
+            } else {
+                header("location: dashboard.php?select=employee");
+            }
+            break;
     }
 
 
