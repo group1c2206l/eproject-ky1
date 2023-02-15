@@ -1,4 +1,5 @@
 <?php
+    require "../request.php";
     require "../classlist.php";
     if(isset($_GET["delete_id"])) {
         $delete_id = $_GET["delete_id"];

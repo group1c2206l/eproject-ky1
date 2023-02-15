@@ -1,5 +1,18 @@
 <?php
     class main {
+        public $name;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
+        // public function __construct($flag,$create_at,$update_at)
+        // {   
+        //     $this->flag = $flag;
+        //     $this->create_at = $create_at;
+        //     $this->update_at = $update_at;
+        // }
+
+
         public function arr_result($query) {
             require_once "config.php";
             $c = new config;
@@ -31,6 +44,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        
     }
     class role extends main {
         public $role_id;
@@ -406,7 +420,7 @@
                 array (
                     ":utilities_id" => $this->utilities_id,
                     ":name" => $this->name,
-                    ":points" => $this->points,
+                    ":points" => $this->points
                 )
             );
         }
@@ -424,7 +438,149 @@
             );
         }
 
+    }
 
+    class device extends main{
+        public $device_id;
+        public $name;
+        public $brand;
+        public $width;
+        public $length;
+        public $height;
+        public $weight;
+        public $rescription;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>BRAND</td>
+                    <td>WIDTH</td>
+                    <td>LENGTH</td>
+                    <td>HEIGHT</td>
+                    <td>WEIGHT</td>
+                    <td>RESCRIPTION</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->device_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->brand.'</td>
+                    <td>'.$this->width.'</td>
+                    <td>'.$this->length.'</td>
+                    <td>'.$this->height.'</td>
+                    <td>'.$this->weight.'</td>
+                    <td>'.$this->rescription.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=device&device_id='.$this->device_id.'&name='.$this->name.'&brand='.$this->brand.'&width='.$this->width.'&length='.$this->length.'&height='.$this->height.'&weight='.$this->weight.'&rescription='.$this->rescription.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=device&device_id='.$this->device_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO device(name,brand,width,length,height,weight,rescription,create_at) VALUES (:name,:brand,:width,:length,:height,:weight,:rescription,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":brand" => $this->brand,
+                    ":width" => $this->width,
+                    ":length" => $this->length,
+                    ":height" => $this->height,
+                    ":weight" => $this->weight,
+                    ":rescription" => $this->rescription,
+                )
+            );
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET name = :name,brand = :brand,width = :width,length = :length,height = :height,weight = :weight,rescription = :rescription,update_at = NOW() WHERE device_id = :device_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":brand" => $this->brand,
+                    ":width" => $this->width,
+                    ":length" => $this->length,
+                    ":height" => $this->height,
+                    ":weight" => $this->weight,
+                    ":rescription" => $this->rescription,
+                    ":device_id" => $this->device_id,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE device_id = :device_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":device_id" => $this->device_id
+                )
+            );
+        }
+
+    }  
+    class service extends main {
+        public $service_id;
+        public $title;
+        public $rescription;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>TITLE</td>
+                    <td>RESCRIPTION</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->service_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->title.'</td>
+                    <td>'.$this->rescription.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=role&service_id='.$this->service_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light"  >Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO service(name,title,rescription,create_at) VALUES (:name,:title,:rescription,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":title" => $this->title,
+                    ":rescription" => $this->rescription,
+                )
+            );
+        }
 
 
     }
