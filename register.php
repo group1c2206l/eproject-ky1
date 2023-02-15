@@ -14,7 +14,10 @@
                 $p->saveme = $_POST["saveme"];
             }
             $p->logins();
+        } else {
+            $mes = "Please enter full information !";
         }
+
     }
 
 

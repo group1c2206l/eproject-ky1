@@ -28,19 +28,19 @@
         case "role":
 
             echo   '<div class="mt-5 num">
-                        <h3 class="text-center">Change Password</h3>
+                        <h3 class="text-center text-light">Change Password</h3>
                         <form action=""  method="POST">
                             <div class="form-group mb-3 mt-6">
-                                <label  for="brand_name">User name</label>
-                                <input type="text" class="form-control" id="brand_name" name="user_name" value="'.$_GET["user_name"].'" disabled>
+                                <label  for="brand_name" class="text-white-50">User name</label>
+                                <input type="text" class="form-control bg-dark text-white" id="brand_name" name="user_name" value="'.$_GET["user_name"].'" disabled>
                             </div>
                             <div class="form-group mb-3">
-                                <label for="category_code">Current Password</label>
-                                <input type="text" class="form-control" id="country" name="current_password">
+                                <label for="category_code" class="text-white-50">Current Password</label>
+                                <input type="text" class="form-control bg-dark text-white" id="country" name="current_password">
                             </div>
                             <div class="form-group mb-3">
-                                <label for="category_code">New Password</label>
-                                <input type="text" class="form-control" id="country" name="new_password">
+                                <label for="category_code" class="text-white-50">New Password</label>
+                                <input type="text" class="form-control bg-dark text-white" id="country" name="new_password">
                             </div>
 
                             <button type="submit" class="btn btn-primary mb-2" name="save" value="save">Save</button>
@@ -259,6 +259,131 @@
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                     <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=utilities">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;    
+
+                case "device":
+                    $p = new device;
+                    $mes = "";
+                    if(isset($_GET["utilities_id"])) {
+                        $p->device_id = $_GET["device_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["brand"])) {
+                            $p->brand = $_POST["brand"];
+                        }
+                        if(isset($_POST["width"])) {
+                            $p->width = $_POST["width"];
+                        }
+                        if(isset($_POST["length"])) {
+                            $p->length = $_POST["length"];
+                        }
+                        if(isset($_POST["height"])) {
+                            $p->height = $_POST["height"];
+                        }
+                        if(isset($_POST["weight"])) {
+                            $p->weight = $_POST["weight"];
+                        }
+                        if(isset($_POST["title"])) {
+                            $p->title = $_POST["title"];
+                        }
+                        if(isset($_POST["description"])) {
+                            $p->description = $_POST["description"];
+                        }
+                        if($p->name != NULL &&  $p->brand != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=device");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Edit Device</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Device name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Brand</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="brand" name="brand" value="'.$_GET["brand"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Width</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="width" name="width" value="'.$_GET["width"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Length</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="length" name="length" value="'.$_GET["length"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Height</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="height" name="height" value="'.$_GET["height"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Weight</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="weight" name="weight" value="'.$_GET["weight"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Title</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="title" name="title" value="'.$_GET["title"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Description</label>
+                                        <textarea name="description"  class="form-control bg-dark text-white"  rows="4">'.$_GET["description"].'</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=device">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;
+
+                case "service":
+                    $p = new service();
+                    $mes = "";
+                    if(isset($_GET["service_id"])) {
+                        $p->service_id = $_GET["service_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["title"])) {
+                            $p->title = $_POST["title"];
+                        }
+                        if(isset($_POST["rescription"])) {
+                            $p->description = $_POST["description"];
+                        }
+                        if($p->name != NULL &&  $p->title != NULL &&  $p->description != NULL) {
+                            $p->addnew();
+                            header("location: dashboard.php?select=service");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Service</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Service name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Title</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="points" name="title" value="'.$_GET["title"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Description</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="points" name="description" value="'.$_GET["description"].'">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
                                     <span class="text-warning">'.$mes.'</span>
                                 </form>
                             </div>';
