@@ -1,3 +1,7 @@
+<?php
+    require "../request.php";
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -12,6 +16,7 @@
     <div class="container">
 
 <?php
+    
     require "../classlist.php";
 
     if(isset($_GET["edit_id"])) {
@@ -168,58 +173,96 @@
                 }
 
                 echo   '<div class="mt-5 num">
-                <h3 class="text-center text-light">Add new Employee</h3>
-                <form action=""  method="POST">
-                    <div class="form-group mb-3 mt-6">
-                        <label for="fname" class="text-white-50">First Name</label>
-                        <input type="text" class="form-control bg-dark text-white" id="fname" name="fname" value="'.$_GET["fname"].'">
-                    </div>
-                    <div class="form-group mb-3 mt-6">
-                        <label for="mname" class="text-white-50">Mid Name</label>
-                        <input type="text" class="form-control bg-dark text-white" id="mname" name="mname" value="'.$_GET["mname"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="lname" class="text-white-50">Last Name</label>
-                        <input type="text" class="form-control bg-dark text-white" id="lname" name="lname" value="'.$_GET["lname"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="dob" class="text-white-50">Dob</label>
-                        <input type="date" class="form-control bg-dark text-white" id="dob" name="dob" value="'.$_GET["dob"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="address" class="text-white-50">Address</label>
-                        <input type="text" class="form-control bg-dark text-white" id="address" name="address" value="'.$_GET["address"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="phone_number" class="text-white-50">PHONE NUMBER</label>
-                        <input type="text" class="form-control bg-dark text-white" id="phone_number" name="phone_number" value="'.$_GET["phone_number"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="person_id" class="text-white-50">Person ID</label>
-                        <input type="text" class="form-control bg-dark text-white" id="person_id" name="person_id" value="'.$_GET["person_id"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="email" class="text-white-50">Email</label>
-                        <input type="email" class="form-control bg-dark text-white" id="email" name="email" value="'.$_GET["email"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="contact_name" class="text-white-50">Contact Name</label>
-                        <input type="text" class="form-control bg-dark text-white" id="contact_name" name="contact_name" value="'.$_GET["contact_name"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="contact_phone" class="text-white-50">Contact Phone</label>
-                        <input type="text" class="form-control bg-dark text-white" id="contact_phone" name="contact_phone" value="'.$_GET["contact_phone"].'">
-                    </div>
-                    <div class="form-group mb-3">
-                        <label for="type" class="text-white-50">Type</label>
-                        <input type="text" class="form-control bg-dark text-white" id="type" name="type" placeholder="M : Manager -- S : Staff  --  PT : Person Trainner" value="'.$_GET["type"].'">
-                    </div>
-                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=employee">Back</a></button>
-                    <span class="text-warning">'.$mes.'</span>
-                </form>
-            </div>';
+                            <h3 class="text-center text-light">Add new Employee</h3>
+                            <form action=""  method="POST">
+                                <div class="form-group mb-3 mt-6">
+                                    <label for="fname" class="text-white-50">First Name</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="fname" name="fname" value="'.$_GET["fname"].'">
+                                </div>
+                                <div class="form-group mb-3 mt-6">
+                                    <label for="mname" class="text-white-50">Mid Name</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="mname" name="mname" value="'.$_GET["mname"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="lname" class="text-white-50">Last Name</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="lname" name="lname" value="'.$_GET["lname"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="dob" class="text-white-50">Dob</label>
+                                    <input type="date" class="form-control bg-dark text-white" id="dob" name="dob" value="'.$_GET["dob"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="address" class="text-white-50">Address</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="address" name="address" value="'.$_GET["address"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="phone_number" class="text-white-50">PHONE NUMBER</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="phone_number" name="phone_number" value="'.$_GET["phone_number"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="person_id" class="text-white-50">Person ID</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="person_id" name="person_id" value="'.$_GET["person_id"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="email" class="text-white-50">Email</label>
+                                    <input type="email" class="form-control bg-dark text-white" id="email" name="email" value="'.$_GET["email"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="contact_name" class="text-white-50">Contact Name</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="contact_name" name="contact_name" value="'.$_GET["contact_name"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="contact_phone" class="text-white-50">Contact Phone</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="contact_phone" name="contact_phone" value="'.$_GET["contact_phone"].'">
+                                </div>
+                                <div class="form-group mb-3">
+                                    <label for="type" class="text-white-50">Type</label>
+                                    <input type="text" class="form-control bg-dark text-white" id="type" name="type" placeholder="M : Manager -- S : Staff  --  PT : Person Trainner" value="'.$_GET["type"].'">
+                                </div>
+                                <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=employee">Back</a></button>
+                                <span class="text-warning">'.$mes.'</span>
+                            </form>
+                        </div>';
                 break;
+
+                case "utilities":
+                    $p = new utilities;
+                    $mes = "";
+                    if(isset($_GET["utilities_id"])) {
+                        $p->utilities_id = $_GET["utilities_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["points"])) {
+                            $p->points = $_POST["points"];
+                        }
+                        if($p->name != NULL &&  $p->points != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=utilities");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Utilities</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Utilities name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Point</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="points" name="points" value="'.$_GET["points"].'">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=utilities">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;    
 
                         
         

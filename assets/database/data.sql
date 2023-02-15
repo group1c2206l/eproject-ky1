@@ -43,27 +43,7 @@ CREATE TABLE employee(
     CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
-CREATE TABLE member(
-    member_id INT AUTO_INCREMENT NOT NULL ,
-    card_id VARCHAR(20) UNIQUE NOT NULL,  -- ma the thanh vien 
-    password_hash VARCHAR(50) NOT NULL,
-    fname VARCHAR(50) NOT NULL,
-    mname VARCHAR(50),
-    lname VARCHAR(50) NOT NULL,
-    dob DATETIME NOT NULL,
-    address VARCHAR(200) NOT NULL,
-    phone_number VARCHAR(15) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
-    email VARCHAR(50) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
-    vip INT DEFAULT 0, -- mac dinh la 0, 1 neu la nguoi noi tieng
-    package_id INT, -- thong tin ve goi thanh vien
-    course_id INT, -- thong tin ve khoa hoc da dang ky
-    points INT, -- so diem tich luy
-    flag INT DEFAULT 1, 
-    create_at DATETIME,
-    update_at DATETIME,
-    CONSTRAINT PK_member_id PRIMARY KEY (member_id)
 
-);
 
 CREATE TABLE utilities(
     utilities_id INT AUTO_INCREMENT NOT NULL ,
@@ -78,7 +58,7 @@ CREATE TABLE utilities(
 CREATE TABLE device(
     device_id INT AUTO_INCREMENT NOT NULL ,
     name VARCHAR(100) NOT NULL,
-    band VARCHAR(50),
+    brand VARCHAR(50),
     width FLOAT ,
     length FLOAT,
     height FLOAT,
@@ -136,6 +116,28 @@ CREATE TABLE course(
     create_at DATETIME,
     update_at DATETIME,
     CONSTRAINT PK_course_id PRIMARY KEY (course_id)
+);
+
+CREATE TABLE member(
+    member_id INT AUTO_INCREMENT NOT NULL ,
+    card_id VARCHAR(20) UNIQUE NOT NULL,  -- ma the thanh vien 
+    password_hash VARCHAR(50) NOT NULL,
+    fname VARCHAR(50) NOT NULL,
+    mname VARCHAR(50),
+    lname VARCHAR(50) NOT NULL,
+    dob DATETIME NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    phone_number VARCHAR(15) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
+    email VARCHAR(50) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
+    vip INT DEFAULT 0, -- mac dinh la 0, 1 neu la nguoi noi tieng
+    package_id INT, -- thong tin ve goi thanh vien
+    course_id INT, -- thong tin ve khoa hoc da dang ky
+    points INT, -- so diem tich luy
+    flag INT DEFAULT 1, 
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_member_id PRIMARY KEY (member_id)
+
 );
 
 -- phan tach thu vien anh cho tung chuyen muc khac nhau

@@ -142,6 +142,11 @@
                                 $s = new utilities;
                                 $s->search_list($arr);
                                 break;
+                           case "service":
+                                $arr = ["name"];
+                                $s = new service("flag","create_at","update_at");
+                                $s->search_list($arr);
+                                break;
                        }
                    ?>
                 </select>
@@ -277,6 +282,38 @@
                                     $p->utilities_id = $row["utilities_id"];
                                     $p->name = $row["name"];
                                     $p->points = $row["points"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+                        
+                        case "service":
+                            $p = new service();
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result('service');
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->service_id = $row["service_id"];
+                                    $p->name = $row["name"];
+                                    $p->title = $row["title"];
+                                    $p->rescription = $row["rescription"];
+                                    $p->flag = $row["flag"];
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
                                     $p->show_item();
