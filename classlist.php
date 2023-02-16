@@ -815,15 +815,7 @@
         public $package_id;
         public $course_id;
         public $points;
-        public $flag;
-        public $create_at;
-        public $update_at;
-        public $update_at;
-        public $update_at;
 
-        public function show() {
-            
-        }
     }
 
 
