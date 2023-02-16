@@ -362,7 +362,11 @@
                             if(isset($_POST["expiry"])) {
                                 $p->expiry = $_POST["expiry"];
                             }
-                            if($p->name != NULL &&  $p->mentor != NULL &&  $p->points != NULL && $p->price != NULL && $p->expiry != NULL) {
+                            if(isset($_POST["day_active"])) {
+                                $p->day_active = $_POST["day_active"];
+                            }
+            
+                            if($p->name != NULL &&  $p->mentor != NULL &&  $p->points != NULL && $p->price != NULL && $p->expiry != NULL && $p->day_active != NULL) {
                                 $p->addnew();
                                 header("location: dashboard.php?select=package");
                             } else {
@@ -378,7 +382,7 @@
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="" class="text-white-50">Mentor</label>
-                                            <select name="product_id" id="" class="form-control bg-dark text-white">
+                                            <select name="mentor" id="" class="form-control bg-dark text-white">
                                                 <option value="YES">YES</option>
                                                 <option value="NO">NO</option>
                                             </select>
@@ -388,18 +392,22 @@
                                             <input type="text" class="form-control bg-dark text-white" id="points" name="points" value="'.$p->points.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">Price</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="points" name="price" value="'.$p->price.'">
+                                            <label for="price" class="text-white-50">Price</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="price" name="price" value="'.$p->price.'">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="" class="text-white-50">Expiry</label>
-                                            <select name="Expiry" id="Expiry" class="form-control bg-dark text-white" value="'.$p->expiry.'">
+                                            <select name="expiry" id="Expiry" class="form-control bg-dark text-white" value="'.$p->expiry.'">
                                                 <option value="1">1 Month</option>
                                                 <option value="12">12 Month</option>
                                             </select>
                                         </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="day_active" class="text-white-50">Day active</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="day_active" name="day_active" value="'.$p->day_active.'">
+                                        </div>
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=package">Back</a></button>
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';
@@ -417,9 +425,6 @@
                             }
                             if(isset($_POST["description"])) {
                                 $p->description = $_POST["description"];
-                            }
-                            if(isset($_POST["price"])) {
-                                $p->price = $_POST["price"];
                             }
                             if(isset($_POST["start_day"])) {
                                 $p->start_day = $_POST["start_day"];
@@ -445,25 +450,25 @@
                                             <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="" class="text-white-50">Mentor</label>
-                                            <select name="product_id" id="" class="form-control bg-dark text-white">';
-                        echo                     $p->list_data($p->employee_id,"employee_id","lname","employee");
+                                            <label for="employee_id" class="text-white-50">Mentor</label>
+                                            <select name="employee_id" id="employee_id" class="form-control bg-dark text-white">';
+                        echo                     $p->list_data_with_condition($p->employee_id,"employee_id","lname","employee","type","PT");
                         echo                '</select>
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">description</label>
+                                            <label for="description" class="text-white-50">description</label>
                                             <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$p->description.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">start_day</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="start_day" name="start_day" value="'.$p->start_day.'">
+                                            <label for="start_day" class="text-white-50">start_day</label>
+                                            <input type="date" class="form-control bg-dark text-white" id="start_day" name="start_day" value="'.$p->start_day.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">end_day</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="end_day" name="end_day" value="'.$p->end_day.'">
+                                            <label for="end_day" class="text-white-50">end_day</label>
+                                            <input type="date" class="form-control bg-dark text-white" id="end_day" name="end_day" value="'.$p->end_day.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">price</label>
+                                            <label for="price" class="text-white-50">price</label>
                                             <input type="text" class="form-control bg-dark text-white" id="price" name="price" value="'.$p->price.'">
                                         </div>
                                        
