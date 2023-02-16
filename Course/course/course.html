@@ -5,19 +5,18 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="/fonts/fontawesome-free-6.3.0-web/fontawesome-free-6.3.0-web/css/all.min.css">
+        <link rel="stylesheet" href="/eproject-ky1/Course/course/style.css">
+        <link rel="stylesheet" href="/eproject-ky1/Course/fonts/fontawesome-free-6.3.0-web/fontawesome-free-6.3.0-web/css/all.min.css">
     </head>
     <body>
         <div class="wrapper">
            <header class="header_wrapper">
                 <nav class="navbar">
                     <div class="navbar_logo">
-                            <img src="/anh/gymm.jpg" alt="">
+                            <img src="/eproject-ky1/Course/anh/gymm.jpg" alt="">
                     </div>
                     <ul class="main-menu">
                         <li><a href="">TRANG CHỦ</a></li>
-                        <li><a href="">GIỚI THIỆU</a></li>
                         <li><a href="">GIỚI THIỆU</a></li>
                         <li><a href="">KHÓA HỌC
                             <i class="fa-solid fa-angle-down"></i>
@@ -36,8 +35,31 @@
            </header>
            <div class="container">
                 <div class="row1">
+                    <div class="header1">
+                        <nav class="navbar">
+                            <div class="navbar_logo">
+                                    <img src="/eproject-ky1/Course/anh/gymm.jpg" alt="">
+                            </div>
+                            <ul class="main-menu">
+                                <li><a href="">TRANG CHỦ</a></li>
+                                <li><a href="">GIỚI THIỆU</a></li>
+                                <li><a href="">KHÓA HỌC
+                                    <i class="fa-solid fa-angle-down"></i>
+                                </a>
+                                    <ul class="sub-menu">
+                                        <li><a href="">Matial arts</a></li>
+                                        <li><a href="">Gym & fitness</a></li>
+                                        <li><a href="">Dance</a></li>
+                                        <li><a href="">Zumba</a></li>
+                                    </ul>
+                                </li>
+                                <li><a href="">TIN TỨC</a></li>
+                                <li><a href="">LIÊN HỆ</a></li>
+                            </ul>
+                        </nav>
+                    </div>
                     <div class="messenger">
-                        <a href=""><img src="/anh/fb-messenger.png" alt=""></a>
+                        <a href=""><img src="/eproject-ky1/Course/anh/fb-messenger.png" alt=""></a>
                     </div>
                     <div class="row-content">
                         <div class="tittle">
@@ -48,7 +70,7 @@
                             </p>
                         </div>
                         <div class="learn-about" >
-                            <a href=""><img src="/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="/eproject-ky1/Course/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
@@ -65,7 +87,7 @@
                             </p>
                         </div>
                         <div class="learn-about">
-                            <a href=""><img src="/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="/eproject-ky1/Course/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
@@ -82,7 +104,7 @@
                             </p>
                         </div>
                         <div class="learn-about">
-                            <a href=""><img src="/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="/eproject-ky1/Course/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
@@ -99,7 +121,7 @@
                         </p>
                    </div>
                     <div class="learn-about">
-                        <a href=""><img src="/anh/btn-orange-1.png" alt=""></a>
+                        <a href=""><img src="/eproject-ky1/Course/anh/btn-orange-1.png" alt=""></a>
                         <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                         <a href=""><p>Tìm hiểu thêm</p></a>
                         </div>
@@ -163,6 +185,11 @@
                 </div>
            </footer>
         </div>
-        <script src="https://code.jquery.com/jquery-3.6.3.js"></script>
+        <script>
+            window.addEventListener('scroll',function(){
+                const header = document.querySelector('header');
+                header.classList.toggle('header-fixed',window.scrollY >0);
+            });
+        </script>
     </body>
 </html>

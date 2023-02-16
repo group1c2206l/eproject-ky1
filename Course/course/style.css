@@ -3,6 +3,18 @@
     padding: 0;
 }
 header{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(255,255,255,0.8);
+    align-items: center;
+    top: -200px;
+    transition: top 0.3s;
+}
+header.header-fixed{
+    top:0;
+}
+header{
     /* position: sticky; */
     position: fixed;
     /* position: -webkit-sticky; */
@@ -85,7 +97,7 @@ ul.sub-menu li a:hover{
     width: 80%;
 }
 .row1{
-    background-image: url(/anh/kickfit-mma.jpg);
+    background-image: url(/eproject-ky1/Course/anh/kickfit-mma.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
@@ -120,28 +132,28 @@ h1,p{
     text-decoration: none;
 }
 .row2{
-    background-image: url(/anh/c2.jpg);
+    background-image: url(/eproject-ky1/Course/anh/c2.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/anh/dance1.jpg);
+    background-image: url(/eproject-ky1/Course/anh/dance1.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row4{
-    background-image: url(/anh/zumba1.jpg);
+    background-image: url(/eproject-ky1/Course/anh/zumba1.jpg);
     background-size: cover;
     height: 620px;
     position: relative;   
 }
 .footer{
     height: 345px;
-    background-image: url(/anh/bg-foot.jpg);
+    background-image: url(/eproject-ky1/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 
@@ -271,4 +283,10 @@ h1,p{
     right:10px;
     top: 48%;
     
+}
+
+@media(max-width:768px){
+    html{
+        font-size: 45%;
+    }
 }
