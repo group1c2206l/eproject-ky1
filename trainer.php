@@ -31,6 +31,9 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
+    <div class="content">
+        
+    </div>
     <script src="../Style/Javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="./assets/js/trainer.js"></script>

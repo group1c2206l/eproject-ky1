@@ -99,6 +99,7 @@ CREATE TABLE package(
     points INT NOT NULL, -- diem thuong trong goi
     price INT NOT NULL, -- chi phi goi 
     expiry INT NOT NULL, -- thoi gian goi dang ky, tinh theo thang.
+    day_active INT NOT NULL, -- so ngay tap luyen toi da trong tuan
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
