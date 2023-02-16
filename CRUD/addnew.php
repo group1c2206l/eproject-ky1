@@ -403,6 +403,75 @@
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';
+                    break;
+                       
+                    case "course":
+                        $p = new course();
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["employee_id"])) {
+                                $p->employee_id = $_POST["employee_id"];
+                            }
+                            if(isset($_POST["description"])) {
+                                $p->description = $_POST["description"];
+                            }
+                            if(isset($_POST["price"])) {
+                                $p->price = $_POST["price"];
+                            }
+                            if(isset($_POST["start_day"])) {
+                                $p->start_day = $_POST["start_day"];
+                            }
+                            if(isset($_POST["end_day"])) {
+                                $p->end_day = $_POST["end_day"];
+                            }
+                            if(isset($_POST["price"])) {
+                                $p->price = $_POST["price"];
+                            }
+                            if($p->name != NULL &&  $p->employee_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=course");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Course</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="name" class="text-white-50">Course name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="" class="text-white-50">Mentor</label>
+                                            <select name="product_id" id="" class="form-control bg-dark text-white">';
+                        echo                     $p->list_data($p->employee_id,"employee_id","lname","employee");
+                        echo                '</select>
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">description</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$p->description.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">start_day</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="start_day" name="start_day" value="'.$p->start_day.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">end_day</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="end_day" name="end_day" value="'.$p->end_day.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">price</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="price" name="price" value="'.$p->price.'">
+                                        </div>
+                                       
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
                     break;    
 
 

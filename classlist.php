@@ -37,6 +37,33 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        public function id_to_name($select,$from,$where,$value) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
+
+        public function list_data($id_check,$id,$name,$table) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                }
+            }
+        }
+
         
     }
 
@@ -615,6 +642,7 @@
 
     class package extends main {
         public $package_id;
+        public $employee_id;
         public $mentor;
         public $points;
         public $price;
@@ -648,6 +676,8 @@
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
                 </tr>';
         }
+
+       
 
         public function addnew() {
             require "config.php";
@@ -745,15 +775,15 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $sql = 'INSERT INTO course(name,mentor,description,start_day,end_day,price,create_at) VALUES (:name,:mentor,:description,:start_day,:end_day,:price,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
                     ":mentor" => $this->mentor,
-                    ":points" => $this->points,
-                    ":price" => $this->price,
-                    ":expiry" => $this->expiry,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
                 )
             );
         }
@@ -768,10 +798,10 @@
                 array (
                     ":name" => $this->name,
                     ":mentor" => $this->mentor,
-                    ":points" => $this->points,
-                    ":price" => $this->price,
-                    ":expiry" => $this->expiry,
-                    ":package_id" => $this->package_id,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
+                    ":course_id" => $this->course_id,
                 )
             );
         }
@@ -780,11 +810,11 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE course SET flag = 0,update_at = NOW() WHERE course_id = :course_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":package_id" => $this->package_id
+                    ":course_id" => $this->course_id
                 )
             );
         }
@@ -817,8 +847,6 @@
         public $points;
         public $flag;
         public $create_at;
-        public $update_at;
-        public $update_at;
         public $update_at;
 
         public function show() {

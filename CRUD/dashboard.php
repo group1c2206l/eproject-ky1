@@ -100,9 +100,9 @@
         <div class="menu-body bg-dark border border-warning rounded rounded-3">
             <table class="table table-dark home-menu container-lg">
                 <tr>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
                 </tr>
                 <tr>
@@ -150,7 +150,17 @@
                                 break;
                            case "service":
                                 $arr = ["name"];
-                                $s = new service("flag","create_at","update_at");
+                                $s = new service();
+                                $s->search_list($arr);
+                                break;
+                           case "package":
+                                $arr = ["name","points","price"];
+                                $s = new package();
+                                $s->search_list($arr);
+                                break;
+                           case "course":
+                                $arr = ["name","price"];
+                                $s = new course();
                                 $s->search_list($arr);
                                 break;
                        }
@@ -355,6 +365,40 @@
                                     $p->name = $row["name"];
                                     $p->title = $row["title"];
                                     $p->description = $row["description"];
+                                    $p->flag = $row["flag"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
+                        case "package":
+                            $p = new package();
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result('package');
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->package_id = $row["package_id"];
+                                    $p->name = $row["name"];
+                                    $p->mentor = $row["mentor"];
+                                    $p->points = $row["points"];
+                                    $p->price = $row["price"];
+                                    $p->expiry = $row["expiry"];
                                     $p->flag = $row["flag"];
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
