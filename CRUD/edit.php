@@ -1,6 +1,6 @@
 <?php
     require "../request.php";
-
+    require "../classlist.php";
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -17,7 +17,7 @@
 
 <?php
     
-    require "../classlist.php";
+    
 
     if(isset($_GET["edit_id"])) {
         $edit_id = $_GET["edit_id"];
