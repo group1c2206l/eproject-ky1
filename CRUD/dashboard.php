@@ -188,7 +188,7 @@
             </form>
         </div>
      
-         <table class="table table-result">
+         <table class="table table-result mt-2">
             <?php
                 
 
