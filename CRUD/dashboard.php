@@ -17,16 +17,12 @@
 
 ?>
 
-
-
 <!DOCTYPE html>
 <html>
 <head>
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dashboard</title>
-	<!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/css/bootstrap.min.css" rel="stylesheet"> -->
-    <!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.3/dist/js/bootstrap.bundle.min.js"></script> -->
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
@@ -60,8 +56,10 @@
         .search-bar {
             width: 100%;
             height: 40px;
+            margin-top: 10px;
         }
         #search-box {
+            width: 250px;
             margin-left: 40px;
             height: 100%;
             padding: 0 5px;
@@ -72,6 +70,14 @@
             height: 100%;
             padding: 0 5px;
             border-radius: 5px;
+        }
+        .btn-search {
+            height: 100%;
+            padding: 0 10px;
+            border: none;
+            border-radius: 5px;
+            background-color: orange;
+            color: white;
         }
         .noti {
             display: inline-block;
@@ -90,7 +96,7 @@
 		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
 			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
-				<li><a class="dropdown-item " href="index.php?product=accessory">Change Password</a></li>
+				<li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user_name"]  ?>">Change Password</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="../logout.php">Logout</a></li>
 			</ul>
@@ -100,9 +106,9 @@
         <div class="menu-body bg-dark border border-warning rounded rounded-3">
             <table class="table table-dark home-menu container-lg">
                 <tr>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
                 </tr>
                 <tr>
@@ -122,10 +128,11 @@
         <!-- Khoi tim kiem -->
         <div class="">
             <form action="" method="GET" class="search-bar <?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
-                <button class="btn btn-primary <?php if($select == "galery") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
+                <button class="btn-search <?php if($select == "member") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
                 <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
-                <input type="text" id="search-box" name="search_data">
+                <input type="text" id="search-box" name="search_data" placeholder="Input content here:">
                 <select name="search_list" id="search_list">
+                    <option selected>Open this select menu :</option>
                    <?php
                        switch($select) {
                            case "role":
@@ -148,16 +155,36 @@
                                 $s = new utilities;
                                 $s->search_list($arr);
                                 break;
+                           case "device":
+                                $arr = ["name","brand"];
+                                $s = new device;
+                                $s->search_list($arr);
+                                break;
                            case "service":
                                 $arr = ["name"];
-                                $s = new service("flag","create_at","update_at");
+                                $s = new service();
+                                $s->search_list($arr);
+                                break;
+                           case "package":
+                                $arr = ["name","points","price"];
+                                $s = new package();
+                                $s->search_list($arr);
+                                break;
+                           case "course":
+                                $arr = ["name","name","price"];
+                                $s = new course();
+                                $s->search_list($arr);
+                                break;
+                           case "member":
+                                $arr = ["card_id","fname","lname","address","phone_number","email","vip","package_id","course_id"];
+                                $s = new member();
                                 $s->search_list($arr);
                                 break;
                        }
                    ?>
                 </select>
                 
-                <button type="submit" class="btn btn-primary" value="send" name="search">Search</button>
+                <button type="submit" class="btn-search" value="send" name="search">Search</button>
             </form>
         </div>
      
@@ -307,7 +334,7 @@
                                         <script>alert('Please enter value on search box !')</script>
                                     ";
                                 } else {
-                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    $results = $p->search_item('device', $search_list,$search_data);
                                     if(count($results)<1) {
                                         echo "khong co gia tri nao phu hop";
                                     }}
@@ -343,7 +370,7 @@
                                         <script>alert('Please enter value on search box !')</script>
                                     ";
                                 } else {
-                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    $results = $p->search_item('service', $search_list,$search_data);
                                     if(count($results)<1) {
                                         echo "khong co gia tri nao phu hop";
                                     }}
@@ -363,7 +390,45 @@
                             }
                             break;
 
+                        case "package":
+                            $p = new package();
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result('package');
+                            } else {
+                                if($search_data == "" || $search_list == "Open this select menu :") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box or select menu list !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('package', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->package_id = $row["package_id"];
+                                    $p->name = $row["name"];
+                                    $p->mentor = $row["mentor"];
+                                    $p->points = $row["points"];
+                                    $p->price = $row["price"];
+                                    $p->expiry = $row["expiry"];
+                                    $p->day_active = $row["day_active"];
+                                    $p->flag = $row["flag"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
                         case "course":
+                            require "../config.php";
+                            $c = new config;
+                            $conn = $c->connect();
                             $p = new course();
                             $p->show_header();
                             if($search_data == NULL && $search_list == NULL) {
@@ -375,7 +440,7 @@
                                         <script>alert('Please enter value on search box !')</script>
                                     ";
                                 } else {
-                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    $results = $p->search_item('course', $search_list,$search_data);
                                     if(count($results)<1) {
                                         echo "khong co gia tri nao phu hop";
                                     }}
@@ -385,7 +450,8 @@
                                 if($p->flag == 1) {
                                     $p->course_id = $row["course_id"];
                                     $p->name = $row["name"];
-                                    $p->mentor = $row["mentor"];
+                                    $p->employee_id = $row["employee_id"];
+                                    $p->mentor = $p->id_to_name($conn,"lname","employee","employee_id",$p->employee_id);
                                     $p->description = $row["description"];
                                     $p->start_day = $row["start_day"];
                                     $p->end_day = $row["end_day"];
@@ -396,7 +462,48 @@
                                     $p->show_item();
                                 }
                             }
+                            $conn = null;
                             break;
+
+                            case "member":
+                                $p = new member;
+                                $p->show_header();
+                                if($search_data == NULL && $search_list == NULL) {
+                                    $results = $p->arr_result("member");
+                                } else {
+                                    if($search_data == "") {
+                                        $results = [];
+                                        echo "
+                                            <script>alert('Please enter value on search box !')</script>
+                                        ";
+                                    } else {
+                                        $results = $p->search_item('member', $search_list,$search_data);
+                                        if(count($results)<1) {
+                                            echo "khong co gia tri nao phu hop";
+                                        }}
+                                    }
+                                foreach($results as $row) {
+                                    $p->flag = $row["flag"];
+                                    if($p->flag == 1) {
+                                        $p->member_id = $row["member_id"];
+                                        $p->card_id = $row["card_id"];
+                                        $p->fname = $row["fname"];
+                                        $p->mname = $row["mname"];
+                                        $p->lname = $row["lname"];
+                                        $p->dob = $row["dob"];
+                                        $p->address = $row["address"];
+                                        $p->phone_number = $row["phone_number"];
+                                        $p->vip = $row["vip"];
+                                        $p->email = $row["email"];
+                                        $p->package_id = $row["package_id"];
+                                        $p->course_id = $row["course_id"];
+                                        $p->points = $row["points"];
+                                        $p->create_at = $row["create_at"];
+                                        $p->update_at = $row["update_at"];
+                                        $p->show_item();
+                                    }
+                                }
+                                break;
                         // case "galery":  // hien thi danh muc galery
                         //     $a = new config;
                         //     $conn = $a->connect();

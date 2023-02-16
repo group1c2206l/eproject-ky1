@@ -13,8 +13,10 @@
             $sql = "SELECT * FROM ".$query." ";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
+            $conn = null;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
         public function search_list($arr) {
             foreach($arr as $item) {
                 echo '
@@ -35,6 +37,50 @@
                 )
             );
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function id_to_name($conn,$select,$from,$where,$value) {
+            // require "config.php";
+            // $c = new config;
+            // $conn = $c->connect();
+            $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
+
+        public function list_data($id_check,$id,$name,$table) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                }
+            }
+        }
+
+        public function list_data_with_condition($id_check,$id,$name,$table,$where,$condition) {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE '.$where.' = "'.$condition.'" ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                }
+            }
         }
 
         
@@ -619,6 +665,7 @@
         public $points;
         public $price;
         public $expiry;
+        public $day_active;
 
         public function show_header() {
             echo "<tr>
@@ -626,8 +673,9 @@
                     <td>NAME</td>
                     <td>MENTOR</td>
                     <td>POINTER</td>
-                    <td>PRICE</td>
-                    <td>EXPIRY</td>
+                    <td>PRICE ($)</td>
+                    <td>EXPIRY (MONTH)</td>
+                    <td>DAY ACTIVE (DAY/WEEK)</td>
                     <td>CREATE_AT</td>
                     <td>UPDATE_AT</td>
                     <td colspan='2'>ACTION</td>
@@ -642,6 +690,7 @@
                     <td>'.$this->points.'</td>
                     <td>'.$this->price.'</td>
                     <td>'.$this->expiry.'</td>
+                    <td>'.$this->day_active.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.' ">Edit</a></button></td>
@@ -649,11 +698,13 @@
                 </tr>';
         }
 
+       
+
         public function addnew() {
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,day_active,create_at) VALUES (:name,:mentor,:points,:price,:expiry,:day_active,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -662,6 +713,7 @@
                     ":points" => $this->points,
                     ":price" => $this->price,
                     ":expiry" => $this->expiry,
+                    ":day_active" => $this->day_active,
                 )
             );
         }
@@ -670,7 +722,7 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,day_active = :day_active,update_at = NOW() WHERE package_id = :package_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -679,6 +731,7 @@
                     ":points" => $this->points,
                     ":price" => $this->price,
                     ":expiry" => $this->expiry,
+                    ":day_active" => $this->day_active,
                     ":package_id" => $this->package_id,
                 )
             );
@@ -703,7 +756,7 @@
     //class course
     class course extends main {
         public $course_id;
-        public $employee_id; // Thong tin PT cua khoa hoc
+        public $employee_id; // Thong tin id PT cua khoa hoc
         public $mentor; // Thong tin PT cua khoa hoc
         public $description;
         public $start_day;
@@ -745,15 +798,16 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $sql = 'INSERT INTO course(name,employee_id,description,start_day,end_day,price,create_at) VALUES (:name,:employee_id,:description,:start_day,:end_day,:price,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":mentor" => $this->mentor,
-                    ":points" => $this->points,
+                    ":employee_id" => $this->employee_id,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
                     ":price" => $this->price,
-                    ":expiry" => $this->expiry,
                 )
             );
         }
@@ -767,11 +821,12 @@
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":mentor" => $this->mentor,
-                    ":points" => $this->points,
+                    ":employee_id" => $this->employee_id,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
                     ":price" => $this->price,
-                    ":expiry" => $this->expiry,
-                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
                 )
             );
         }
@@ -780,24 +835,17 @@
             require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE course SET flag = 0,update_at = NOW() WHERE course_id = :course_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":package_id" => $this->package_id
+                    ":course_id" => $this->course_id
                 )
             );
         }
 
 
     }
-
-
-
-
-
-
-
 
 
     class member extends main {
@@ -816,19 +864,80 @@
         public $course_id;
         public $points;
 
+        public function show() {
+            
+        }
     }
 
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO member(card_id,fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":card_id" => $this->card_id,
+                    ":password_hash" => $this->password_hash,
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":vip" => $this->vip,
+                    ":email" => $this->email,
+                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
+                    ":points" => $this->points,
+                )
+            );
+            $conn = NULL;
+        }
 
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,password_hash = :password_hash,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE employee_id = :employee_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":card_id" => $this->card_id,
+                    ":password_hash" => $this->password_hash,
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":vip" => $this->vip,
+                    ":email" => $this->email,
+                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
+                    ":points" => $this->points,
+                    ":member_id" => $this->member_id,
+                )
+            );
+            $conn = NULL;
+        }
 
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE member SET flag = 0,update_at = NOW() WHERE member_id = :member_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":member_id" => $this->member_id
+                )
+            );
+            $conn = NULL;
+        }
 
-
-
-
-
-
-
-
-
+    }
+    
 
 
 ?>
