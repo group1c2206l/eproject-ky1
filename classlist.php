@@ -977,7 +977,7 @@
     }
 
     class galery {
-        
+        public $galery_id;
     }
     
 
