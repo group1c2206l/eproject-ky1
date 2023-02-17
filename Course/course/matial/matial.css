@@ -2,6 +2,10 @@
     margin: 0;
     padding: 0;
 }
+:root{
+    --text-color:coral;
+    --menu-color: #625f5f;
+}
 header{
     position: fixed;
     width: 100%;
@@ -49,7 +53,7 @@ header.header-fixed{
     font-size: large;
 }
 .main-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li ul.sub-menu{
     position: absolute;
@@ -65,7 +69,7 @@ header.header-fixed{
     color: white;
 }
 ul.sub-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li:hover ul.sub-menu{
     display: block;
@@ -89,7 +93,7 @@ ul.sub-menu li a:hover{
     width: 80%;
 }
 .row1{
-    background-image: url(/anh/MMA.jpg);
+    background-image: url(/eproject-ky1/Course/anh/MMA.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
@@ -118,21 +122,21 @@ ul.sub-menu li a:hover{
     bottom: 250px;
 }
 .row2{
-    background-image: url(/anh/boxing.jpg);
+    background-image: url(/eproject-ky1/Course/anh/boxing.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/anh/Muay-Thai.jpg);
+    background-image: url(/eproject-ky1/Course/anh/Muay-Thai_auto_x2.jpg);
     background-size: cover;
     height: 620px;
     position: relative; 
 }
 .footer{
     height: 345px;
-    background-image: url(/anh/bg-foot.jpg);
+    background-image: url(/eproject-ky1/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 
@@ -140,7 +144,7 @@ ul.sub-menu li a:hover{
 .contact{
     display: flex;
     flex-direction: column;
-    color: rgb(181, 176, 176);
+    color: var(--menu-color);
     margin-top: 65px;
 }
 .contact h2{
@@ -150,13 +154,13 @@ ul.sub-menu li a:hover{
     display: flex;
     font-size: small;
     font-family: 'Times New Roman', Times, serif;
-    padding: 3px 0px;
+    padding: 10px 0px;
     position: relative;
 }
 .fl i{
     margin-right: 15px;
     position: absolute;
-    left: -20px;
+    left: -25px;
     bottom: 8px;
 }
 .fl p{
@@ -166,7 +170,7 @@ ul.sub-menu li a:hover{
 .link{
     display: flex;
     flex-direction: column;
-    color: rgb(181, 176, 176);
+    color: var(--menu-color);
     margin-top: 65px;
 }
 .link h2{
@@ -185,22 +189,22 @@ ul.sub-menu li a:hover{
 .b a{
     text-decoration: none;
     margin-left: 20px;
-    color: rgb(181, 176, 176);
+    color: var(--menu-color);
 }
 .b a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .icon{
     display: flex;
     justify-content: space-evenly;
 }
 .icon a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 /*hover cac icon*/
 .icon a{
     position: relative;
-    color: rgb(181, 176, 176); ;
+    color: var(--menu-color);
 }
 .icon a::before{
     content: "";
@@ -242,13 +246,13 @@ ul.sub-menu li a:hover{
 }
 .register h2{
     margin-top: 65px;
-    color: rgb(181, 176, 176);
+    color: var(--menu-color);
     margin-bottom: 16px;
     
 }
 .register p{
     font-family: 'Times New Roman', Times, serif;
-    color: rgb(181, 176, 176);
+    color: var(--menu-color);
     margin-bottom: 10px;
 }
 .register input{
@@ -259,7 +263,7 @@ ul.sub-menu li a:hover{
 .register i{
     /* position: absolute;
     left: 10px; */
-    color: rgb(246, 136, 96);
+    color: var(--text-color);
     position: absolute;
     right:10px;
     top: 47%;

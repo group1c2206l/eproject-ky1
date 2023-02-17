@@ -86,12 +86,12 @@ ul.sub-menu li a:hover{
 .main-menu li:hover a::before{
     width: 80%;
 }
-.row1{
+/* .row1{
     background-image: url(/eproject-ky1/Course/anh/kickfit-mma.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
-}
+} */
 .messenger{
     position: absolute;
     right: 20px;
