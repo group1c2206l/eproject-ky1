@@ -4,14 +4,21 @@
     box-sizing: border-box;
 }
 body {
+    height: 100vh;
+    background: linear-gradient(180deg,#39373d,#18061b);
+    
     background-color: rgb(26, 23, 23);
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
 }
 .container {
-    background-color: rgb(68, 7, 87);
+    /* background-image: url(../image/backgound/desktop-1600x900.jpg); */
+    background-color: rgba(48, 16, 48, 0.26);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-color: rgb(68, 7, 87); */
     width: 600px;
     margin: 100px auto 0 auto;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .select {
     width: 100%;
@@ -25,9 +32,9 @@ body {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    color: rgb(109, 93, 93);
+    color: rgb(224, 238, 186);
     display: inline-block;
-    background-color: rgb(196, 241, 208);
+    background-color: rgb(27, 22, 29);
     width: 80px;
     text-align: center;
     line-height: 50px;
@@ -77,6 +84,10 @@ h2 {
     height: 50px;
     color: aliceblue;
 }
+.lable-remember:hover {
+    cursor: pointer;
+    text-shadow: 0 0 3px #FF0000;
+}
 input[type = "checkbox"] {
     cursor: pointer;
     width: 15px;
@@ -109,7 +120,7 @@ input[type="submit"]:active {
 
 .active {
     background-color: violet !important;
-    color: aliceblue !important;
+    color: rgb(255, 253, 253) !important;
 }
 
 .mes {

@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="./assets/css/register.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" >
         <div class="select">
             <div class="reg ">
                 <p id="reg-menu" class="active btn-select"  onclick="show(1)">Register</p>
@@ -77,7 +77,7 @@
             </div>
             <div class="remember">
                 <input type="checkbox" id="save_me" name="saveme" value="saveme">
-                <label for="save_me">Remember me</label>
+                <label for="save_me" class="lable-remember">Remember me</label>
             </div>
             <div class="group-btn">
                 <input type="submit" name="login" value="login">
