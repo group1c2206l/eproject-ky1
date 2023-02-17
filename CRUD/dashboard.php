@@ -426,9 +426,6 @@
                             break;
 
                         case "course":
-                            require "../config.php";
-                            $c = new config;
-                            $conn = $c->connect();
                             $p = new course();
                             $p->show_header();
                             if($search_data == NULL && $search_list == NULL) {
@@ -451,7 +448,7 @@
                                     $p->course_id = $row["course_id"];
                                     $p->name = $row["name"];
                                     $p->employee_id = $row["employee_id"];
-                                    $p->mentor = $p->id_to_name($conn,"lname","employee","employee_id",$p->employee_id);
+                                    $p->mentor = $p->id_to_name("lname","employee","employee_id",$p->employee_id);
                                     $p->description = $row["description"];
                                     $p->start_day = $row["start_day"];
                                     $p->end_day = $row["end_day"];

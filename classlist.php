@@ -41,10 +41,9 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function id_to_name($conn,$select,$from,$where,$value) {
-            // 
-            // $c = new config;
-            // $conn = $c->connect();
+        public function id_to_name($select,$from,$where,$value) {
+            $c = new config;
+            $conn = $c->connect();
             $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -52,7 +51,6 @@
         }
 
         public function list_data($id_check,$id,$name,$table) {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
@@ -105,7 +103,6 @@
                     <td class='table-dark text-warning fw-bold'>USER NAME</td>
                     <td class='table-dark text-warning fw-bold'>PASSWORD</td>
                     <td class='table-dark text-warning fw-bold'>EMPLOYEE NAME</td>
-                    <td class='table-dark text-warning fw-bold'>FLAG</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
                     <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
                     <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
@@ -117,7 +114,6 @@
                     <td>'.$this->user_name.'</td>
                     <td>'.$this->password_hash.'</td>
                     <td>'.$this->employee_name.'</td>
-                    <td>'.$this->flag.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=role&role_id='.$this->role_id.'&user_name='.$this->user_name.' ">Edit</a></button></td>
@@ -150,12 +146,12 @@
         public function logins() {
             if($this->check_current_pass()) {
                 $name = $this->user_name;
-                setcookie("id",md5($name),time()+6000,"/");
-                setcookie("user_name",$name, time() + 10000,"/");
+                setcookie("id",md5($name),time()+86400,"/");
+                setcookie("user_name",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+6000,"/");
+                    setcookie("loggedin",$name,time()+86400,"/");
                     header("location: ./CRUD/dashboard.php");
                 } else {
                     session_start();
@@ -220,13 +216,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>ADDRESS</td>
-                    <td>HOTLINE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>HOTLINE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -307,21 +303,21 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>FNAME</td>
-                    <td>MNAME</td>
-                    <td>LNAME</td>
-                    <td>DOB</td>
-                    <td>ADDRESS</td>
-                    <td>PHONE NUMBER</td>
-                    <td>PERSON ID</td>
-                    <td>EMAIL</td>
-                    <td>CONTACT NAME</td>
-                    <td>CONTACT PHONE</td>
-                    <td>TYPE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -420,12 +416,12 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>POINT</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>POINT</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -500,18 +496,18 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>BRAND</td>
-                    <td>WIDTH</td>
-                    <td>LENGTH</td>
-                    <td>HEIGHT</td>
-                    <td>WEIGHT</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>BRAND</td>
+                    <td class='table-dark text-warning fw-bold'>WIDTH</td>
+                    <td class='table-dark text-warning fw-bold'>LENGTH</td>
+                    <td class='table-dark text-warning fw-bold'>HEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>WEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -594,13 +590,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -671,16 +667,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>POINTER</td>
-                    <td>PRICE ($)</td>
-                    <td>EXPIRY (MONTH)</td>
-                    <td>DAY ACTIVE (DAY/WEEK)</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>POINTER</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE ($)</td>
+                    <td class='table-dark text-warning fw-bold'>EXPIRY (MONTH)</td>
+                    <td class='table-dark text-warning fw-bold'>DAY ACTIVE (DAY/WEEK)</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -767,16 +763,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>DESCRIPTION</td>
-                    <td>START DAY</td>
-                    <td>END DAY</td>
-                    <td>PRICE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>START DAY</td>
+                    <td class='table-dark text-warning fw-bold'>END DAY</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -868,24 +864,24 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>CARD ID</td>
-                    <td>PW HASH</td>
-                    <td>FNAME</td>
-                    <td>MNAME</td>
-                    <td>LNAME</td>
-                    <td>DOB</td>
-                    <td>ADDRESS</td>
-                    <td>PHONE NUMBER</td>
-                    <td>EMAIL</td>
-                    <td>VIP</td>
-                    <td>PACKAGE</td>
-                    <td>COURSE</td>
-                    <td>POINTS</td>
-                    <td>TYPE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>CARD ID</td>
+                    <td class='table-dark text-warning fw-bold'>PW HASH</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>VIP</td>
+                    <td class='table-dark text-warning fw-bold'>PACKAGE</td>
+                    <td class='table-dark text-warning fw-bold'>COURSE</td>
+                    <td class='table-dark text-warning fw-bold'>POINTS</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {

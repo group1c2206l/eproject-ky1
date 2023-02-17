@@ -84,6 +84,10 @@ h2 {
     height: 50px;
     color: aliceblue;
 }
+.lable-remember:hover {
+    cursor: pointer;
+    text-shadow: 0 0 3px #FF0000;
+}
 input[type = "checkbox"] {
     cursor: pointer;
     width: 15px;

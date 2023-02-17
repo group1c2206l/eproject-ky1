@@ -77,7 +77,7 @@
             </div>
             <div class="remember">
                 <input type="checkbox" id="save_me" name="saveme" value="saveme">
-                <label for="save_me">Remember me</label>
+                <label for="save_me" class="lable-remember">Remember me</label>
             </div>
             <div class="group-btn">
                 <input type="submit" name="login" value="login">
