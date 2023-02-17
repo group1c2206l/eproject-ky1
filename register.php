@@ -34,7 +34,7 @@
     <link rel="stylesheet" href="./assets/css/register.css">
 </head>
 <body>
-    <div class="container">
+    <div class="container" >
         <div class="select">
             <div class="reg ">
                 <p id="reg-menu" class="active btn-select"  onclick="show(1)">Register</p>
