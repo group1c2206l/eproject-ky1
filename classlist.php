@@ -862,51 +862,6 @@
         public $course_id;
         public $points;
 
-        public function show_header() {
-            echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>CARD ID</td>
-                    <td class='table-dark text-warning fw-bold'>PW HASH</td>
-                    <td class='table-dark text-warning fw-bold'>FNAME</td>
-                    <td class='table-dark text-warning fw-bold'>MNAME</td>
-                    <td class='table-dark text-warning fw-bold'>LNAME</td>
-                    <td class='table-dark text-warning fw-bold'>DOB</td>
-                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
-                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
-                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
-                    <td class='table-dark text-warning fw-bold'>VIP</td>
-                    <td class='table-dark text-warning fw-bold'>PACKAGE</td>
-                    <td class='table-dark text-warning fw-bold'>COURSE</td>
-                    <td class='table-dark text-warning fw-bold'>POINTS</td>
-                    <td class='table-dark text-warning fw-bold'>TYPE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
-                </tr>";
-        }
-        public function show_item() {
-            echo '<tr>
-                    <td>'.$this->member_id.'</td>
-                    <td>'.$this->card_id.'</td>
-                    <td>'.$this->password_hash.'</td>
-                    <td>'.$this->fname.'</td>
-                    <td>'.$this->mname.'</td>
-                    <td>'.$this->lname.'</td>
-                    <td>'.$this->dob.'</td>
-                    <td>'.$this->address.'</td>
-                    <td>'.$this->phone_number.'</td>
-                    <td>'.$this->email.'</td>
-                    <td>'.$this->vip.'</td>
-                    <td>'.$this->package_id.'</td>
-                    <td>'.$this->course_id.'</td>
-                    <td>'.$this->points.'</td>
-                    <td>'.$this->create_at.'</td>
-                    <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=member&member_id='.$this->member_id.'&card_id='.$this->card_id.'&password_hash='.$this->password_hash.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&vip='.$this->vip.'&email='.$this->email.'&package_id='.$this->package_id.'&course_id='.$this->course_id.'&points='.$this->points.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=member&member_id='.$this->member_id.' ">Delete</a></button></td> 
-                </tr>';
-        }
-
         public function addnew() {
             
             $c = new config;
