@@ -1,4 +1,5 @@
 <?php
+    require "../request.php";
     require "../classlist.php";
 
 
@@ -25,11 +26,11 @@
                                     <form action=""  method="POST">
                                         <div class="form-group mb-3 mt-6">
                                             <label  for="user_name" class="text-white">User name</label>
-                                            <input type="text" class="form-control" id="user_name" name="user_name">
+                                            <input type="text" class="form-control bg-dark text-white" id="user_name" name="user_name">
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="category_code" class="text-white">Password</label>
-                                            <input type="password" class="form-control" id="password_hash" name="password_hash">
+                                            <input type="password" class="form-control bg-dark text-white" id="password_hash" name="password_hash">
                                         </div>
 
                                         <button type="submit" class="btn btn-primary mb-2" name="save" value="save">Save</button>
@@ -218,6 +219,187 @@
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                         <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=utilities">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;
+
+                    case "device":
+                        $p = new device;
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["brand"])) {
+                                $p->brand = $_POST["brand"];
+                            }
+                            if(isset($_POST["width"])) {
+                                $p->width = $_POST["width"];
+                            }
+                            if(isset($_POST["length"])) {
+                                $p->length = $_POST["length"];
+                            }
+                            if(isset($_POST["height"])) {
+                                $p->height = $_POST["height"];
+                            }
+                            if(isset($_POST["weight"])) {
+                                $p->weight = $_POST["weight"];
+                            }
+                            if(isset($_POST["title"])) {
+                                $p->title = $_POST["title"];
+                            }
+                            if(isset($_POST["description"])) {
+                                $p->description = $_POST["description"];
+                            }
+                            if($p->name != NULL &&  $p->brand != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=device");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Device</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="name" class="text-white-50">Device name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Brand</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="brand" name="brand" value="'.$p->brand.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Width</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="width" name="width" value="'.$p->width.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Length</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="length" name="length" value="'.$p->length.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Height</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="height" name="height" value="'.$p->height.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Weight</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="weight" name="weight" value="'.$p->weight.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Title</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="title" name="title" value="'.$p->title.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Description</label>
+                                            <textarea name="description"  class="form-control bg-dark text-white"  rows="4">'.$p->description.'</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=device">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;
+
+                    case "service":
+                        $p = new service();
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["title"])) {
+                                $p->title = $_POST["title"];
+                            }
+                            if(isset($_POST["rescription"])) {
+                                $p->description = $_POST["description"];
+                            }
+                            if($p->name != NULL &&  $p->title != NULL &&  $p->description != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=service");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Service</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="name" class="text-white-50">Service name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Title</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="points" name="title" value="'.$p->title.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Description</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="points" name="description" value="'.$p->description.'">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;    
+
+                    case "package":
+                        $p = new package();
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["mentor"])) {
+                                $p->mentor = $_POST["mentor"];
+                            }
+                            if(isset($_POST["points"])) {
+                                $p->points = $_POST["points"];
+                            }
+                            if(isset($_POST["price"])) {
+                                $p->price = $_POST["price"];
+                            }
+                            if(isset($_POST["expiry"])) {
+                                $p->expiry = $_POST["expiry"];
+                            }
+                            if($p->name != NULL &&  $p->mentor != NULL &&  $p->points != NULL && $p->price != NULL && $p->expiry != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=package");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Package</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="name" class="text-white-50">Package name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="" class="text-white-50">Mentor</label>
+                                            <select name="product_id" id="" class="form-control bg-dark text-white">
+                                                <option value="YES">YES</option>
+                                                <option value="NO">NO</option>
+                                            </select>
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Points</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="points" name="points" value="'.$p->points.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="points" class="text-white-50">Price</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="points" name="price" value="'.$p->price.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="" class="text-white-50">Expiry</label>
+                                            <select name="Expiry" id="Expiry" class="form-control bg-dark text-white" value="'.$p->expiry.'">
+                                                <option value="1">1 Month</option>
+                                                <option value="12">12 Month</option>
+                                            </select>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';

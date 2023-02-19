@@ -42,9 +42,17 @@
             width: 100%;
          }
     	.mmm {
-            min-width: 33.3%;
+            min-width: 25%;
             display: inline-block;
             height: 50px;
+        }
+        .mmm .dblink {
+            width: 100px; 
+            margin-left: calc(50% - 50px);
+        }
+        .mmm .dblink a:hover {
+            color: chocolate !important;
+            text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
         }
         .table-result td {
             color: white;
@@ -77,39 +85,37 @@
     </style>
 </head>
 <body class="bg-secondary">
-	<div class="dashboard container-fluid position-relative">
+	<div class="dashboard container-fluid position-relative ">
 
-		<!-- <div class="dropdown border position-absolute top-0 start-40">
-			<a class="nav-link  table-hover dropdown-toggle" href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
+		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
+			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
 				<li><a class="dropdown-item " href="index.php?product=accessory">Change Password</a></li>
 				<li><hr class="dropdown-divider"></li>
-				<li><a class="dropdown-item" href="logout.php">Logout</a></li>
+				<li><a class="dropdown-item" href="../logout.php">Logout</a></li>
 			</ul>
-		</div> -->
+		</div>
 
 		<h1 class="text-center text-warn mt-3">DASHBOARD PAGE</h1>
-        <div class="menu-body bg-dark">
+        <div class="menu-body bg-dark border border-warning rounded rounded-3">
             <table class="table table-dark home-menu container-lg">
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=brand" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=device" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
-                </tr>
-                <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="../logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" style="width: 100px; margin-left: calc(50% - 50px);"><a class="fw-bold text-light open text-decoration-none"  href="logout.php"></a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-images"></i>  Course</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
                 </tr>
             </table>
         </div>
@@ -140,6 +146,11 @@
                            case "utilities":
                                 $arr = ["name","points"];
                                 $s = new utilities;
+                                $s->search_list($arr);
+                                break;
+                           case "service":
+                                $arr = ["name"];
+                                $s = new service("flag","create_at","update_at");
                                 $s->search_list($arr);
                                 break;
                        }
@@ -188,16 +199,16 @@
                         case "branch":
                             $p = new branch;
                             $p->show_header();
-                            if($search_data == NULL && $search_list == NULL) {
+                            if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
                             } else {
-                                if($search_data == "") {
+                                if($search_data == "") { //neu co bien $search_data rong thi hien thong bao 
                                     $results = [];
                                     echo "
                                         <script>alert('Please enter value on search box !')</script>
                                     ";
                                 } else {
-                                    $results = $p->search_item('branch', $search_list,$search_data);
+                                    $results = $p->search_item('branch', $search_list,$search_data); //neu co noi dung tim kiem thi chay phuong thuc tim kiem
                                     if(count($results)<1) {
                                         echo "khong co gia tri nao phu hop";
                                     }}
@@ -277,6 +288,109 @@
                                     $p->utilities_id = $row["utilities_id"];
                                     $p->name = $row["name"];
                                     $p->points = $row["points"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
+                        case "device":
+                            $p = new device;
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result("device");
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->device_id = $row["device_id"];
+                                    $p->name = $row["name"];
+                                    $p->brand = $row["brand"];
+                                    $p->width = $row["width"];
+                                    $p->length = $row["length"];
+                                    $p->height = $row["height"];
+                                    $p->weight = $row["weight"];
+                                    $p->title = $row["title"];
+                                    $p->description = $row["description"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+                        
+                        case "service":
+                            $p = new service();
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result('service');
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->service_id = $row["service_id"];
+                                    $p->name = $row["name"];
+                                    $p->title = $row["title"];
+                                    $p->description = $row["description"];
+                                    $p->flag = $row["flag"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
+                        case "course":
+                            $p = new course();
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result('course');
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('utilities', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->course_id = $row["course_id"];
+                                    $p->name = $row["name"];
+                                    $p->mentor = $row["mentor"];
+                                    $p->description = $row["description"];
+                                    $p->start_day = $row["start_day"];
+                                    $p->end_day = $row["end_day"];
+                                    $p->price = $row["price"];
+                                    $p->flag = $row["flag"];
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
                                     $p->show_item();

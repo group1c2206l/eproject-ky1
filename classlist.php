@@ -1,5 +1,11 @@
 <?php
+    // class parent
     class main {
+        public $name;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
         public function arr_result($query) {
             require_once "config.php";
             $c = new config;
@@ -31,7 +37,9 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
+        
     }
+
     class role extends main {
         public $role_id;
         public $user_name;
@@ -69,7 +77,7 @@
                 </tr>';
         }
 
-        //kiem tra current co chinh xac 
+        //kiem tra current pass co chinh xac 
         public function check_current_pass() {
             require_once "config.php";
             $c = new config;
@@ -90,11 +98,12 @@
             }
         }
 
+        // phuong thuc dang nhap
         public function logins() {
             if($this->check_current_pass()) {
                 $name = $this->user_name;
                 setcookie("id",md5($name),time()+6000,"/");
-
+                setcookie("user_name",$name, time() + 10000,"/");
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
@@ -150,6 +159,7 @@
 
     }
 
+    //class brand 
     class branch extends main {
         public $branch_id;
         public $name;
@@ -406,7 +416,7 @@
                 array (
                     ":utilities_id" => $this->utilities_id,
                     ":name" => $this->name,
-                    ":points" => $this->points,
+                    ":points" => $this->points
                 )
             );
         }
@@ -424,11 +434,363 @@
             );
         }
 
+    }
 
+    class device extends main{
+        public $device_id;
+        public $name;
+        public $brand;
+        public $width;
+        public $length;
+        public $height;
+        public $weight;
+        public $title;
+        public $description;
+        public $flag;
+        public $create_at;
+        public $update_at;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>BRAND</td>
+                    <td>WIDTH</td>
+                    <td>LENGTH</td>
+                    <td>HEIGHT</td>
+                    <td>WEIGHT</td>
+                    <td>TITLE</td>
+                    <td>DESCRIPTION</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->device_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->brand.'</td>
+                    <td>'.$this->width.'</td>
+                    <td>'.$this->length.'</td>
+                    <td>'.$this->height.'</td>
+                    <td>'.$this->weight.'</td>
+                    <td>'.$this->title.'</td>
+                    <td>'.$this->description.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=device&device_id='.$this->device_id.'&name='.$this->name.'&brand='.$this->brand.'&width='.$this->width.'&length='.$this->length.'&height='.$this->height.'&weight='.$this->weight.'&title='.$this->title.'&description='.$this->description.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=device&device_id='.$this->device_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO device(name,brand,width,length,height,weight,title,description,create_at) VALUES (:name,:brand,:width,:length,:height,:weight,:title,:description,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":brand" => $this->brand,
+                    ":width" => $this->width,
+                    ":length" => $this->length,
+                    ":height" => $this->height,
+                    ":weight" => $this->weight,
+                    ":title" => $this->title,
+                    ":description" => $this->description,
+                )
+            );
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET name = :name,brand = :brand,width = :width,length = :length,height = :height,weight = :weight,title = :title,description = :description,update_at = NOW() WHERE device_id = :device_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":brand" => $this->brand,
+                    ":width" => $this->width,
+                    ":length" => $this->length,
+                    ":height" => $this->height,
+                    ":weight" => $this->weight,
+                    ":title" => $this->title,
+                    ":description" => $this->description,
+                    ":device_id" => $this->device_id,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE device_id = :device_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":device_id" => $this->device_id
+                )
+            );
+        }
+
+    }  
+    class service extends main {
+        public $service_id;
+        public $title;
+        public $description;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>TITLE</td>
+                    <td>DESCRIPTION</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->service_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->title.'</td>
+                    <td>'.$this->description.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=service&service_id='.$this->service_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO service(name,title,rescription,create_at) VALUES (:name,:title,:rescription,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":title" => $this->title,
+                    ":rescription" => $this->description,
+                )
+            );
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE service SET name = :name,title = :title,rescription = :rescription,update_at = NOW() WHERE service_id = :service_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":title" => $this->title,
+                    ":rescription" => $this->description,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE service_id = :service_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":service_id" => $this->service_id
+                )
+            );
+        }
+
+    }
+
+    class package extends main {
+        public $package_id;
+        public $mentor;
+        public $points;
+        public $price;
+        public $expiry;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>MENTOR</td>
+                    <td>POINTER</td>
+                    <td>PRICE</td>
+                    <td>EXPIRY</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->package_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->mentor.'</td>
+                    <td>'.$this->points.'</td>
+                    <td>'.$this->price.'</td>
+                    <td>'.$this->expiry.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":mentor" => $this->mentor,
+                    ":points" => $this->points,
+                    ":price" => $this->price,
+                    ":expiry" => $this->expiry,
+                )
+            );
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":mentor" => $this->mentor,
+                    ":points" => $this->points,
+                    ":price" => $this->price,
+                    ":expiry" => $this->expiry,
+                    ":package_id" => $this->package_id,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":package_id" => $this->package_id
+                )
+            );
+        }
 
 
     }
 
+    //class course
+    class course extends main {
+        public $course_id;
+        public $employee_id; // Thong tin PT cua khoa hoc
+        public $mentor; // Thong tin PT cua khoa hoc
+        public $description;
+        public $start_day;
+        public $end_day;
+        public $price;
+
+        public function show_header() {
+            echo "<tr>
+                    <td>ID</td>
+                    <td>NAME</td>
+                    <td>MENTOR</td>
+                    <td>DESCRIPTION</td>
+                    <td>START DAY</td>
+                    <td>END DAY</td>
+                    <td>PRICE</td>
+                    <td>CREATE_AT</td>
+                    <td>UPDATE_AT</td>
+                    <td colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->course_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->mentor.'</td>
+                    <td>'.$this->description.'</td>
+                    <td>'.$this->start_day.'</td>
+                    <td>'.$this->end_day.'</td>
+                    <td>'.$this->price.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=course&course_id='.$this->course_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":mentor" => $this->mentor,
+                    ":points" => $this->points,
+                    ":price" => $this->price,
+                    ":expiry" => $this->expiry,
+                )
+            );
+        }
+
+        public function edit() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":mentor" => $this->mentor,
+                    ":points" => $this->points,
+                    ":price" => $this->price,
+                    ":expiry" => $this->expiry,
+                    ":package_id" => $this->package_id,
+                )
+            );
+        }
+
+        public function delete() {
+            require "config.php";
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":package_id" => $this->package_id
+                )
+            );
+        }
+
+
+    }
 
 
 
