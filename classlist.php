@@ -1,4 +1,5 @@
 <?php
+    require "config.php";
     // class parent
     class main {
         public $name;
@@ -13,8 +14,10 @@
             $sql = "SELECT * FROM ".$query." ";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
+            $conn = null;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
+
         public function search_list($arr) {
             foreach($arr as $item) {
                 echo '
@@ -24,7 +27,7 @@
         }
 
         public function search_item($table,$search_list,$search_data) {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
@@ -34,7 +37,50 @@
                     ":search_data" => '%'.$search_data.'%'
                 )
             );
+            $conn = null;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
+        }
+
+        public function id_to_name($select,$from,$where,$value) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
+
+        public function list_data($id_check,$id,$name,$table) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                }
+            }
+        }
+
+        public function list_data_with_condition($id_check,$id,$name,$table,$where,$condition) {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE '.$where.' = "'.$condition.'" ';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                }
+            }
         }
 
         
@@ -53,14 +99,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ROLE_ID</td>
-                    <td>USER NAME</td>
-                    <td>PASSWORD</td>
-                    <td>EMPLOYEE NAME</td>
-                    <td>FLAG</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ROLE_ID</td>
+                    <td class='table-dark text-warning fw-bold'>USER NAME</td>
+                    <td class='table-dark text-warning fw-bold'>PASSWORD</td>
+                    <td class='table-dark text-warning fw-bold'>EMPLOYEE NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -69,7 +114,6 @@
                     <td>'.$this->user_name.'</td>
                     <td>'.$this->password_hash.'</td>
                     <td>'.$this->employee_name.'</td>
-                    <td>'.$this->flag.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=role&role_id='.$this->role_id.'&user_name='.$this->user_name.' ">Edit</a></button></td>
@@ -102,12 +146,12 @@
         public function logins() {
             if($this->check_current_pass()) {
                 $name = $this->user_name;
-                setcookie("id",md5($name),time()+6000,"/");
-                setcookie("user_name",$name, time() + 10000,"/");
+                setcookie("id",md5($name),time()+86400,"/");
+                setcookie("user_name",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+6000,"/");
+                    setcookie("loggedin",$name,time()+86400,"/");
                     header("location: ./CRUD/dashboard.php");
                 } else {
                     session_start();
@@ -172,13 +216,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>ADDRESS</td>
-                    <td>HOTLINE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>HOTLINE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -195,7 +239,6 @@
         }
 
         public function addnew() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO branch(name,address,hotline,create_at) VALUES (:name,:address,:hotline,NOW())';
@@ -207,10 +250,10 @@
                     ":hotline" => $this->hotline,
                 )
             );
+            $conn = null;
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE branch SET name = :name,address = :address,hotline = :hotline,update_at = NOW() WHERE branch_id = :branch_id;';
@@ -223,10 +266,10 @@
                     ":hotline" => $this->hotline,
                 )
             );
+            $conn = null;
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE branch SET flag = 0,update_at = NOW() WHERE branch_id = :branch_id;';
@@ -236,6 +279,7 @@
                     ":branch_id" => $this->branch_id
                 )
             );
+            $conn = null;
         }
 
     }
@@ -259,21 +303,21 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>FNAME</td>
-                    <td>MNAME</td>
-                    <td>LNAME</td>
-                    <td>DOB</td>
-                    <td>ADDRESS</td>
-                    <td>PHONE NUMBER</td>
-                    <td>PERSON ID</td>
-                    <td>EMAIL</td>
-                    <td>CONTACT NAME</td>
-                    <td>CONTACT PHONE</td>
-                    <td>TYPE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -298,7 +342,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO employee(fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
@@ -322,7 +366,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,person_id = :person_id,email = :email,contact_name = :contact_name,contact_phone = :contact_phone,type = :type,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -347,7 +391,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET flag = 0,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -372,12 +416,12 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>POINT</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>POINT</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -393,7 +437,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO utilities(name,points,create_at) VALUES (:name,:points,NOW())';
@@ -407,7 +451,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE utilities SET name = :name,points = :points,update_at = NOW() WHERE utilities_id = :utilities_id;';
@@ -422,7 +466,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE utilities SET flag = 0,update_at = NOW() WHERE utilities_id = :utilities_id;';
@@ -452,18 +496,18 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>BRAND</td>
-                    <td>WIDTH</td>
-                    <td>LENGTH</td>
-                    <td>HEIGHT</td>
-                    <td>WEIGHT</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>BRAND</td>
+                    <td class='table-dark text-warning fw-bold'>WIDTH</td>
+                    <td class='table-dark text-warning fw-bold'>LENGTH</td>
+                    <td class='table-dark text-warning fw-bold'>HEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>WEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -485,7 +529,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO device(name,brand,width,length,height,weight,title,description,create_at) VALUES (:name,:brand,:width,:length,:height,:weight,:title,:description,NOW())';
@@ -505,7 +549,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET name = :name,brand = :brand,width = :width,length = :length,height = :height,weight = :weight,title = :title,description = :description,update_at = NOW() WHERE device_id = :device_id;';
@@ -526,7 +570,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE device_id = :device_id;';
@@ -546,13 +590,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -569,7 +613,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO service(name,title,rescription,create_at) VALUES (:name,:title,:rescription,NOW())';
@@ -584,7 +628,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE service SET name = :name,title = :title,rescription = :rescription,update_at = NOW() WHERE service_id = :service_id;';
@@ -599,7 +643,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE service_id = :service_id;';
@@ -619,18 +663,20 @@
         public $points;
         public $price;
         public $expiry;
+        public $day_active;
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>POINTER</td>
-                    <td>PRICE</td>
-                    <td>EXPIRY</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>POINTER</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE ($)</td>
+                    <td class='table-dark text-warning fw-bold'>EXPIRY (MONTH)</td>
+                    <td class='table-dark text-warning fw-bold'>DAY ACTIVE (DAY/WEEK)</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -642,6 +688,7 @@
                     <td>'.$this->points.'</td>
                     <td>'.$this->price.'</td>
                     <td>'.$this->expiry.'</td>
+                    <td>'.$this->day_active.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.' ">Edit</a></button></td>
@@ -649,11 +696,13 @@
                 </tr>';
         }
 
+       
+
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,day_active,create_at) VALUES (:name,:mentor,:points,:price,:expiry,:day_active,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -662,15 +711,16 @@
                     ":points" => $this->points,
                     ":price" => $this->price,
                     ":expiry" => $this->expiry,
+                    ":day_active" => $this->day_active,
                 )
             );
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,day_active = :day_active,update_at = NOW() WHERE package_id = :package_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -679,13 +729,14 @@
                     ":points" => $this->points,
                     ":price" => $this->price,
                     ":expiry" => $this->expiry,
+                    ":day_active" => $this->day_active,
                     ":package_id" => $this->package_id,
                 )
             );
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
@@ -703,7 +754,7 @@
     //class course
     class course extends main {
         public $course_id;
-        public $employee_id; // Thong tin PT cua khoa hoc
+        public $employee_id; // Thong tin id PT cua khoa hoc
         public $mentor; // Thong tin PT cua khoa hoc
         public $description;
         public $start_day;
@@ -712,16 +763,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>DESCRIPTION</td>
-                    <td>START DAY</td>
-                    <td>END DAY</td>
-                    <td>PRICE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>START DAY</td>
+                    <td class='table-dark text-warning fw-bold'>END DAY</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -742,24 +793,25 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO package(name,mentor,points,price,expiry,create_at) VALUES (:name,:mentor,:points,:price,:expiry,NOW())';
+            $sql = 'INSERT INTO course(name,employee_id,description,start_day,end_day,price,create_at) VALUES (:name,:employee_id,:description,:start_day,:end_day,:price,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":mentor" => $this->mentor,
-                    ":points" => $this->points,
+                    ":employee_id" => $this->employee_id,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
                     ":price" => $this->price,
-                    ":expiry" => $this->expiry,
                 )
             );
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
@@ -767,37 +819,31 @@
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":mentor" => $this->mentor,
-                    ":points" => $this->points,
+                    ":employee_id" => $this->employee_id,
+                    ":description" => $this->description,
+                    ":start_day" => $this->start_day,
+                    ":end_day" => $this->end_day,
                     ":price" => $this->price,
-                    ":expiry" => $this->expiry,
-                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
                 )
             );
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE course SET flag = 0,update_at = NOW() WHERE course_id = :course_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":package_id" => $this->package_id
+                    ":course_id" => $this->course_id
                 )
             );
         }
 
 
     }
-
-
-
-
-
-
-
 
 
     class member extends main {
@@ -815,26 +861,125 @@
         public $package_id;
         public $course_id;
         public $points;
-        public $flag;
-        public $create_at;
-        public $update_at;
 
-        public function show() {
-            
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>CARD ID</td>
+                    <td class='table-dark text-warning fw-bold'>PW HASH</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>VIP</td>
+                    <td class='table-dark text-warning fw-bold'>PACKAGE</td>
+                    <td class='table-dark text-warning fw-bold'>COURSE</td>
+                    <td class='table-dark text-warning fw-bold'>POINTS</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
         }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->member_id.'</td>
+                    <td>'.$this->card_id.'</td>
+                    <td>'.$this->password_hash.'</td>
+                    <td>'.$this->fname.'</td>
+                    <td>'.$this->mname.'</td>
+                    <td>'.$this->lname.'</td>
+                    <td>'.$this->dob.'</td>
+                    <td>'.$this->address.'</td>
+                    <td>'.$this->phone_number.'</td>
+                    <td>'.$this->email.'</td>
+                    <td>'.$this->vip.'</td>
+                    <td>'.$this->package_id.'</td>
+                    <td>'.$this->course_id.'</td>
+                    <td>'.$this->points.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=member&member_id='.$this->member_id.'&card_id='.$this->card_id.'&password_hash='.$this->password_hash.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&vip='.$this->vip.'&email='.$this->email.'&package_id='.$this->package_id.'&course_id='.$this->course_id.'&points='.$this->points.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=member&member_id='.$this->member_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO member(card_id,fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":card_id" => $this->card_id,
+                    ":password_hash" => $this->password_hash,
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":vip" => $this->vip,
+                    ":email" => $this->email,
+                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
+                    ":points" => $this->points,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function edit() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,password_hash = :password_hash,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE employee_id = :employee_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":card_id" => $this->card_id,
+                    ":password_hash" => $this->password_hash,
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":vip" => $this->vip,
+                    ":email" => $this->email,
+                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
+                    ":points" => $this->points,
+                    ":member_id" => $this->member_id,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function delete() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE member SET flag = 0,update_at = NOW() WHERE member_id = :member_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":member_id" => $this->member_id
+                )
+            );
+            $conn = NULL;
+        }
+
     }
 
-
-
-
-
-
-
-
-
-
-
-
+    class galery {
+        public $galery_id;
+    }
+    
 
 
 ?>

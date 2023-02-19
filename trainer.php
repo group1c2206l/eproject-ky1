@@ -31,6 +31,7 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
+<<<<<<< HEAD
 <!-- home starts -->
     <section class="home">
         <div class="home-slide">
@@ -175,6 +176,11 @@
     </section>
 
     
+=======
+    <div class="content">
+        
+    </div>
+>>>>>>> c476fa80a3ce1d847af5a653b348c398c4ce190a
     <script src="../Style/Javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="./assets/js/trainer.js"></script>
