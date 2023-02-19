@@ -15,13 +15,13 @@
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo">Prime<span>Fitness</span></a>
+        <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
         
         <nav class="navbar">
-            <a href="#">Home</a>
+            <a href="./index.php">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
-            <a href="#">Trainer</a>
+            <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
             <a href="./register.php">Login</a>
         </nav>
@@ -48,7 +48,7 @@
                     </div>
                 </div>
                 
-                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-3.jpeg');">
+                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-1.jpeg');">
                     <div class="content">
                         <h3>health is wealth</h3>
                         <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem modi distinctio facere ut. Inventore, facere.</p>

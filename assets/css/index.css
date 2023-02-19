@@ -392,7 +392,7 @@ section{
     padding: 2rem 0;
 }
 
-trainers .trainer-slider .box .info-trainer h1{
+.trainers .trainer-slider .box .info-trainer h1{
     font-size: 3rem;
     color: #333;
     font-weight: 600;
