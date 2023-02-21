@@ -976,8 +976,143 @@
 
     }
 
-    class galery {
-        public $galery_id;
+    class galery_type extends main {
+        public $galery_type_id;
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->galery_type_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                )
+            );
+        }
+
+        public function edit() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":galery_type_id" => $this->galery_type_id,
+                )
+            );
+        }
+
+        public function delete() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":galery_type_id" => $this->galery_type_id
+                )
+            );
+        }
+
+    }
+
+    class galery_option extends main {
+        public $galery_option_id;
+        public $galery_type_id;
+        public $device_id;
+        public $service_id;
+        public $course_id;
+        public $employee_id;
+        public $package_id;
+
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->galery_option_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                )
+            );
+        }
+
+        public function edit() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":galery_type_id" => $this->galery_type_id,
+                )
+            );
+        }
+
+        public function delete() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":galery_type_id" => $this->galery_type_id
+                )
+            );
+        }
+
     }
     
 
