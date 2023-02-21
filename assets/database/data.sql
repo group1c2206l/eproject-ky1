@@ -143,10 +143,18 @@ CREATE TABLE member(
 );
 
 -- phan tach thu vien anh cho tung chuyen muc khac nhau
+CREATE TABLE galery_type(
+    galery_type_id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL, -- ex: slide, device, package, course, service, employee
+    flag INT DEFAULT 1, 
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_galery_type_id PRIMARY KEY (galery_type_id)
+);
+
 CREATE TABLE galery_option(
     galery_option_id INT AUTO_INCREMENT NOT NULL ,
-    name VARCHAR(50) NOT NULL,  -- ex: slide, device, package, course, service, employee
-    member_id INT,
+    galery_type_id INT NOT NULL,  
     device_id INT,
     service_id INT,
     course_id INT,
@@ -160,9 +168,9 @@ CREATE TABLE galery_option(
 
 CREATE TABLE galery(
     galery_id INT AUTO_INCREMENT NOT NULL ,
-    name VARCHAR(50) NOT NULL,
     galery_option_id INT NOT NULL,
     dir VARCHAR(200) NOT NULL,
+    img_name VARCHAR(100) NOT NULL,
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
