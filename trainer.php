@@ -86,7 +86,7 @@
         <div class="trainer-slider">
             <div class="wrapper">
                 <div class="box">
-                    <a href="">
+                    <a href="./infomation-trainer.php">
                         <div class="image">
                             <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                         </div>
@@ -174,13 +174,6 @@
             </div>
         </div>
     </section>
-
-    
-=======
-    <div class="content">
-        
-    </div>
->>>>>>> c476fa80a3ce1d847af5a653b348c398c4ce190a
     <script src="../Style/Javascript/index.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="./assets/js/trainer.js"></script>
