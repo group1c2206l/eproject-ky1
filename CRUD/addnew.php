@@ -478,6 +478,36 @@
                                     </form>
                                 </div>';
                     break;    
+                    case "galery_type":
+                        $p = new galery_type();
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["galery_type_id"])) {
+                                $p->galery_type_id = $_POST["galery_type_id"];
+                            }
+                            if($p->name != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=galery_type");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Galery Type</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="name" class="text-white-50">Type name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;    
 
 
                 
