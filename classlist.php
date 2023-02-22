@@ -1045,17 +1045,22 @@
     class galery_option extends main {
         public $galery_option_id;
         public $galery_type_id;
+        public $galery_type_name;
+        public $galery_option_name;
         public $device_id;
         public $service_id;
         public $course_id;
         public $employee_id;
         public $package_id;
+        public $code;
 
 
         public function show_header() {
             echo "<tr>
                     <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE NAME</td>
+                    <td class='table-dark text-warning fw-bold'>OPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CODE</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
                     <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
                     <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
@@ -1065,7 +1070,8 @@
         public function show_item() {
             echo '<tr>
                     <td>'.$this->galery_option_id.'</td>
-                    <td>'.$this->name.'</td>
+                    <td>'.$this->galery_type_name.'</td>
+                    <td>'.$this->galery_option_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>

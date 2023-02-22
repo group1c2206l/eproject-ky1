@@ -102,9 +102,9 @@
 			</ul>
 		</div>
 
-		<h1 class="text-center text-warn mt-3">DASHBOARD PAGE</h1>
+		<h1 class="text-center text-warning mt-3">DASHBOARD PAGE</h1>
         <div class="menu-body bg-dark border border-warning rounded rounded-3">
-            <table class="table table-dark home-menu container-lg">
+            <table class="table table-dark home-menu container-lg mt-2">
                 <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
