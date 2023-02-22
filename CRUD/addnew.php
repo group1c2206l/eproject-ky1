@@ -508,6 +508,83 @@
                                     </form>
                                 </div>';
                     break;    
+                    case "galery":
+                        $p = new galery();
+                        $mes = "";
+                        if(isset($_POST["select"])) {
+                            $p->select_option = $_POST["option_name"];
+                            // echo $p->select_option;
+                        }
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["galery_type_id"])) {
+                            $p->galery_type_id = $_POST["galery_type_id"];
+                        }
+                        if(isset($_POST["save"])) {
+                            echo  $p->select_option;
+                            if($p->name != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=galery");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Galery</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3">
+                                            <form action ="" method="POST">
+                                                <label for="option_name" class="text-white-50">Select Option</label>
+                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                                    <option selected disabled>Please Select option below:</option>';
+                            echo                     $p->list_data_name("","galery_type_id","name","galery_type");
+                            echo                '</select>
+                                                <button type="submit" class="btn btn-primary mb-2 mt-3" name="select">Select</button>
+                                            </form>';
+                            switch($p->select_option) {
+                                case "device":
+                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
+                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                                    <option selected disabled>Device list:</option>';
+                                    echo            $p->list_data("","device_id","name","device");
+                                    echo        '</select>';
+                                    break;
+                                case "service":
+                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
+                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                                    <option selected disabled>Service list:</option>';
+                                    echo            $p->list_data("","service_id","name","service");
+                                    echo        '</select>';
+                                    break;
+                                case "course":
+                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
+                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                                    <option selected disabled>Course list:</option>';
+                                    echo            $p->list_data("","course_id","name","course");
+                                    echo        '</select>';
+                                    break;
+                                case "employee":
+                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
+                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                                    <option selected disabled>Employee list:</option>';
+                                    echo            $p->list_data("","employee_id","name","employee");
+                                    echo        '</select>';
+                                    break;
+
+                            }
+                            echo               '<div class="form-group mb-3 mt-6">
+                                                <label for="name" class="text-white-50">Type name</label>
+                                                <input type="FILE" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
+                                            </div>
+                                           
+                                        <button type="submit" class="btn btn-primary mb-2 mt-3" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2 mt-3"> <a class="text-light" href="dashboard.php?select=galery">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+
+                    break;    
 
 
                 

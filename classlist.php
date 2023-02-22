@@ -6,6 +6,7 @@
         public $flag;
         public $create_at;
         public $update_at;
+        public $sl ;
 
         public function arr_result($query) {
             require_once "config.php";
@@ -53,15 +54,32 @@
         public function list_data($id_check,$id,$name,$table) {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
             foreach($results as $row) {
                 if($id_check == $row[$id]) {
-                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'abc</option>';
                 } else {
                     echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+
+                }
+            }
+        }
+        public function list_data_name($id_check,$id,$name,$table) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$id]) {
+                    echo  '<option value='.$row[$name].' selected>'.$row[$name].'abc</option>';
+                } else {
+                    echo  '<option value='.$row[$name].'>'.$row[$name].'</option>';
+
                 }
             }
         }
@@ -79,6 +97,8 @@
                     echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
                 } else {
                     echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                    $this->sl = $row["name"];
+                    echo $this->sl;
                 }
             }
         }
@@ -1042,17 +1062,20 @@
 
     }
 
-    class galery_option extends main {
-        public $galery_option_id;
+    class galery extends main {
+        public $galery_id;
         public $galery_type_id;
         public $galery_type_name;
-        public $galery_option_name;
+        public $galery_name;
         public $device_id;
         public $service_id;
         public $course_id;
         public $employee_id;
         public $package_id;
         public $code;
+        public $select_option;
+        public $dir;
+        public $img_name;
 
 
         public function show_header() {
@@ -1061,6 +1084,8 @@
                     <td class='table-dark text-warning fw-bold'>TYPE NAME</td>
                     <td class='table-dark text-warning fw-bold'>OPTION</td>
                     <td class='table-dark text-warning fw-bold'>CODE</td>
+                    <td class='table-dark text-warning fw-bold'>DIR</td>
+                    <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
                     <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
                     <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
@@ -1069,9 +1094,9 @@
 
         public function show_item() {
             echo '<tr>
-                    <td>'.$this->galery_option_id.'</td>
+                    <td>'.$this->galery_id.'</td>
                     <td>'.$this->galery_type_name.'</td>
-                    <td>'.$this->galery_option_name.'</td>
+                    <td>'.$this->galery_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
@@ -1080,14 +1105,20 @@
         }
 
         public function addnew() {
-            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
+            $sql = 'INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,dir,img_name,create_at) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:dir,:img_name,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":name" => $this->name,
+                    ":galery_type_id" => $this->galery_type_id,
+                    ":device_id" => $this->device_id,
+                    ":service_id" => $this->service_id,
+                    ":course_id" => $this->course_id,
+                    ":employee_id" => $this->employee_id,
+                    ":package_id" => $this->package_id,
+                    ":dir" => $this->dir,
+                    ":img_name" => $this->img_name,
                 )
             );
         }
@@ -1096,7 +1127,7 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $sql = 'UPDATE galery SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -1110,7 +1141,7 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE galery_type SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $sql = 'UPDATE galery SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (

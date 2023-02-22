@@ -120,7 +120,6 @@
                 <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-images"></i>  Course</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_type" ><i class="bi bi-images"></i>  Galery Type</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_option" ><i class="bi bi-images"></i>  Galery Option</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
                 </tr>
                 <tr>
@@ -527,6 +526,34 @@
                                     $p->flag = $row["flag"];
                                     if($p->flag == 1) {
                                         $p->galery_type_id = $row["galery_type_id"];
+                                        $p->name = $row["name"];
+                                        $p->create_at = $row["create_at"];
+                                        $p->update_at = $row["update_at"];
+                                        $p->show_item();
+                                    }
+                                }
+                                break;
+                            case "galery":
+                                $p = new galery;
+                                $p->show_header();
+                                if($search_data == NULL && $search_list == NULL) {
+                                    $results = $p->arr_result("galery");
+                                } else {
+                                    if($search_data == "") {
+                                        $results = [];
+                                        echo "
+                                            <script>alert('Please enter value on search box !')</script>
+                                        ";
+                                    } else {
+                                        $results = $p->search_item('galery', $search_list,$search_data);
+                                        if(count($results)<1) {
+                                            echo "khong co gia tri nao phu hop";
+                                        }}
+                                    }
+                                foreach($results as $row) {
+                                    $p->flag = $row["flag"];
+                                    if($p->flag == 1) {
+                                        $p->galery_id = $row["galery_id"];
                                         $p->name = $row["name"];
                                         $p->create_at = $row["create_at"];
                                         $p->update_at = $row["update_at"];
