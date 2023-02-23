@@ -1108,18 +1108,17 @@
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
-            
             $file_path = $this->dir.$this->img_name;
             echo $file_path;
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
                 if(move_uploaded_file($this->img_tmp,$file_path)) {
-                    $sql = "INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,member_id,dir,img_name,CREATE_AT) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:member_id,:dir,:img_name,NOW())";
+                    $sql = "INSERT INTO galery(galery_type_name,device_id,service_id,course_id,employee_id,package_id,member_id,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:device_id,:service_id,:course_id,:employee_id,:package_id,:member_id,:dir,:img_name,NOW())";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(
                         array (
-                            "galery_type_id" => $this->galery_type_id,
+                            "galery_type_name" => $this->galery_type_name,
                             "device_id" => $this->device_id,
                             "service_id" => $this->service_id,
                             "course_id" => $this->course_id,

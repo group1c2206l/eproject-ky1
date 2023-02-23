@@ -516,95 +516,96 @@
                     case "galery":
                         $p = new galery();
                         $mes = "";
-                        if(isset($_POST["select"])) {
-                            if(isset($_POST["galery_type_name"])) {
-                                $p->galery_type_name = $_POST["galery_type_name"];
-                                echo $p->galery_type_name;
+                        $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = $p->member_id = "";
+                        if(isset($_GET["option"])) {
+                            if(isset($_GET["galery_type_name"])) {
+                                $p->galery_type_name = $_GET["galery_type_name"];
+                            }
+                        }
+                        if(isset($_POST["save"])) {
+                            if(isset($_GET["galery_type_name"])) {
+                                $p->galery_type_name = $_GET["galery_type_name"];
                                 switch($p->galery_type_name) {
                                     case "slide":
-                                        $p->dir = '../assets/image/slide/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/slide/';
                                     break;
                                     case "background":
-                                        $p->dir = './assets/image/background/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/background/';
                                     break;
                     
                                     case "course":
-                                        $p->dir = './assets/image/course/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/course/';
                                     break;
                                     case "logo":
-                                        $p->dir = './assets/image/logo/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/logo/';
                                     break;
                                     case "PT":
-                                        $p->dir = './assets/image/PT/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/PT/';
                                     break;
                                     case "device":
-                                        $p->dir = './assets/image/device/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/device/';
                                     break;
                                     case "service":
-                                        $p->dir = './assets/image/service/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/service/';
                                     break;
                                     case "member":
-                                        $p->dir = './assets/image/member/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/member/';
                                     break;
                                     case "talk_about_me":
-                                        $p->dir = './assets/image/talk_about_me/';
+                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/talk_about_me/';
                                     break;
                                 }
-                                echo $p->dir;
+                                
                             }
-                        } else {
-
-                            if(isset($_POST["save"])) {
-                                // $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = "";
-                                // if(isset($_POST["device_id"])) {
-                                //     $p->device_id = $_POST["device_id"];
-                                // }
-                                // if(isset($_POST["service_id"])) {
-                                //     $p->service_id = $_POST["service_id"];
-                                // }
-                                // if(isset($_POST["package_id"])) {
-                                //     $p->package_id = $_POST["package_id"];
-                                // }
-                                // if(isset($_POST["course_id"])) {
-                                //     $p->course_id = $_POST["course_id"];
-                                // }
-                                // if(isset($_POST["employee_id"])) {
-                                //     $p->employee_id = $_POST["employee_id"];
-                                // }
-                                // if(isset($_FILES["img_name"]["name"])) {
-                                //     $p->img_name = basename($_FILES["img_name"]["name"]);
-                                // }
-                                // if(isset($_FILES["img_name"]["tmp_name"])) {
-                                //     $p->img_tmp = $_FILES["img_name"]["tmp_name"];
-                                // }
-                                // echo $p->img_name;
-                                // $p->slide_name = "slide";
-                                // if($p->galery_type_name != NULL) {
-                                //     $p->addnew();
-                                //     header("location: dashboard.php?select=galery");
-                                //     print_r($p);
-                                // } else {
-                                //     $mes = "Please enter full information";
-                                //     print_r($p);
-                                // }
-                                echo $p->dir."ass";
+                            
+                            if(isset($_POST["device_id"])) {
+                                $p->device_id = $_POST["device_id"];
+                            }
+                            if(isset($_POST["service_id"])) {
+                                $p->service_id = $_POST["service_id"];
+                            }
+                            if(isset($_POST["package_id"])) {
+                                $p->package_id = $_POST["package_id"];
+                            }
+                            if(isset($_POST["course_id"])) {
+                                $p->course_id = $_POST["course_id"];
+                            }
+                            if(isset($_POST["employee_id"])) {
+                                $p->employee_id = $_POST["employee_id"];
+                            }
+                            if(isset($_FILES["img_name"]["name"])) {
+                                $p->img_name = basename($_FILES["img_name"]["name"]);
+                            }
+                            if(isset($_FILES["img_name"]["tmp_name"])) {
+                                $p->img_tmp = $_FILES["img_name"]["tmp_name"];
+                            }
+                            $p->slide_name = "slide";
+                            if($p->galery_type_name != NULL) {
+                                $p->addnew();
+                                // header("location: dashboard.php?select=galery");
+                                // print_r($p);
+                            } else {
+                                $mes = "Please enter full information";
                             }
                         }
+                        
 
                         
 
                         
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center text-light">Add news Galery</h3>
-                                    <form action=""  method="POST" enctype="multipart/form-data>
-                                        <div class="form-group mb-3">
-                                            
-                                                <label for="galery_type_name" class="text-white-50 ">Select Option</label>
-                                                <select name="galery_type_name" id="galery_type_name" class="form-control bg-dark text-white ">
-                                                    <option selected disabled>Please Select option below:</option>';
-                            echo                     $p->list_data_name($p->galery_type_name,"galery_type_id","name","galery_type");
-                            echo                '</select>
-                                                <button type="submit" class="btn btn-primary mb-2 mt-3" name="select">Select</button>';
+                                    <form action="" method="get">
+                                        <label for="galery_type_name" class="text-white-50 ">Select Option</label>
+                                        <input type="text" name="select" value="'.$select.'" class="d-none">
+                                        <select name="galery_type_name" id="galery_type_name" class="form-control bg-dark text-white ">
+                                            <option selected disabled>Please Select option below:</option>';
+                        echo                $p->list_data_name($p->galery_type_name,"galery_type_id","name","galery_type");
+                        echo            '</select>
+                                         <button type="submit" class="btn btn-primary mb-2 mt-3" name="option" value="ok">option</button>
+                                    </form>
+                                    <form action=""  method="POST" enctype="multipart/form-data">
+                                        <div class="form-group mb-3">';       
                             switch($p->galery_type_name) {
                                 case "device":
                                     echo        '<div class="form-group mb-3 mt-6">

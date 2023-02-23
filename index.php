@@ -21,6 +21,7 @@
             <a href="./index.php">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
+            
             <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
             <a href="./register.php">Login</a>
