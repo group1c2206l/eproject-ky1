@@ -1074,6 +1074,7 @@
         public $code;
         public $dir;
         public $img_name;
+        public $img_tmp;
         public $slide_name;
 
 
@@ -1113,7 +1114,7 @@
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
-                if(move_uploaded_file($_FILES["file"]["tmp_name"],$file_path)) {
+                if(move_uploaded_file($this->img_tmp,$file_path)) {
                     $sql = "INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,member_id,dir,img_name,CREATE_AT) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:member_id,:dir,:img_name,NOW())";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(
@@ -1135,22 +1136,6 @@
             } else {
                 echo "please check file type";
             }
-
-
-            $sql = 'INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,dir,img_name,create_at) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:dir,:img_name,NOW())';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(
-                array (
-                    ":galery_type_id" => $this->galery_type_id,
-                    ":device_id" => $this->device_id,
-                    ":service_id" => $this->service_id,
-                    ":course_id" => $this->course_id,
-                    ":employee_id" => $this->employee_id,
-                    ":package_id" => $this->package_id,
-                    ":dir" => $this->dir,
-                    ":img_name" => $this->img_name,
-                )
-            );
         }
 
         public function edit() {

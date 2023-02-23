@@ -513,39 +513,6 @@
                                     </form>
                                 </div>';
                     break;    
-                    case "galery_option":
-                        $p = new galery_option();
-                        $mes = "";
-                        if(isset($_POST["save"])) {
-                            if(isset($_POST["name"])) {
-                                $p->name = $_POST["name"];
-                            }
-                            if(isset($_POST["galery_type_id"])) {
-                                $p->galery_type_id = $_POST["galery_type_id"];
-                            }
-                            if($p->name != NULL) {
-                                $p->addnew();
-                                header("location: dashboard.php?select=galery_type");
-                            } else {
-                                $mes = "Please enter full information";
-                            }
-                        }
-                        echo   '<div class="mt-5 num">
-                                    <h3 class="text-center text-light">Add new Galery Option</h3>
-                                    <form action=""  method="POST">
-                                       
-                                        <div class="form-group mb-3">
-                                            <label for="employee_id" class="text-white-50">Mentor</label>
-                                            <select name="option-list" id="option-list" class="form-control bg-dark text-white">';
-                        echo                     $p->list_data("","galery_type_id","name","galery_type");
-                        echo                '</select>
-                                        <p>'.$p->select.'</p>
-                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
-                                        <span class="text-warning">'.$mes.'</span>
-                                    </form>
-                                </div>';
-                    break;    
                     case "galery":
                         $p = new galery();
                         $mes = "";
@@ -585,42 +552,50 @@
                                 }
                                 echo $p->dir;
                             }
+                        } else {
+
+                            if(isset($_POST["save"])) {
+                                // $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = "";
+                                // if(isset($_POST["device_id"])) {
+                                //     $p->device_id = $_POST["device_id"];
+                                // }
+                                // if(isset($_POST["service_id"])) {
+                                //     $p->service_id = $_POST["service_id"];
+                                // }
+                                // if(isset($_POST["package_id"])) {
+                                //     $p->package_id = $_POST["package_id"];
+                                // }
+                                // if(isset($_POST["course_id"])) {
+                                //     $p->course_id = $_POST["course_id"];
+                                // }
+                                // if(isset($_POST["employee_id"])) {
+                                //     $p->employee_id = $_POST["employee_id"];
+                                // }
+                                // if(isset($_FILES["img_name"]["name"])) {
+                                //     $p->img_name = basename($_FILES["img_name"]["name"]);
+                                // }
+                                // if(isset($_FILES["img_name"]["tmp_name"])) {
+                                //     $p->img_tmp = $_FILES["img_name"]["tmp_name"];
+                                // }
+                                // echo $p->img_name;
+                                // $p->slide_name = "slide";
+                                // if($p->galery_type_name != NULL) {
+                                //     $p->addnew();
+                                //     header("location: dashboard.php?select=galery");
+                                //     print_r($p);
+                                // } else {
+                                //     $mes = "Please enter full information";
+                                //     print_r($p);
+                                // }
+                                echo $p->dir."ass";
+                            }
                         }
+
                         
 
-                        if(isset($_POST["save"])) {
-                            $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = "";
-                            if(isset($_POST["device_id"])) {
-                                $p->device_id = $_POST["device_id"];
-                            }
-                            if(isset($_POST["service_id"])) {
-                                $p->service_id = $_POST["service_id"];
-                            }
-                            if(isset($_POST["package_id"])) {
-                                $p->package_id = $_POST["package_id"];
-                            }
-                            if(isset($_POST["course_id"])) {
-                                $p->course_id = $_POST["course_id"];
-                            }
-                            if(isset($_POST["employee_id"])) {
-                                $p->employee_id = $_POST["employee_id"];
-                            }
-                            if(isset($_FILES["img_name"]["name"])) {
-                                $p->img_name = basename($_FILES["file"]["name"]);
-                            }
-                            echo $p->img_name;
-                            $p->slide_name = "slide";
-                            if($p->galery_type_name != NULL && $p->img_name != NULL) {
-                                $p->addnew();
-                                header("location: dashboard.php?select=galery");
-                                print_r($p);
-                            } else {
-                                $mes = "Please enter full information";
-                                print_r($p);
-                            }
-                        }
+                        
                         echo   '<div class="mt-5 num">
-                                    <h3 class="text-center text-light">Add new Galery</h3>
+                                    <h3 class="text-center text-light">Add news Galery</h3>
                                     <form action=""  method="POST" enctype="multipart/form-data>
                                         <div class="form-group mb-3">
                                             
@@ -681,7 +656,7 @@
                             }
                             echo               '<div class="form-group mb-3 mt-6">
                                                     <label for="img_name" class="text-white-50">Picture Name</label>
-                                                    <input type="FILE" class="form-control bg-dark text-white" id="img_name" name="img_name">
+                                                    <input type="file" class="form-control bg-dark text-white" id="img_name" name="img_name">
                                                 </div>
                                            
                                         <button type="submit" class="btn btn-primary mb-2 mt-3" name="save">Save</button>
