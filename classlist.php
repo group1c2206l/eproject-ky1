@@ -1064,6 +1064,8 @@
         public $galery_id;
         public $galery_type_id;
         public $galery_type_name;
+        public $item_id;
+        public $item_name;
         public $galery_name;
         public $device_id;
         public $service_id;
@@ -1082,9 +1084,9 @@
         public function show_header() {
             echo "<tr>
                     <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>TYPE NAME</td>
-                    <td class='table-dark text-warning fw-bold'>OPTION</td>
-                    <td class='table-dark text-warning fw-bold'>CODE</td>
+                    <td class='table-dark text-warning fw-bold'>GALERY TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>ITEM ID</td>
+                    <td class='table-dark text-warning fw-bold'>ITEM NAME</td>
                     <td class='table-dark text-warning fw-bold'>DIR</td>
                     <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
@@ -1097,7 +1099,10 @@
             echo '<tr>
                     <td>'.$this->galery_id.'</td>
                     <td>'.$this->galery_type_name.'</td>
-                    <td>'.$this->galery_name.'</td>
+                    <td>'.$this->item_id.'</td>
+                    <td>'.$this->item_name.'</td>
+                    <td>'.$this->dir.'</td>
+                    <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
@@ -1114,17 +1119,13 @@
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
                 if(move_uploaded_file($this->img_tmp,$file_path)) {
-                    $sql = "INSERT INTO galery(galery_type_name,device_id,service_id,course_id,employee_id,package_id,member_id,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:device_id,:service_id,:course_id,:employee_id,:package_id,:member_id,:dir,:img_name,NOW())";
+                    $sql = "INSERT INTO galery(galery_type_name,item_id,item_name,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:item_id,:item_name,:dir,:img_name,NOW())";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(
                         array (
                             "galery_type_name" => $this->galery_type_name,
-                            "device_id" => $this->device_id,
-                            "service_id" => $this->service_id,
-                            "course_id" => $this->course_id,
-                            "employee_id" => $this->employee_id,
-                            "package_id" => $this->package_id,
-                            "member_id" => $this->member_id,
+                            "item_id" => $this->item_id,
+                            "item_name" => $this->item_name,
                             "dir" => $this->dir,
                             "img_name" => $this->img_name,
                         )

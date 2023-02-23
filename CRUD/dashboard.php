@@ -136,7 +136,7 @@
                 <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
                 <input type="text" id="search-box" name="search_data" placeholder="Input content here:">
                 <select name="search_list" id="search_list">
-                    <option selected>Open this select menu :</option>
+                    <option selected disabled>Open this select menu :</option>
                    <?php
                        switch($select) {
                            case "role":
@@ -182,6 +182,16 @@
                            case "member":
                                 $arr = ["card_id","fname","lname","address","phone_number","email","vip","package_id","course_id"];
                                 $s = new member();
+                                $s->search_list($arr);
+                                break;
+                           case "galery_type":
+                                $arr = ["name"];
+                                $s = new galery_type();
+                                $s->search_list($arr);
+                                break;
+                           case "galery":
+                                $arr = ["galery_type_name","item_name","img_name"];
+                                $s = new galery();
                                 $s->search_list($arr);
                                 break;
                        }
@@ -257,6 +267,7 @@
                                 }
                             }
                             break;
+
                         case "employee":
                             $p = new employee;
                             $p->show_header();
@@ -505,6 +516,7 @@
                                     }
                                 }
                                 break;
+
                             case "galery_type":
                                 $p = new galery_type;
                                 $p->show_header();
@@ -534,50 +546,39 @@
                                 }
                                 break;
 
+                            case "galery":
+                                $p = new galery;
+                                $p->show_header();
+                                if($search_data == NULL && $search_list == NULL) {
+                                    $results = $p->arr_result("galery");
+                                } else {
+                                    if($search_data == "") {
+                                        $results = [];
+                                        echo "
+                                            <script>alert('Please enter value on search box !')</script>
+                                        ";
+                                    } else {
+                                        $results = $p->search_item('galery', $search_list,$search_data);
+                                        if(count($results)<1) {
+                                            echo "khong co gia tri nao phu hop";
+                                        }}
+                                    }
+                                foreach($results as $row) {
+                                    $p->flag = $row["flag"];
+                                    if($p->flag == 1) {
+                                        $p->galery_id = $row["galery_id"];
+                                        $p->galery_type_name = $row["galery_type_name"];
+                                        $p->item_id = $row["item_id"];
+                                        $p->item_name = $row["item_name"];
 
-
-
-                        // case "galery":  // hien thi danh muc galery
-                        //     $a = new config;
-                        //     $conn = $a->connect();
-                        //     $p = new galery;
-                        //     $p->show_header();
-                        //     $sql1 = "SELECT P.PRODUCT_ID,P.NAME PNAME,C.NAME CNAME FROM product P INNER JOIN category C ON P.CATEGORY_ID = C.CATEGORY_ID"; //hien thi toan bo danh sach product da co
-                        //     $stmt1 = $conn->prepare($sql1);
-                        //     $stmt1->execute();
-                        //     $results1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-                        //     foreach($results1 as $row1) {
-                        //         $p->product_id = $row1["PRODUCT_ID"];
-                        //         $p->product_name = $row1["PNAME"];
-                        //         $p->category = $row1["CNAME"];
-                        //         $sql_product = "SELECT COUNT(PRODUCT_ID) NUM FROM galery WHERE PRODUCT_ID = ".$p->product_id." "; //kiem tra xem san pham da ton tai trong galery hay chua
-                        //         $check = $conn->prepare($sql_product);
-                        //         $check->execute();
-                        //         $num = $check->fetchColumn();
-                        //         if($num>0) {  //neu san pham da ton tai anh thi hien thi thong tin
-                        //             $sql = "SELECT G.GALERY_ID,G.PRODUCT_ID,G.DIR,G.FILENAME,CONCAT(G.DIR,G.FILENAME) PICTURE,G.CREATE_AT,G.UPDATE_AT FROM `galery` G INNER JOIN product P ON G.PRODUCT_ID = P.PRODUCT_ID "
-                        //             ."WHERE G.PRODUCT_ID = ".$p->product_id." ";
-                        //             $tsql = $conn->prepare($sql);
-                        //             $tsql->execute();
-                        //             $results = $tsql->fetchAll(PDO::FETCH_ASSOC);
-                        //             $p->galery_id = $results[0]["GALERY_ID"];
-                        //             $p->dir = $results[0]["DIR"];
-                        //             $p->filename = $results[0]["FILENAME"];
-                        //             $p->fullpart = $results[0]["PICTURE"];
-                        //             $p->create_at = $results[0]["CREATE_AT"];
-                        //             $p->update_at = $results[0]["UPDATE_AT"];
-                        //         } else { //neu chua ton tai thi de trong cac muc tren
-                        //             $p->galery_id = "";
-                        //             $p->dir = "";
-                        //             $p->filename = "";
-                        //             $p->fullpart = "";
-                        //             $p->create_at = "";
-                        //             $p->update_at = "";
-                        //         }
-                        //         $p->show_item();    
-                        //     }
-                        //     $conn = NULL;
-                        //     break;
+                                        $p->dir = $row["dir"];
+                                        $p->img_name = $row["img_name"];
+                                        $p->create_at = $row["create_at"];
+                                        $p->update_at = $row["update_at"];
+                                        $p->show_item();
+                                    }
+                                }
+                                break;
 
                     }                 
                 

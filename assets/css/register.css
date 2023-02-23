@@ -12,7 +12,8 @@ body {
 }
 .container {
     /* background-image: url(../image/backgound/desktop-1600x900.jpg); */
-    background-color: rgba(48, 16, 48, 0.26);
+    background-color: rgba(167, 148, 167, 0.075);
+    box-shadow: 2px 2px 5px rgba(238, 130, 238, 0.342);
     background-size: cover;
     background-repeat: no-repeat;
     /* background-color: rgb(68, 7, 87); */

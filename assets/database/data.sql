@@ -152,20 +152,6 @@ CREATE TABLE galery_type(
     CONSTRAINT PK_galery_type_id PRIMARY KEY (galery_type_id)
 );
 
--- CREATE TABLE galery_option(
---     galery_option_id INT AUTO_INCREMENT NOT NULL ,
---     galery_type_id INT NOT NULL,  
---     device_id INT,
---     service_id INT,
---     course_id INT,
---     employee_id INT,
---     package_id INT,
---     flag INT DEFAULT 1, 
---     create_at DATETIME,
---     update_at DATETIME,
---     CONSTRAINT PK_galery_option_id PRIMARY KEY (galery_option_id)
--- );
-
 CREATE TABLE galery(
     galery_id INT AUTO_INCREMENT NOT NULL ,
     galery_type_id INT NOT NULL, 

@@ -516,7 +516,7 @@
                     case "galery":
                         $p = new galery();
                         $mes = "";
-                        $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = $p->member_id = "";
+                        $p->item_id = $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = $p->member_id = "";
                         if(isset($_GET["option"])) {
                             if(isset($_GET["galery_type_name"])) {
                                 $p->galery_type_name = $_GET["galery_type_name"];
@@ -539,7 +539,7 @@
                                     case "logo":
                                         $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/logo/';
                                     break;
-                                    case "PT":
+                                    case "employee":
                                         $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/PT/';
                                     break;
                                     case "device":
@@ -560,21 +560,32 @@
                             
                             if(isset($_POST["device_id"])) {
                                 $p->device_id = $_POST["device_id"];
+                                $p->item_id = $p->device_id;
+                                $p->item_name = $p->id_to_name("name","device","device_id",$p->device_id);
                             }
                             if(isset($_POST["service_id"])) {
                                 $p->service_id = $_POST["service_id"];
+                                $p->item_id = $p->service_id;
+                                $p->item_name = $p->id_to_name("name","service","service_id",$p->service_id);
                             }
                             if(isset($_POST["package_id"])) {
                                 $p->package_id = $_POST["package_id"];
+                                $p->item_id = $p->package_id;
+                                $p->item_name = $p->id_to_name("name","package","package_id",$p->package_id);
                             }
                             if(isset($_POST["course_id"])) {
                                 $p->course_id = $_POST["course_id"];
+                                $p->item_id = $p->course_id;
+                                $p->item_name = $p->id_to_name("name","course","course_id",$p->course_id);
                             }
                             if(isset($_POST["employee_id"])) {
                                 $p->employee_id = $_POST["employee_id"];
+                                $p->item_id = $p->employee_id;
+                                $p->item_name = $p->id_to_name("lname","employee","employee_id",$p->employee_id);
                             }
                             if(isset($_FILES["img_name"]["name"])) {
                                 $p->img_name = basename($_FILES["img_name"]["name"]);
+                                $p->item_id = $p->device_id;
                             }
                             if(isset($_FILES["img_name"]["tmp_name"])) {
                                 $p->img_tmp = $_FILES["img_name"]["tmp_name"];
@@ -583,7 +594,7 @@
                             if($p->galery_type_name != NULL) {
                                 $p->addnew();
                                 // header("location: dashboard.php?select=galery");
-                                // print_r($p);
+                                print_r($p);
                             } else {
                                 $mes = "Please enter full information";
                             }
