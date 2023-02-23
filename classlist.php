@@ -1135,7 +1135,7 @@
                 }
             } else {
                 echo "please check file type";
-            }
+            } 
         }
 
         public function edit() {

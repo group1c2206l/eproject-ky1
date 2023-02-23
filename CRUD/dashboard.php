@@ -233,8 +233,6 @@
                                     $p->show_item();
                                 }
                             }
-                        
-                            
                         break;
 
                         case "branch":

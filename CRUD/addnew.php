@@ -527,32 +527,32 @@
                                 $p->galery_type_name = $_GET["galery_type_name"];
                                 switch($p->galery_type_name) {
                                     case "slide":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/slide/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/slide/';
                                     break;
                                     case "background":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/background/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/background/';
                                     break;
                     
                                     case "course":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/course/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/course/';
                                     break;
                                     case "logo":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/logo/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/logo/';
                                     break;
                                     case "employee":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/PT/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/PT/';
                                     break;
                                     case "device":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/device/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/device/';
                                     break;
                                     case "service":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/service/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/service/';
                                     break;
                                     case "member":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/member/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/member/';
                                     break;
                                     case "talk_about_me":
-                                        $p->dir = 'C:/Users/phamn/OneDrive/Code/eproject/eproject-ky1/assets/image/talk_about_me/';
+                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/talk_about_me/';
                                     break;
                                 }
                                 
