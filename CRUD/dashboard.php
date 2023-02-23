@@ -533,34 +533,6 @@
                                     }
                                 }
                                 break;
-                            case "galery":
-                                $p = new galery;
-                                $p->show_header();
-                                if($search_data == NULL && $search_list == NULL) {
-                                    $results = $p->arr_result("galery");
-                                } else {
-                                    if($search_data == "") {
-                                        $results = [];
-                                        echo "
-                                            <script>alert('Please enter value on search box !')</script>
-                                        ";
-                                    } else {
-                                        $results = $p->search_item('galery', $search_list,$search_data);
-                                        if(count($results)<1) {
-                                            echo "khong co gia tri nao phu hop";
-                                        }}
-                                    }
-                                foreach($results as $row) {
-                                    $p->flag = $row["flag"];
-                                    if($p->flag == 1) {
-                                        $p->galery_id = $row["galery_id"];
-                                        $p->name = $row["name"];
-                                        $p->create_at = $row["create_at"];
-                                        $p->update_at = $row["update_at"];
-                                        $p->show_item();
-                                    }
-                                }
-                                break;
 
 
 

@@ -2,6 +2,7 @@
     require "config.php";
     // class parent
     class main {
+        public $select;
         public $name;
         public $flag;
         public $create_at;
@@ -59,7 +60,7 @@
             $results = $stmt->fetchAll();
             foreach($results as $row) {
                 if($id_check == $row[$id]) {
-                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'abc</option>';
+                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
                 } else {
                     echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
 
@@ -84,7 +85,6 @@
         }
 
         public function list_data_with_condition($id_check,$id,$name,$table,$where,$condition) {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE '.$where.' = "'.$condition.'" ';

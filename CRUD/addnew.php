@@ -506,6 +506,40 @@
                                             <label for="name" class="text-white-50">Type name</label>
                                             <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
                                         </div>
+                                        
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;    
+                    case "galery_option":
+                        $p = new galery_option();
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["name"])) {
+                                $p->name = $_POST["name"];
+                            }
+                            if(isset($_POST["galery_type_id"])) {
+                                $p->galery_type_id = $_POST["galery_type_id"];
+                            }
+                            if($p->name != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=galery_type");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Galery Option</h3>
+                                    <form action=""  method="POST">
+                                       
+                                        <div class="form-group mb-3">
+                                            <label for="employee_id" class="text-white-50">Mentor</label>
+                                            <select name="option-list" id="option-list" class="form-control bg-dark text-white">';
+                        echo                     $p->list_data("","galery_type_id","name","galery_type");
+                        echo                '</select>
+                                        <p>'.$p->select.'</p>
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                         <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
                                         <span class="text-warning">'.$mes.'</span>
