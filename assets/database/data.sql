@@ -174,6 +174,7 @@ CREATE TABLE galery(
     course_id INT,
     employee_id INT,
     package_id INT,
+    member_id INT,
     dir VARCHAR(200) NOT NULL,
     img_name VARCHAR(100) NOT NULL,
     flag INT DEFAULT 1, 

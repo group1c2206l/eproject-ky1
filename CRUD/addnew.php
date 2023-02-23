@@ -404,7 +404,11 @@
                                         </div>
                                         <div class="form-group mb-3 mt-6">
                                             <label for="day_active" class="text-white-50">Day active</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="day_active" name="day_active" value="'.$p->day_active.'">
+                                            <select name="day_active" id="day_active" class="form-control bg-dark text-white" value="'.$p->day_active.'">
+                                                <option value="3">3 day/week</option>
+                                                <option value="5">5 day/week</option>
+                                                <option value="7">7 day/week</option>
+                                            </select>
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                         <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=package">Back</a></button>
@@ -512,71 +516,139 @@
                         $p = new galery();
                         $mes = "";
                         if(isset($_POST["select"])) {
-                            $p->select_option = $_POST["option_name"];
-                            // echo $p->select_option;
+                            if(isset($_POST["galery_type_name"])) {
+                                $p->galery_type_name = $_POST["galery_type_name"];
+                                echo $p->galery_type_name;
+                                switch($p->galery_type_name) {
+                                    case "slide":
+                                        $p->dir = '../assets/image/slide/';
+                                    break;
+                                    case "background":
+                                        $p->dir = './assets/image/background/';
+                                    break;
+                    
+                                    case "course":
+                                        $p->dir = './assets/image/course/';
+                                    break;
+                                    case "logo":
+                                        $p->dir = './assets/image/logo/';
+                                    break;
+                                    case "PT":
+                                        $p->dir = './assets/image/PT/';
+                                    break;
+                                    case "device":
+                                        $p->dir = './assets/image/device/';
+                                    break;
+                                    case "service":
+                                        $p->dir = './assets/image/service/';
+                                    break;
+                                    case "member":
+                                        $p->dir = './assets/image/member/';
+                                    break;
+                                    case "talk_about_me":
+                                        $p->dir = './assets/image/talk_about_me/';
+                                    break;
+                                }
+                                echo $p->dir;
+                            }
                         }
-                        if(isset($_POST["name"])) {
-                            $p->name = $_POST["name"];
-                        }
-                        if(isset($_POST["galery_type_id"])) {
-                            $p->galery_type_id = $_POST["galery_type_id"];
-                        }
+                        
+
                         if(isset($_POST["save"])) {
-                            echo  $p->select_option;
-                            if($p->name != NULL) {
+                            $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->employee_id = "";
+                            if(isset($_POST["device_id"])) {
+                                $p->device_id = $_POST["device_id"];
+                            }
+                            if(isset($_POST["service_id"])) {
+                                $p->service_id = $_POST["service_id"];
+                            }
+                            if(isset($_POST["package_id"])) {
+                                $p->package_id = $_POST["package_id"];
+                            }
+                            if(isset($_POST["course_id"])) {
+                                $p->course_id = $_POST["course_id"];
+                            }
+                            if(isset($_POST["employee_id"])) {
+                                $p->employee_id = $_POST["employee_id"];
+                            }
+                            if(isset($_FILES["img_name"]["name"])) {
+                                $p->img_name = basename($_FILES["file"]["name"]);
+                            }
+                            echo $p->img_name;
+                            $p->slide_name = "slide";
+                            if($p->galery_type_name != NULL && $p->img_name != NULL) {
                                 $p->addnew();
                                 header("location: dashboard.php?select=galery");
+                                print_r($p);
                             } else {
                                 $mes = "Please enter full information";
+                                print_r($p);
                             }
                         }
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center text-light">Add new Galery</h3>
-                                    <form action=""  method="POST">
+                                    <form action=""  method="POST" enctype="multipart/form-data>
                                         <div class="form-group mb-3">
-                                            <form action ="" method="POST">
-                                                <label for="option_name" class="text-white-50">Select Option</label>
-                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
+                                            
+                                                <label for="galery_type_name" class="text-white-50 ">Select Option</label>
+                                                <select name="galery_type_name" id="galery_type_name" class="form-control bg-dark text-white ">
                                                     <option selected disabled>Please Select option below:</option>';
-                            echo                     $p->list_data_name("","galery_type_id","name","galery_type");
+                            echo                     $p->list_data_name($p->galery_type_name,"galery_type_id","name","galery_type");
                             echo                '</select>
-                                                <button type="submit" class="btn btn-primary mb-2 mt-3" name="select">Select</button>
-                                            </form>';
-                            switch($p->select_option) {
+                                                <button type="submit" class="btn btn-primary mb-2 mt-3" name="select">Select</button>';
+                            switch($p->galery_type_name) {
                                 case "device":
-                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
-                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
-                                                    <option selected disabled>Device list:</option>';
-                                    echo            $p->list_data("","device_id","name","device");
-                                    echo        '</select>';
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="device_id" class="text-white-50">Select Option</label>
+                                                    <select name="device_id" id="device_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Device list:</option>';
+                                    echo                $p->list_data("","device_id","name","device");
+                                    echo           '</select>
+                                                    
+                                                </div>';
                                     break;
                                 case "service":
-                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
-                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
-                                                    <option selected disabled>Service list:</option>';
-                                    echo            $p->list_data("","service_id","name","service");
-                                    echo        '</select>';
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="service_id" class="text-white-50">Select Option</label>
+                                                    <select name="service_id" id="service_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Service list:</option>';
+                                    echo                $p->list_data("","service_id","name","service");
+                                    echo           '</select>
+                                                </div>';
+                                    break;
+                                case "package":
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="package_id" class="text-white-50">Select Option</label>
+                                                    <select name="package_id" id="package_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>package list:</option>';
+                                    echo                $p->list_data("","package_id","name","package");
+                                    echo           '</select>
+                                                </div>';
                                     break;
                                 case "course":
-                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
-                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
-                                                    <option selected disabled>Course list:</option>';
-                                    echo            $p->list_data("","course_id","name","course");
-                                    echo        '</select>';
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="course_id" class="text-white-50">Select Option</label>
+                                                    <select name="course_id" id="course_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Course list:</option>';
+                                    echo                $p->list_data("","course_id","name","course");
+                                    echo           '</select>
+                                                </div>';
                                     break;
                                 case "employee":
-                                    echo        '<label for="option_name" class="text-white-50">Select Option</label>
-                                                <select name="option_name" id="option_name" class="form-control bg-dark text-white w-50">
-                                                    <option selected disabled>Employee list:</option>';
-                                    echo            $p->list_data("","employee_id","name","employee");
-                                    echo        '</select>';
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="employee_id" class="text-white-50">Select Option</label>
+                                                    <select name="employee_id" id="employee_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Employee list:</option>';
+                                    echo                $p->list_data("","employee_id","lname","employee");
+                                    echo           '</select>
+                                                </div>';
                                     break;
-
+                                
                             }
                             echo               '<div class="form-group mb-3 mt-6">
-                                                <label for="name" class="text-white-50">Type name</label>
-                                                <input type="FILE" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
-                                            </div>
+                                                    <label for="img_name" class="text-white-50">Picture Name</label>
+                                                    <input type="FILE" class="form-control bg-dark text-white" id="img_name" name="img_name">
+                                                </div>
                                            
                                         <button type="submit" class="btn btn-primary mb-2 mt-3" name="save">Save</button>
                                         <button  class="btn btn-primary mb-2 mt-3"> <a class="text-light" href="dashboard.php?select=galery">Back</a></button>

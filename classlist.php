@@ -19,7 +19,7 @@
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function search_list($arr) {
+        public function search_list($arr) { //xuat danh sach danh muc tim kiem
             foreach($arr as $item) {
                 echo '
                     <option value="'.$item.'">'.$item.'</option>
@@ -28,7 +28,6 @@
         }
 
         public function search_item($table,$search_list,$search_data) {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
@@ -75,8 +74,8 @@
             $stmt->execute();
             $results = $stmt->fetchAll();
             foreach($results as $row) {
-                if($id_check == $row[$id]) {
-                    echo  '<option value='.$row[$name].' selected>'.$row[$name].'abc</option>';
+                if($id_check == $row[$name]) {
+                    echo  '<option value='.$row[$name].' selected>'.$row[$name].'</option>';
                 } else {
                     echo  '<option value='.$row[$name].'>'.$row[$name].'</option>';
 
@@ -1015,7 +1014,7 @@
                     <td>'.$this->name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -1034,7 +1033,6 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
@@ -1071,11 +1069,13 @@
         public $service_id;
         public $course_id;
         public $employee_id;
+        public $member_id;
         public $package_id;
         public $code;
-        public $select_option;
         public $dir;
         public $img_name;
+        public $slide_name;
+
 
 
         public function show_header() {
@@ -1107,6 +1107,36 @@
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
+            
+            $file_path = $this->dir.$this->img_name;
+            echo $file_path;
+            $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
+            $allowtype = array('jpg','png','jpeg','gif','pdf');
+            if(in_array($filetype,$allowtype)) {
+                if(move_uploaded_file($_FILES["file"]["tmp_name"],$file_path)) {
+                    $sql = "INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,member_id,dir,img_name,CREATE_AT) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:member_id,:dir,:img_name,NOW())";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(
+                        array (
+                            "galery_type_id" => $this->galery_type_id,
+                            "device_id" => $this->device_id,
+                            "service_id" => $this->service_id,
+                            "course_id" => $this->course_id,
+                            "employee_id" => $this->employee_id,
+                            "package_id" => $this->package_id,
+                            "member_id" => $this->member_id,
+                            "dir" => $this->dir,
+                            "img_name" => $this->img_name,
+                        )
+                    );
+                } else {
+                    echo "file upload error";
+                }
+            } else {
+                echo "please check file type";
+            }
+
+
             $sql = 'INSERT INTO galery(galery_type_id,device_id,service_id,course_id,employee_id,package_id,dir,img_name,create_at) VALUES (:galery_type_id,:device_id,:service_id,:course_id,:employee_id,:package_id,:dir,:img_name,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
@@ -1124,7 +1154,6 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE galery SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
@@ -1138,7 +1167,6 @@
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE galery SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';

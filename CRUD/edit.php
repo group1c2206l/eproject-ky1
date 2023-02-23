@@ -361,7 +361,7 @@
                             $p->description = $_POST["description"];
                         }
                         if($p->name != NULL &&  $p->title != NULL &&  $p->description != NULL) {
-                            $p->addnew();
+                            $p->edit();
                             header("location: dashboard.php?select=service");
                         } else {
                             $mes = "Please enter full information";
@@ -389,7 +389,180 @@
                             </div>';
                 break;    
 
-                        
+                case "package":
+                    $p = new package();
+                    $mes = "";
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["mentor"])) {
+                            $p->mentor = $_POST["mentor"];
+                        }
+                        if(isset($_POST["points"])) {
+                            $p->points = $_POST["points"];
+                        }
+                        if(isset($_POST["price"])) {
+                            $p->price = $_POST["price"];
+                        }
+                        if(isset($_POST["expiry"])) {
+                            $p->expiry = $_POST["expiry"];
+                        }
+                        if(isset($_POST["day_active"])) {
+                            $p->day_active = $_POST["day_active"];
+                        }
+        
+                        if($p->name != NULL &&  $p->mentor != NULL &&  $p->points != NULL && $p->price != NULL && $p->expiry != NULL && $p->day_active != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=package");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Package</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Package name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="" class="text-white-50">Mentor</label>
+                                        <select name="mentor" id="" class="form-control bg-dark text-white">
+                                            <option value="YES">YES</option>
+                                            <option value="NO">NO</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="points" class="text-white-50">Points</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="points" name="points" value="'.$_GET["points"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="price" class="text-white-50">Price</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="price" name="price" value="'.$_GET["price"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="" class="text-white-50">Expiry</label>
+                                        <select name="expiry" id="Expiry" class="form-control bg-dark text-white" value="'.$_GET["expiry"].'">
+                                            <option value="1">1 Month</option>
+                                            <option value="12">12 Month</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                            <label for="day_active" class="text-white-50">Day active</label>
+                                            <select name="day_active" id="day_active" class="form-control bg-dark text-white" value="'.$_GET["day_active"].'">
+                                                <option value="3">3 day/week</option>
+                                                <option value="5">5 day/week</option>
+                                                <option value="7">7 day/week</option>
+                                            </select>
+                                        </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=package">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;
+
+                case "course":
+                    $p = new course();
+                    $mes = "";
+                    if(isset($_GET["course_id"])) {
+                        $p->course_id = $_GET["course_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                        if(isset($_POST["employee_id"])) {
+                            $p->employee_id = $_POST["employee_id"];
+                        }
+                        if(isset($_POST["description"])) {
+                            $p->description = $_POST["description"];
+                        }
+                        if(isset($_POST["start_day"])) {
+                            $p->start_day = $_POST["start_day"];
+                        }
+                        if(isset($_POST["end_day"])) {
+                            $p->end_day = $_POST["end_day"];
+                        }
+                        if(isset($_POST["price"])) {
+                            $p->price = $_POST["price"];
+                        }
+                        if($p->name != NULL &&  $p->employee_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=course");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Course</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Course name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="employee_id" class="text-white-50">Mentor</label>
+                                        <select name="employee_id" id="employee_id" class="form-control bg-dark text-white">';
+                    echo                     $p->list_data_with_condition($_GET["employee_id"],"employee_id","lname","employee","type","PT");
+                    echo                '</select>
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="description" class="text-white-50">description</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$_GET["description"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="start_day" class="text-white-50">start_day</label>
+                                        <input type="date" class="form-control bg-dark text-white" id="start_day" name="start_day" value="'.$_GET["start_day"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="end_day" class="text-white-50">end_day</label>
+                                        <input type="date" class="form-control bg-dark text-white" id="end_day" name="end_day" value="'.$_GET["end_day"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="price" class="text-white-50">price</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="price" name="price" value="'.$_GET["price"].'">
+                                    </div>
+                                   
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=course">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;    
+                
+                case "galery_type":
+                    $p = new galery_type();
+                    $mes = "";
+                    if(isset($_GET["galery_type_id"])) {
+                        $p->galery_type_id = $_GET["galery_type_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                      
+                        if($p->name != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=galery_type");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Galery Type</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Type name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=galery_type">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;    
         
     }
 

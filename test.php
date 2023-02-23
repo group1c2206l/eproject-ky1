@@ -1,19 +1,3 @@
-<?php
-    function check($str) {
-        $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
-        if(preg_match($pattern,$str)) {
-            return true;
-        } else {
-            return false;
-        }
-    }
-
-    echo check('asasa@sasa');
-
-
-
-
-?>
 
 <!DOCTYPE html>
 <html lang="en">
@@ -24,20 +8,32 @@
     <title>Document</title>
 </head>
 <body>
-    <form action="test.php?ab=12" method="post">
-        <input type="text" name="ab">
+    <form action="" method="post">
+        
+        
+       
+            <input type="text" name="cd" placeholder="cd">
+            <input type="submit" name="ok" id="save" value="ok">
+        
+
+        <input type="text" name="ab" placeholder="ab">
         <input type="submit" name="save" id="save" value="save">
     </form>
+
     <?php
-        $ab = "";
-        if(isset($_GET["ab"])) {
-            $ab = $_GET["ab"];
+    if(isset($_POST["save"])) {
+        if(isset($_POST["ab"])) {
+            $ab = $_POST["ab"];
+            echo $ab;
         }
-        if($ab == "12") {
-            echo "yes";
-        } else {
-            echo "no";
+    }
+    if(isset($_POST["ok"])) {
+        if(isset($_POST["cd"])) {
+            $cd = $_POST["cd"];
+            echo $cd;
         }
+    }
+       
 
     ?>
 </body>
