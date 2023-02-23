@@ -2,6 +2,7 @@
     require "config.php";
     // class parent
     class main {
+        public $select;
         public $name;
         public $flag;
         public $create_at;
@@ -53,13 +54,14 @@
         public function list_data($id_check,$id,$name,$table) {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
             foreach($results as $row) {
                 if($id_check == $row[$id]) {
                     echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                    $this->select = $row[$name];
                 } else {
                     echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
                 }
@@ -67,7 +69,6 @@
         }
 
         public function list_data_with_condition($id_check,$id,$name,$table,$where,$condition) {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE '.$where.' = "'.$condition.'" ';
@@ -1080,7 +1081,6 @@
         }
 
         public function addnew() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
@@ -1093,7 +1093,6 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
