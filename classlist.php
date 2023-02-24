@@ -1163,6 +1163,19 @@
             );
         }
 
+        public function slide_number() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT COUNT(galery_type_name) FROM galery WHERE galery_type_name = '.$this->galery_type_name.';';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":galery_type_name" => $this->galery_type_name
+                )
+            );
+            return $stmt->fetchColumn();
+        }
+
     }
     
 
