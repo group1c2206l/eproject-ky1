@@ -570,7 +570,7 @@
                                         </div>
                                         <div class="form-group mb-3 mt-6">
                                             <label for="description" class="text-white-50">description</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$p->description.'">
+                                            <textarea name="description"  class="form-control bg-dark text-white"  rows="4">'.$p->description.'</textarea>
                                         </div>
                                         <div class="form-group mb-3 mt-6">
                                             <label for="start_day" class="text-white-50">start_day</label>
@@ -653,42 +653,42 @@
                                         $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "background":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/background/';
+                                        $p->dir = './assets/image/background/';
                                         $p->item_id = $p->galery_type_count("background");
                                         $p->item_name = "slide ".$p->item_id;
                                     break;
                     
                                     case "course":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/course/';
+                                        $p->dir = './assets/image/course/';
                                         $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
                                     break;
                                     case "logo":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/logo/';
+                                        $p->dir = './assets/image/logo/';
                                         $p->item_id = $p->galery_type_count("slide");
                                         $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "person_trainer":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/PT/';
+                                        $p->dir = './assets/image/PT/';
                                         $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->item_id);
                                     break;
                                     case "device":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/device/';
+                                        $p->dir = './assets/image/device/';
                                         $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
                                     break;
                                     case "service":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/service/';
+                                        $p->dir = './assets/image/service/';
                                         $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
                                     break;
                                     case "package":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/package/';
+                                        $p->dir = './assets/image/package/';
                                         $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
                                     break;
                                     case "member":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/member/';
+                                        $p->dir = './assets/image/member/';
                                         $p->item_name = $p->id_to_name("name","member","member_id",$p->item_id);
                                     break;
                                     case "talk_about_me":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/talk_about_me/';
+                                        $p->dir = './assets/image/talk_about_me/';
                                     break;
                                 }
                             }

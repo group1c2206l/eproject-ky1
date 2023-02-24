@@ -896,12 +896,12 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO course(name,employee_id,description,start_day,end_day,price,create_at) VALUES (:name,:employee_id,:description,:start_day,:end_day,:price,NOW())';
+            $sql = 'INSERT INTO course(name,person_trainer_id,description,start_day,end_day,price,create_at) VALUES (:name,:person_trainer_id,:description,:start_day,:end_day,:price,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->person_trainer_id,
+                    ":person_trainer_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,
@@ -1193,7 +1193,7 @@
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
-            $file_path = $this->dir.$this->img_name;
+            $file_path = '.'.$this->dir.$this->img_name;
             echo $file_path;
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
             $allowtype = array('jpg','png','jpeg','gif','pdf');

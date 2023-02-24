@@ -224,7 +224,12 @@ section{
 /* ---------------------------home section end */
 
 /* --------------------------feature start */
+.feature .heading {
+    max-width: 1400px;
+    margin: 0 auto;
+}
 .feature .feature-slider{
+    max-width: 1400px;
     padding-bottom: 4rem;
 }
 
@@ -301,7 +306,14 @@ section{
     background: #eee;
 }
 
+.schedule .heading{
+    max-width: 1730px;
+    margin: 0 auto;
+}
+
 .schedule .box-container{
+    max-width: 1730px;
+    margin: 0 auto;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(25rem, 1fr));
     padding-top: 2rem;
@@ -309,15 +321,35 @@ section{
 }
 
 .schedule .box-container .box{
+    height: 500px;
+    position: relative;
     background: #fff;
-    overflow: hidden;
+    z-index: 1;
+    overflow: visible;
 }
 
 .schedule .box-container .box .content{
+    height: 350px;
+    position: absolute;
+    z-index: 1;
+    top: 0;
     padding: 2rem;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.schedule .box-container .box .content:hover{
+    position: absolute;
+    top: 0;
+    height: 500px;
+    z-index: 99;
+    background-color: #b4b3b3;
+    padding: 2rem;
+    overflow: visible;
 }
 
 .schedule .box-container .box .content h3{
+
     font-size: 2rem;
     font-weight: 500;
     padding-bottom: 0.5rem;
@@ -327,9 +359,12 @@ section{
     color: #333;
     font-size: 1.5rem;
     line-height: 1.8;
+    text-overflow: ellipsis;
 }
 
 .schedule .box-container .box .icons{
+    position: absolute;
+    bottom: 80px;
     padding: 0 2rem;
 }
 
@@ -345,6 +380,8 @@ section{
 }
 
 .schedule .box-container .box .btn{
+    position: absolute;
+    bottom: 10px;
     margin: 1.5rem 2rem;
     background: var(--main-color);
     color: #fff;
@@ -364,7 +401,14 @@ section{
 /* ------------------schedule ends/ */
 
 /* ------------trainer starts */
-
+.trainers .heading {
+    max-width: 1500px;
+    margin: 0 auto;
+}
+.trainers .trainer-slider {
+    max-width: 1500px;
+    margin: 0 auto;
+}
 .trainers .trainer-slider .box{
     position: relative;
     text-align: center;
@@ -547,8 +591,9 @@ section{
     color: #fff;
 }
 
-/*blogs starts */
+/*blogs end */
 
+/*footer start */
 .footer{
     background: #222;
 }
@@ -619,7 +664,7 @@ section{
 .footer .box-container .box .icon a:hover{
     color: var(--main-color);
 }
-
+/*footer end */
 
 
 /* media queries section */

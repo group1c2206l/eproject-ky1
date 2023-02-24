@@ -74,125 +74,62 @@
     <!-- feature section starts -->
 
     <section class="feature">
-        <h1 class="heading">featured <span>classer</span></h1>
+        <h1 class="heading">our <span>service</span></h1>
         <div class="swiper feature-slider">
             <div class="swiper-wrapper wapper">
-                <div class="swiper-slide box">
-                    <div class="image">
-                        <img src="./assets/image/course/bjj.jpg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="price">price</div>
-                        <h3>Fitness Classes name here</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="image">
-                        <img src="./assets/image/course/Feature-classes-2.jpeg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="price">price</div>
-                        <h3>Fitness Classes name here</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="image">
-                        <img src="./assets/image/course/Feature-classes-3.jpeg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="price">price</div>
-                        <h3>Fitness Classes name here</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="image">
-                        <img src="./assets/image/course/Feature-classes-4.jpeg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="price">price</div>
-                        <h3>Fitness Classes name here</h3>
-                    </div>
-                </div>
-
-                <div class="swiper-slide box">
-                    <div class="image">
-                        <img src="./assets/image/course/Feature-classes-5.jpeg" alt="">
-                    </div>
-                    <div class="content">
-                        <div class="price">price</div>
-                        <h3>Fitness Classes name here</h3>
-                    </div>
-                </div>
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="swiper-slide box">
+                                    <div class="image">
+                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                    </div>
+                                    <div class="content">
+                                        
+                                        <h3>'.$row["cname"].'</h3>
+                                    </div>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
         </div>
     </section>
 <!-- schedule starts -->
     <section class="schedule">
-        <h1 class="heading"><span>our</span> schedule</h1>
+        <h1 class="heading"><span>FEATURED</span> CLASS</h1>
 
         <div class="box-container">
-            <div class="box">
-                <div class="content">
-                    <h3>fitness class name here</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, veritatis</p>
-                </div>
-                <div class="icons">
-                        <span><i class="far fa-clock"></i> 5:30pm</span>
-                        <span><i class="fad fa-calendar-alt"></i> appril 22, 2021</span>
-                </div>
-                <a href="" class="btn">join form price</a>
-            </div>
-            <div class="box">
-                <img src="./assets/image/service/pic-1.jpeg" alt="">
-            </div>
-
-            <div class="box">
-                <div class="content">
-                    <h3>fitness class name here</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, veritatis</p>
-                </div>
-                <div class="icons">
-                        <span><i class="far fa-clock"></i> 5:30pm</span>
-                        <span><i class="fad fa-calendar-alt"></i> appril 22, 2021</span>
-                </div>
-                <a href="" class="btn">join form price</a>
-            </div>
-            <div class="box">
-                <img src="./assets/image/service/pic-2.jpeg" alt="">
-            </div>
-
-            <div class="box">
-                <img src="./assets/image/service/pic-3.jpeg" alt="">
-            </div>
-            <div class="box">
-                <div class="content">
-                    <h3>fitness class name here</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, veritatis</p>
-                </div>
-                <div class="icons">
-                        <span><i class="far fa-clock"></i> 5:30pm</span>
-                        <span><i class="fad fa-calendar-alt"></i> appril 22, 2021</span>
-                </div>
-                <a href="" class="btn">join form price</a>
-            </div>
-
-            <div class="box">
-                <img src="./assets/image/swimming/swimming-couse.jpeg" alt="">
-            </div>
-            <div class="box">
-                <div class="content">
-                    <h3>fitness class name here</h3>
-                    <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ullam, veritatis</p>
-                </div>
-                <div class="icons">
-                        <span><i class="far fa-clock"></i> 5:30pm</span>
-                        <span><i class="fa-light fa-calendar-days"></i> appril 22, 2021</span>
-                </div>
-                <a href="" class="btn">join form price</a>
-            </div>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice,C.start_day,C.end_day FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                foreach($results as $row) {
+                    echo '<div class="box">
+                                <div class="content">
+                                    <h3>'.$row["cname"].'</h3>
+                                    <p>'.$row["description"].'</p>
+                                </div>
+                                <div class="icons">
+                                        <span><i class="far fa-clock"></i>Start: '.$row["start_day"].'</span>
+                                        <span><i class="far fa-clock"></i>End    : '.$row["end_day"].'</span>
+                                </div>
+                                <a href="" class="btn">join form price</a>
+                            </div>
+                            <div class="box">
+                                <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                            </div>';
+                }
+                $conn = null;
+            ?>
         </div>
     </section>
 
@@ -203,72 +140,27 @@
         <div class="swiper trainer-slider">
             <div class="swiper-wrapper wrapper">
                 <?php
-
-
-
-
-
-
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="swiper-slide box">
+                                    <a href="">
+                                        <div class="image">
+                                            <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                        </div>
+                                        <div class="info-trainer">
+                                            <h1>'.$row["lname"].'</h1>
+                                            <p>'.$row["trainer_job"].'</p>
+                                        </div>
+                                    </a>
+                                </div>';
+                    }
+                    $conn = null;
                 ?>
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-1.png" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-2.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-4.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/swimming_pt.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
             </div>
         </div>
     </section>
@@ -280,38 +172,27 @@
     <section class="testimonial">
         <h1 class="heading">testimonial</h1>
             <div class="box-container">
-                <div class="box">
-                    <div class="image">
-                        <img src="./assets/image/talkAboutMe/t-2.jpeg" alt="">
-                    </div>
-                    <div class="info">
-                        <h1>name</h1>
-                        <p>job <span>workplace</span></p>
-                    </div>
-                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
-                </div>
-
-                <div class="box">
-                    <div class="image">
-                        <img src="./assets/image/talkAboutMe/t-3.jpeg" alt="">
-                    </div>
-                    <div class="info">
-                        <h1>name</h1>
-                        <p>job</p>
-                    </div>
-                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
-                </div>
-
-                <div class="box">
-                    <div class="image">
-                        <img src="./assets/image/talkAboutMe/t-4.jpeg" alt="">
-                    </div>
-                    <div class="info">
-                        <h1>name</h1>
-                        <p>job</p>
-                    </div>
-                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
-                </div>
+            <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job,P.evaluate FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1' LIMIT 3;";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="box">
+                                    <div class="image">
+                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                    </div>
+                                    <div class="info">
+                                        <h1>'.$row["lname"].'</h1>
+                                        <p>'.$row["trainer_job"].'</p>
+                                    </div>
+                                    <p>'.$row["evaluate"].'</p>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
     </section>
 
@@ -320,7 +201,7 @@
     <!-- blogs section starts -->
 
     <section class="blogs">
-        <h1 class="heading">our <span>blogs</span></h1>
+        <h1 class="heading">Famous <span>members</span></h1>
         <div class="swiper blogs-slider">
             <div class="swiper-wrapper wapper">
                 <div class="swiper-slide box">
