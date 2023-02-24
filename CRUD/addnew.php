@@ -188,6 +188,97 @@
                                     </form>
                                 </div>';
                     break;
+
+                    case "person_trainer":
+                        $p = new person_trainer;
+                        $mes = "";
+                        if(isset($_POST["save"])) {
+                            if(isset($_POST["fname"])) {
+                                $p->fname = $_POST["fname"];
+                            }
+                            if(isset($_POST["mname"])) {
+                                $p->mname = $_POST["mname"];
+                            }
+                            if(isset($_POST["lname"])) {
+                                $p->lname = $_POST["lname"];
+                            }
+                            if(isset($_POST["dob"])) {
+                                $p->dob = $_POST["dob"];
+                            }
+                            if(isset($_POST["address"])) {
+                                $p->address = $_POST["address"];
+                            }
+                            if(isset($_POST["phone_number"])) {
+                                $p->phone_number = $_POST["phone_number"];
+                            }
+                            if(isset($_POST["person_id"])) {
+                                $p->person_id = $_POST["person_id"];
+                            }
+                            if(isset($_POST["email"])) {
+                                $p->email = $_POST["email"];
+                            }
+                            if(isset($_POST["trainer_job"])) {
+                                $p->trainer_job = $_POST["trainer_job"];
+                            }
+                            if(isset($_POST["evaluate"])) {
+                                $p->evaluate = $_POST["evaluate"];
+                            }
+                            if($p->fname != NULL && $p->lname != NULL && $p->dob != NULL && $p->address != NULL && $p->phone_number != NULL && $p->person_id != NULL && $p->email != NULL && $p->trainer_job != NULL) {    
+                                $p->addnew();
+                                header("location: dashboard.php?select=person_trainer");
+                            } else {
+                                $mes = "Please enter full information !";
+                            }
+                        }
+                        echo   '<div class="mt-5 num">
+                                    <h3 class="text-center text-light">Add new Person Trainer</h3>
+                                    <form action=""  method="POST">
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="fname" class="text-white-50">First Name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="fname" name="fname" value="'.$p->fname.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="mname" class="text-white-50">Mid Name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="mname" name="mname" value="'.$p->mname.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="lname" class="text-white-50">Last Name</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="lname" name="lname" value="'.$p->lname.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="dob" class="text-white-50">Dob</label>
+                                            <input type="date" class="form-control bg-dark text-white" id="dob" name="dob" value="'.$p->dob.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="address" class="text-white-50">Address</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="address" name="address" value="'.$p->address.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="phone_number" class="text-white-50">PHONE NUMBER</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="phone_number" name="phone_number" value="'.$p->phone_number.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="person_id" class="text-white-50">Person ID</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="person_id" name="person_id" value="'.$p->person_id.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="email" class="text-white-50">Email</label>
+                                            <input type="email" class="form-control bg-dark text-white" id="email" name="email" value="'.$p->email.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="trainer_job" class="text-white-50">trainer_job</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="trainer_job" name="trainer_job" value="'.$p->trainer_job.'">
+                                        </div>
+                                        <div class="form-group mb-3 mt-6">
+                                            <label for="evaluate" class="text-white-50">Evaluate</label>
+                                            <textarea name="evaluate"  class="form-control bg-dark text-white"  rows="4">'.$p->evaluate.'</textarea>
+                                        </div>
+                                        <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=employee">Back</a></button>
+                                        <span class="text-warning">'.$mes.'</span>
+                                    </form>
+                                </div>';
+                    break;
                 
                     case "utilities":
                         $p = new utilities;
@@ -527,7 +618,7 @@
                                 $p->galery_type_name = $_GET["galery_type_name"];
                                 switch($p->galery_type_name) {
                                     case "slide":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/slide/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/slide/';
                                         $p->item_id = $p->slide_number();
                                         $p->item_name = "slide ".$p->item_id;
                                     break;
@@ -536,25 +627,25 @@
                                     break;
                     
                                     case "course":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/course/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/course/';
                                     break;
                                     case "logo":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/logo/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/logo/';
                                     break;
                                     case "employee":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/PT/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/PT/';
                                     break;
                                     case "device":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/device/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/device/';
                                     break;
                                     case "service":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/service/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/service/';
                                     break;
                                     case "member":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/member/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/member/';
                                     break;
                                     case "talk_about_me":
-                                        $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/talk_about_me/';
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/talk_about_me/';
                                     break;
                                 }
                                 
@@ -595,7 +686,7 @@
                             $p->slide_name = "slide";
                             if($p->galery_type_name != NULL) {
                                 $p->addnew();
-                                // header("location: dashboard.php?select=galery");
+                                header("location: dashboard.php?select=galery");
                                 print_r($p);
                             } else {
                                 $mes = "Please enter full information";
@@ -662,7 +753,7 @@
                                                     <label for="employee_id" class="text-white-50">Select Option</label>
                                                     <select name="employee_id" id="employee_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>Employee list:</option>';
-                                    echo                $p->list_data("","employee_id","lname","employee");
+                                    echo                $p->list_data_with_condition($p->employee_id,"employee_id","lname","employee","type","PT");
                                     echo           '</select>
                                                 </div>';
                                     break;

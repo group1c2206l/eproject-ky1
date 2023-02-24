@@ -194,6 +194,14 @@
         <h1 class="heading">Expert <span>trainer</span></h1>
         <div class="swiper trainer-slider">
             <div class="swiper-wrapper wrapper">
+                <?php
+
+
+
+
+
+
+                ?>
                 <div class="swiper-slide box">
                     <a href="">
                         <div class="image">

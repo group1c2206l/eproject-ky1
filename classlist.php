@@ -425,6 +425,81 @@
 
     }
 
+    class person_trainer extends main {
+        public $person_trainer_id;
+        public $fname;
+        public $mname;
+        public $lname;
+        public $dob;
+        public $address;
+        public $phone_number;
+        public $person_id;
+        public $email;
+        public $trainer_job;
+        public $evaluate;
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>TRAINER JOB</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
+                    <td class='table-dark text-warning fw-bold'>EVALUATE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->person_trainer_id.'</td>
+                    <td>'.$this->fname.'</td>
+                    <td>'.$this->mname.'</td>
+                    <td>'.$this->lname.'</td>
+                    <td>'.$this->dob.'</td>
+                    <td>'.$this->address.'</td>
+                    <td>'.$this->phone_number.'</td>
+                    <td>'.$this->person_id.'</td>
+                    <td>'.$this->email.'</td>
+                    <td>'.$this->trainer_job.'</td>
+                    <td>'.$this->evaluate.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=person_trainer&person_trainer_id='.$this->person_trainer_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+        public function addnew() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO person_trainer(fname,mname,lname,dob,address,phone_number,person_id,email,trainer_job,evaluate,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:trainer_job,:evaluate,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":person_id" => $this->person_id,
+                    ":email" => $this->email,
+                    ":trainer_job" => $this->trainer_job,
+                    ":evaluate" => $this->evaluate,
+                )
+            );
+            $conn = NULL;
+        }
+    }
+
+    // class utilities
     class utilities extends main {
         public $utilities_id;
         public $name;

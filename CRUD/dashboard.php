@@ -112,12 +112,13 @@
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=person_trainer" ><i class="bi bi-microsoft"></i>  Person Trainer</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=device" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
                 </tr>
                 <tr>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-images"></i>  Course</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_type" ><i class="bi bi-images"></i>  Galery Type</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
@@ -152,6 +153,11 @@
                            case "employee":
                                 $arr = ["lname","dob","address","phone_number","person_id","email"];
                                 $s = new employee;
+                                $s->search_list($arr);
+                                break;
+                           case "person_trainer":
+                                $arr = ["lname","dob","address","phone_number","person_id","email","trainer_job"];
+                                $s = new person_trainer;
                                 $s->search_list($arr);
                                 break;
                            case "utilities":
@@ -298,6 +304,44 @@
                                     $p->contact_name = $row["contact_name"];
                                     $p->contact_phone = $row["contact_phone"];
                                     $p->type = $row["type"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
+                        case "person_trainer":
+                            $p = new person_trainer;
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result("person_trainer");
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('person_trainer', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->person_trainer_id = $row["person_trainer_id"];
+                                    $p->fname = $row["fname"];
+                                    $p->mname = $row["mname"];
+                                    $p->lname = $row["lname"];
+                                    $p->dob = $row["dob"];
+                                    $p->address = $row["address"];
+                                    $p->phone_number = $row["phone_number"];
+                                    $p->person_id = $row["person_id"];
+                                    $p->email = $row["email"];
+                                    $p->trainer_job = $row["trainer_job"];
+                                    $p->evaluate = $row["evaluate"];
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
                                     $p->show_item();

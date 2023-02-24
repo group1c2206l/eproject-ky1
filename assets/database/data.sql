@@ -43,6 +43,25 @@ CREATE TABLE employee(
     CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
+-- danh sach nguoi huong dan club
+CREATE TABLE person_trainer(
+    person_trainer_id INT AUTO_INCREMENT NOT NULL,
+    fname VARCHAR(50) NOT NULL,
+    mname VARCHAR(50),
+    lname VARCHAR(50) NOT NULL,
+    dob DATETIME NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    person_id VARCHAR(20) UNIQUE NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    trainer_job VARCHAR(100),
+    evaluate VARCHAR(500),
+    flag INT DEFAULT 1,
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_person_trainer PRIMARY KEY (person_trainer_id)
+);
 
 
 CREATE TABLE utilities(
