@@ -607,20 +607,18 @@
                     case "galery":
                         $p = new galery();
                         $mes = "";
-                        $p->item_id = $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->person_trainer_id = $p->member_id = "";
+                        // $p->item_id = $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->person_trainer_id = $p->member_id = "";
                         if(isset($_GET["option"])) {
                             if(isset($_GET["galery_type_name"])) {
                                 $p->galery_type_name = $_GET["galery_type_name"];
                             }
                         }
                         if(isset($_POST["save"])) {
-                            echo "POST[item_id]:".$_POST["item_id"];
                             if(isset($_POST["item_id"])) {
                                 $p->item_id = $_POST["item_id"];
                             }
                             if(isset($_FILES["img_name"]["name"])) {
                                 $p->img_name = basename($_FILES["img_name"]["name"]);
-                                $p->item_id = $p->device_id;
                             }
                             if(isset($_FILES["img_name"]["tmp_name"])) {
                                 $p->img_tmp = $_FILES["img_name"]["tmp_name"];
@@ -630,8 +628,8 @@
                                 switch($p->galery_type_name) {
                                     case "slide":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/slide/';
-                                        // $p->item_id = $p->slide_number();
-                                        // $p->item_name = "slide ".$p->item_id;
+                                        $p->item_id = $p->galery_type_count("slide");
+                                        $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "background":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/background/';
@@ -639,6 +637,7 @@
                     
                                     case "course":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/course/';
+                                        $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
                                     break;
                                     case "logo":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/logo/';
@@ -653,58 +652,29 @@
                                     break;
                                     case "service":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/service/';
+                                        $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
+                                    break;
+                                    case "package":
+                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/package/';
+                                        $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
                                     break;
                                     case "member":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/member/';
+                                        $p->item_name = $p->id_to_name("name","member","member_id",$p->item_id);
                                     break;
                                     case "talk_about_me":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/talk_about_me/';
                                     break;
                                 }
                             }
-                            echo "item_id:".$p->item_id;
-                            echo "item_name:".$p->item_name;
-                            echo  $p->galery_type_name;
-                            echo  $p->img_name;
-                            // if(isset($_POST["device_id"])) {
-                            //     $p->device_id = $_POST["device_id"];
-                            //     $p->item_id = $p->device_id;
-                            //     $p->item_name = $p->id_to_name("name","device","device_id",$p->device_id);
-                            // }
-                            // if(isset($_POST["service_id"])) {
-                            //     $p->service_id = $_POST["service_id"];
-                            //     $p->item_id = $p->service_id;
-                            //     $p->item_name = $p->id_to_name("name","service","service_id",$p->service_id);
-                            // }
-                            // if(isset($_POST["package_id"])) {
-                            //     $p->package_id = $_POST["package_id"];
-                            //     $p->item_id = $p->package_id;
-                            //     $p->item_name = $p->id_to_name("name","package","package_id",$p->package_id);
-                            // }
-                            // if(isset($_POST["course_id"])) {
-                            //     $p->course_id = $_POST["course_id"];
-                            //     $p->item_id = $p->course_id;
-                            //     $p->item_name = $p->id_to_name("name","course","course_id",$p->course_id);
-                            // }
-                            // if(isset($_POST["person_trainer_id"])) {
-                            //     $p->person_trainer_id = $_POST["person_trainer_id"];
-                            //     $p->item_id = $_POST["person_trainer_id"];
-                            //     $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$_POST["person_trainer_id"]);
-                            // }
-                            
-                            // print_r($p);
-                            
-                            // if($p->galery_type_name != NULL) {
-                            //     $p->addnew();
-                            //     header("location: dashboard.php?select=galery");
-                            // } else {
-                            //     $mes = "Please enter full information";
-                            // }
+                            if($p->galery_type_name != NULL) {
+                                $p->addnew();
+                                header("location: dashboard.php?select=galery");
+                            } else {
+                                $mes = "Please enter full information";
+                            }
                         }
                         
-
-                        
-
                         
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center text-light">Add news Galery</h3>
@@ -733,7 +703,7 @@
                                 case "service":
                                     echo        '<div class="form-group mb-3 mt-6">
                                                     <label for="service_id" class="text-white-50">Select Option</label>
-                                                    <select name="service_id" id="service_id" class="form-control bg-dark text-white ">
+                                                    <select name="item_id" id="service_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>Service list:</option>';
                                     echo                $p->list_data("","service_id","name","service");
                                     echo           '</select>
@@ -742,7 +712,7 @@
                                 case "package":
                                     echo        '<div class="form-group mb-3 mt-6">
                                                     <label for="package_id" class="text-white-50">Select Option</label>
-                                                    <select name="package_id" id="package_id" class="form-control bg-dark text-white ">
+                                                    <select name="item_id" id="package_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>package list:</option>';
                                     echo                $p->list_data("","package_id","name","package");
                                     echo           '</select>
@@ -751,7 +721,7 @@
                                 case "course":
                                     echo        '<div class="form-group mb-3 mt-6">
                                                     <label for="course_id" class="text-white-50">Select Option</label>
-                                                    <select name="course_id" id="course_id" class="form-control bg-dark text-white ">
+                                                    <select name="item_id" id="course_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>Course list:</option>';
                                     echo                $p->list_data("","course_id","name","course");
                                     echo           '</select>
@@ -778,7 +748,6 @@
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';
-                            // var_dump($p);
                     break;    
 
 

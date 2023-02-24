@@ -1238,10 +1238,10 @@
             );
         }
 
-        public function slide_number() {
+        public function galery_type_count($type) {
             $c = new config;
             $conn = $c->connect();
-            $sql = "SELECT COUNT(galery_type_name) FROM galery WHERE galery_type_name = 'slide';";
+            $sql = "SELECT COUNT(galery_type_name) FROM galery WHERE galery_type_name = '".$type."';";
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             return $stmt->fetchColumn();
