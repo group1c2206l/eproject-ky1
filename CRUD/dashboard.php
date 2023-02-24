@@ -335,7 +335,9 @@
                                     $p->fname = $row["fname"];
                                     $p->mname = $row["mname"];
                                     $p->lname = $row["lname"];
+                                    $p->code = $row["code"];
                                     $p->dob = $row["dob"];
+                                    $p->gender = $row["gender"];
                                     $p->address = $row["address"];
                                     $p->phone_number = $row["phone_number"];
                                     $p->person_id = $row["person_id"];
@@ -504,8 +506,8 @@
                                 if($p->flag == 1) {
                                     $p->course_id = $row["course_id"];
                                     $p->name = $row["name"];
-                                    $p->employee_id = $row["employee_id"];
-                                    $p->mentor = $p->id_to_name("lname","employee","employee_id",$p->employee_id);
+                                    $p->person_trainer_id = $row["person_trainer_id"];
+                                    $p->mentor = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->person_trainer_id);
                                     $p->description = $row["description"];
                                     $p->start_day = $row["start_day"];
                                     $p->end_day = $row["end_day"];
@@ -612,7 +614,7 @@
                                         $p->galery_type_name = $row["galery_type_name"];
                                         $p->item_id = $row["item_id"];
                                         $p->item_name = $row["item_name"];
-
+                                        $p->note = $row["note"];
                                         $p->dir = $row["dir"];
                                         $p->img_name = $row["img_name"];
                                         $p->create_at = $row["create_at"];

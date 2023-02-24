@@ -49,6 +49,7 @@ CREATE TABLE person_trainer(
     fname VARCHAR(50) NOT NULL,
     mname VARCHAR(50),
     lname VARCHAR(50) NOT NULL,
+    code VARCHAR(10) NOT NULL, -- ma nhan vien
     dob DATETIME NOT NULL,
     gender VARCHAR(20) NOT NULL,
     address VARCHAR(200) NOT NULL,
@@ -174,12 +175,9 @@ CREATE TABLE galery_type(
 CREATE TABLE galery(
     galery_id INT AUTO_INCREMENT NOT NULL ,
     galery_type_id INT NOT NULL, 
-    device_id INT,
-    service_id INT,
-    course_id INT,
-    employee_id INT,
-    package_id INT,
-    member_id INT,
+    item_id INT,
+    item_name VARCHAR(50),
+    note INT VARCHAR(500),
     dir VARCHAR(200) NOT NULL,
     img_name VARCHAR(100) NOT NULL,
     flag INT DEFAULT 1, 

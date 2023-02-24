@@ -430,7 +430,9 @@
         public $fname;
         public $mname;
         public $lname;
+        public $code;
         public $dob;
+        public $gender;
         public $address;
         public $phone_number;
         public $person_id;
@@ -444,7 +446,9 @@
                     <td class='table-dark text-warning fw-bold'>FNAME</td>
                     <td class='table-dark text-warning fw-bold'>MNAME</td>
                     <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>CODE</td>
                     <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>GENDER</td>
                     <td class='table-dark text-warning fw-bold'>ADDRESS</td>
                     <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
                     <td class='table-dark text-warning fw-bold'>PERSON ID</td>
@@ -463,7 +467,9 @@
                     <td>'.$this->fname.'</td>
                     <td>'.$this->mname.'</td>
                     <td>'.$this->lname.'</td>
+                    <td>'.$this->code.'</td>
                     <td>'.$this->dob.'</td>
+                    <td>'.$this->gender.'</td>
                     <td>'.$this->address.'</td>
                     <td>'.$this->phone_number.'</td>
                     <td>'.$this->person_id.'</td>
@@ -848,7 +854,7 @@
     //class course
     class course extends main {
         public $course_id;
-        public $employee_id; // Thong tin id PT cua khoa hoc
+        public $person_trainer_id; // Thong tin id PT cua khoa hoc
         public $mentor; // Thong tin PT cua khoa hoc
         public $description;
         public $start_day;
@@ -895,7 +901,7 @@
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->employee_id,
+                    ":employee_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,
@@ -913,7 +919,7 @@
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->employee_id,
+                    ":employee_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,
@@ -1141,7 +1147,7 @@
         public $galery_type_name;
         public $item_id;
         public $item_name;
-        public $galery_name;
+        public $note;
         public $device_id;
         public $service_id;
         public $course_id;
@@ -1152,9 +1158,6 @@
         public $dir;
         public $img_name;
         public $img_tmp;
-        public $slide_name;
-
-
 
         public function show_header() {
             echo "<tr>
@@ -1162,6 +1165,7 @@
                     <td class='table-dark text-warning fw-bold'>GALERY TYPE</td>
                     <td class='table-dark text-warning fw-bold'>ITEM ID</td>
                     <td class='table-dark text-warning fw-bold'>ITEM NAME</td>
+                    <td class='table-dark text-warning fw-bold'>NOTE</td>
                     <td class='table-dark text-warning fw-bold'>DIR</td>
                     <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
@@ -1176,6 +1180,7 @@
                     <td>'.$this->galery_type_name.'</td>
                     <td>'.$this->item_id.'</td>
                     <td>'.$this->item_name.'</td>
+                    <td>'.$this->note.'</td>
                     <td>'.$this->dir.'</td>
                     <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
@@ -1194,13 +1199,14 @@
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
                 if(move_uploaded_file($this->img_tmp,$file_path)) {
-                    $sql = "INSERT INTO galery(galery_type_name,item_id,item_name,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:item_id,:item_name,:dir,:img_name,NOW())";
+                    $sql = "INSERT INTO galery(galery_type_name,item_id,item_name,note,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:item_id,:item_name,:note,:dir,:img_name,NOW())";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(
                         array (
                             "galery_type_name" => $this->galery_type_name,
                             "item_id" => $this->item_id,
                             "item_name" => $this->item_name,
+                            "note" => $this->note,
                             "dir" => $this->dir,
                             "img_name" => $this->img_name,
                         )

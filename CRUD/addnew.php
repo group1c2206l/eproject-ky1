@@ -202,8 +202,14 @@
                             if(isset($_POST["lname"])) {
                                 $p->lname = $_POST["lname"];
                             }
+                            if(isset($_POST["code"])) {
+                                $p->code = $_POST["code"];
+                            }
                             if(isset($_POST["dob"])) {
                                 $p->dob = $_POST["dob"];
+                            }
+                            if(isset($_POST["gender"])) {
+                                $p->gender = $_POST["gender"];
                             }
                             if(isset($_POST["address"])) {
                                 $p->address = $_POST["address"];
@@ -246,8 +252,20 @@
                                             <input type="text" class="form-control bg-dark text-white" id="lname" name="lname" value="'.$p->lname.'">
                                         </div>
                                         <div class="form-group mb-3">
+                                            <label for="code" class="text-white-50">CODE ID</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="code" name="code" value="'.$p->code.'">
+                                        </div>
+                                        <div class="form-group mb-3">
                                             <label for="dob" class="text-white-50">Dob</label>
                                             <input type="date" class="form-control bg-dark text-white" id="dob" name="dob" value="'.$p->dob.'">
+                                        </div>
+                                        <div class="form-group mb-3">
+                                            <label for="dob" class="text-white-50">Dob</label>
+                                            <select class="form-select form-select-md bg-dark text-white" name="gender">
+                                                <option value="" selected disabled>Select Gender : </option>
+                                                <option value="F">FEMALE</option>
+                                                <option value="M">MALE</option>
+                                            </select>
                                         </div>
                                         <div class="form-group mb-3">
                                             <label for="address" class="text-white-50">Address</label>
@@ -515,8 +533,8 @@
                             if(isset($_POST["name"])) {
                                 $p->name = $_POST["name"];
                             }
-                            if(isset($_POST["employee_id"])) {
-                                $p->employee_id = $_POST["employee_id"];
+                            if(isset($_POST["person_trainer_id"])) {
+                                $p->person_trainer_id = $_POST["person_trainer_id"];
                             }
                             if(isset($_POST["description"])) {
                                 $p->description = $_POST["description"];
@@ -530,7 +548,7 @@
                             if(isset($_POST["price"])) {
                                 $p->price = $_POST["price"];
                             }
-                            if($p->name != NULL &&  $p->employee_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
+                            if($p->name != NULL &&  $p->person_trainer_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
                                 $p->addnew();
                                 header("location: dashboard.php?select=course");
                             } else {
@@ -545,9 +563,9 @@
                                             <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
                                         </div>
                                         <div class="form-group mb-3">
-                                            <label for="employee_id" class="text-white-50">Mentor</label>
-                                            <select name="employee_id" id="employee_id" class="form-control bg-dark text-white">';
-                        echo                     $p->list_data_with_condition($p->employee_id,"employee_id","lname","employee","type","PT");
+                                            <label for="person_trainer_id" class="text-white-50">Mentor</label>
+                                            <select name="person_trainer_id" id="person_trainer_id" class="form-control bg-dark text-white">';
+                        echo                     $p->list_data("","person_trainer_id","lname","person_trainer");
                         echo                '</select>
                                         </div>
                                         <div class="form-group mb-3 mt-6">
@@ -568,7 +586,7 @@
                                         </div>
                                        
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
+                                        <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=course">Back</a></button>
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';
@@ -617,6 +635,9 @@
                             if(isset($_POST["item_id"])) {
                                 $p->item_id = $_POST["item_id"];
                             }
+                            if(isset($_POST["note"])) {
+                                $p->note = $_POST["note"];
+                            }
                             if(isset($_FILES["img_name"]["name"])) {
                                 $p->img_name = basename($_FILES["img_name"]["name"]);
                             }
@@ -627,12 +648,14 @@
                                 $p->galery_type_name = $_GET["galery_type_name"];
                                 switch($p->galery_type_name) {
                                     case "slide":
-                                        $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/slide/';
+                                        $p->dir = './assets/image/slide/';
                                         $p->item_id = $p->galery_type_count("slide");
                                         $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "background":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/background/';
+                                        $p->item_id = $p->galery_type_count("background");
+                                        $p->item_name = "slide ".$p->item_id;
                                     break;
                     
                                     case "course":
@@ -641,6 +664,8 @@
                                     break;
                                     case "logo":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/logo/';
+                                        $p->item_id = $p->galery_type_count("slide");
+                                        $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "person_trainer":
                                         $p->dir = 'C:/xampp/htdocs/dashboard/eproject-ky1/assets/image/PT/';
@@ -739,6 +764,10 @@
                                 
                             }
                             echo               '<div class="form-group mb-3 mt-6">
+                                                    <label for="note" class="text-white-50">Note</label>
+                                                    <textarea name="note"  class="form-control bg-dark text-white"  rows="3">'.$p->note.'</textarea>
+                                                </div>
+                                                <div class="form-group mb-3 mt-6">
                                                     <label for="img_name" class="text-white-50">Picture Name</label>
                                                     <input type="file" class="form-control bg-dark text-white" id="img_name" name="img_name">
                                                 </div>

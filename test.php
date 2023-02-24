@@ -16,6 +16,7 @@
         <input type="text" name="cd" placeholder="cd">
         <input type="submit" name="ok" id="save" value="ok">
     </form>
+    <img src="./assets/image/slide/home-1.jpeg" alt="">
 
     <?php
         $ab = $cd = "";
@@ -32,7 +33,7 @@
                 echo $cd.$ab;
             }
         }
-       gagag
+       
 
     ?>
 </body>

@@ -1,9 +1,16 @@
+<?php
+    require "config.php";
+
+
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" href="./assets/image/logo/logo.png" type="image/x-icon" />
     <title>Gym</title>
     <!-- link CSS -->
     <link rel="stylesheet" href="./assets/css/index.css">
@@ -21,6 +28,7 @@
             <a href="./index.php">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
+            <a href="#">Course</a>
             
             <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
@@ -38,27 +46,27 @@
     <section class="home">
         <div class="swiper home-slider">
             <div class="swiper-wrapper">
-                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-2.jpeg');">
-                    <div class="content">
-                        <h3>join prime-fitness today</h3>
-                        <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem modi distinctio facere ut. Inventore, facere.</p>
-                        <div class="button">
-                            <a href="#" class="btn btn-1">get started</a>
-                            <!-- <a href="#" class="btn">download</a> -->
-                        </div>
-                    </div>
-                </div>
-                
-                <div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/slide/home-1.jpeg');">
-                    <div class="content">
-                        <h3>health is wealth</h3>
-                        <p>lorem ipsum dolor sit amet consectetur adipisicing elit. Dolorem modi distinctio facere ut. Inventore, facere.</p>
-                        <div class="button">
-                            <a href="#" class="btn btn-1">get started</a>
-                            <!-- <a href="#" class="btn">download</a> -->
-                        </div>
-                    </div>
-                </div>
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "SELECT note,dir,img_name FROM galery WHERE galery_type_name = 'slide'";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="swiper-slide box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('.$row["dir"].$row["img_name"].');">
+                                    <div class="content">
+                                        <h3>join prime-fitness today</h3>
+                                        <p>'.$row["note"].'</p>
+                                        <div class="button">
+                                            <a href="#" class="btn btn-1">get started</a>
+                                            <a href="#" class="btn">download</a>
+                                        </div>
+                                    </div>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
         </div>
     </section>
@@ -71,7 +79,7 @@
             <div class="swiper-wrapper wapper">
                 <div class="swiper-slide box">
                     <div class="image">
-                        <img src="./assets/image/course/Feature-classes.jpeg" alt="">
+                        <img src="./assets/image/course/bjj.jpg" alt="">
                     </div>
                     <div class="content">
                         <div class="price">price</div>

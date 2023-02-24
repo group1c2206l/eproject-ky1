@@ -473,8 +473,8 @@
                         if(isset($_POST["name"])) {
                             $p->name = $_POST["name"];
                         }
-                        if(isset($_POST["employee_id"])) {
-                            $p->employee_id = $_POST["employee_id"];
+                        if(isset($_POST["person_trainer_id"])) {
+                            $p->person_trainer_id = $_POST["person_trainer_id"];
                         }
                         if(isset($_POST["description"])) {
                             $p->description = $_POST["description"];
@@ -488,7 +488,7 @@
                         if(isset($_POST["price"])) {
                             $p->price = $_POST["price"];
                         }
-                        if($p->name != NULL &&  $p->employee_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
+                        if($p->name != NULL &&  $p->person_trainer_id != NULL &&  $p->description != NULL && $p->start_day != NULL && $p->end_day != NULL && $p->price != NULL) {
                             $p->edit();
                             header("location: dashboard.php?select=course");
                         } else {
@@ -503,9 +503,9 @@
                                         <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
                                     </div>
                                     <div class="form-group mb-3">
-                                        <label for="employee_id" class="text-white-50">Mentor</label>
-                                        <select name="employee_id" id="employee_id" class="form-control bg-dark text-white">';
-                    echo                     $p->list_data_with_condition($_GET["employee_id"],"employee_id","lname","employee","type","PT");
+                                        <label for="person_trainer_id" class="text-white-50">Mentor</label>
+                                        <select name="person_trainer_id" id="person_trainer_id" class="form-control bg-dark text-white">';
+                    echo                     $p->list_data("","person_trainer_id","lname","person_trainer");
                     echo                '</select>
                                     </div>
                                     <div class="form-group mb-3 mt-6">
