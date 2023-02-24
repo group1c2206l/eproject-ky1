@@ -60,9 +60,9 @@
             $results = $stmt->fetchAll();
             foreach($results as $row) {
                 if($id_check == $row[$id]) {
-                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                    echo  '<option value="'.$row[$id].'" selected>'.$row[$name].'</option>';
                 } else {
-                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                    echo  '<option value="'.$row[$id].'">'.$row[$name].'</option>';
 
                 }
             }
@@ -1145,7 +1145,7 @@
         public $device_id;
         public $service_id;
         public $course_id;
-        public $employee_id;
+        public $person_trainer_id;
         public $member_id;
         public $package_id;
         public $code;
