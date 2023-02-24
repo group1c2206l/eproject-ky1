@@ -528,7 +528,8 @@
                                 switch($p->galery_type_name) {
                                     case "slide":
                                         $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/slide/';
-                                        $p->item_id = 
+                                        $p->item_id = $p->slide_number();
+                                        $p->item_name = "slide ".$p->item_id;
                                     break;
                                     case "background":
                                         $p->dir = 'C:/xampp/htdocs/eproject-ky1/assets/image/background/';
