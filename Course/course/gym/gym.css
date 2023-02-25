@@ -89,7 +89,7 @@ ul.sub-menu li a:hover{
     width: 80%;
 }
 .row1{
-    background-image: url(/anh/crossfit.jpg);
+    background-image: url(/Course/anh/crossfit.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
@@ -118,21 +118,21 @@ ul.sub-menu li a:hover{
     bottom: 250px;
 }
 .row2{
-    background-image: url(/anh/burn.jpg);
+    background-image: url(/Course/anh/burn.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/anh/yoga.jpg);
+    background-image: url(/Course/anh/yoga.jpg);
     background-size: cover;
     height: 620px;
     position: relative; 
 }
 .footer{
     height: 345px;
-    background-image: url(/anh/bg-foot.jpg);
+    background-image: url(/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 
@@ -264,4 +264,9 @@ ul.sub-menu li a:hover{
     right:10px;
     top: 47%;
     
+}
+@media(max-width:768px){
+    html{
+        font-size: 45%;
+    }
 }

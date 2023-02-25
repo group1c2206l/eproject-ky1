@@ -93,7 +93,7 @@ ul.sub-menu li a:hover{
     width: 80%;
 }
 .row1{
-    background-image: url(/eproject-ky1/Course/anh/MMA.jpg);
+    background-image: url(/Course/anh/MMA.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
@@ -122,21 +122,21 @@ ul.sub-menu li a:hover{
     bottom: 250px;
 }
 .row2{
-    background-image: url(/eproject-ky1/Course/anh/boxing.jpg);
+    background-image: url(/Course/anh/boxing.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/eproject-ky1/Course/anh/Muay-Thai_auto_x2.jpg);
+    background-image: url(/Course/anh/Muay-Thai_auto_x2.jpg);
     background-size: cover;
     height: 620px;
     position: relative; 
 }
 .footer{
     height: 345px;
-    background-image: url(/eproject-ky1/Course/anh/bg-foot.jpg);
+    background-image: url(/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 
@@ -268,4 +268,9 @@ ul.sub-menu li a:hover{
     right:10px;
     top: 47%;
     
+}
+@media(max-width:768px){
+    html{
+        font-size: 45%;
+    }
 }

@@ -120,7 +120,7 @@ h1,p{
 }
 .footer{
     height: 345px;
-    background-image: url(/eproject-ky1/Course/anh/bg-foot.jpg);
+    background-image: url(/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 }
