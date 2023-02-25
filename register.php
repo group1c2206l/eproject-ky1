@@ -13,8 +13,8 @@
     echo $select;
     switch($select) {
         case "login":
-            if(isset($_POST["email"])) {
-                $p->email = $_POST["email"];
+            if(isset($_POST["l_email"])) {
+                $p->email = $_POST["l_email"];
             }
             if(isset($_POST["l_pwd"])) {
                 $p->password_hash = sha1($_POST["l_pwd"]);
@@ -53,6 +53,7 @@
                 if(isset($_POST["email"])) {
                     $p->email = $_POST["email"];
                 }
+                $p->card_id = $p->member_type_count();
                 print_r($p);
                 // $p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && 
                 if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
@@ -135,7 +136,7 @@
             <h2>Login</h2>
             <div class="group-item">
                 <label for="">Email</label>
-                <input type="text" name="email" placeholder="email">
+                <input type="text" name="l_email" placeholder="email">
             </div>
             <div class="group-item">
                 <label for="">Password</label>

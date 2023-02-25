@@ -685,7 +685,7 @@
                                     break;
                                     case "member":
                                         $p->dir = './assets/image/member/';
-                                        $p->item_name = $p->id_to_name("name","member","member_id",$p->item_id);
+                                        $p->item_name = $p->id_to_name("lname","member","member_id",$p->item_id);
                                     break;
                                     case "talk_about_me":
                                         $p->dir = './assets/image/talk_about_me/';
@@ -758,6 +758,15 @@
                                                     <select name="item_id" id="item_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>Person Trainer list:</option>';
                                     echo                $p->list_data("","person_trainer_id","lname","person_trainer");
+                                    echo           '</select>
+                                                </div>';
+                                    break;
+                                case "member":
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="item_id" class="text-white-50">Select Option</label>
+                                                    <select name="item_id" id="item_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Person Trainer list:</option>';
+                                    echo                $p->list_data("","member_id","lname","member");
                                     echo           '</select>
                                                 </div>';
                                     break;

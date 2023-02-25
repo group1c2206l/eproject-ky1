@@ -211,8 +211,6 @@
          <table class="table table-result mt-2">
             <?php
                 
-
-
                     switch($select) {
                         
                         case "role":
@@ -625,15 +623,11 @@
                                 break;
 
                     }                 
-                
             ?>
         </table>
         <div class="noti d-none">
             <h5>vui long nhap du thong tin</h5>
         </div>            
-
-
-
     </div>
     <script src="../assets/js/dashboard.js"></script>
 </body>

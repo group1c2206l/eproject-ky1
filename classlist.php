@@ -1012,10 +1012,11 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO member(password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';
+            $sql = 'INSERT INTO member(card_id,password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:card_id,:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
+                    ":card_id" => $this->card_id,
                     ":password_hash" => $this->password_hash,
                     ":fname" => $this->fname,
                     ":mname" => $this->mname,
@@ -1117,6 +1118,15 @@
             } else {
                 return false;
             }
+        }
+
+        public function member_type_count() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT COUNT(member_id) FROM member;";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
         }
 
     }
