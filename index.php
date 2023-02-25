@@ -71,7 +71,7 @@
         </div>
     </section>
 
-    <!-- feature section starts -->
+    <!-- service starts -->
 
     <section class="feature">
         <h1 class="heading">our <span>service</span></h1>
@@ -80,7 +80,7 @@
                 <?php
                     $c = new config;
                     $conn = $c->connect();
-                    $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
+                    $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1';";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $results = $stmt->fetchAll();
@@ -90,8 +90,8 @@
                                         <img src='.$row["gdir"].$row["gimgname"].' alt="">
                                     </div>
                                     <div class="content">
-                                        
-                                        <h3>'.$row["cname"].'</h3>
+                                        <h3>'.$row["sname"].'</h3>
+                                        <p>'.$row["title"].'</p>
                                     </div>
                                 </div>';
                     }

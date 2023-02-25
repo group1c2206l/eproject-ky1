@@ -52,17 +52,19 @@ body {
     justify-content: space-between;
 }
 .login a{
-    display: inline-block;
+    /* display: inline-block; */
     text-align: center;
     padding-right: 18px;
     line-height: 50px;
+    align-self: center;
 }
 .login a i {
-    font-size: 20px;
+    font-size: 22px;
 }
 .login a i:hover {
     color: #FF0000;
-    text-shadow: 3px chocolate;
+    /* text-shadow: 3px chocolate; */
+    text-shadow: 2px 2px 8px #FF0000;
 }
 
 form {

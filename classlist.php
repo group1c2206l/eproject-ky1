@@ -707,43 +707,41 @@
                     <td>'.$this->description.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.'&title='.$this->title.'&description='.$this->description.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=service&service_id='.$this->service_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
-        public function addnew() {
-            
+        public function addnew() {  
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO service(name,title,rescription,create_at) VALUES (:name,:title,:rescription,NOW())';
+            $sql = 'INSERT INTO service(name,title,description,create_at) VALUES (:name,:title,:description,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
                     ":title" => $this->title,
-                    ":rescription" => $this->description,
+                    ":description" => $this->description,
                 )
             );
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,title = :title,rescription = :rescription,update_at = NOW() WHERE service_id = :service_id;';
+            $sql = 'UPDATE service SET name = :name,title = :title,description = :description,update_at = NOW() WHERE service_id = :service_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
                     ":title" => $this->title,
-                    ":rescription" => $this->description,
+                    ":description" => $this->description,
+                    ":service_id" => $this->service_id,
                 )
             );
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE service_id = :service_id;';
@@ -962,6 +960,7 @@
         public $package_id;
         public $course_id;
         public $points;
+        public $saveme;
 
         public function show_header() {
             echo "<tr>
@@ -1073,6 +1072,57 @@
                 )
             );
             $conn = NULL;
+        }
+
+        //kiem tra current pass co chinh xac 
+        public function check_current_pass() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM member WHERE email = :email AND password_hash = :password_hash;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":email" => $this->email,
+                    ":password_hash" => $this->password_hash,
+                )
+            );
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(count($results) == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // phuong thuc dang nhap
+        public function logins() {
+            if($this->check_current_pass()) {
+                $name = $this->email;
+                setcookie("id",md5($name),time()+86400,"/");
+                setcookie("user_name",$name, time() + 86400,"/");
+                if($this->saveme == "saveme") {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    setcookie("loggedin",$name,time()+86400,"/");
+                    header("location: ../CRUD/dashboard.php");
+                } else {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    header("location: ../CRUD/dashboard.php");
+                }
+            } else {
+                echo "Invalid username or password";
+            }
+        }
+
+        //kiem tra password moi nhap vao co chinh quy
+        public function regexp($str) {
+            $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
         }
 
     }

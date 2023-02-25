@@ -44,7 +44,7 @@ let phone = document.querySelector('input[name="phone"]');
 let flag = true;
 function email_check() {
     console.log(email.value);
-    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    let regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
     if(regex.test(email.value)) {
         email.classList.add("validate");
         email.classList.remove("err");
@@ -54,4 +54,22 @@ function email_check() {
         flag = false;
     }
 }
+function password_check() {
+    console.log(pwd.value);
+    let regex = /^[a-zA-Z0-9@]{6,}$/;
+    if(regex.test(pwd.value)) {
+        pwd.classList.add("validate");
+        pwd.classList.remove("err");
+    } else {
+        pwd.classList.add("err");
+        pwd.classList.remove("validate");
+        flag = false;
+    }
+}
 
+
+
+function validateForm() {
+    console.log("flag:",flag);
+    return true;
+}

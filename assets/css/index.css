@@ -275,8 +275,11 @@ section{
     margin-top: 0.5rem;
 }
 
-.feature .feature-slider .box:hover .content h3{
-
+.feature .feature-slider .box .content p{
+    font-size: 1.7rem;
+    color: #fff;
+    padding: 1rem 0;
+    transition-delay: .4s;
 }
 
 .feature .feature-slider .box .content .price{

@@ -438,12 +438,12 @@
                                             <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$p->name.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">Title</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="points" name="title" value="'.$p->title.'">
+                                            <label for="title" class="text-white-50">Title</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="title" name="title" value="'.$p->title.'">
                                         </div>
                                         <div class="form-group mb-3 mt-6">
-                                            <label for="points" class="text-white-50">Description</label>
-                                            <input type="text" class="form-control bg-dark text-white" id="points" name="description" value="'.$p->description.'">
+                                            <label for="description" class="text-white-50">Description</label>
+                                            <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$p->description.'">
                                         </div>
                                         <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                         <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>

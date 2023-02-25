@@ -357,10 +357,11 @@
                         if(isset($_POST["title"])) {
                             $p->title = $_POST["title"];
                         }
-                        if(isset($_POST["rescription"])) {
+                        if(isset($_POST["description"])) {
                             $p->description = $_POST["description"];
                         }
                         if($p->name != NULL &&  $p->title != NULL &&  $p->description != NULL) {
+                            print_r($p);
                             $p->edit();
                             header("location: dashboard.php?select=service");
                         } else {
@@ -368,19 +369,19 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Service</h3>
+                                <h3 class="text-center text-light">Edit Service</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Service name</label>
                                         <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
                                     </div>
                                     <div class="form-group mb-3 mt-6">
-                                        <label for="points" class="text-white-50">Title</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="points" name="title" value="'.$_GET["title"].'">
+                                        <label for="title" class="text-white-50">Title</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="title" name="title" value="'.$_GET["title"].'">
                                     </div>
                                     <div class="form-group mb-3 mt-6">
-                                        <label for="points" class="text-white-50">Description</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="points" name="description" value="'.$_GET["description"].'">
+                                        <label for="description" class="text-white-50">Description</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$_GET["description"].'">
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                     <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>

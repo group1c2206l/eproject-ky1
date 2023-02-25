@@ -13,13 +13,13 @@
     echo $select;
     switch($select) {
         case "login":
-            if(isset($_POST["l_user_name"])) {
-                $p->user_name = $_POST["l_user_name"];
+            if(isset($_POST["email"])) {
+                $p->email = $_POST["email"];
             }
             if(isset($_POST["l_pwd"])) {
                 $p->password_hash = sha1($_POST["l_pwd"]);
             }
-            if($p->user_name != NULL && $p->password_hash != NULL) {
+            if($p->email != NULL && $p->password_hash != NULL) {
                 if(isset($_POST["saveme"])) {
                     $p->saveme = $_POST["saveme"];
                 }
@@ -29,7 +29,6 @@
             }
             break;
         case "register":
-            $mes = "";
             if(isset($_POST["save"])) {
                 if(isset($_POST["pwd"])) {
                     $p->password_hash = $_POST["pwd"];
@@ -55,11 +54,12 @@
                 if(isset($_POST["email"])) {
                     $p->email = $_POST["email"];
                 }
-                
-
-                if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
+                print_r($p);
+                // $p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && 
+                if($p->email != NULL) {   
                     if($p->password_hash == $p->re_password_hash) {
-                        $p->addnew();
+                        header("location: ./index.php");
+                        // $p->addnew();
                     } else {
                         $mes = "The password is not the same !";
                     }
@@ -94,7 +94,8 @@
             </div>
 
         </div>
-        <form id="register-form" action="" method="POST">
+        <!-- onsubmit="return validateForm()" -->
+        <form id="register-form" action="" method="POST" >
             <h2>REGISTRATION</h2>
             <div class="group-item">
                 <label for="">Email :</label>
@@ -102,7 +103,7 @@
             </div>
             <div class="group-item">
                 <label for="">Password :</label>
-                <input type="password" name="pwd" placeholder="Password" onkeydown="email_check()">
+                <input type="password" name="pwd" placeholder="Password" onchange="password_check()">
             </div>
             <div class="group-item">
                 <label for="">Repassword :</label>
@@ -128,12 +129,15 @@
             <div class="group-btn">
                 <input type="submit" name="register" value="register">
             </div>
+            <div class="mes">
+                <span><?php echo $mes ?></span>
+            </div>
         </form>
         <form id="login-form" action="" method="POST">
             <h2>Login</h2>
             <div class="group-item">
-                <label for="">Username</label>
-                <input type="text" name="l_user_name" placeholder="User name">
+                <label for="">Email</label>
+                <input type="text" name="email" placeholder="email">
             </div>
             <div class="group-item">
                 <label for="">Password</label>
