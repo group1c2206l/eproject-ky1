@@ -961,6 +961,7 @@
         public $course_id;
         public $points;
         public $saveme;
+        public $mes;
 
         public function show_header() {
             echo "<tr>
@@ -1011,23 +1012,16 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO member(card_id,fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
+            $sql = 'INSERT INTO member(password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":card_id" => $this->card_id,
                     ":password_hash" => $this->password_hash,
                     ":fname" => $this->fname,
                     ":mname" => $this->mname,
                     ":lname" => $this->lname,
-                    ":dob" => $this->dob,
-                    ":address" => $this->address,
                     ":phone_number" => $this->phone_number,
-                    ":vip" => $this->vip,
                     ":email" => $this->email,
-                    ":package_id" => $this->package_id,
-                    ":course_id" => $this->course_id,
-                    ":points" => $this->points,
                 )
             );
             $conn = NULL;
@@ -1104,14 +1098,14 @@
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
                     setcookie("loggedin",$name,time()+86400,"/");
-                    header("location: ../CRUD/dashboard.php");
+                    header("location: ./trainer.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ../CRUD/dashboard.php");
+                    header("location: ./trainer.php");
                 }
             } else {
-                echo "Invalid username or password";
+                $this->mes = "Invalid username or password";
             }
         }
 

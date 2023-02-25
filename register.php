@@ -1,7 +1,7 @@
 <?php
     require "classlist.php";
     $p = new member;
-    $mes = "";
+    $p->mes = "";
     $select = "";
     if(isset($_POST["login"])) {
         $select = "login";
@@ -25,16 +25,15 @@
                 }
                 $p->logins();
             } else {
-                $mes = "Please enter full information !";
+                $p->mes = "Please enter full information !";
             }
             break;
         case "register":
-            if(isset($_POST["save"])) {
                 if(isset($_POST["pwd"])) {
-                    $p->password_hash = $_POST["pwd"];
+                    $p->password_hash = sha1($_POST["pwd"]);
                 }
                 if(isset($_POST["repwd"])) {
-                    $p->re_password_hash = $_POST["repwd"];
+                    $p->re_password_hash = sha1($_POST["repwd"]);
                 }
                 if(isset($_POST["fname"])) {
                     $p->fname = $_POST["fname"];
@@ -56,19 +55,17 @@
                 }
                 print_r($p);
                 // $p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && 
-                if($p->email != NULL) {   
+                if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
                     if($p->password_hash == $p->re_password_hash) {
+                        $p->addnew();
                         header("location: ./index.php");
-                        // $p->addnew();
                     } else {
-                        $mes = "The password is not the same !";
+                        $p->mes = "The password is not the same !";
                     }
                 } else {
-                    $mes = "Please enter full information !";
+                    $p->mes = "Please enter full information !";
                 }
     }
-}
-
 
 ?>
 
@@ -95,23 +92,24 @@
 
         </div>
         <!-- onsubmit="return validateForm()" -->
-        <form id="register-form" action="" method="POST" >
+        <!-- onchange="re_password_check()" -->
+        <form id="register-form" action="" method="POST" onsubmit="return validateForm()">
             <h2>REGISTRATION</h2>
             <div class="group-item">
                 <label for="">Email :</label>
-                <input class="email" type="email" name="email" placeholder="Email" onchange="email_check()">
+                <input class="email" type="email" name="email" placeholder="Email" onblur="email_check()">
             </div>
             <div class="group-item">
                 <label for="">Password :</label>
-                <input type="password" name="pwd" placeholder="Password" onchange="password_check()">
+                <input type="password" name="pwd" placeholder="Password" onblur="password_check()">
             </div>
             <div class="group-item">
                 <label for="">Repassword :</label>
-                <input type="password" name="repwd" placeholder="Re-password">
+                <input type="password" name="repwd" placeholder="Re-password" onblur="re_password_check()"> 
             </div>
             <div class="group-item">
                 <label for="">First Name :</label>
-                <input type="text" name="fname" placeholder="">
+                <input type="text" name="fname" placeholder="" onblur="fname_check()">
             </div>
             <div class="group-item">
                 <label for="">Mid Name :</label>
@@ -119,18 +117,18 @@
             </div>
             <div class="group-item">
                 <label for="">Last Name :</label>
-                <input type="text" name="lname" placeholder="">
+                <input type="text" name="lname" placeholder="" onblur="lname_check()">
             </div>
             <div class="group-item">
                 <label for="">Phone :</label>
-                <input type="tel" name="phone" placeholder="Phone">
+                <input type="tel" name="phone_number" placeholder="Phone" onblur="phone_check()">
             </div>
             
             <div class="group-btn">
                 <input type="submit" name="register" value="register">
             </div>
             <div class="mes">
-                <span><?php echo $mes ?></span>
+                <span><?php echo $p->mes ?></span>
             </div>
         </form>
         <form id="login-form" action="" method="POST">
@@ -151,7 +149,7 @@
                 <input type="submit" name="login" value="login">
             </div>
             <div class="mes">
-                <span><?php echo $mes ?></span>
+                <span><?php echo $p->mes ?></span>
             </div>
         </form>
     </div>
