@@ -34,5 +34,24 @@ function show(a) {
     }
 }
 
-
+let email = document.querySelector(".email");
+let pwd = document.querySelector('input[name="pwd"]');
+let repwd = document.querySelector('input[name="repwd"]');
+let fname = document.querySelector('input[name="fname"]');
+let mname = document.querySelector('input[name="mname"]');
+let lname = document.querySelector('input[name="lname"]');
+let phone = document.querySelector('input[name="phone"]');
+let flag = true;
+function email_check() {
+    console.log(email.value);
+    var regex = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+    if(regex.test(email.value)) {
+        email.classList.add("validate");
+        email.classList.remove("err");
+    } else {
+        email.classList.add("err");
+        email.classList.remove("validate");
+        flag = false;
+    }
+}
 

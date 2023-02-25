@@ -171,11 +171,11 @@
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
                     setcookie("loggedin",$name,time()+86400,"/");
-                    header("location: ./CRUD/dashboard.php");
+                    header("location: ../CRUD/dashboard.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ./CRUD/dashboard.php");
+                    header("location: ../CRUD/dashboard.php");
                 }
             } else {
                 echo "Invalid username or password";
@@ -950,6 +950,7 @@
         public $member_id;
         public $card_id;
         public $password_hash;
+        public $re_password_hash;
         public $fname;
         public $mname;
         public $lname;

@@ -47,6 +47,23 @@ body {
 .reg {
     text-align: end;
 }
+.login {
+    display: flex;
+    justify-content: space-between;
+}
+.login a{
+    display: inline-block;
+    text-align: center;
+    padding-right: 18px;
+    line-height: 50px;
+}
+.login a i {
+    font-size: 20px;
+}
+.login a i:hover {
+    color: #FF0000;
+    text-shadow: 3px chocolate;
+}
 
 form {
     width: 100%;
@@ -67,6 +84,7 @@ h2 {
 }
 .group-item label {
     width: 100px;
+    align-self: center;
     font-weight: 500;
     display: inline-block;
     color: aliceblue;
@@ -131,4 +149,13 @@ input[type="submit"]:active {
     margin-top: 20px;
     text-align: center;
     color: rgb(245, 253, 206);
+}
+
+.err {
+    border: 1px solid red !important;
+    box-shadow: 2px 2px 4px rgb(190, 0, 63);
+}
+.validate {
+    border: 1px solid rgb(1, 226, 1) !important;
+    box-shadow: 2px 2px 4px rgb(0, 248, 42);
 }
