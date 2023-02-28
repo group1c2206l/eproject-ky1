@@ -147,7 +147,7 @@ CREATE TABLE member(
     fname VARCHAR(50) NOT NULL,
     mname VARCHAR(50),
     lname VARCHAR(50) NOT NULL,
-    dob DATETIME NOT NULL,
+    dob DATE NOT NULL,
     address VARCHAR(200) NOT NULL,
     phone_number VARCHAR(15) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
     email VARCHAR(50) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
@@ -159,7 +159,6 @@ CREATE TABLE member(
     create_at DATETIME,
     update_at DATETIME,
     CONSTRAINT PK_member_id PRIMARY KEY (member_id)
-
 );
 
 -- phan tach thu vien anh cho tung chuyen muc khac nhau

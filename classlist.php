@@ -1029,15 +1029,13 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,password_hash = :password_hash,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE employee_id = :employee_id;';
+            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE member_id = :member_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":card_id" => $this->card_id,
-                    ":password_hash" => $this->password_hash,
                     ":fname" => $this->fname,
                     ":mname" => $this->mname,
                     ":lname" => $this->lname,
@@ -1056,7 +1054,6 @@
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE member SET flag = 0,update_at = NOW() WHERE member_id = :member_id;';
