@@ -454,7 +454,6 @@
                     <td class='table-dark text-warning fw-bold'>PERSON ID</td>
                     <td class='table-dark text-warning fw-bold'>EMAIL</td>
                     <td class='table-dark text-warning fw-bold'>TRAINER JOB</td>
-                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
                     <td class='table-dark text-warning fw-bold'>EVALUATE</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
                     <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
@@ -478,14 +477,36 @@
                     <td>'.$this->evaluate.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&code='.$this->code.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=person_trainer&person_trainer_id='.$this->person_trainer_id.' ">Delete</a></button></td> 
                 </tr>';
         }
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO person_trainer(fname,mname,lname,dob,address,phone_number,person_id,email,trainer_job,evaluate,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:trainer_job,:evaluate,NOW())';
+            $sql = 'INSERT INTO person_trainer(fname,mname,lname,code,dob,address,phone_number,person_id,email,trainer_job,evaluate,create_at) VALUES (:fname,:mname,:lname,:code,:dob,:address,:phone_number,:person_id,:email,:trainer_job,:evaluate,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":code" => $this->code,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":person_id" => $this->person_id,
+                    ":email" => $this->email,
+                    ":trainer_job" => $this->trainer_job,
+                    ":evaluate" => $this->evaluate,
+                )
+            );
+            $conn = NULL;
+        }
+        public function edit() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE person_trainer SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,email = :email,trainer_job = :trainer_job,evaluate = :evaluate,update_at = NOW() WHERE person_trainer_id = :person_trainer_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -495,10 +516,23 @@
                     ":dob" => $this->dob,
                     ":address" => $this->address,
                     ":phone_number" => $this->phone_number,
-                    ":person_id" => $this->person_id,
                     ":email" => $this->email,
                     ":trainer_job" => $this->trainer_job,
                     ":evaluate" => $this->evaluate,
+                    ":person_trainer_id" => $this->person_trainer_id,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function delete() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE person_trainer SET flag = 0,update_at = NOW() WHERE person_trainer_id = :person_trainer_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":person_trainer_id" => $this->person_trainer_id
                 )
             );
             $conn = NULL;
@@ -789,7 +823,7 @@
                     <td>'.$this->day_active.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.'&mentor='.$this->mentor.'&points='.$this->points.'&price='.$this->price.'&expiry='.$this->expiry.'&day_active='.$this->day_active.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -797,7 +831,6 @@
        
 
         public function addnew() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO package(name,mentor,points,price,expiry,day_active,create_at) VALUES (:name,:mentor,:points,:price,:expiry,:day_active,NOW())';
@@ -837,7 +870,7 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE package SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -1009,7 +1042,6 @@
         }
 
         public function addnew() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO member(card_id,password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:card_id,:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';

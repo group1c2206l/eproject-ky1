@@ -590,7 +590,8 @@
                                         <span class="text-warning">'.$mes.'</span>
                                     </form>
                                 </div>';
-                    break;    
+                    break;
+                        
                     case "galery_type":
                         $p = new galery_type();
                         $mes = "";

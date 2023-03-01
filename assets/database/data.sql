@@ -154,7 +154,7 @@ CREATE TABLE member(
     vip INT DEFAULT 0, -- mac dinh la 0, 1 neu la nguoi noi tieng
     package_id INT, -- thong tin ve goi thanh vien
     course_id INT, -- thong tin ve khoa hoc da dang ky
-    points INT, -- so diem tich luy
+    points INT DEFAULT 0, -- so diem tich luy
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,

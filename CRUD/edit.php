@@ -226,6 +226,115 @@
                         </div>';
                 break;
 
+                case "person_trainer":
+                    $p = new person_trainer;
+                    $mes = "";
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["fname"])) {
+                            $p->fname = $_POST["fname"];
+                        }
+                        if(isset($_POST["mname"])) {
+                            $p->mname = $_POST["mname"];
+                        }
+                        if(isset($_POST["lname"])) {
+                            $p->lname = $_POST["lname"];
+                        }
+                        if(isset($_POST["code"])) {
+                            $p->code = $_POST["code"];
+                        }
+                        if(isset($_POST["dob"])) {
+                            $p->dob = $_POST["dob"];
+                        }
+                        if(isset($_POST["gender"])) {
+                            $p->gender = $_POST["gender"];
+                        }
+                        if(isset($_POST["address"])) {
+                            $p->address = $_POST["address"];
+                        }
+                        if(isset($_POST["phone_number"])) {
+                            $p->phone_number = $_POST["phone_number"];
+                        }
+                        if(isset($_POST["person_id"])) {
+                            $p->person_id = $_POST["person_id"];
+                        }
+                        if(isset($_POST["email"])) {
+                            $p->email = $_POST["email"];
+                        }
+                        if(isset($_POST["trainer_job"])) {
+                            $p->trainer_job = $_POST["trainer_job"];
+                        }
+                        if(isset($_POST["evaluate"])) {
+                            $p->evaluate = $_POST["evaluate"];
+                        }
+                        if($p->fname != NULL && $p->lname != NULL && $p->dob != NULL && $p->address != NULL && $p->phone_number != NULL && $p->person_id != NULL && $p->email != NULL && $p->trainer_job != NULL) {    
+                            $p->edit();
+                            header("location: dashboard.php?select=person_trainer");
+                        } else {
+                            $mes = "Please enter full information !";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Add new Person Trainer</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="fname" class="text-white-50">First Name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="fname" name="fname" value="'.$_GET["fname"].'" >
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="mname" class="text-white-50">Mid Name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="mname" name="mname" value="'.$_GET["mname"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="lname" class="text-white-50">Last Name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="lname" name="lname" value="'.$_GET["lname"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="code" class="text-white-50">CODE ID</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="code" name="code" value="'.$_GET["code"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="dob" class="text-white-50">Dob</label>
+                                        <input type="date" class="form-control bg-dark text-white" id="dob" name="dob" value="'.$_GET["dob"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="dob" class="text-white-50">Dob</label>
+                                        <select class="form-select form-select-md bg-dark text-white" name="gender">
+                                            <option value="" selected disabled>Select Gender : </option>
+                                            <option value="F">FEMALE</option>
+                                            <option value="M">MALE</option>
+                                        </select>
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="address" class="text-white-50">Address</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="address" name="address" value="'.$_GET["address"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="phone_number" class="text-white-50">PHONE NUMBER</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="phone_number" name="phone_number" value="'.$_GET["phone_number"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="person_id" class="text-white-50">Person ID</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="person_id" name="person_id" value="'.$_GET["person_id"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="email" class="text-white-50">Email</label>
+                                        <input type="email" class="form-control bg-dark text-white" id="email" name="email" value="'.$_GET["email"].'">
+                                    </div>
+                                    <div class="form-group mb-3">
+                                        <label for="trainer_job" class="text-white-50">trainer_job</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="trainer_job" name="trainer_job" value="'.$_GET["trainer_job"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="evaluate" class="text-white-50">Evaluate</label>
+                                        <textarea name="evaluate"  class="form-control bg-dark text-white"  rows="4">'.$_GET["evaluate"].'</textarea>
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=person_trainer">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;
+
                 case "utilities":
                     $p = new utilities;
                     $mes = "";
@@ -582,7 +691,7 @@
                     }
     
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Employee</h3>
+                                <h3 class="text-center text-light">Edit Member</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="fname" class="text-white-50">Card ID</label>
@@ -626,18 +735,20 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="package_id" class="text-white-50">Package</label>
-                                        <select name="package_id" id="package_id" class="form-control bg-dark text-white">';
+                                        <select name="package_id" id="package_id" class="form-control bg-dark text-white">
+                                             <option selected disabled>Select on list :</option>';
                     echo                     $p->list_data("","package_id","name","package");
                     echo                '</select>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="course_id" class="text-white-50">Course</label>
-                                        <select name="course_id" id="course_id" class="form-control bg-dark text-white">';
+                                        <select name="course_id" id="course_id" class="form-control bg-dark text-white">
+                                             <option selected disabled>Select on list :</option>';
                     echo                     $p->list_data("","course_id","name","course");
                     echo                '</select>
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=employee">Back</a></button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=member">Back</a></button>
                                     <span class="text-warning">'.$mes.'</span>
                                 </form>
                             </div>';

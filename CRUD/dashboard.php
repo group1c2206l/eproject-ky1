@@ -14,7 +14,6 @@
         $search_list = $_GET["search_list"];
     }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -92,7 +91,6 @@
 </head>
 <body class="bg-secondary">
 	<div class="dashboard container-fluid position-relative ">
-
 		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
 			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
