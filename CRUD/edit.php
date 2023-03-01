@@ -173,7 +173,7 @@
                 }
 
                 echo   '<div class="mt-5 num">
-                            <h3 class="text-center text-light">Add new Employee</h3>
+                            <h3 class="text-center text-light">Edit Employee</h3>
                             <form action=""  method="POST">
                                 <div class="form-group mb-3 mt-6">
                                     <label for="fname" class="text-white-50">First Name</label>
@@ -274,7 +274,7 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Person Trainer</h3>
+                                <h3 class="text-center text-light">Edit Person Trainer</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="fname" class="text-white-50">First Name</label>
@@ -356,7 +356,7 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Utilities</h3>
+                                <h3 class="text-center text-light">Edit Utilities</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Utilities name</label>
@@ -490,7 +490,7 @@
                                     </div>
                                     <div class="form-group mb-3 mt-6">
                                         <label for="description" class="text-white-50">Description</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$_GET["description"].'">
+                                        <textarea name="description"  class="form-control bg-dark text-white"  rows="4">'.$_GET["description"].'</textarea>
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                     <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=service">Back</a></button>
@@ -530,7 +530,7 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Package</h3>
+                                <h3 class="text-center text-light">Edit Package</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Package name</label>
@@ -606,7 +606,7 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Course</h3>
+                                <h3 class="text-center text-light">Edit Course</h3>
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Course name</label>
@@ -620,7 +620,7 @@
                                     </div>
                                     <div class="form-group mb-3 mt-6">
                                         <label for="description" class="text-white-50">description</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="description" name="description" value="'.$_GET["description"].'">
+                                        <textarea name="description"  class="form-control bg-dark text-white"  rows="4">'.$_GET["description"].'</textarea>
                                     </div>
                                     <div class="form-group mb-3 mt-6">
                                         <label for="start_day" class="text-white-50">start_day</label>
@@ -773,8 +773,43 @@
                         }
                     }
                     echo   '<div class="mt-5 num">
-                                <h3 class="text-center text-light">Add new Galery Type</h3>
+                                <h3 class="text-center text-light">Edit Galery Type</h3>
                                 <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Type name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
+                                    <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=galery_type">Back</a></button>
+                                    <span class="text-warning">'.$mes.'</span>
+                                </form>
+                            </div>';
+                break;    
+                case "galery":
+                    $p = new galery();
+                    $mes = "";
+                    if(isset($_GET["galery_id"])) {
+                        $p->galery_id = $_GET["galery_id"];
+                    }
+                    if(isset($_POST["save"])) {
+                        if(isset($_POST["name"])) {
+                            $p->name = $_POST["name"];
+                        }
+                      
+                        if($p->name != NULL) {
+                            $p->edit();
+                            header("location: dashboard.php?select=galery");
+                        } else {
+                            $mes = "Please enter full information";
+                        }
+                    }
+                    echo   '<div class="mt-5 num">
+                                <h3 class="text-center text-light">Edit Galery</h3>
+                                <form action=""  method="POST">
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="name" class="text-white-50">Type name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                    </div>
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Type name</label>
                                         <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">

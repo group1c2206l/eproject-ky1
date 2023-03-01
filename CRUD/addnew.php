@@ -591,7 +591,7 @@
                                     </form>
                                 </div>';
                     break;
-                        
+
                     case "galery_type":
                         $p = new galery_type();
                         $mes = "";
@@ -640,7 +640,7 @@
                                 $p->note = $_POST["note"];
                             }
                             if(isset($_FILES["img_name"]["name"])) {
-                                $p->img_name = basename($_FILES["img_name"]["name"]);
+                                $p->img_name = uniqid("",false)."_".basename($_FILES["img_name"]["name"]); //tranh viec trung ten file khi upload
                             }
                             if(isset($_FILES["img_name"]["tmp_name"])) {
                                 $p->img_tmp = $_FILES["img_name"]["tmp_name"];
@@ -675,6 +675,10 @@
                                     case "device":
                                         $p->dir = './assets/image/device/';
                                         $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
+                                    break;
+                                    case "utilities":
+                                        $p->dir = './assets/image/utilities/';
+                                        $p->item_name = $p->id_to_name("name","utilities","utilities_id",$p->item_id);
                                     break;
                                     case "service":
                                         $p->dir = './assets/image/service/';
@@ -768,6 +772,15 @@
                                                     <select name="item_id" id="item_id" class="form-control bg-dark text-white ">
                                                         <option selected disabled>Person Trainer list:</option>';
                                     echo                $p->list_data("","member_id","lname","member");
+                                    echo           '</select>
+                                                </div>';
+                                    break;
+                                case "utilities":
+                                    echo        '<div class="form-group mb-3 mt-6">
+                                                    <label for="item_id" class="text-white-50">Select Option</label>
+                                                    <select name="item_id" id="item_id" class="form-control bg-dark text-white ">
+                                                        <option selected disabled>Utilities_id list:</option>';
+                                    echo                $p->list_data("","utilities_id","name","utilities");
                                     echo           '</select>
                                                 </div>';
                                     break;

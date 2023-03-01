@@ -385,7 +385,6 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,person_id = :person_id,email = :email,contact_name = :contact_name,contact_phone = :contact_phone,type = :type,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -410,7 +409,6 @@
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET flag = 0,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -600,7 +598,6 @@
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE utilities SET flag = 0,update_at = NOW() WHERE utilities_id = :utilities_id;';
@@ -918,7 +915,7 @@
                     <td>'.$this->price.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&person_trainer_id='.$this->person_trainer_id.'&description='.$this->description.'&start_day='.$this->start_day.'&end_day='.$this->end_day.'&price='.$this->price.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=course&course_id='.$this->course_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -1250,6 +1247,7 @@
                     <td class='table-dark text-warning fw-bold'>ITEM ID</td>
                     <td class='table-dark text-warning fw-bold'>ITEM NAME</td>
                     <td class='table-dark text-warning fw-bold'>NOTE</td>
+                    <td class='table-dark text-warning fw-bold'>VIEW</td>
                     <td class='table-dark text-warning fw-bold'>DIR</td>
                     <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
                     <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
@@ -1265,20 +1263,21 @@
                     <td>'.$this->item_id.'</td>
                     <td>'.$this->item_name.'</td>
                     <td>'.$this->note.'</td>
+                    <td><img width="80px" height="auto" src=".'.$this->dir.$this->img_name.'" /></td>
                     <td>'.$this->dir.'</td>
                     <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'&name='.$this->name.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
-            $file_path = '.'.$this->dir.$this->img_name;
-            echo $file_path;
+            $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
+            // echo $file_path;
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {

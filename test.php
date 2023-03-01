@@ -31,6 +31,7 @@
             if(isset($_POST["cd"])) {
                 $cd = $_POST["cd"];
                 echo $cd.$ab;
+                exec('start ping google.com.vn -t');
             }
         }
        

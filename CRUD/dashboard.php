@@ -243,7 +243,7 @@
                             if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
                             } else {
-                                if($search_data == "") { //neu co bien $search_data rong thi hien thong bao 
+                                if($search_data == "") { //neu co bien $search_data rong (chua dien gia tri vao o tim kiem) thi hien thong bao 
                                     $results = [];
                                     echo "
                                         <script>alert('Please enter value on search box !')</script>
