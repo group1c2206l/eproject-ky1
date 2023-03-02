@@ -1,16 +1,23 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
+}
+:root{
+    --text-color:coral;
+    --menu-color: #625f5f;
 }
 header{
-    /* position: sticky; */
     position: fixed;
-    /* position: -webkit-sticky; */
-    /* top: 10px; */
     width: 100%;
-    margin: 0px auto;
     z-index: 1;
     background-color: rgba(255,255,255,0.8);
+    align-items: center;
+    top: -200px;
+    transition: top 0.3s;
+}
+header.header-fixed{
+    top:0;
 }
 .wrapper{
     background-color:rgba(235, 232, 232, 0.5);
@@ -45,7 +52,7 @@ header{
     margin-top: 20px;
 }
 .main-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li ul.sub-menu{
     position: absolute;
@@ -61,7 +68,7 @@ header{
     color: white;
 }
 ul.sub-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li:hover ul.sub-menu{
     display: block;
@@ -84,12 +91,12 @@ ul.sub-menu li a:hover{
 .main-menu li:hover a::before{
     width: 80%;
 }
-.row1{
-    background-image: url(/anh/kickfit-mma.jpg);
+/* .row1{
+    background-image: url(/eproject-ky1/Course/anh/kickfit-mma.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
-}
+} */
 .messenger{
     position: absolute;
     right: 20px;
@@ -99,7 +106,7 @@ ul.sub-menu li a:hover{
 }
 h1,p{
     color: aliceblue;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     padding: 5px 0px; 
 }
 .row-content{
@@ -120,28 +127,28 @@ h1,p{
     text-decoration: none;
 }
 .row2{
-    background-image: url(/anh/c2.jpg);
+    background-image: url(/Course/anh/c2.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/anh/dance1.jpg);
+    background-image: url(/Course/anh/dancee.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row4{
-    background-image: url(/anh/zumba1.jpg);
+    background-image: url(/Course/anh/zumm_auto_x2.jpg);
     background-size: cover;
     height: 620px;
     position: relative;   
 }
 .footer{
     height: 345px;
-    background-image: url(/anh/bg-foot.jpg);
+    background-image: url(/Course/anh/bg-foot.jpg);
     display: flex;
     justify-content: space-evenly;
 
@@ -158,7 +165,7 @@ h1,p{
 .fl{
     display: flex;
     font-size: small;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     padding: 3px 0px;
     position: relative;
 }
@@ -197,14 +204,14 @@ h1,p{
     color: rgb(181, 176, 176);
 }
 .b a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .icon{
     display: flex;
     justify-content: space-evenly;
 }
 .icon a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 /*hover cac icon*/
 .icon a{
@@ -256,7 +263,7 @@ h1,p{
     
 }
 .register p{
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
 }
 .register input{
     padding: 10px ;
@@ -266,9 +273,15 @@ h1,p{
 .register i{
     /* position: absolute;
     left: 10px; */
-    color: rgb(246, 136, 96);
+    color: var(--text-color);
     position: absolute;
     right:10px;
     top: 48%;
     
+}
+
+@media(max-width:768px){
+    html{
+        font-size: 45%;
+    }
 }
