@@ -1,0 +1,36 @@
+
+.messenger{
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    position: fixed;
+    z-index: 999;
+}
+h1,p{
+    color: aliceblue;
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
+    padding: 5px 0px; 
+}
+.row-content{
+    position: absolute;
+    text-align: left;
+    left: 160px;
+    bottom: 250px;
+}
+.learn-about{
+    position: relative;
+}
+.learn-about a img{
+    width: 240px;
+    height: 40px;
+    padding: 5px 0px;
+}
+.learn-about a{
+    text-decoration: none;
+}
+
+@media(max-width:768px){
+    html{
+        font-size: 45%;
+    }
+}

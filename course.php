@@ -5,15 +5,15 @@
         <meta http-equiv="X-UA-Compatible" content="IE=edge">
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Document</title>
-        <link rel="stylesheet" href="/Course/course/course.css">
-        <link rel="stylesheet" href="/Course/fonts/fontawesome-free-6.3.0-web/fontawesome-free-6.3.0-web/css/all.min.css">
+        <link rel="stylesheet" href="./assets/css/course.css">
+        <link rel="stylesheet" href="./Course/fonts/fontawesome-free-6.3.0-web/fontawesome-free-6.3.0-web/css/all.min.css">
     </head>
     <body>
         <div class="wrapper">
            <div class="container">
-                <div class="row1" style="background-image: url(/Course/anh/kickfit-mma.jpg);background-size: cover;height: 685px;position: relative;">
+                <div class="row1" style="background-image: url(./assets/image/anh/kickfit-mma.jpg);background-size: cover;height: 685px;position: relative;">
                     <div class="messenger">
-                        <a href=""><img src="/Course/anh/fb-messenger.png" alt=""></a>
+                        <a href=""><img src="./assets/image/anh/fb-messenger.png" alt=""></a>
                     </div>
                     <div class="row-content">
                         <div class="tittle">
@@ -27,14 +27,14 @@
                             </p>
                         </div>
                         <div class="learn-about" >
-                            <a href=""><img src="/Course/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row2">
+                <div class="row2" style=" background-image: url(./assets/image/anh/c2.jpg); background-size: cover;height: 620px;position: relative;">
                     <div class="row-content">
                         <div class="tittle">
                             <h1>Gym & fitness</h1>
@@ -47,14 +47,14 @@
                             </p>
                         </div>
                         <div class="learn-about">
-                            <a href=""><img src="/Course/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row3">
+                <div class="row3" style=" background-image: url(./assets/image/anh/dancee.jpg); background-size: cover;height: 620px;position: relative;">
                     <div class="row-content">
                         <div class="tittle">
                             <h1>Dance</h1>
@@ -67,14 +67,14 @@
                             </p>
                         </div>
                         <div class="learn-about">
-                            <a href=""><img src="/Course/anh/btn-orange-1.png" alt=""></a>
+                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                             <a href=""><p>Tìm hiểu thêm</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div class="row4">
+                <div class="row3" style=" background-image: url(./assets/image/anh/zumm_auto_x2.jpg); background-size: cover;height: 620px;position: relative;">
                    <div class="row-content">
                     <div class="tittle">
                         <h1>Zumba</h1>
@@ -85,7 +85,7 @@
                         </p>
                    </div>
                     <div class="learn-about">
-                        <a href=""><img src="/Course/anh/btn-orange-1.png" alt=""></a>
+                        <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                         <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
                         <a href=""><p>Tìm hiểu thêm</p></a>
                         </div>
@@ -93,7 +93,6 @@
                    </div>
                 </div>
            </div>
-           </footer>
         </div>
         <script>
             window.addEventListener('scroll',function(){
