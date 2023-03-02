@@ -1,7 +1,11 @@
 *{
     margin: 0;
     padding: 0;
-    font-family:'Times New Roman', Times, serif;
+    font-family: 'Times New Roman', Times, serif;
+}
+:root{
+    --text-color:coral;
+    --menu-color: #625f5f;
 }
 header{
     position: fixed;
@@ -15,10 +19,10 @@ header{
 header.header-fixed{
     top:0;
 }
-/*.wrapper{
+.wrapper{
     background-color:rgba(235, 232, 232, 0.5);
     /* background-size: cover; */
-
+}
 .navbar{
     /* height: 120px; */
     display: flex;
@@ -29,7 +33,7 @@ header.header-fixed{
     
 }
 .navbar_logo img{
-    height: 100px;
+    height: 120px;
     width: 200px;
 }
 .main-menu{
@@ -42,15 +46,13 @@ header.header-fixed{
 }
 .main-menu li a{
     text-decoration: none;
-    /* color: rgb(24, 25, 25); */
-    color: #625f5f;
+    color: rgb(24, 25, 25);
     display: block;
     padding: 10px 20px;
     margin-top: 20px;
-    font-size: large;
 }
 .main-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li ul.sub-menu{
     position: absolute;
@@ -66,7 +68,7 @@ header.header-fixed{
     color: white;
 }
 ul.sub-menu li a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .main-menu li:hover ul.sub-menu{
     display: block;
@@ -89,12 +91,12 @@ ul.sub-menu li a:hover{
 .main-menu li:hover a::before{
     width: 80%;
 }
-.row1{
-    background-image: url(/Course/anh/crossfit.jpg);
+/* .row1{
+    background-image: url(/eproject-ky1/Course/anh/kickfit-mma.jpg);
     background-size: cover;
     height: 685px;
     position: relative;
-}
+} */
 .messenger{
     position: absolute;
     right: 20px;
@@ -102,16 +104,10 @@ ul.sub-menu li a:hover{
     position: fixed;
     z-index: 999;
 }
-
-.tittle{
-    margin-top: 60px;
+h1,p{
     color: aliceblue;
-    /* font-family: Georgia, 'Times New Roman', Times, serif; */
+    /* font-family: 'Franklin Gothic Medium', 'Arial Narrow', Arial, sans-serif; */
     padding: 5px 0px; 
-}
-.tittle p{
-    margin-top: 10px;
-    letter-spacing: 1px;
 }
 .row-content{
     position: absolute;
@@ -119,18 +115,36 @@ ul.sub-menu li a:hover{
     left: 160px;
     bottom: 250px;
 }
+.learn-about{
+    position: relative;
+}
+.learn-about a img{
+    width: 240px;
+    height: 40px;
+    padding: 5px 0px;
+}
+.learn-about a{
+    text-decoration: none;
+}
 .row2{
-    background-image: url(/Course/anh/burn.jpg);
+    background-image: url(/Course/anh/c2.jpg);
     background-size: cover;
     height: 620px;
     position: relative;
     
 }
 .row3{
-    background-image: url(/Course/anh/yoga.jpg);
+    background-image: url(/Course/anh/dancee.jpg);
     background-size: cover;
     height: 620px;
-    position: relative; 
+    position: relative;
+    
+}
+.row4{
+    background-image: url(/Course/anh/zumm_auto_x2.jpg);
+    background-size: cover;
+    height: 620px;
+    position: relative;   
 }
 .footer{
     height: 345px;
@@ -152,7 +166,7 @@ ul.sub-menu li a:hover{
     display: flex;
     font-size: small;
     /* font-family: 'Times New Roman', Times, serif; */
-    padding: 10px 0px;
+    padding: 3px 0px;
     position: relative;
 }
 .fl i{
@@ -190,14 +204,14 @@ ul.sub-menu li a:hover{
     color: rgb(181, 176, 176);
 }
 .b a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 .icon{
     display: flex;
     justify-content: space-evenly;
 }
 .icon a:hover{
-    color: coral;
+    color: var(--text-color);
 }
 /*hover cac icon*/
 .icon a{
@@ -249,9 +263,7 @@ ul.sub-menu li a:hover{
     
 }
 .register p{
-    font-family: 'Times New Roman', Times, serif;
-    color: rgb(181, 176, 176);
-    margin-bottom: 10px;
+    /* font-family: 'Times New Roman', Times, serif; */
 }
 .register input{
     padding: 10px ;
@@ -261,12 +273,13 @@ ul.sub-menu li a:hover{
 .register i{
     /* position: absolute;
     left: 10px; */
-    color: rgb(246, 136, 96);
+    color: var(--text-color);
     position: absolute;
     right:10px;
-    top: 47%;
+    top: 48%;
     
 }
+
 @media(max-width:768px){
     html{
         font-size: 45%;

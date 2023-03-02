@@ -185,6 +185,18 @@ CREATE TABLE galery(
     CONSTRAINT PK_galery_id PRIMARY KEY (galery_id)
 );
 
+CREATE TABLE about(
+    about_id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(200),
+    title VARCHAR(300),
+    description VARCHAR(500),
+    flag INT DEFAULT 1, 
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_about_id PRIMARY KEY (about_id)
+);
+
+
 ALTER TABLE role
 CONSTRAINT FK_role_employee_id FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
 
