@@ -1,6 +1,7 @@
 *{
     margin: 0;
     padding: 0;
+    font-family: 'Times New Roman', Times, serif;
 }
 :root{
     --text-color:coral;
@@ -109,7 +110,7 @@ ul.sub-menu li a:hover{
 .tittle{
     margin-top: 60px;
     color: aliceblue;
-    font-family: Georgia, 'Times New Roman', Times, serif;
+    /* font-family: Georgia, 'Times New Roman', Times, serif; */
     padding: 5px 0px; 
 }
 .tittle p{
@@ -153,7 +154,7 @@ ul.sub-menu li a:hover{
 .fl{
     display: flex;
     font-size: small;
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     padding: 10px 0px;
     position: relative;
 }
@@ -251,7 +252,7 @@ ul.sub-menu li a:hover{
     
 }
 .register p{
-    font-family: 'Times New Roman', Times, serif;
+    /* font-family: 'Times New Roman', Times, serif; */
     color: var(--menu-color);
     margin-bottom: 10px;
 }
