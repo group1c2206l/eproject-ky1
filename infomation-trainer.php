@@ -26,7 +26,7 @@
     <script src="./fullcalendar/lib/main.min.js"></script>
 </head>
 <body>
-    <?php require('./navbar.php')?>
+    <?php include("navbar.php")?>
 
     <div class="container">
         <div class="other-options">
@@ -34,35 +34,35 @@
             <div class="line"></div>
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/pi1.jpg" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/pi1.jpg" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/pi1.jpg" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/pi1.jpg" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/pi1.jpg" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
@@ -160,7 +160,7 @@
         </div>
     </div>
     <?php }?>
-    
+
     <script src="./assets/js/script.js"></script>
     <script src="./assets/js/navbar.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
