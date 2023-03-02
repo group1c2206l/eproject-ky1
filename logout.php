@@ -6,7 +6,7 @@
     if(isset($_COOKIE["loggedin"])) {
         $ckname = $_COOKIE["loggedin"];
     }
-    setcookie("id",$ckname,time()-6000,"/");
-    setcookie("loggedin",$ckname,time()-6000,"/");
-    header("location: ./register.php");
+    setcookie("id",$ckname,time()-86400,"/");
+    setcookie("loggedin",$ckname,time()-86400,"/");
+    header("location: ./index.php");
 ?>

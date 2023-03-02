@@ -59,9 +59,56 @@
                 header("location: dashboard.php?select=service");
             }
             break;
+        case "package":
+            $p = new package;
+            $p->package_id = $_GET["package_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=package");
+            } else {
+                header("location: dashboard.php?select=package");
+            }
+            break;
+        case "course":
+            $p = new course;
+            $p->course_id = $_GET["course_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=course");
+            } else {
+                header("location: dashboard.php?select=course");
+            }
+            break;
+        case "member":
+            $p = new member;
+            $p->member_id = $_GET["member_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=member");
+            } else {
+                header("location: dashboard.php?select=member");
+            }
+            break;
+        case "galery_type":
+            $p = new galery_type;
+            $p->galery_type_id = $_GET["galery_type_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=galery_type");
+            } else {
+                header("location: dashboard.php?select=galery_type");
+            }
+            break;
+        case "galery":
+            $p = new galery;
+            $p->galery_id = $_GET["galery_id"];
+            if($confirm == "true") {
+                $p->delete();
+                header("location: dashboard.php?select=galery");
+            } else {
+                header("location: dashboard.php?select=galery");
+            }
+            break;
     }
-
-
-
-
+        
 ?>

@@ -14,7 +14,6 @@
         $search_list = $_GET["search_list"];
     }
 
-
 ?>
 
 <!DOCTYPE html>
@@ -43,7 +42,7 @@
             height: 50px;
         }
         .mmm .dblink {
-            width: 100px; 
+            width: 150px; 
             margin-left: calc(50% - 50px);
         }
         .mmm .dblink a:hover {
@@ -92,7 +91,6 @@
 </head>
 <body class="bg-secondary">
 	<div class="dashboard container-fluid position-relative ">
-
 		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
 			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
@@ -102,9 +100,9 @@
 			</ul>
 		</div>
 
-		<h1 class="text-center text-warn mt-3">DASHBOARD PAGE</h1>
+		<h1 class="text-center text-warning mt-3">DASHBOARD PAGE</h1>
         <div class="menu-body bg-dark border border-warning rounded rounded-3">
-            <table class="table table-dark home-menu container-lg">
+            <table class="table table-dark home-menu container-lg mt-2">
                 <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
@@ -112,16 +110,21 @@
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=person_trainer" ><i class="bi bi-microsoft"></i>  Person Trainer</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=device" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
                 </tr>
                 <tr>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-images"></i>  Course</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_type" ><i class="bi bi-images"></i>  Galery Type</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
+                </tr>
+                <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
+
                 </tr>
             </table>
         </div>
@@ -132,7 +135,7 @@
                 <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
                 <input type="text" id="search-box" name="search_data" placeholder="Input content here:">
                 <select name="search_list" id="search_list">
-                    <option selected>Open this select menu :</option>
+                    <option selected disabled>Open this select menu :</option>
                    <?php
                        switch($select) {
                            case "role":
@@ -148,6 +151,11 @@
                            case "employee":
                                 $arr = ["lname","dob","address","phone_number","person_id","email"];
                                 $s = new employee;
+                                $s->search_list($arr);
+                                break;
+                           case "person_trainer":
+                                $arr = ["lname","dob","address","phone_number","person_id","email","trainer_job"];
+                                $s = new person_trainer;
                                 $s->search_list($arr);
                                 break;
                            case "utilities":
@@ -180,6 +188,16 @@
                                 $s = new member();
                                 $s->search_list($arr);
                                 break;
+                           case "galery_type":
+                                $arr = ["name"];
+                                $s = new galery_type();
+                                $s->search_list($arr);
+                                break;
+                           case "galery":
+                                $arr = ["galery_type_name","item_name","img_name"];
+                                $s = new galery();
+                                $s->search_list($arr);
+                                break;
                        }
                    ?>
                 </select>
@@ -188,16 +206,29 @@
             </form>
         </div>
      
-         <table class="table table-result">
+        <!-- Show data -->
+         <table class="table table-result mt-2">
             <?php
                 
-
-
                     switch($select) {
                         
                         case "role":
                             $p = new role;
                             $p->show_header();
+                            $p->total = $p->total_page("role");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("role");
                             if($search_data == NULL) {
                                 $results = $p->arr_result("role");
                                 
@@ -219,17 +250,30 @@
                                     $p->show_item();
                                 }
                             }
-                        
                             
                         break;
 
                         case "branch":
                             $p = new branch;
                             $p->show_header();
+                            $p->total = $p->total_page("branch");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("branch");
                             if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
                             } else {
-                                if($search_data == "") { //neu co bien $search_data rong thi hien thong bao 
+                                if($search_data == "") { //neu co bien $search_data rong (chua dien gia tri vao o tim kiem) thi hien thong bao 
                                     $results = [];
                                     echo "
                                         <script>alert('Please enter value on search box !')</script>
@@ -253,9 +297,24 @@
                                 }
                             }
                             break;
+
                         case "employee":
                             $p = new employee;
                             $p->show_header();
+                            $p->total = $p->total_page("employee");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("employee");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("employee");
                             } else {
@@ -285,6 +344,46 @@
                                     $p->contact_name = $row["contact_name"];
                                     $p->contact_phone = $row["contact_phone"];
                                     $p->type = $row["type"];
+                                    $p->create_at = $row["create_at"];
+                                    $p->update_at = $row["update_at"];
+                                    $p->show_item();
+                                }
+                            }
+                            break;
+
+                        case "person_trainer":
+                            $p = new person_trainer;
+                            $p->show_header();
+                            if($search_data == NULL && $search_list == NULL) {
+                                $results = $p->arr_result("person_trainer");
+                            } else {
+                                if($search_data == "") {
+                                    $results = [];
+                                    echo "
+                                        <script>alert('Please enter value on search box !')</script>
+                                    ";
+                                } else {
+                                    $results = $p->search_item('person_trainer', $search_list,$search_data);
+                                    if(count($results)<1) {
+                                        echo "khong co gia tri nao phu hop";
+                                    }}
+                                }
+                            foreach($results as $row) {
+                                $p->flag = $row["flag"];
+                                if($p->flag == 1) {
+                                    $p->person_trainer_id = $row["person_trainer_id"];
+                                    $p->fname = $row["fname"];
+                                    $p->mname = $row["mname"];
+                                    $p->lname = $row["lname"];
+                                    $p->code = $row["code"];
+                                    $p->dob = $row["dob"];
+                                    $p->gender = $row["gender"];
+                                    $p->address = $row["address"];
+                                    $p->phone_number = $row["phone_number"];
+                                    $p->person_id = $row["person_id"];
+                                    $p->email = $row["email"];
+                                    $p->trainer_job = $row["trainer_job"];
+                                    $p->evaluate = $row["evaluate"];
                                     $p->create_at = $row["create_at"];
                                     $p->update_at = $row["update_at"];
                                     $p->show_item();
@@ -426,9 +525,6 @@
                             break;
 
                         case "course":
-                            require "../config.php";
-                            $c = new config;
-                            $conn = $c->connect();
                             $p = new course();
                             $p->show_header();
                             if($search_data == NULL && $search_list == NULL) {
@@ -450,8 +546,8 @@
                                 if($p->flag == 1) {
                                     $p->course_id = $row["course_id"];
                                     $p->name = $row["name"];
-                                    $p->employee_id = $row["employee_id"];
-                                    $p->mentor = $p->id_to_name($conn,"lname","employee","employee_id",$p->employee_id);
+                                    $p->person_trainer_id = $row["person_trainer_id"];
+                                    $p->mentor = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->person_trainer_id);
                                     $p->description = $row["description"];
                                     $p->start_day = $row["start_day"];
                                     $p->end_day = $row["end_day"];
@@ -504,58 +600,92 @@
                                     }
                                 }
                                 break;
-                        // case "galery":  // hien thi danh muc galery
-                        //     $a = new config;
-                        //     $conn = $a->connect();
-                        //     $p = new galery;
-                        //     $p->show_header();
-                        //     $sql1 = "SELECT P.PRODUCT_ID,P.NAME PNAME,C.NAME CNAME FROM product P INNER JOIN category C ON P.CATEGORY_ID = C.CATEGORY_ID"; //hien thi toan bo danh sach product da co
-                        //     $stmt1 = $conn->prepare($sql1);
-                        //     $stmt1->execute();
-                        //     $results1 = $stmt1->fetchAll(PDO::FETCH_ASSOC);
-                        //     foreach($results1 as $row1) {
-                        //         $p->product_id = $row1["PRODUCT_ID"];
-                        //         $p->product_name = $row1["PNAME"];
-                        //         $p->category = $row1["CNAME"];
-                        //         $sql_product = "SELECT COUNT(PRODUCT_ID) NUM FROM galery WHERE PRODUCT_ID = ".$p->product_id." "; //kiem tra xem san pham da ton tai trong galery hay chua
-                        //         $check = $conn->prepare($sql_product);
-                        //         $check->execute();
-                        //         $num = $check->fetchColumn();
-                        //         if($num>0) {  //neu san pham da ton tai anh thi hien thi thong tin
-                        //             $sql = "SELECT G.GALERY_ID,G.PRODUCT_ID,G.DIR,G.FILENAME,CONCAT(G.DIR,G.FILENAME) PICTURE,G.CREATE_AT,G.UPDATE_AT FROM `galery` G INNER JOIN product P ON G.PRODUCT_ID = P.PRODUCT_ID "
-                        //             ."WHERE G.PRODUCT_ID = ".$p->product_id." ";
-                        //             $tsql = $conn->prepare($sql);
-                        //             $tsql->execute();
-                        //             $results = $tsql->fetchAll(PDO::FETCH_ASSOC);
-                        //             $p->galery_id = $results[0]["GALERY_ID"];
-                        //             $p->dir = $results[0]["DIR"];
-                        //             $p->filename = $results[0]["FILENAME"];
-                        //             $p->fullpart = $results[0]["PICTURE"];
-                        //             $p->create_at = $results[0]["CREATE_AT"];
-                        //             $p->update_at = $results[0]["UPDATE_AT"];
-                        //         } else { //neu chua ton tai thi de trong cac muc tren
-                        //             $p->galery_id = "";
-                        //             $p->dir = "";
-                        //             $p->filename = "";
-                        //             $p->fullpart = "";
-                        //             $p->create_at = "";
-                        //             $p->update_at = "";
-                        //         }
-                        //         $p->show_item();    
-                        //     }
-                        //     $conn = NULL;
-                        //     break;
+
+                            case "galery_type":
+                                $p = new galery_type;
+                                $p->show_header();
+                                if($search_data == NULL && $search_list == NULL) {
+                                    $results = $p->arr_result("galery_type");
+                                } else {
+                                    if($search_data == "") {
+                                        $results = [];
+                                        echo "
+                                            <script>alert('Please enter value on search box !')</script>
+                                        ";
+                                    } else {
+                                        $results = $p->search_item('galery_type', $search_list,$search_data);
+                                        if(count($results)<1) {
+                                            echo "khong co gia tri nao phu hop";
+                                        }}
+                                    }
+                                foreach($results as $row) {
+                                    $p->flag = $row["flag"];
+                                    if($p->flag == 1) {
+                                        $p->galery_type_id = $row["galery_type_id"];
+                                        $p->name = $row["name"];
+                                        $p->create_at = $row["create_at"];
+                                        $p->update_at = $row["update_at"];
+                                        $p->show_item();
+                                    }
+                                };
+                                break;
+
+                            case "galery":
+                                $p = new galery;
+                                $p->show_header();
+                                $p->total = $p->total_page("galery");
+
+                                if(isset($_GET["row_current"])) {
+                                    $p->row_current = $_GET["row_current"];
+                                } else {
+                                    $p->row_current = 1;
+                                };
+                                $p->page = ceil($p->row_current/$p->limit);
+                                if($p->row_current < $p->limit) {
+                                    $p->previous = 1;
+                                } else {
+                                    $p->previous = $p->row_current - $p->limit;
+                                };
+                                $p->show_pagination("galery");
+                                
+                                if($search_data == NULL && $search_list == NULL) {
+                                    $results = $p->arr_result("galery");
+                                } else {
+                                    if($search_data == "") {
+                                        $results = [];
+                                        echo "
+                                            <script>alert('Please enter value on search box !')</script>
+                                        ";
+                                    } else {
+                                        $results = $p->search_item('galery', $search_list,$search_data);
+                                        if(count($results)<1) {
+                                            echo "khong co gia tri nao phu hop";
+                                        }}
+                                    }
+                                foreach($results as $row) {
+                                    $p->flag = $row["flag"];
+                                    if($p->flag == 1) {
+                                        $p->galery_id = $row["galery_id"];
+                                        $p->galery_type_name = $row["galery_type_name"];
+                                        $p->item_id = $row["item_id"];
+                                        $p->item_name = $row["item_name"];
+                                        $p->note = $row["note"];
+                                        $p->dir = $row["dir"];
+                                        $p->img_name = $row["img_name"];
+                                        $p->create_at = $row["create_at"];
+                                        $p->update_at = $row["update_at"];
+                                        $p->show_item();
+                                    }
+                                }
+                                // print_r($p);
+                                break;
 
                     }                 
-                
             ?>
         </table>
         <div class="noti d-none">
             <h5>vui long nhap du thong tin</h5>
         </div>            
-
-
-
     </div>
     <script src="../assets/js/dashboard.js"></script>
 </body>

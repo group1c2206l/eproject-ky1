@@ -1,0 +1,267 @@
+*{
+    margin: 0;
+    padding: 0;
+}
+header{
+    position: fixed;
+    width: 100%;
+    z-index: 1;
+    background-color: rgba(255,255,255,0.8);
+    align-items: center;
+    top: -200px;
+    transition: top 0.3s;
+}
+header.header-fixed{
+    top:0;
+}
+/*.wrapper{
+    background-color:rgba(235, 232, 232, 0.5);
+    /* background-size: cover; */
+
+.navbar{
+    /* height: 120px; */
+    display: flex;
+    justify-content: space-between;
+    width: 1200px;
+    margin: 0 auto;
+    max-width: 100%
+    
+}
+.navbar_logo img{
+    height: 100px;
+    width: 200px;
+}
+.main-menu{
+    display: flex;
+    /* margin-top: 42px; */
+    list-style: none;
+}
+.main-menu li{
+    position: relative;
+}
+.main-menu li a{
+    text-decoration: none;
+    /* color: rgb(24, 25, 25); */
+    color: #625f5f;
+    display: block;
+    padding: 10px 20px;
+    margin-top: 20px;
+    font-size: large;
+}
+.main-menu li a:hover{
+    color: coral;
+}
+.main-menu li ul.sub-menu{
+    position: absolute;
+    list-style: none;
+    width: 240px;
+    background-color: rgb(33, 32, 32);
+    border: 1px solid whitesmoke;
+    display: none;
+    border-radius: 3px;
+    /* color: white; */
+}
+.main-menu li ul.sub-menu a{
+    color: white;
+}
+ul.sub-menu li a:hover{
+    color: coral;
+}
+.main-menu li:hover ul.sub-menu{
+    display: block;
+}
+/* thiêt lập khi hover*/
+.main-menu li a{
+    position: relative;
+}
+.main-menu>li>a::before{
+    content: "";
+    height: 1px;
+    width: 0px;
+    background-color: rgb(208, 94, 6);
+    position: absolute;
+    bottom: 5px;
+    left: 10px;
+    transition: 0.25s cubic-bezier(0.075, 0.82, 0.165, 1) ;
+    /* display: none; */
+}
+.main-menu li:hover a::before{
+    width: 80%;
+}
+.row1{
+    background-image: url(/anh/MMA.jpg);
+    background-size: cover;
+    height: 685px;
+    position: relative;
+}
+.messenger{
+    position: absolute;
+    right: 20px;
+    top: 35%;
+    position: fixed;
+    z-index: 999;
+}
+
+.tittle{
+    margin-top: 60px;
+    color: aliceblue;
+    font-family: Georgia, 'Times New Roman', Times, serif;
+    padding: 5px 0px; 
+}
+.tittle p{
+    margin-top: 10px;
+}
+.row-content{
+    position: absolute;
+    text-align: left;
+    left: 160px;
+    bottom: 250px;
+}
+.row2{
+    background-image: url(/anh/boxing.jpg);
+    background-size: cover;
+    height: 620px;
+    position: relative;
+    
+}
+.row3{
+    background-image: url(/anh/Muay-Thai.jpg);
+    background-size: cover;
+    height: 620px;
+    position: relative; 
+}
+.footer{
+    height: 345px;
+    background-image: url(/anh/bg-foot.jpg);
+    display: flex;
+    justify-content: space-evenly;
+
+}
+.contact{
+    display: flex;
+    flex-direction: column;
+    color: rgb(181, 176, 176);
+    margin-top: 65px;
+}
+.contact h2{
+    margin-bottom: 20px;
+}
+.fl{
+    display: flex;
+    font-size: small;
+    font-family: 'Times New Roman', Times, serif;
+    padding: 3px 0px;
+    position: relative;
+}
+.fl i{
+    margin-right: 15px;
+    position: absolute;
+    left: -20px;
+    bottom: 8px;
+}
+.fl p{
+    text-align: center;
+    line-height: 10px;
+}
+.link{
+    display: flex;
+    flex-direction: column;
+    color: rgb(181, 176, 176);
+    margin-top: 65px;
+}
+.link h2{
+    margin-bottom: 20px;
+    margin-left: 20px;
+}
+.n_link{
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap-reverse ;
+    
+}
+.b{
+    margin-bottom: 20px;
+}
+.b a{
+    text-decoration: none;
+    margin-left: 20px;
+    color: rgb(181, 176, 176);
+}
+.b a:hover{
+    color: coral;
+}
+.icon{
+    display: flex;
+    justify-content: space-evenly;
+}
+.icon a:hover{
+    color: coral;
+}
+/*hover cac icon*/
+.icon a{
+    position: relative;
+    color: rgb(181, 176, 176); ;
+}
+.icon a::before{
+    content: "";
+    position: absolute;
+    display: none;
+    top: -50px;
+    left: -50px;
+    background-color: rgb(22, 21, 21);
+    color: azure;
+    width: 150px;
+    height: 40px;
+    text-align: center;
+    line-height: 40px;
+    border-radius: 10px;
+    /* transition: 1s cubic-bezier(0.075, 0.82, 0.165, 1) */
+}
+.icon a:first-child:hover:before{
+    display: block;
+    content: "folow on facebook";
+}
+.icon a:nth-child(2):hover:before{
+    display: block;
+    content: "folow on twitter";
+}
+.icon a:nth-child(3):hover:before{
+    display: block;
+    content: "folow on Google";
+}
+.icon a:nth-child(4):hover:before{
+    display: block;
+    content: "Subscribe to RSS";
+}
+.icon a:last-child:hover:before{
+    display: block;
+    content: "folow on linkedin";
+}
+.register{
+    position: relative;
+}
+.register h2{
+    margin-top: 65px;
+    color: rgb(181, 176, 176);
+    margin-bottom: 16px;
+    
+}
+.register p{
+    font-family: 'Times New Roman', Times, serif;
+    color: rgb(181, 176, 176);
+    margin-bottom: 10px;
+}
+.register input{
+    padding: 10px ;
+    width: 250px;
+    border-radius: 5px;
+}
+.register i{
+    /* position: absolute;
+    left: 10px; */
+    color: rgb(246, 136, 96);
+    position: absolute;
+    right:10px;
+    top: 47%;
+    
+}
