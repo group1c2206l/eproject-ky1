@@ -203,7 +203,7 @@
                         $s = $result[$i]; 
                         echo '
                             <div class="swiper-slide box">
-                                <a href="./infomation-trainer.php?trainerID='.$s->employee_id.'">
+                                <a href="./infomation-trainer.php?trainerID='.$s->person_id.'">
                                     <div class="image">
                                         <img src="./assets/image/trainer_page/info-pt/'.$s->image.'" alt="">
                                     </div>

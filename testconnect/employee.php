@@ -40,6 +40,7 @@
                 $trainer->dob = $row["dob"];
                 $trainer->address = $row["address"];
                 $trainer->phone_number = $row["phone_number"];
+                $trainer->person_id = $row["person_id"];
                 $trainer->email = $row["email"];
                 $trainer->image = $row["image"];
                 $trainer->contact_name = $row["contact_name"];
@@ -61,7 +62,7 @@
             $dsn = "mysql:host=" .DBinfo::getServer().";dbname=".DBinfo::getDBname().";charset=utf8";
             $conn = new PDO($dsn, DBinfo::getUserName(), DBinfo::getPassword(), $option);
 
-            $sql = "SELECT * FROM `employee` WHERE `employee_id` = $trainerID;";
+            $sql = "SELECT * FROM `employee` WHERE `person_id` = $trainerID;";
 
             $stmt = $conn -> prepare($sql);
 
@@ -77,6 +78,7 @@
                 $trainer->dob = $row["dob"];
                 $trainer->address = $row["address"];
                 $trainer->phone_number = $row["phone_number"];
+                $trainer->person_id = $row["person_id"];
                 $trainer->email = $row["email"];
                 $trainer->image = $row["image"];
                 $trainer->contact_name = $row["contact_name"];

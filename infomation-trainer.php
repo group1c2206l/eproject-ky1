@@ -34,35 +34,35 @@
             <div class="line"></div>
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
 
             <div class="options">
                 <div class="image">
-                    <img src="./assets/image/trainer_page/info-pt/bg1.png" alt="">
+                    <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
                 </div>
                 <div class="name">ĐẶNG ĐỨC ĐÔNG</div>
             </div>
