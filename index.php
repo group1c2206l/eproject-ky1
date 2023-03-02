@@ -35,7 +35,7 @@
         </nav>
 
         <div class="icons">
-            <a href="" class="btn">Become a memeber</a>
+            <a href="./register.php" class="btn">Become a memeber</a>
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
