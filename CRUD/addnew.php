@@ -697,11 +697,15 @@
                                     break;
                                 }
                             }
-                            if($p->galery_type_name != NULL) {
-                                $p->addnew();
-                                header("location: dashboard.php?select=galery");
+                            if($_FILES["img_name"]["size"] > $p->maxfilesize) {
+                                if($p->galery_type_name != NULL) {
+                                    $p->addnew();
+                                    header("location: dashboard.php?select=galery");
+                                } else {
+                                    $mes = "Please enter full information";
+                                }
                             } else {
-                                $mes = "Please enter full information";
+                                $mes = "File upload limit 3MB";
                             }
                         }
                         

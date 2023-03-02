@@ -1229,12 +1229,7 @@
         public $item_id;
         public $item_name;
         public $note;
-        public $device_id;
-        public $service_id;
-        public $course_id;
-        public $person_trainer_id;
-        public $member_id;
-        public $package_id;
+        public $maxfilesize = 3000000;//3MB;
         public $code;
         public $dir;
         public $img_name;
@@ -1268,7 +1263,7 @@
                     <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'&dir='.$this->dir.'">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -1277,7 +1272,6 @@
             $c = new config;
             $conn = $c->connect();
             $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
-            // echo $file_path;
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
@@ -1305,14 +1299,29 @@
         public function edit() {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE galery SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
-            $stmt = $conn->prepare($sql);
-            $stmt->execute(
-                array (
-                    ":name" => $this->name,
-                    ":galery_type_id" => $this->galery_type_id,
-                )
-            );
+            $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
+            $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
+            $allowtype = array('jpg','png','jpeg','gif','pdf','svg');
+            if(in_array($filetype,$allowtype)) {
+                if(move_uploaded_file($this->img_tmp,$file_path)) {
+                    $sql = 'UPDATE galery SET item_id = :item_id,item_name = :item_name,note = :note,dir = :dir,img_name = :img_name,update_at = NOW() WHERE galery_id = :galery_id;';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(
+                        array (
+                            "item_id" => $this->item_id,
+                            "item_name" => $this->item_name,
+                            "note" => $this->note,
+                            "dir" => $this->dir,
+                            "img_name" => $this->img_name,
+                            ":galery_id" => $this->galery_id,
+                        )
+                        );
+                } else {
+                    echo "file upload error";
+                }
+            } else {
+                echo "please check file type";
+            } 
         }
 
         public function delete() {

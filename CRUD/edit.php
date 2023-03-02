@@ -791,12 +791,27 @@
                     if(isset($_GET["galery_id"])) {
                         $p->galery_id = $_GET["galery_id"];
                     }
+                    if(isset($_GET["dir"])) {
+                        $p->dir = $_GET["dir"];
+                    }
                     if(isset($_POST["save"])) {
-                        if(isset($_POST["name"])) {
-                            $p->name = $_POST["name"];
+                        if(isset($_POST["item_id"])) {
+                            $p->item_id = $_POST["item_id"];
+                        }
+                        if(isset($_POST["item_name"])) {
+                            $p->item_name = $_POST["item_name"];
+                        }
+                        if(isset($_POST["note"])) {
+                            $p->note = $_POST["note"];
+                        }
+                        if(isset($_FILES["img_name"]["name"])) {
+                            $p->img_name = uniqid("",false)."_".basename($_FILES["img_name"]["name"]); //tranh viec trung ten file khi upload
+                        }
+                        if(isset($_FILES["img_name"]["tmp_name"])) {
+                            $p->img_tmp = $_FILES["img_name"]["tmp_name"];
                         }
                       
-                        if($p->name != NULL) {
+                        if($p->item_id != NULL && $p->item_name != NULL && $p->img_name != NULL) {
                             $p->edit();
                             header("location: dashboard.php?select=galery");
                         } else {
@@ -805,17 +820,29 @@
                     }
                     echo   '<div class="mt-5 num">
                                 <h3 class="text-center text-light">Edit Galery</h3>
-                                <form action=""  method="POST">
+                                <form action=""  method="POST" enctype="multipart/form-data">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Type name</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="galery_type_name" value="'.$_GET["galery_type_name"].'" disabled>
                                     </div>
                                     <div class="form-group mb-3 mt-6">
-                                        <label for="name" class="text-white-50">Type name</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                        <label for="item_id" class="text-white-50">Item ID</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="item_id" name="item_id" value="'.$_GET["item_id"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="item_name" class="text-white-50">Item name</label>
+                                        <input type="text" class="form-control bg-dark text-white" id="item_name" name="item_name" value="'.$_GET["item_name"].'">
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                    <label for="note" class="text-white-50">Note</label>
+                                    <textarea name="note"  class="form-control bg-dark text-white"  rows="4">'.$_GET["note"].'</textarea>
+                                    </div>
+                                    <div class="form-group mb-3 mt-6">
+                                        <label for="img_name" class="text-white-50">Picture Name</label>
+                                        <input type="file" class="form-control bg-dark text-white" id="img_name" name="img_name">
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
-                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=galery_type">Back</a></button>
+                                    <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=galery">Back</a></button>
                                     <span class="text-warning">'.$mes.'</span>
                                 </form>
                             </div>';

@@ -267,3 +267,4 @@ CONSTRAINT FK_galery_go_id FOREIGN KEY (galery_option_id) REFERENCES galery_opti
 --     - free massager
 --     - giá tiền : 120$ / tháng  - 1200$/năm. 
 
+-- rename("user/image1.jpg", "user/del/image1.jpg");
