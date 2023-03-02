@@ -8,12 +8,42 @@
         public $create_at;
         public $update_at;
         public $sl ;
+        public $limit = 10; // so dong hien thi tren moi trang
+        public $row_current; //dong du lieu bat dau.
+        public $previous;
+        public $next;
+        public $page; // thu tu trang hien tai dang hien thi
+        public $sql; //cau truy van
+        public $total; //tong so trang du lieu
 
-        public function arr_result($query) {
-            require_once "config.php";
+        public function total_page($table) {
             $c = new config;
             $conn = $c->connect();
-            $sql = "SELECT * FROM ".$query." ";
+            $sql = 'SELECT COUNT(*) FROM '.$table.'';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchColumn();
+            return ceil($results/$this->limit);
+        }
+
+        public function show_pagination($table) {
+            $row_current = 1;
+            echo '<ul class="pagination pt-3">
+                      <li class="page-item px-3"><a class="page-link" href="#">Page '.$this->page.'</a></li>
+                      <li class="page-item "><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
+            for($s = 1;$s <= $this->total;$s++) {
+                echo '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$row_current.' ">'.$s.'</a></li>';
+                $row_current += $this->limit;
+            }
+            echo     '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->next.'">Next</a></li>
+                 </ul>';
+
+        }
+
+        public function arr_result($table) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' LIMIT '.$this->row_current.','.$this->limit.'';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $conn = null;
@@ -103,6 +133,16 @@
         }
 
         
+    }
+
+    class pagination extends main {
+        public $limit;
+        public $page;
+        public $sql;
+        public $total;
+
+
+
     }
 
     class role extends main {
@@ -939,15 +979,14 @@
         }
 
         public function edit() {
-            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE course SET name = :name,person_trainer_id = :person_trainer_id,description = :description,start_day = :start_day,end_day = :end_day,price = :price,update_at = NOW() WHERE course_id = :course_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->person_trainer_id,
+                    ":person_trainer_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,

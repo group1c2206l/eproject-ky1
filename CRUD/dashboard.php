@@ -206,6 +206,7 @@
             </form>
         </div>
      
+        <!-- Show data -->
          <table class="table table-result mt-2">
             <?php
                 
@@ -214,6 +215,20 @@
                         case "role":
                             $p = new role;
                             $p->show_header();
+                            $p->total = $p->total_page("role");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("role");
                             if($search_data == NULL) {
                                 $results = $p->arr_result("role");
                                 
@@ -235,11 +250,26 @@
                                     $p->show_item();
                                 }
                             }
+                            
                         break;
 
                         case "branch":
                             $p = new branch;
                             $p->show_header();
+                            $p->total = $p->total_page("branch");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("branch");
                             if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
                             } else {
@@ -271,6 +301,20 @@
                         case "employee":
                             $p = new employee;
                             $p->show_header();
+                            $p->total = $p->total_page("employee");
+
+                            if(isset($_GET["row_current"])) {
+                                $p->row_current = $_GET["row_current"];
+                            } else {
+                                $p->row_current = 1;
+                            };
+                            $p->page = ceil($p->row_current/$p->limit);
+                            if($p->row_current < $p->limit) {
+                                $p->previous = 1;
+                            } else {
+                                $p->previous = $p->row_current - $p->limit;
+                            };
+                            $p->show_pagination("employee");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("employee");
                             } else {
@@ -583,12 +627,27 @@
                                         $p->update_at = $row["update_at"];
                                         $p->show_item();
                                     }
-                                }
+                                };
                                 break;
 
                             case "galery":
                                 $p = new galery;
                                 $p->show_header();
+                                $p->total = $p->total_page("galery");
+
+                                if(isset($_GET["row_current"])) {
+                                    $p->row_current = $_GET["row_current"];
+                                } else {
+                                    $p->row_current = 1;
+                                };
+                                $p->page = ceil($p->row_current/$p->limit);
+                                if($p->row_current < $p->limit) {
+                                    $p->previous = 1;
+                                } else {
+                                    $p->previous = $p->row_current - $p->limit;
+                                };
+                                $p->show_pagination("galery");
+                                
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("galery");
                                 } else {
@@ -618,6 +677,7 @@
                                         $p->show_item();
                                     }
                                 }
+                                // print_r($p);
                                 break;
 
                     }                 

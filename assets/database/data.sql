@@ -129,7 +129,7 @@ CREATE TABLE package(
 CREATE TABLE course(
     course_id INT AUTO_INCREMENT NOT NULL ,
     name VARCHAR(50) NOT NULL,
-    employee_id INT,   -- thong tin PT khoa hoc
+    person_trainer_id INT,   -- thong tin PT khoa hoc
     description VARCHAR(500) NOT NULL,
     start_day DATETIME NOT NULL,
     end_day DATETIME NOT NULL,

@@ -31,7 +31,7 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
-<<<<<<< HEAD
+<!-- <<<<<<< HEAD -->
 <!-- home starts -->
     <section class="home">
         <div class="home-slide">
