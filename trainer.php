@@ -1,3 +1,7 @@
+<?php
+    require "config.php";
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -33,14 +37,23 @@
     </header>
 <!-- <<<<<<< HEAD -->
 <!-- home starts -->
+    <?php
+        $c = new config;
+        $conn = $c->connect();
+        $sql = "SELECT note,dir,img_name FROM galery WHERE galery_type_name = 'about'";
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $results = $stmt->fetchAll();
+        $fullpart = $results[0]["dir"].$results[0]["img_name"];
+?>
     <section class="home">
         <div class="home-slide">
             <div class="wapper">
-                <div class="box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url('./assets/image/trainer_page/PT-home.jpg');">
+                <div class="box" style="background: linear-gradient(rgba(0,0,0,.3),rgba(0,0,0,.3)), url(<?php echo $fullpart;  ?>);">
                     <div class="content">
-                        <h1>Trainer Team</h1>
+                        <h1>ABOUT</h1>
                         <div><span></span></div>
-                        <p>Đội ngũ coach của Swequity được sàng lọc kĩ càng, phải trải qua giai đoạn trainning ít nhất 3 tháng để có đủ kĩ năng giao tiếp và kiến thức chuyên môn hướng dẫn cho khách hàng</p>
+                        <p><?php echo $results[0]["note"];  ?></p>
                     </div>
                 </div>
             </div>
