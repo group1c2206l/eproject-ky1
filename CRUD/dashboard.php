@@ -604,6 +604,20 @@
                             case "galery_type":
                                 $p = new galery_type;
                                 $p->show_header();
+                                $p->total = $p->total_page("galery_type");
+
+                                if(isset($_GET["row_current"])) {
+                                    $p->row_current = $_GET["row_current"];
+                                } else {
+                                    $p->row_current = 1;
+                                };
+                                $p->page = ceil($p->row_current/$p->limit);
+                                if($p->row_current < $p->limit) {
+                                    $p->previous = 1;
+                                } else {
+                                    $p->previous = $p->row_current - $p->limit;
+                                };
+                                $p->show_pagination("galery_type");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("galery_type");
                                 } else {

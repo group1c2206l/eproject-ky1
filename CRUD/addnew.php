@@ -695,9 +695,17 @@
                                     case "talk_about_me":
                                         $p->dir = './assets/image/talk_about_me/';
                                     break;
+                                    case "about":
+                                        $p->dir = './assets/image/about/';
+                                        $p->item_id = $p->galery_type_count("about");
+                                        $p->item_name = "about ".$p->item_id;
+                                    break;
                                 }
                             }
-                            if($_FILES["img_name"]["size"] > $p->maxfilesize) {
+                            print_r($p);
+                            echo $_FILES["img_name"]["size"];
+
+                            if($_FILES["img_name"]["size"] < $p->maxfilesize) {
                                 if($p->galery_type_name != NULL) {
                                     $p->addnew();
                                     header("location: dashboard.php?select=galery");
