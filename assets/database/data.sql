@@ -43,6 +43,26 @@ CREATE TABLE employee(
     CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
+-- danh sach nguoi huong dan club
+CREATE TABLE person_trainer(
+    person_trainer_id INT AUTO_INCREMENT NOT NULL,
+    fname VARCHAR(50) NOT NULL,
+    mname VARCHAR(50),
+    lname VARCHAR(50) NOT NULL,
+    code VARCHAR(10) NOT NULL, -- ma nhan vien
+    dob DATETIME NOT NULL,
+    gender VARCHAR(20) NOT NULL,
+    address VARCHAR(200) NOT NULL,
+    phone_number VARCHAR(15) NOT NULL,
+    person_id VARCHAR(20) UNIQUE NOT NULL,
+    email VARCHAR(50) UNIQUE NOT NULL,
+    trainer_job VARCHAR(100),
+    evaluate VARCHAR(500),
+    flag INT DEFAULT 1,
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_person_trainer PRIMARY KEY (person_trainer_id)
+);
 
 
 CREATE TABLE utilities(
@@ -109,7 +129,7 @@ CREATE TABLE package(
 CREATE TABLE course(
     course_id INT AUTO_INCREMENT NOT NULL ,
     name VARCHAR(50) NOT NULL,
-    employee_id INT,   -- thong tin PT khoa hoc
+    person_trainer_id INT,   -- thong tin PT khoa hoc
     description VARCHAR(500) NOT NULL,
     start_day DATETIME NOT NULL,
     end_day DATETIME NOT NULL,
@@ -127,47 +147,55 @@ CREATE TABLE member(
     fname VARCHAR(50) NOT NULL,
     mname VARCHAR(50),
     lname VARCHAR(50) NOT NULL,
-    dob DATETIME NOT NULL,
+    dob DATE NOT NULL,
     address VARCHAR(200) NOT NULL,
     phone_number VARCHAR(15) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
     email VARCHAR(50) UNIQUE NOT NULL, -- thong tin dang nhap tk cua thanh vien tren he thong
     vip INT DEFAULT 0, -- mac dinh la 0, 1 neu la nguoi noi tieng
     package_id INT, -- thong tin ve goi thanh vien
     course_id INT, -- thong tin ve khoa hoc da dang ky
-    points INT, -- so diem tich luy
+    points INT DEFAULT 0, -- so diem tich luy
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
     CONSTRAINT PK_member_id PRIMARY KEY (member_id)
-
 );
 
 -- phan tach thu vien anh cho tung chuyen muc khac nhau
-CREATE TABLE galery_option(
-    galery_option_id INT AUTO_INCREMENT NOT NULL ,
-    name VARCHAR(50) NOT NULL,  -- ex: slide, device, package, course, service, employee
-    member_id INT,
-    device_id INT,
-    service_id INT,
-    course_id INT,
-    employee_id INT,
-    package_id INT,
+CREATE TABLE galery_type(
+    galery_type_id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(50) NOT NULL, -- ex: slide, device, package, course, service, employee
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
-    CONSTRAINT PK_galery_option_id PRIMARY KEY (galery_option_id)
+    CONSTRAINT PK_galery_type_id PRIMARY KEY (galery_type_id)
 );
 
 CREATE TABLE galery(
     galery_id INT AUTO_INCREMENT NOT NULL ,
-    name VARCHAR(50) NOT NULL,
-    galery_option_id INT NOT NULL,
+    galery_type_id INT NOT NULL, 
+    item_id INT,
+    item_name VARCHAR(50),
+    note INT VARCHAR(500),
     dir VARCHAR(200) NOT NULL,
+    img_name VARCHAR(100) NOT NULL,
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
     CONSTRAINT PK_galery_id PRIMARY KEY (galery_id)
 );
+
+CREATE TABLE about(
+    about_id INT AUTO_INCREMENT NOT NULL,
+    name VARCHAR(200),
+    title VARCHAR(300),
+    description VARCHAR(500),
+    flag INT DEFAULT 1, 
+    create_at DATETIME,
+    update_at DATETIME,
+    CONSTRAINT PK_about_id PRIMARY KEY (about_id)
+);
+
 
 ALTER TABLE role
 CONSTRAINT FK_role_employee_id FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
@@ -251,3 +279,4 @@ CONSTRAINT FK_galery_go_id FOREIGN KEY (galery_option_id) REFERENCES galery_opti
 --     - free massager
 --     - giá tiền : 120$ / tháng  - 1200$/năm. 
 
+-- rename("user/image1.jpg", "user/del/image1.jpg");

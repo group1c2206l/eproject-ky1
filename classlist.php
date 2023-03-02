@@ -1,23 +1,56 @@
 <?php
+    require "config.php";
     // class parent
     class main {
+        public $select;
         public $name;
         public $flag;
         public $create_at;
         public $update_at;
+        public $sl ;
+        public $limit = 10; // so dong hien thi tren moi trang
+        public $row_current; //dong du lieu bat dau.
+        public $previous;
+        public $next;
+        public $page; // thu tu trang hien tai dang hien thi
+        public $sql; //cau truy van
+        public $total; //tong so trang du lieu
 
-        public function arr_result($query) {
-            require_once "config.php";
+        public function total_page($table) {
             $c = new config;
             $conn = $c->connect();
-            $sql = "SELECT * FROM ".$query." ";
+            $sql = 'SELECT COUNT(*) FROM '.$table.'';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchColumn();
+            return ceil($results/$this->limit);
+        }
+
+        public function show_pagination($table) {
+            $row_current = 1;
+            echo '<ul class="pagination pt-3">
+                      <li class="page-item px-3"><a class="page-link" href="#">Page '.$this->page.'</a></li>
+                      <li class="page-item "><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
+            for($s = 1;$s <= $this->total;$s++) {
+                echo '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$row_current.' ">'.$s.'</a></li>';
+                $row_current += $this->limit;
+            }
+            echo     '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->next.'">Next</a></li>
+                 </ul>';
+
+        }
+
+        public function arr_result($table) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM '.$table.' LIMIT '.$this->row_current.','.$this->limit.'';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $conn = null;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function search_list($arr) {
+        public function search_list($arr) { //xuat danh sach danh muc tim kiem
             foreach($arr as $item) {
                 echo '
                     <option value="'.$item.'">'.$item.'</option>
@@ -26,7 +59,6 @@
         }
 
         public function search_item($table,$search_list,$search_data) {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT * FROM '.$table.' WHERE '.$search_list.' LIKE :search_data ;';
@@ -36,13 +68,13 @@
                     ":search_data" => '%'.$search_data.'%'
                 )
             );
+            $conn = null;
             return $stmt->fetchAll(PDO::FETCH_ASSOC);
         }
 
-        public function id_to_name($conn,$select,$from,$where,$value) {
-            // require "config.php";
-            // $c = new config;
-            // $conn = $c->connect();
+        public function id_to_name($select,$from,$where,$value) {
+            $c = new config;
+            $conn = $c->connect();
             $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
@@ -50,24 +82,39 @@
         }
 
         public function list_data($id_check,$id,$name,$table) {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE ';
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
             $results = $stmt->fetchAll();
             foreach($results as $row) {
                 if($id_check == $row[$id]) {
-                    echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
+                    echo  '<option value="'.$row[$id].'" selected>'.$row[$name].'</option>';
                 } else {
-                    echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                    echo  '<option value="'.$row[$id].'">'.$row[$name].'</option>';
+
+                }
+            }
+        }
+        public function list_data_name($id_check,$id,$name,$table) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT '.$id.','.$name.' FROM '.$table.'';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                if($id_check == $row[$name]) {
+                    echo  '<option value='.$row[$name].' selected>'.$row[$name].'</option>';
+                } else {
+                    echo  '<option value='.$row[$name].'>'.$row[$name].'</option>';
+
                 }
             }
         }
 
         public function list_data_with_condition($id_check,$id,$name,$table,$where,$condition) {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT '.$id.','.$name.' FROM '.$table.' WHERE '.$where.' = "'.$condition.'" ';
@@ -79,11 +126,23 @@
                     echo  '<option value='.$row[$id].' selected>'.$row[$name].'</option>';
                 } else {
                     echo  '<option value='.$row[$id].'>'.$row[$name].'</option>';
+                    $this->sl = $row["name"];
+                    echo $this->sl;
                 }
             }
         }
 
         
+    }
+
+    class pagination extends main {
+        public $limit;
+        public $page;
+        public $sql;
+        public $total;
+
+
+
     }
 
     class role extends main {
@@ -99,14 +158,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ROLE_ID</td>
-                    <td>USER NAME</td>
-                    <td>PASSWORD</td>
-                    <td>EMPLOYEE NAME</td>
-                    <td>FLAG</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ROLE_ID</td>
+                    <td class='table-dark text-warning fw-bold'>USER NAME</td>
+                    <td class='table-dark text-warning fw-bold'>PASSWORD</td>
+                    <td class='table-dark text-warning fw-bold'>EMPLOYEE NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -115,7 +173,6 @@
                     <td>'.$this->user_name.'</td>
                     <td>'.$this->password_hash.'</td>
                     <td>'.$this->employee_name.'</td>
-                    <td>'.$this->flag.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=role&role_id='.$this->role_id.'&user_name='.$this->user_name.' ">Edit</a></button></td>
@@ -148,17 +205,17 @@
         public function logins() {
             if($this->check_current_pass()) {
                 $name = $this->user_name;
-                setcookie("id",md5($name),time()+6000,"/");
-                setcookie("user_name",$name, time() + 10000,"/");
+                setcookie("id",md5($name),time()+86400,"/");
+                setcookie("user_name",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+6000,"/");
-                    header("location: ./CRUD/dashboard.php");
+                    setcookie("loggedin",$name,time()+86400,"/");
+                    header("location: ../CRUD/dashboard.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ./CRUD/dashboard.php");
+                    header("location: ../CRUD/dashboard.php");
                 }
             } else {
                 echo "Invalid username or password";
@@ -218,13 +275,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>ADDRESS</td>
-                    <td>HOTLINE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>HOTLINE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -241,7 +298,6 @@
         }
 
         public function addnew() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO branch(name,address,hotline,create_at) VALUES (:name,:address,:hotline,NOW())';
@@ -253,10 +309,10 @@
                     ":hotline" => $this->hotline,
                 )
             );
+            $conn = null;
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE branch SET name = :name,address = :address,hotline = :hotline,update_at = NOW() WHERE branch_id = :branch_id;';
@@ -269,10 +325,10 @@
                     ":hotline" => $this->hotline,
                 )
             );
+            $conn = null;
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE branch SET flag = 0,update_at = NOW() WHERE branch_id = :branch_id;';
@@ -282,6 +338,7 @@
                     ":branch_id" => $this->branch_id
                 )
             );
+            $conn = null;
         }
 
     }
@@ -305,21 +362,21 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>FNAME</td>
-                    <td>MNAME</td>
-                    <td>LNAME</td>
-                    <td>DOB</td>
-                    <td>ADDRESS</td>
-                    <td>PHONE NUMBER</td>
-                    <td>PERSON ID</td>
-                    <td>EMAIL</td>
-                    <td>CONTACT NAME</td>
-                    <td>CONTACT PHONE</td>
-                    <td>TYPE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -344,7 +401,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO employee(fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
@@ -368,7 +425,6 @@
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,person_id = :person_id,email = :email,contact_name = :contact_name,contact_phone = :contact_phone,type = :type,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -393,7 +449,6 @@
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE employee SET flag = 0,update_at = NOW() WHERE employee_id = :employee_id;';
@@ -408,6 +463,121 @@
 
     }
 
+    class person_trainer extends main {
+        public $person_trainer_id;
+        public $fname;
+        public $mname;
+        public $lname;
+        public $code;
+        public $dob;
+        public $gender;
+        public $address;
+        public $phone_number;
+        public $person_id;
+        public $email;
+        public $trainer_job;
+        public $evaluate;
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>CODE</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>GENDER</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>TRAINER JOB</td>
+                    <td class='table-dark text-warning fw-bold'>EVALUATE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->person_trainer_id.'</td>
+                    <td>'.$this->fname.'</td>
+                    <td>'.$this->mname.'</td>
+                    <td>'.$this->lname.'</td>
+                    <td>'.$this->code.'</td>
+                    <td>'.$this->dob.'</td>
+                    <td>'.$this->gender.'</td>
+                    <td>'.$this->address.'</td>
+                    <td>'.$this->phone_number.'</td>
+                    <td>'.$this->person_id.'</td>
+                    <td>'.$this->email.'</td>
+                    <td>'.$this->trainer_job.'</td>
+                    <td>'.$this->evaluate.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&code='.$this->code.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=person_trainer&person_trainer_id='.$this->person_trainer_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+        public function addnew() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO person_trainer(fname,mname,lname,code,dob,address,phone_number,person_id,email,trainer_job,evaluate,create_at) VALUES (:fname,:mname,:lname,:code,:dob,:address,:phone_number,:person_id,:email,:trainer_job,:evaluate,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":code" => $this->code,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":person_id" => $this->person_id,
+                    ":email" => $this->email,
+                    ":trainer_job" => $this->trainer_job,
+                    ":evaluate" => $this->evaluate,
+                )
+            );
+            $conn = NULL;
+        }
+        public function edit() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE person_trainer SET fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,email = :email,trainer_job = :trainer_job,evaluate = :evaluate,update_at = NOW() WHERE person_trainer_id = :person_trainer_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":fname" => $this->fname,
+                    ":mname" => $this->mname,
+                    ":lname" => $this->lname,
+                    ":dob" => $this->dob,
+                    ":address" => $this->address,
+                    ":phone_number" => $this->phone_number,
+                    ":email" => $this->email,
+                    ":trainer_job" => $this->trainer_job,
+                    ":evaluate" => $this->evaluate,
+                    ":person_trainer_id" => $this->person_trainer_id,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function delete() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE person_trainer SET flag = 0,update_at = NOW() WHERE person_trainer_id = :person_trainer_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":person_trainer_id" => $this->person_trainer_id
+                )
+            );
+            $conn = NULL;
+        }
+    }
+
+    // class utilities
     class utilities extends main {
         public $utilities_id;
         public $name;
@@ -418,12 +588,12 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>POINT</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>POINT</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -439,7 +609,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO utilities(name,points,create_at) VALUES (:name,:points,NOW())';
@@ -453,7 +623,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE utilities SET name = :name,points = :points,update_at = NOW() WHERE utilities_id = :utilities_id;';
@@ -468,7 +638,6 @@
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE utilities SET flag = 0,update_at = NOW() WHERE utilities_id = :utilities_id;';
@@ -498,18 +667,18 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>BRAND</td>
-                    <td>WIDTH</td>
-                    <td>LENGTH</td>
-                    <td>HEIGHT</td>
-                    <td>WEIGHT</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>BRAND</td>
+                    <td class='table-dark text-warning fw-bold'>WIDTH</td>
+                    <td class='table-dark text-warning fw-bold'>LENGTH</td>
+                    <td class='table-dark text-warning fw-bold'>HEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>WEIGHT</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -531,7 +700,7 @@
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO device(name,brand,width,length,height,weight,title,description,create_at) VALUES (:name,:brand,:width,:length,:height,:weight,:title,:description,NOW())';
@@ -551,7 +720,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET name = :name,brand = :brand,width = :width,length = :length,height = :height,weight = :weight,title = :title,description = :description,update_at = NOW() WHERE device_id = :device_id;';
@@ -572,7 +741,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE device_id = :device_id;';
@@ -592,13 +761,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>TITLE</td>
-                    <td>DESCRIPTION</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>TITLE</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -609,43 +778,41 @@
                     <td>'.$this->description.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.'&title='.$this->title.'&description='.$this->description.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=service&service_id='.$this->service_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
-        public function addnew() {
-            require "config.php";
+        public function addnew() {  
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO service(name,title,rescription,create_at) VALUES (:name,:title,:rescription,NOW())';
+            $sql = 'INSERT INTO service(name,title,description,create_at) VALUES (:name,:title,:description,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
                     ":title" => $this->title,
-                    ":rescription" => $this->description,
+                    ":description" => $this->description,
                 )
             );
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,title = :title,rescription = :rescription,update_at = NOW() WHERE service_id = :service_id;';
+            $sql = 'UPDATE service SET name = :name,title = :title,description = :description,update_at = NOW() WHERE service_id = :service_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
                     ":title" => $this->title,
-                    ":rescription" => $this->description,
+                    ":description" => $this->description,
+                    ":service_id" => $this->service_id,
                 )
             );
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE service_id = :service_id;';
@@ -669,16 +836,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>POINTER</td>
-                    <td>PRICE ($)</td>
-                    <td>EXPIRY (MONTH)</td>
-                    <td>DAY ACTIVE (DAY/WEEK)</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>POINTER</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE ($)</td>
+                    <td class='table-dark text-warning fw-bold'>EXPIRY (MONTH)</td>
+                    <td class='table-dark text-warning fw-bold'>DAY ACTIVE (DAY/WEEK)</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -693,7 +860,7 @@
                     <td>'.$this->day_active.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.'&mentor='.$this->mentor.'&points='.$this->points.'&price='.$this->price.'&expiry='.$this->expiry.'&day_active='.$this->day_active.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -701,7 +868,6 @@
        
 
         public function addnew() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO package(name,mentor,points,price,expiry,day_active,create_at) VALUES (:name,:mentor,:points,:price,:expiry,:day_active,NOW())';
@@ -719,7 +885,7 @@
         }
 
         public function edit() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,day_active = :day_active,update_at = NOW() WHERE package_id = :package_id;';
@@ -738,10 +904,10 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE device SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE package SET flag = 0,update_at = NOW() WHERE package_id = :package_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -756,7 +922,7 @@
     //class course
     class course extends main {
         public $course_id;
-        public $employee_id; // Thong tin id PT cua khoa hoc
+        public $person_trainer_id; // Thong tin id PT cua khoa hoc
         public $mentor; // Thong tin PT cua khoa hoc
         public $description;
         public $start_day;
@@ -765,16 +931,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>NAME</td>
-                    <td>MENTOR</td>
-                    <td>DESCRIPTION</td>
-                    <td>START DAY</td>
-                    <td>END DAY</td>
-                    <td>PRICE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
+                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
+                    <td class='table-dark text-warning fw-bold'>START DAY</td>
+                    <td class='table-dark text-warning fw-bold'>END DAY</td>
+                    <td class='table-dark text-warning fw-bold'>PRICE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -789,21 +955,21 @@
                     <td>'.$this->price.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.'&name='.$this->name.' ">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&person_trainer_id='.$this->person_trainer_id.'&description='.$this->description.'&start_day='.$this->start_day.'&end_day='.$this->end_day.'&price='.$this->price.' ">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=course&course_id='.$this->course_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
         public function addnew() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO course(name,employee_id,description,start_day,end_day,price,create_at) VALUES (:name,:employee_id,:description,:start_day,:end_day,:price,NOW())';
+            $sql = 'INSERT INTO course(name,person_trainer_id,description,start_day,end_day,price,create_at) VALUES (:name,:person_trainer_id,:description,:start_day,:end_day,:price,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->employee_id,
+                    ":person_trainer_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,
@@ -813,15 +979,14 @@
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE service SET name = :name,mentor = :mentor,points = :points,price = :price,expiry = :expiry,update_at = NOW() WHERE package_id = :package_id;';
+            $sql = 'UPDATE course SET name = :name,person_trainer_id = :person_trainer_id,description = :description,start_day = :start_day,end_day = :end_day,price = :price,update_at = NOW() WHERE course_id = :course_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":name" => $this->name,
-                    ":employee_id" => $this->employee_id,
+                    ":person_trainer_id" => $this->person_trainer_id,
                     ":description" => $this->description,
                     ":start_day" => $this->start_day,
                     ":end_day" => $this->end_day,
@@ -832,7 +997,7 @@
         }
 
         public function delete() {
-            require "config.php";
+            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE course SET flag = 0,update_at = NOW() WHERE course_id = :course_id;';
@@ -852,6 +1017,7 @@
         public $member_id;
         public $card_id;
         public $password_hash;
+        public $re_password_hash;
         public $fname;
         public $mname;
         public $lname;
@@ -863,27 +1029,29 @@
         public $package_id;
         public $course_id;
         public $points;
+        public $saveme;
+        public $mes;
 
         public function show_header() {
             echo "<tr>
-                    <td>ID</td>
-                    <td>CARD ID</td>
-                    <td>PW HASH</td>
-                    <td>FNAME</td>
-                    <td>MNAME</td>
-                    <td>LNAME</td>
-                    <td>DOB</td>
-                    <td>ADDRESS</td>
-                    <td>PHONE NUMBER</td>
-                    <td>EMAIL</td>
-                    <td>VIP</td>
-                    <td>PACKAGE</td>
-                    <td>COURSE</td>
-                    <td>POINTS</td>
-                    <td>TYPE</td>
-                    <td>CREATE_AT</td>
-                    <td>UPDATE_AT</td>
-                    <td colspan='2'>ACTION</td>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>CARD ID</td>
+                    <td class='table-dark text-warning fw-bold'>PW HASH</td>
+                    <td class='table-dark text-warning fw-bold'>FNAME</td>
+                    <td class='table-dark text-warning fw-bold'>MNAME</td>
+                    <td class='table-dark text-warning fw-bold'>LNAME</td>
+                    <td class='table-dark text-warning fw-bold'>DOB</td>
+                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
+                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
+                    <td class='table-dark text-warning fw-bold'>VIP</td>
+                    <td class='table-dark text-warning fw-bold'>PACKAGE</td>
+                    <td class='table-dark text-warning fw-bold'>COURSE</td>
+                    <td class='table-dark text-warning fw-bold'>POINTS</td>
+                    <td class='table-dark text-warning fw-bold'>TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -910,10 +1078,9 @@
         }
 
         public function addnew() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO member(card_id,fname,mname,lname,dob,address,phone_number,person_id,email,contact_name,contact_phone,type,create_at) VALUES (:fname,:mname,:lname,:dob,:address,:phone_number,:person_id,:email,:contact_name,:contact_phone,:type,NOW())';
+            $sql = 'INSERT INTO member(card_id,password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:card_id,:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -922,29 +1089,21 @@
                     ":fname" => $this->fname,
                     ":mname" => $this->mname,
                     ":lname" => $this->lname,
-                    ":dob" => $this->dob,
-                    ":address" => $this->address,
                     ":phone_number" => $this->phone_number,
-                    ":vip" => $this->vip,
                     ":email" => $this->email,
-                    ":package_id" => $this->package_id,
-                    ":course_id" => $this->course_id,
-                    ":points" => $this->points,
                 )
             );
             $conn = NULL;
         }
 
         public function edit() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,password_hash = :password_hash,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE employee_id = :employee_id;';
+            $sql = 'UPDATE member SET card_id = :card_id,fname = :fname,mname = :mname,lname = :lname,dob = :dob,address = :address,phone_number = :phone_number,vip = :vip,email = :email,package_id = :package_id,course_id = :course_id,points = :points,update_at = NOW() WHERE member_id = :member_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
                     ":card_id" => $this->card_id,
-                    ":password_hash" => $this->password_hash,
                     ":fname" => $this->fname,
                     ":mname" => $this->mname,
                     ":lname" => $this->lname,
@@ -963,7 +1122,6 @@
         }
 
         public function delete() {
-            require "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE member SET flag = 0,update_at = NOW() WHERE member_id = :member_id;';
@@ -974,6 +1132,256 @@
                 )
             );
             $conn = NULL;
+        }
+
+        //kiem tra current pass co chinh xac 
+        public function check_current_pass() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'SELECT * FROM member WHERE email = :email AND password_hash = :password_hash;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":email" => $this->email,
+                    ":password_hash" => $this->password_hash,
+                )
+            );
+            $results = $stmt->fetchAll(PDO::FETCH_ASSOC);
+            if(count($results) == 1) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        // phuong thuc dang nhap
+        public function logins() {
+            if($this->check_current_pass()) {
+                $name = $this->email;
+                setcookie("id",md5($name),time()+86400,"/");
+                setcookie("user_name",$name, time() + 86400,"/");
+                if($this->saveme == "saveme") {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    setcookie("loggedin",$name,time()+86400,"/");
+                    header("location: ./trainer.php");
+                } else {
+                    session_start();
+                    $_SESSION["loggedin"] = TRUE;
+                    header("location: ./trainer.php");
+                }
+            } else {
+                $this->mes = "Invalid username or password";
+            }
+        }
+
+        //kiem tra password moi nhap vao co chinh quy
+        public function regexp($str) {
+            $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
+        public function member_type_count() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT COUNT(member_id) FROM member;";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
+        }
+
+    }
+
+    class galery_type extends main {
+        public $galery_type_id;
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->galery_type_id.'</td>
+                    <td>'.$this->name.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                )
+            );
+        }
+
+        public function edit() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":name" => $this->name,
+                    ":galery_type_id" => $this->galery_type_id,
+                )
+            );
+        }
+
+        public function delete() {
+            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery_type SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":galery_type_id" => $this->galery_type_id
+                )
+            );
+        }
+
+    }
+
+    class galery extends main {
+        public $galery_id;
+        public $galery_type_id;
+        public $galery_type_name;
+        public $item_id;
+        public $item_name;
+        public $note;
+        public $maxfilesize = 3000000;//3MB;
+        public $code;
+        public $dir;
+        public $img_name;
+        public $img_tmp;
+
+        public function show_header() {
+            echo "<tr>
+                    <td class='table-dark text-warning fw-bold'>ID</td>
+                    <td class='table-dark text-warning fw-bold'>GALERY TYPE</td>
+                    <td class='table-dark text-warning fw-bold'>ITEM ID</td>
+                    <td class='table-dark text-warning fw-bold'>ITEM NAME</td>
+                    <td class='table-dark text-warning fw-bold'>NOTE</td>
+                    <td class='table-dark text-warning fw-bold'>VIEW</td>
+                    <td class='table-dark text-warning fw-bold'>DIR</td>
+                    <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
+                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
+                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
+                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                </tr>";
+        }
+
+        public function show_item() {
+            echo '<tr>
+                    <td>'.$this->galery_id.'</td>
+                    <td>'.$this->galery_type_name.'</td>
+                    <td>'.$this->item_id.'</td>
+                    <td>'.$this->item_name.'</td>
+                    <td>'.$this->note.'</td>
+                    <td><img width="80px" height="auto" src=".'.$this->dir.$this->img_name.'" /></td>
+                    <td>'.$this->dir.'</td>
+                    <td>'.$this->img_name.'</td>
+                    <td>'.$this->create_at.'</td>
+                    <td>'.$this->update_at.'</td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'&dir='.$this->dir.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
+                </tr>';
+        }
+
+        public function addnew() {
+            $c = new config;
+            $conn = $c->connect();
+            $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
+            $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
+            $allowtype = array('jpg','png','jpeg','gif','pdf');
+            if(in_array($filetype,$allowtype)) {
+                if(move_uploaded_file($this->img_tmp,$file_path)) {
+                    $sql = "INSERT INTO galery(galery_type_name,item_id,item_name,note,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:item_id,:item_name,:note,:dir,:img_name,NOW())";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(
+                        array (
+                            "galery_type_name" => $this->galery_type_name,
+                            "item_id" => $this->item_id,
+                            "item_name" => $this->item_name,
+                            "note" => $this->note,
+                            "dir" => $this->dir,
+                            "img_name" => $this->img_name,
+                        )
+                    );
+                } else {
+                    echo "file upload error";
+                }
+            } else {
+                echo "please check file type";
+            } 
+        }
+
+        public function edit() {
+            $c = new config;
+            $conn = $c->connect();
+            $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
+            $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
+            $allowtype = array('jpg','png','jpeg','gif','pdf','svg');
+            if(in_array($filetype,$allowtype)) {
+                if(move_uploaded_file($this->img_tmp,$file_path)) {
+                    $sql = 'UPDATE galery SET item_id = :item_id,item_name = :item_name,note = :note,dir = :dir,img_name = :img_name,update_at = NOW() WHERE galery_id = :galery_id;';
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute(
+                        array (
+                            "item_id" => $this->item_id,
+                            "item_name" => $this->item_name,
+                            "note" => $this->note,
+                            "dir" => $this->dir,
+                            "img_name" => $this->img_name,
+                            ":galery_id" => $this->galery_id,
+                        )
+                        );
+                } else {
+                    echo "file upload error";
+                }
+            } else {
+                echo "please check file type";
+            } 
+        }
+
+        public function delete() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE galery SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":galery_type_id" => $this->galery_type_id
+                )
+            );
+        }
+
+        public function galery_type_count($type) {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT COUNT(galery_type_name) FROM galery WHERE galery_type_name = '".$type."';";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            return $stmt->fetchColumn();
         }
 
     }

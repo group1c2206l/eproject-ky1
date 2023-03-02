@@ -4,14 +4,25 @@
     box-sizing: border-box;
 }
 body {
-    background-color: rgb(26, 23, 23);
+    /* height: 100vh; */
     font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-image: url(../image/backgound/desktop-1600x900.jpg);
+    background-size: cover ;
+    background-repeat: no-repeat;
+    background-position: center;
+    background-attachment: fixed;
+    /* background: linear-gradient(180deg,#39373d,#18061b); */
+    /* background-color: rgb(26, 23, 23); */
 }
 .container {
-    background-color: rgb(68, 7, 87);
+    background-color: rgba(104, 97, 104, 0.336);
+    box-shadow: 2px 2px 5px rgba(238, 130, 238, 0.342);
+    background-size: cover;
+    background-repeat: no-repeat;
+    /* background-color: rgb(68, 7, 87); */
     width: 600px;
     margin: 100px auto 0 auto;
-    border-radius: 5px;
+    border-radius: 10px;
 }
 .select {
     width: 100%;
@@ -25,9 +36,9 @@ body {
     cursor: pointer;
     font-size: 18px;
     font-weight: bold;
-    color: rgb(109, 93, 93);
+    color: rgb(224, 238, 186);
     display: inline-block;
-    background-color: rgb(196, 241, 208);
+    background-color: rgb(27, 22, 29);
     width: 80px;
     text-align: center;
     line-height: 50px;
@@ -35,6 +46,25 @@ body {
 }
 .reg {
     text-align: end;
+}
+.login {
+    display: flex;
+    justify-content: space-between;
+}
+.login a{
+    /* display: inline-block; */
+    text-align: center;
+    padding-right: 18px;
+    line-height: 50px;
+    align-self: center;
+}
+.login a i {
+    font-size: 22px;
+}
+.login a i:hover {
+    color: #FF0000;
+    /* text-shadow: 3px chocolate; */
+    text-shadow: 2px 2px 8px #FF0000;
 }
 
 form {
@@ -56,6 +86,7 @@ h2 {
 }
 .group-item label {
     width: 100px;
+    align-self: center;
     font-weight: 500;
     display: inline-block;
     color: aliceblue;
@@ -76,6 +107,10 @@ h2 {
     width: 100%;
     height: 50px;
     color: aliceblue;
+}
+.lable-remember:hover {
+    cursor: pointer;
+    text-shadow: 0 0 3px #FF0000;
 }
 input[type = "checkbox"] {
     cursor: pointer;
@@ -109,11 +144,20 @@ input[type="submit"]:active {
 
 .active {
     background-color: violet !important;
-    color: aliceblue !important;
+    color: rgb(255, 253, 253) !important;
 }
 
 .mes {
     margin-top: 20px;
     text-align: center;
     color: rgb(245, 253, 206);
+}
+
+.err {
+    border: 1px solid red !important;
+    box-shadow: 2px 2px 4px rgb(190, 0, 63);
+}
+.validate {
+    border: 1px solid rgb(1, 226, 1) !important;
+    box-shadow: 2px 2px 4px rgb(0, 248, 42);
 }

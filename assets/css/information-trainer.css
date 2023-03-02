@@ -1,0 +1,170 @@
+@import url('https://fonts.googleapis.com/css2?family=Poppins:wght@200;300;400;500;600;700&display=swap');
+
+:root{
+   --main-color: #f05812;
+   --back: #000;
+   --light-color: #868e96; 
+}
+
+*{
+    font-family: 'Poppins', sans-serif;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    text-decoration: none;
+    outline: none;
+    text-transform: capitalize;
+    transition: all .2s linear;
+}
+
+::selection{
+    background: var(--main-color);
+    color: #fff;
+}
+
+html{
+    font-size: 62.5%;  
+    scroll-behavior: smooth;
+    overflow-x: hidden;
+    scroll-padding-top: 7rem;
+}
+
+html::-webkit-scrollbar{
+    width: 1rem;
+}
+
+html::-webkit-scrollbar-track{
+    background: #fafafa;
+}
+
+html::-webkit-scrollbar-thumb{
+    background: var(--main-color);
+    border-radius: 5rem;
+}
+
+section{
+    padding: 2rem 9%;
+}
+
+.heading{
+    font-size: 4rem;
+    text-align: center;
+    padding-top: 4rem;
+    padding-bottom: 2rem;
+    color: var(--back);
+    text-transform: uppercase;
+}
+
+.heading a span{
+    text-transform: uppercase;
+    color: var(--main-color);
+}
+
+.btn{
+    margin-top: 1rem;
+    display: inline-block;
+    padding: 0.8rem 3rem;
+    background: #fff;
+    font-weight: 500;
+    cursor: pointer;
+    color: var(--main-color);
+    font-size: 1.7rem;
+}
+
+.btn:hover{
+    background: var(--main-color);
+    color: #fff;
+    letter-spacing: .1rem;
+}
+
+.header{
+    background-color: rgba(0,0,0,.9);
+}
+
+
+/* -------------------container */
+
+.container{
+    margin: 0 10rem;
+    margin-top: 16rem;
+    display: flex;
+}
+
+.container .other-options{
+    float: left;
+    width: 60%;
+}
+
+.container .other-options h2{
+    font-size: 2.5rem;
+    font-weight: 300;
+}
+
+.container .other-options .line{
+    width: 17rem;
+    height: .5rem;
+    background-color: #f05812;
+    margin: 1rem 0rem 2.5rem 0;
+}
+
+.container .other-options .options{
+    width: 100%;
+    display: flex;
+}
+
+.container .other-options .options .image{
+    width: 50%;
+}
+
+.container .other-options .options .image img{
+    width: 100%;
+}
+
+.container .other-options .options .name{
+    font-size: 1.6rem;
+    font-weight: 500;
+    margin-left: 1rem;
+}
+
+.container .main-info .info{
+    display: flex;
+}
+
+.container .main-info .info .image-main{
+    width: 30%;
+    margin: 0 5rem;
+    height: auto;
+    margin-top: 4rem;
+}
+
+.container .main-info .info .image-main img{
+    width: 100%;
+}
+
+.container .main-info .info .infomation {
+    width: 70%;
+}
+
+.container .main-info .info .infomation p{
+    margin-bottom: 2.5rem;
+    font-size: 1.6rem;
+}
+
+.container .main-info .info .infomation .name{
+    font-size: 3.5rem;
+    margin-bottom: 2rem;
+}
+
+.container .main-info .info .infomation .job{
+    font-size: 2rem;
+    margin-bottom: 1rem;
+}
+
+
+
+
+
+
+
+
+
