@@ -30,13 +30,8 @@
     <!-- MDBootstrap JavaScript -->
     <script src="https://cdn.jsdelivr.net/npm/@mdbootstrap/bootstrap-free@4.19.0/js/mdb.min.js" integrity="sha384-iRHfQV91qxFc2h2zKtIV8L7W4OMvn5h5nZp5B8P5jlSxvx0anW4M/vSlHYltVt2" crossorigin="anonymous"></script>
     <style>
-        /* .container{
-            display: flex;
-            position: relative;
-            justify-content: center;
-            flex-wrap: wrap;
-        } */
-        .item{
+        /* SWIMMING */
+        .item-swim{
             width: 1400px;
             height: 550px;
             /* border: 1px solid black; */
@@ -44,9 +39,9 @@
             background-image: url(https://images.pexels.com/photos/863988/pexels-photo-863988.jpeg);
             background-size: cover;
             font-family: 'Playfair Display', serif;
-            border-radius: 4px;
+            /* border-radius: 4px; */
         }
-        .item-text{
+        .item-text-swim{
             width: 70%;
             height: 550px;
             color: white;
@@ -59,65 +54,84 @@
 
         }
         @media (max-width:555px){
-            .item-text{
+            .item-text-swim{
                 width: 100%;
                 opacity: 0.38;
             }
         }
-        .item-text1{
+        .item-text1-swim{
             width: 60%;
             color: white;
             position: absolute;
             margin: 20px 0 0 20px;
         }
         @media (max-width:555px){
-            .item-text1{
+            .item-text1-swim{
                 margin: 7px;
             }
         }
-        .item-text1 h1{
+        .item-text1-swim h1{
             /* margin-top: 20px; */
             font-size: 55px;
             letter-spacing: 5px;
             
         }
         @media (max-width:555px){
-            .item-text1 h1{
+            .item-text1-swim h1{
                 font-size: 30px;
                 letter-spacing: 1px;
             }
         }
-        .item-text1 h2{
-            /* margin-top: 20px; */
-            font-size: 16px;
+        .item-text1-swim h2{
+            margin-top: 20px;
+            font-size: 20px;
             
         }
         @media (max-width:555px){
-            .item-text1 h2{
+            .item-text1-swim h2{
                 margin-top: 15px;
                 font-size: 11px;
             }
         }
-        .item-text1 h3{
+        @media (min-width:556px) and (max-width:1000px){
+            .item-text1-swim h2{
+                margin-top: 20px;
+                font-size: 16px;
+            }
+        }
+        /* @media (max-width:900px){
+            .item-text1 h2{
+                margin-top: 15px;
+                font-size: 14px;
+            }
+        } */
+        .item-text1-swim h3{
             font-size: large;
-            margin-top: 100px;
+            margin-top: 135px;
             color: black;
         }
         @media (max-width:555px){
-            .item-text1 h3{
+            .item-text1-swim h3{
                 margin-top: 10px;
                 font-size: 14px ;
             }
         }
+
+        @media (max-width:900px){
+            .item-text1-swim h3{
+                margin-top: 50px;
+                font-size: 15px ;
+            }
+        }
         
         @media (max-width:600px){
-            .item1{
+            .item1-swim{
                 display: flex;
                 flex-wrap: wrap;
             }
         }
         .btnswimming {
-            margin:30px 0 0 10px;
+            margin:15px 0 0 10px;
             background: #fff;
             border: none;
             padding: 10px 20px;
@@ -135,7 +149,7 @@
             transform: skew(1deg);
             }
 
-            button::before {
+        .btnswimming::before {
             content: '';
             position: absolute;
             top: 0;
@@ -148,11 +162,11 @@
             transition: all 0.5s;
             }
 
-            button:hover {
+        .btnswimming:hover {
             color: #fff;
             }
 
-            button:hover::before {
+        .btnswimming:hover::before {
             left: 0;
             right: 0;
             opacity: 1;
@@ -164,36 +178,44 @@
                     padding: 3px 2px;
                 }
             }
-            .item1{
+            .item1-swim{
                 width: 1400px;
                 height: auto;
+                padding: 5px 0 20px 0;
                 position: relative;
                 margin-top: 10px;
                 display:flex;
                 flex-wrap: wrap;
                 justify-content: space-between;
+
             }
-            .item1-con{
-                width: 33%;
+            .item1-con-swim{
+                width: 31%;
                 height: auto;
+                position: relative;
+                overflow: hidden;
+                transform: scale(1);
+                transition: all 0.4s ease-out;
             }
-            .item1-con img{
+            .item1-con-swim img{
                 width: 100%;
                 height: auto;
                 border-radius: 5px;
             }
-            .item1-con:hover{
+            .item1-con-swim:hover{
+                width: 32%;
+                top: -5px;
+                margin-top: 7px;
                 transform: scale(1.1);
-                width: 40%;
-                top: 5px;
+                box-shadow: 0px 5px 5px rgba(0,0,0,0.9);
             }
     </style>
 </head>
   <body>
     <div class="container d-flex flex-wrap justify-content-center">
-        <div class="item">
-            <div class="item-text"></div>
-            <div class="item-text1 d-flex flex-column justify-content-center">
+        <div class="item-swim">
+            <div class="item-text-swim"></div>
+            <div class="item-text1-swim d-flex flex-column justify-content-center">
                 <h1>SWIMMING</h1>
                 <h2>Bơi lội là một bộ môn thể thao vô cùng thú vị và bổ ích cho sức khỏe.
                      Khi bạn bơi, cơ thể của bạn sẽ được hoạt động toàn diện,
@@ -205,12 +227,16 @@
                 </button>
             </div>
         </div>
-        <div class="item1">
-            <div class="item1-con">
+        <div class="item1-swim">
+            <div class="item1-con-swim">
                 <img src="https://images.pexels.com/photos/2062708/pexels-photo-2062708.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
             </div>
-            <div class="item1-con"></div>
-            <div class="item1-con"></div>
+            <div class="item1-con-swim">
+                <img src="https://images.pexels.com/photos/1415810/pexels-photo-1415810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+            </div>
+            <div class="item1-con-swim">
+                <img src="https://images.pexels.com/photos/73760/swimming-swimmer-female-race-73760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+            </div>
         </div>
     </div>
   </body>
