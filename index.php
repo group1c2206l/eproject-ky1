@@ -188,70 +188,33 @@
     </section>
 
     <!-- trainer section starts -->
-    
+    <?php 
+        require_once('./testconnect/employee.php');
+    ?>
     <section class="trainers">
         <h1 class="heading">Expert <span>trainer</span></h1>
         <div class="swiper trainer-slider">
             <div class="swiper-wrapper wrapper">
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-1.png" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-2.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-4.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="swiper-slide box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/swimming_pt.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
+                <?php 
+                    $p = new employeeInfo();
+                    $result = $p->showInfo();
+                    $arr = Array();
+                    for ($i = 0; $i<count($result); $i++){
+                        $s = $result[$i]; 
+                        echo '
+                            <div class="swiper-slide box">
+                                <a href="./infomation-trainer.php?trainerID='.$s->employee_id.'">
+                                    <div class="image">
+                                        <img src="./assets/image/trainer_page/info-pt/'.$s->image.'" alt="">
+                                    </div>
+                                    <div class="info-trainer">
+                                        <h1>'.$s->fname ." ". $s->mname ." ". $s->lname.'</h1>
+                                        <p>'.$s->type.'</p>
+                                    </div>
+                                </a>
+                            </div>';
+                    }
+                ?>
             </div>
         </div>
     </section>
@@ -387,9 +350,21 @@
             <div class="box">
                 <h1>contact info</h1>
                 <div class="icon">
-                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i> Doi can</a>
+                    <a href=""><i class="fas fa-phone-alt"></i> 030303030</a>
+                    <a href=""><i class="fas fa-envelope"></i> primefitness@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h1>quick Link</h1>
+                <div class="icon">
+                    <a href="./index.php">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="./trainer.php">Trainer</a>
+                    <a href="#">Contact</a>
+                    <a href="./register.php">Login</a>
                 </div>
             </div>
         </div>
