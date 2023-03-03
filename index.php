@@ -59,7 +59,6 @@
                                         <p>'.$row["note"].'</p>
                                         <div class="button">
                                             <a href="#" class="btn btn-1">get started</a>
-                                            <a href="#" class="btn">download</a>
                                         </div>
                                     </div>
                                 </div>';
@@ -238,15 +237,14 @@
     <section class="footer">
         <div class="box-container">
             <div class="box">
-                <h1>about</h1>
-                <div class="text">
-                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
-                </div>
-                <div class="icons">
-                    <a href=""><i class="fab fa-facebook"></i></a>
-                    <a href=""><i class="fab fa-twitter"></i></a>
-                    <a href=""><i class="fab fa-linkedin-in"></i></a>
-                    <a href=""><i class="fab fa-instagram"></i></a>
+                <h1>quick Link</h1>
+                <div class="icon">
+                    <a href="./index.php">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="./trainer.php">Trainer</a>
+                    <a href="#">Contact</a>
+                    <a href="./register.php">Login</a>
                 </div>
             </div>
 
@@ -256,6 +254,19 @@
                     <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
                     <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
                     <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                </div>
+            </div>
+            
+            <div class="box">
+                <h1>about</h1>
+                <div class="text">
+                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
+                </div>
+                <div class="icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
         </div>
