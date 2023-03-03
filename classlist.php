@@ -29,8 +29,8 @@
         public function show_pagination($table) {
             $row_current = 1;
             echo '<ul class="pagination pt-3">
-                      <li class="page-item px-3"><a class="page-link" href="#">Page '.$this->page.'</a></li>
-                      <li class="page-item "><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
+                      <li class="page-item"><a class="page-link" href="#">Page '.$this->page.'</a></li>
+                      <li class="page-item ps-3"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
             for($s = 1;$s <= $this->total;$s++) {
                 echo '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$row_current.' ">'.$s.'</a></li>';
                 $row_current += $this->limit;

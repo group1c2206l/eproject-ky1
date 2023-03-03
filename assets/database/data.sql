@@ -120,6 +120,8 @@ CREATE TABLE package(
     price INT NOT NULL, -- chi phi goi 
     expiry INT NOT NULL, -- thoi gian goi dang ky, tinh theo thang.
     day_active INT NOT NULL, -- so ngay tap luyen toi da trong tuan
+    utilities_id INT,  -- tien ich duoc su dung trong goi
+    description VARCHAR(500),
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,

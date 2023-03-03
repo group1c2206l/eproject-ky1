@@ -58,7 +58,7 @@
                                         <h3>join prime-fitness today</h3>
                                         <p>'.$row["note"].'</p>
                                         <div class="button">
-                                            <a href="#" class="btn btn-1">get started</a>
+                                            <a href="./package.php" class="btn btn-1">get started</a>
                                         </div>
                                     </div>
                                 </div>';
