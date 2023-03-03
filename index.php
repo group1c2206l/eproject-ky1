@@ -1,5 +1,5 @@
 <?php
-    require "config.php";
+    include "config.php";
 
 ?>
 
@@ -146,7 +146,7 @@
                     $results = $stmt->fetchAll();
                     foreach($results as $row) {
                         echo '<div class="swiper-slide box">
-                                    <a href="">
+                                    <a href="./infomation-trainer.php?trainerID=001202000337">
                                         <div class="image">
                                             <img src='.$row["gdir"].$row["gimgname"].' alt="">
                                         </div>
