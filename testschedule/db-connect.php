@@ -2,7 +2,7 @@
 $host     = 'localhost';
 $username = 'root';
 $password = '';
-$dbname   ='manage_gym';
+$dbname   ='gym_manager';
 
 $conn = new mysqli($host, $username, $password, $dbname);
 if(!$conn){

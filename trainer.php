@@ -185,6 +185,17 @@
                     <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
                 </div>
             </div>
+
+            <div class="box">
+                <h1>Quick Link</h1>
+                <div class="icon">
+                    <a href="./index.php">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="./trainer.php">Trainer</a>
+                    <a href="#">Contact</a>
+                </div>
+            </div>
         </div>
     </section>
     <script src="../Style/Javascript/index.js"></script>

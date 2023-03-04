@@ -44,7 +44,7 @@
                 <div id="calendar"></div>
             </div>
             <div class="col-md-3">
-                <!-- <div class="cardt rounded-0 shadow">
+                <div class="cardt rounded-0 shadow">
                     <div class="card-header bg-gradient bg-primary text-light">
                         <h5 class="card-title">Schedule Form</h5>
                     </div>
@@ -53,12 +53,16 @@
                             <form action="save_schedule.php" method="post" id="schedule-form">
                                 <input type="hidden" name="id" value="">
                                 <div class="form-group mb-2">
+                                    <label for="title" class="control-label">ID Person</label>
+                                    <input type="text" class="form-control form-control-sm rounded-0" name="personid" id="personid" required>
+                                </div>
+                                <div class="form-group mb-2">
                                     <label for="title" class="control-label">Title</label>
                                     <input type="text" class="form-control form-control-sm rounded-0" name="title" id="title" required>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="description" class="control-label">Description</label>
-                                    <textarea rows="3" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
+                                    <textarea rows="10" class="form-control form-control-sm rounded-0" name="description" id="description" required></textarea>
                                 </div>
                                 <div class="form-group mb-2">
                                     <label for="start_datetime" class="control-label">Start</label>
@@ -77,7 +81,7 @@
                             <button class="btn btn-default border btn-sm rounded-0" type="reset" form="schedule-form"><i class="fa fa-reset"></i> Cancel</button>
                         </div>
                     </div>
-                </div> -->
+                </div>
             </div>
         </div>
     </div>

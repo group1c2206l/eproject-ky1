@@ -9,7 +9,7 @@ extract($_POST);
 $allday = isset($allday);
 
 if(empty($id)){
-    $sql = "INSERT INTO `schedule` (`title`,`description`,`start_datetime`,`end_datetime`, `type`) VALUES ('$title','$description','$start_datetime','$end_datetime', 'trainer', '1')";
+    $sql = "INSERT INTO `schedule` (`title`,`description`,`start_datetime`,`end_datetime`, `type`, `person_id`, `flag`) VALUES ('$title','$description','$start_datetime','$end_datetime', 'trainer', '$personid', '1')";
 }else{
     $sql = "UPDATE `schedule` set `title` = '{$title}', `description` = '{$description}', `start_datetime` = '{$start_datetime}', `end_datetime` = '{$end_datetime}' where `id` = '{$id}'";
 }

@@ -160,6 +160,23 @@ section{
     margin-bottom: 1rem;
 }
 
+table, tbody, td, tfoot, th, thead, tr {
+    border-color: #c7c2c2 !important;
+    border-style: solid;
+    border-width: 1px !important;
+}
+
+.container1{
+    margin-left: 1rem;
+    width: 100%;
+}
+
+.calender{
+    margin-left: 3rem;
+    width: 120%;
+    height: 100%;
+}
+
 
 
 
