@@ -70,7 +70,8 @@
         </div>
         <div class="main-info">
             <div class="info">
-                <?php $id = $_GET['trainerID'];
+                <?php 
+                    $id = $_GET['trainerID'];
                     $trainer = new employeeInfo();
                     $info = $trainer->showInfoTrainer($id);
                     for($i=0; $i<count($info); $i++){
@@ -143,7 +144,7 @@
             </div>
             <!-- Event Details Modal -->  
             <?php 
-            $schedules = $conn->query("SELECT * FROM employee INNER JOIN schedule ON employee.person_id = schedule.person_id WHERE employee.person_id='001202223337';");
+            $schedules = $conn->query("SELECT * FROM `schedule` WHERE `person_id` = $id;");
             $sched_res = [];
             foreach($schedules->fetch_all(MYSQLI_ASSOC) as $row){
                 $row['sdate'] = date("F d, Y h:i A",strtotime($row['start_datetime']));

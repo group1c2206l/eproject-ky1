@@ -48,8 +48,8 @@
         
         <nav class="navbar">
             <a href="./index.php">Home</a>
-            <a href="./about.php">About</a>
-            <a href="./service.php">Services</a>
+            <a href="#">About</a>
+            <a href="#">Services</a>
             <a href="./course.php">Course</a>
             <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
@@ -93,6 +93,7 @@
                                         <h3>join prime-fitness today</h3>
                                         <p>'.$row["note"].'</p>
                                         <div class="button">
+                                            <a href="#" class="btn btn-1">get started</a>
                                             <a href="./package.php" class="btn btn-1">get started</a>
                                         </div>
                                     </div>
@@ -176,13 +177,13 @@
                 <?php
                     $c = new config;
                     $conn = $c->connect();
-                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
+                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job, P.person_id FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $results = $stmt->fetchAll();
                     foreach($results as $row) {
                         echo '<div class="swiper-slide box">
-                                    <a href="./infomation-trainer.php?trainerID=001202000337">
+                                    <a href="./infomation-trainer.php?trainerID='.$row["person_id"].'">
                                         <div class="image">
                                             <img src='.$row["gdir"].$row["gimgname"].' alt="">
                                         </div>
@@ -311,6 +312,26 @@
                     <a href=""><i class="fab fa-twitter"></i></a>
                     <a href=""><i class="fab fa-linkedin-in"></i></a>
                     <a href=""><i class="fab fa-instagram"></i></a>
+                </div>
+            </div>
+            <div class="box">
+                <h1>contact info</h1>
+                <div class="icon">
+                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
+                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
+                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                </div>
+            </div>
+
+            <div class="box">
+                <h1>quick link</h1>
+                <div class="icon">
+                <a href="./index.php">Home</a>
+                <a href="#">About</a>
+                <a href="#">Services</a>
+                <a href="#">Course</a>
+                <a href="./trainer.php">Trainer</a>
+                <a href="#">Contact</a>
                 </div>
             </div>
         </div>
