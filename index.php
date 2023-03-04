@@ -314,26 +314,7 @@
                     <a href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-            <div class="box">
-                <h1>contact info</h1>
-                <div class="icon">
-                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
-                </div>
-            </div>
-
-            <div class="box">
-                <h1>quick link</h1>
-                <div class="icon">
-                <a href="./index.php">Home</a>
-                <a href="#">About</a>
-                <a href="#">Services</a>
-                <a href="#">Course</a>
-                <a href="./trainer.php">Trainer</a>
-                <a href="#">Contact</a>
-                </div>
-            </div>
+           
         </div>
     </section>
 
