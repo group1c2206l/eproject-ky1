@@ -20,6 +20,9 @@ h1,p{
     left: 160px;
     bottom: 250px;
 }
+.row-content .tittle p{
+    font-size: 15px;
+}
 .learn-about{
     position: relative;
 }
