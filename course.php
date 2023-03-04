@@ -16,10 +16,10 @@
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo">Prime<span>Fitness</span></a>
+        <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
         
         <nav class="navbar">
-            <a href="#">Home</a>
+            <a href="./index.php">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
             <a href="#">Trainer</a>
@@ -34,87 +34,32 @@
     </header>
     <div class="wrapper">
            <div class="container">
-                <div class="row1" style="background-image: url(./assets/image/anh/kickfit-mma.jpg);background-size: cover;height: 685px;position: relative;">
-                    <div class="messenger">
-                        <a href=""><img src="./assets/image/anh/fb-messenger.png" alt=""></a>
-                    </div>
-                    <div class="row-content">
-                        <div class="tittle">
-                            <h1>Matial arts</h1>
-                            <p>
-                                Võ thuật (martial arts) là một hình thức nghệ thuật, thể thao và tự vệ<br>
-                                được phát triển từ các kỹ năng và chiến thuật chiến đấu. Võ thuật bao gồm<br>
-                                nhiều phương pháp và hình thức khác nhau, từ các bộ môn truyền thống của<br>
-                                châu Á như Karate, Taekwondo, Kung Fu và Judo đến các hình thức hiện đại<br>
-                                như Kickboxing, MMA (Mixed Martial Arts) và Krav Maga.
-                            </p>
-                        </div>
-                        <div class="learn-about" >
-                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                            <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href=""><p>Tìm hiểu thêm</p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row2" style=" background-image: url(./assets/image/anh/c2.jpg); background-size: cover;height: 620px;position: relative;">
-                    <div class="row-content">
-                        <div class="tittle">
-                            <h1>Gym & fitness</h1>
-                            <p>
-                                Phòng tập gym và tập luyện fitness là nơi mà người tập thể dục và rèn luyện<br>
-                                sức khỏe bằng cách sử dụng các thiết bị tập luyện và các bài tập thể dục. Tập<br>
-                                luyện thể dục và rèn luyện sức khỏe là một phần quan trọng của một lối sống<br>
-                                lành mạnh, và phòng tập gym và tập luyện fitness cung cấp một môi trường thuận<br>
-                                tiện và chuyên nghiệp để thực hiện việc này.
-                            </p>
-                        </div>
-                        <div class="learn-about">
-                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                            <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href=""><p>Tìm hiểu thêm</p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row3" style=" background-image: url(./assets/image/anh/dancee.jpg); background-size: cover;height: 620px;position: relative;">
-                    <div class="row-content">
-                        <div class="tittle">
-                            <h1>Dance</h1>
-                            <p>
-                                Dance là một nghệ thuật biểu diễn mà nó thể hiện qua những bước nhảy phối</br>
-                                hợp với âm nhạc. Nó có thể được thực hiện một mình hoặc nhóm, trong phòng tập,</br>
-                                trên sân khấu hoặc trên đường phố. Dance đã trở thành một phần của nhiều nền</br>
-                                văn hóa và được phát triển với nhiều phong cách khác nhau, từ ballet cổ điển đến</br>
-                                hip-hop đương đại.</br>
-                            </p>
-                        </div>
-                        <div class="learn-about">
-                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                            <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href=""><p>Tìm hiểu thêm</p></a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="row3" style=" background-image: url(./assets/image/anh/zumm_auto_x2.jpg); background-size: cover;height: 620px;position: relative;">
-                   <div class="row-content">
-                    <div class="tittle">
-                        <h1>Zumba</h1>
-                        <p>
-                            Zumba là một loại hình thể dục thể thao kết hợp giữa các bài tập nhảy và nhạc latin.<br>
-                            Nó đã trở thành một trào lưu tập thể dục phổ biến trên toàn thế giới với hàng triệu người<br>
-                            tham gia mỗi ngày.<br>
-                        </p>
-                   </div>
-                    <div class="learn-about">
-                        <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                        <div style="position: absolute; top: 40%; left: 20%; transform: translate(-50%, -50%); z-index: 1;">
-                        <a href=""><p>Tìm hiểu thêm</p></a>
-                        </div>
-                    </div>
-                   </div>
-                </div>
+                <?php
+                    require "config.php";
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice,C.start_day,C.end_day FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '  <div class="row3" style=" background-image: url('.$row["gdir"].$row["gimgname"].'); background-size: cover;height: 620px;position: relative;">
+                                    <div class="row-content">
+                                        <div class="tittle">
+                                            <h1>'.$row["cname"].'</h1>
+                                            <p>'.$row["description"].'</p>
+                                        </div>
+                                        <div class="learn-about">
+                                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
+                                            <div style="position: absolute; top: 40%; left: 10%; transform: translate(-50%, -50%); z-index: 1;">
+                                                <a href=""><p>More...</p></a>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
            </div>
         </div>
         <section class="footer">
@@ -132,12 +77,22 @@
                 </div>
             </div>
 
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "SELECT name,address,hotline,email FROM branch WHERE address = 'New York'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $conn = null;
+            ?>        
             <div class="box">
                 <h1>contact info</h1>
                 <div class="icon">
-                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                    <a href="#"><i class="fas fa-home"></i><?php  echo $results[0]["name"]  ?> </a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i><?php  echo $results[0]["address"]  ?> </a>
+                    <a href=""><i class="fas fa-phone-alt"></i><?php  echo $results[0]["hotline"]  ?></a>
+                    <a href=""><i class="fas fa-envelope"></i><?php  echo $results[0]["email"]  ?></a>
                 </div>
             </div>
         </div>
