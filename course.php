@@ -16,10 +16,10 @@
 </head>
 <body>
     <header class="header">
-        <a href="#" class="logo">Prime<span>Fitness</span></a>
+        <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
         
         <nav class="navbar">
-            <a href="#">Home</a>
+            <a href="./index.php">Home</a>
             <a href="#">About</a>
             <a href="#">Services</a>
             <a href="#">Trainer</a>

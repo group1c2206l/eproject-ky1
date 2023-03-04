@@ -134,16 +134,6 @@
         
     }
 
-    class pagination extends main {
-        public $limit;
-        public $page;
-        public $sql;
-        public $total;
-
-
-
-    }
-
     class role extends main {
         public $role_id;
         public $user_name;
@@ -579,7 +569,6 @@
     // class utilities
     class utilities extends main {
         public $utilities_id;
-        public $name;
         public $points;
         public $flag;
         public $create_at;
@@ -652,7 +641,6 @@
 
     class device extends main{
         public $device_id;
-        public $name;
         public $brand;
         public $width;
         public $length;
@@ -1162,12 +1150,12 @@
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+86400,"/");
-                    header("location: ./trainer.php");
+                    setcookie("loggedin",md5($name),time()+86400,"/");
+                    header("location: ./index.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ./trainer.php");
+                    header("location: ./index.php");
                 }
             } else {
                 $this->mes = "Invalid username or password";
@@ -1192,7 +1180,6 @@
             $stmt->execute();
             return $stmt->fetchColumn();
         }
-
     }
 
     class galery_type extends main {

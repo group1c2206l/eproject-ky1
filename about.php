@@ -98,65 +98,28 @@
         <h1 class="heading">Senior<span> coach</span></h1>
         <div class="trainer-slider">
             <div class="wrapper">
-                <div class="box">
-                    <a href="./infomation-trainer.php">
-                        <div class="image">
-                            <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-1.png" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-2.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-4.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/swimming_pt.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="box">
+                                    <a href="./infomation-trainer.php">
+                                        <div class="image">
+                                            <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                        </div>
+                                        <div class="info-trainer">
+                                            <h1>'.$row["lname"].'</h1>
+                                            <p>'.$row["trainer_job"].'</p>
+                                        </div>
+                                    </a>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
         </div>
     </section>
@@ -164,6 +127,36 @@
 
     <section class="footer">
         <div class="box-container">
+            <div class="box">
+                <h1>quick Link</h1>
+                <div class="icon">
+                    <a href="./index.php">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="./trainer.php">Trainer</a>
+                    <a href="#">Contact</a>
+                    <a href="./register.php">Login</a>
+                </div>
+            </div>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "SELECT name,address,hotline,email FROM branch WHERE address = 'New York'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $conn = null;
+            ?>        
+            <div class="box">
+                <h1>contact info</h1>
+                <div class="icon">
+                    <a href="#"><i class="fas fa-home"></i><?php  echo $results[0]["name"]  ?> </a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i><?php  echo $results[0]["address"]  ?> </a>
+                    <a href=""><i class="fas fa-phone-alt"></i><?php  echo $results[0]["hotline"]  ?></a>
+                    <a href=""><i class="fas fa-envelope"></i><?php  echo $results[0]["email"]  ?></a>
+                </div>
+            </div>
+            
             <div class="box">
                 <h1>about</h1>
                 <div class="text">
@@ -174,15 +167,6 @@
                     <a href=""><i class="fab fa-twitter"></i></a>
                     <a href=""><i class="fab fa-linkedin-in"></i></a>
                     <a href=""><i class="fab fa-instagram"></i></a>
-                </div>
-            </div>
-
-            <div class="box">
-                <h1>contact info</h1>
-                <div class="icon">
-                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
                 </div>
             </div>
         </div>

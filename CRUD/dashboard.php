@@ -226,11 +226,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("role");
                             if($search_data == NULL) {
                                 $results = $p->arr_result("role");
@@ -266,11 +271,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("branch");
                             if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
@@ -311,11 +321,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("employee");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("employee");
@@ -364,11 +379,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("person_trainer");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("person_trainer");
@@ -418,11 +438,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("utilities");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("utilities");
@@ -462,11 +487,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("device");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("device");
@@ -512,11 +542,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("service");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('service');
@@ -557,11 +592,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("package");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('package');
@@ -605,11 +645,16 @@
                                 $p->row_current = 0;
                             };
                             $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
+                            if($p->page >1 && $p->page <= $p->total) {
                                 $p->previous = $p->row_current - $p->limit;
+                            } else {
+                                $p->previous = 0;
                             };
+                            if($p->page < $p->total) {
+                                $p->next = $p->row_current + $p->limit;
+                            } else {
+                                $p->next = $p->page*$p->limit - $p->limit;
+                            }
                             $p->show_pagination("course");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('course');
@@ -655,11 +700,16 @@
                                     $p->row_current = 0;
                                 };
                                 $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->row_current < $p->limit) {
-                                    $p->previous = 1;
-                                } else {
+                                if($p->page >1 && $p->page <= $p->total) {
                                     $p->previous = $p->row_current - $p->limit;
+                                } else {
+                                    $p->previous = 0;
                                 };
+                                if($p->page < $p->total) {
+                                    $p->next = $p->row_current + $p->limit;
+                                } else {
+                                    $p->next = $p->page*$p->limit - $p->limit;
+                                }
                                 $p->show_pagination("member");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("member");
@@ -709,11 +759,16 @@
                                     $p->row_current = 0;
                                 };
                                 $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->row_current < $p->limit) {
-                                    $p->previous = 1;
-                                } else {
+                                if($p->page >1 && $p->page <= $p->total) {
                                     $p->previous = $p->row_current - $p->limit;
+                                } else {
+                                    $p->previous = 0;
                                 };
+                                if($p->page < $p->total) {
+                                    $p->next = $p->row_current + $p->limit;
+                                } else {
+                                    $p->next = $p->page*$p->limit - $p->limit;
+                                }
                                 $p->show_pagination("galery_type");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("galery_type");
@@ -745,18 +800,22 @@
                                 $p = new galery;
                                 $p->show_header();
                                 $p->total = $p->total_page("galery");
-
                                 if(isset($_GET["row_current"])) {
                                     $p->row_current = $_GET["row_current"];
                                 } else {
                                     $p->row_current = 0;
                                 };
                                 $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->row_current < $p->limit) {
-                                    $p->previous = 1;
-                                } else {
+                                if($p->page >1 && $p->page <= $p->total) {
                                     $p->previous = $p->row_current - $p->limit;
+                                } else {
+                                    $p->previous = 0;
                                 };
+                                if($p->page < $p->total) {
+                                    $p->next = $p->row_current + $p->limit;
+                                } else {
+                                    $p->next = $p->page*$p->limit - $p->limit;
+                                }
                                 $p->show_pagination("galery");
                                 
                                 if($search_data == NULL && $search_list == NULL) {
