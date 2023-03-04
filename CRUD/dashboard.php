@@ -223,9 +223,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -263,23 +263,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
-                                $p->previous = $p->row_current - $p->limit;
-                            };
-                            $p->show_pagination("branch");
-                            $p->total = $p->total_page("branch");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 1;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -322,23 +308,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
-                            if($p->row_current < $p->limit) {
-                                $p->previous = 1;
-                            } else {
-                                $p->previous = $p->row_current - $p->limit;
-                            };
-                            $p->show_pagination("employee");
-                            $p->total = $p->total_page("employee");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 1;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -389,9 +361,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -443,9 +415,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -487,9 +459,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -537,9 +509,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -582,9 +554,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -630,9 +602,9 @@
                             if(isset($_GET["row_current"])) {
                                 $p->row_current = $_GET["row_current"];
                             } else {
-                                $p->row_current = 1;
+                                $p->row_current = 0;
                             };
-                            $p->page = ceil($p->row_current/$p->limit);
+                            $p->page = ceil($p->row_current/$p->limit)+1;
                             if($p->row_current < $p->limit) {
                                 $p->previous = 1;
                             } else {
@@ -680,9 +652,9 @@
                                 if(isset($_GET["row_current"])) {
                                     $p->row_current = $_GET["row_current"];
                                 } else {
-                                    $p->row_current = 1;
+                                    $p->row_current = 0;
                                 };
-                                $p->page = ceil($p->row_current/$p->limit);
+                                $p->page = ceil($p->row_current/$p->limit)+1;
                                 if($p->row_current < $p->limit) {
                                     $p->previous = 1;
                                 } else {
@@ -734,9 +706,9 @@
                                 if(isset($_GET["row_current"])) {
                                     $p->row_current = $_GET["row_current"];
                                 } else {
-                                    $p->row_current = 1;
+                                    $p->row_current = 0;
                                 };
-                                $p->page = ceil($p->row_current/$p->limit);
+                                $p->page = ceil($p->row_current/$p->limit)+1;
                                 if($p->row_current < $p->limit) {
                                     $p->previous = 1;
                                 } else {
@@ -777,9 +749,9 @@
                                 if(isset($_GET["row_current"])) {
                                     $p->row_current = $_GET["row_current"];
                                 } else {
-                                    $p->row_current = 1;
+                                    $p->row_current = 0;
                                 };
-                                $p->page = ceil($p->row_current/$p->limit);
+                                $p->page = ceil($p->row_current/$p->limit)+1;
                                 if($p->row_current < $p->limit) {
                                     $p->previous = 1;
                                 } else {
