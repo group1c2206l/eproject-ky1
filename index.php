@@ -28,6 +28,7 @@
             <a href="#">About</a>
             <a href="#">Services</a>
             <a href="#">Course</a>
+            <a href="./course.php">Course</a>
             <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
             <a href="./register.php">Login</a>
@@ -58,6 +59,7 @@
                                         <p>'.$row["note"].'</p>
                                         <div class="button">
                                             <a href="#" class="btn btn-1">get started</a>
+                                            <a href="./package.php" class="btn btn-1">get started</a>
                                         </div>
                                     </div>
                                 </div>';
@@ -102,6 +104,7 @@
         <h1 class="heading"><span>FEATURED</span> CLASS</h1>
 
         <div class="box-container">
+
             <?php
                 $c = new config;
                 $conn = $c->connect();
@@ -116,8 +119,8 @@
                                     <p>'.$row["description"].'</p>
                                 </div>
                                 <div class="icons">
-                                        <span><i class="far fa-clock"></i>Start: '.$row["start_day"].'</span>
-                                        <span><i class="far fa-clock"></i>End    : '.$row["end_day"].'</span>
+                                        <span><i class="far fa-clock"></i>Start: '.date("F d, Y",strtotime($row['start_day'])).'</span>
+                                        <span><i class="far fa-clock"></i>End    : '.date("F d, Y",strtotime($row['end_day'])).'</span>
                                 </div>
                                 <a href="" class="btn">join form price</a>
                             </div>
@@ -196,7 +199,6 @@
     <!-- testimonial section ends -->
 
     <!-- blogs section starts -->
-
     <section class="blogs">
         <h1 class="heading">Famous <span>members</span></h1>
         <div class="swiper blogs-slider">
@@ -236,6 +238,36 @@
     <section class="footer">
         <div class="box-container">
             <div class="box">
+                <h1>quick Link</h1>
+                <div class="icon">
+                    <a href="./index.php">Home</a>
+                    <a href="#">About</a>
+                    <a href="#">Services</a>
+                    <a href="./trainer.php">Trainer</a>
+                    <a href="#">Contact</a>
+                    <a href="./register.php">Login</a>
+                </div>
+            </div>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "SELECT name,address,hotline,email FROM branch WHERE address = 'New York'";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $conn = null;
+            ?>        
+            <div class="box">
+                <h1>contact info</h1>
+                <div class="icon">
+                    <a href="#"><i class="fas fa-home"></i><?php  echo $results[0]["name"]  ?> </a>
+                    <a href="#"><i class="fas fa-map-marker-alt"></i><?php  echo $results[0]["address"]  ?> </a>
+                    <a href=""><i class="fas fa-phone-alt"></i><?php  echo $results[0]["hotline"]  ?></a>
+                    <a href=""><i class="fas fa-envelope"></i><?php  echo $results[0]["email"]  ?></a>
+                </div>
+            </div>
+            
+            <div class="box">
                 <h1>about</h1>
                 <div class="text">
                     <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
@@ -247,7 +279,6 @@
                     <a href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-
             <div class="box">
                 <h1>contact info</h1>
                 <div class="icon">

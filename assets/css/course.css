@@ -14,10 +14,14 @@ h1,p{
     padding: 5px 0px; 
 }
 .row-content{
+    width: 500px;
     position: absolute;
     text-align: left;
     left: 160px;
     bottom: 250px;
+}
+.row-content .tittle p{
+    font-size: 15px;
 }
 .learn-about{
     position: relative;
