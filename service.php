@@ -55,7 +55,6 @@
             height: 600px;
             bottom: -100px;
             left: -220px;
-
         }
         @media (max-width: 950px){
             .item1-cycling img{
@@ -539,7 +538,6 @@
                     height: 560px;
                     position: absolute;
                     margin: 5% 3%;
-                    
                     border-radius: 40px;
                     background: #e0e0e0;
                     box-shadow:  22px 22px 44px #bebebe,
@@ -701,13 +699,13 @@
                 position: absolute;
             }
             .bgr-sp{
-                /* margin-top: 10px; */
+                margin-top: 20px;
+                margin-left: 15px;
                 width: 1385px;
                 height: 500px;
                 background: linear-gradient(to right, rgb(113, 111, 111),rgb(46, 45, 45));
                 opacity: 0.6;
                 position: absolute;
-                left: 15px;
                 z-index: 1;
             }
             .container-text h1{
@@ -995,6 +993,13 @@
                     color: var(--main-color);
                 }
                 /*footer end */
+                .container-fix{
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                }
     </style>
 </head>
   <body>
@@ -1076,6 +1081,7 @@
                 </div>
             </div>
         </div>
+        <div class="container-fix">
         <div class="container-ex">  
             <div class="item-ex"></div>
             <div class="item-ex2">
@@ -1117,11 +1123,12 @@
                         </span>
                         <span class="button-text">Đăng Ký Ngay</span>
                       </button>
+                    </div>
                 </div>
             </div>
-        </div>
         <div class="title-sp">
-            <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
+                <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
+        </div>
         </div>
         <div class="product-sp">
             <div class="product-sp-item">
