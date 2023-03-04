@@ -9,6 +9,9 @@
     if(isset($_POST["register"])) {
         $select = "register";
     }
+    if(isset($_POST["reset"])) {
+        $select = "reset";
+    }
 
     echo $select;
     switch($select) {
@@ -29,8 +32,8 @@
             }
             break;
         case "register":
-                if(isset($_POST["pwd"])) {
-                    $p->password_hash = sha1($_POST["pwd"]);
+                if(isset($_POST["r_pwd"])) {
+                    $p->password_hash = sha1($_POST["r_pwd"]);
                 }
                 if(isset($_POST["repwd"])) {
                     $p->re_password_hash = sha1($_POST["repwd"]);
@@ -50,8 +53,8 @@
                 if(isset($_POST["phone_number"])) {
                     $p->phone_number = $_POST["phone_number"];
                 }
-                if(isset($_POST["email"])) {
-                    $p->email = $_POST["email"];
+                if(isset($_POST["r_email"])) {
+                    $p->email = $_POST["r_email"];
                 }
                 $p->card_id = $p->member_type_count();
                 print_r($p);
@@ -66,8 +69,12 @@
                 } else {
                     $p->mes = "Please enter full information !";
                 }
+                break;
+            case "Reset Password":
+                if(isset($_POST["f_email"])) {
+                    $p->email = $_POST["f_email"];
+                }
     }
-
 ?>
 
 <!DOCTYPE html>
@@ -94,15 +101,15 @@
         </div>
         <!-- onsubmit="return validateForm()" -->
         <!-- onchange="re_password_check()" -->
-        <form id="register-form" action="" method="POST" onsubmit="return validateForm()">
+        <form id="register-form" action="" method="POST" onsubmit="return validate_Register_Form()">
             <h2>REGISTRATION</h2>
             <div class="group-item">
                 <label for="">Email :</label>
-                <input class="email" type="email" name="email" placeholder="Email" onblur="email_check()">
+                <input class="r_email" type="email" name="email" placeholder="Email" onblur="email_check(r_email)">
             </div>
             <div class="group-item">
                 <label for="">Password :</label>
-                <input type="password" name="pwd" placeholder="Password" onblur="password_check()">
+                <input class="r_pwd" type="password" name="pwd" placeholder="Password" onblur="password_check(r_pwd)">
             </div>
             <div class="group-item">
                 <label for="">Repassword :</label>
@@ -132,22 +139,38 @@
                 <span><?php echo $p->mes ?></span>
             </div>
         </form>
-        <form id="login-form" action="" method="POST">
+        <form id="login-form" action="" method="POST" onsubmit="return validate_Login_Form()">
             <h2>Login</h2>
             <div class="group-item">
                 <label for="">Email</label>
-                <input type="text" name="l_email" placeholder="email">
+                <input type="text" name="l_email" class="l_email" placeholder="email" onblur="email_check(l_email)">
             </div>
             <div class="group-item">
                 <label for="">Password</label>
-                <input type="password" name="l_pwd" placeholder="Password">
+                <input class="l_pwd" type="password" name="l_pwd" placeholder="Password" onblur="password_check(l_pwd)">
             </div>
             <div class="remember">
                 <input type="checkbox" id="save_me" name="saveme" value="saveme">
                 <label for="save_me" class="lable-remember">Remember me</label>
             </div>
+            <div class="remember">
+                <a href="" onclick="show(3)" style="color:antiquewhite">Forget password , click here.</a>
+            </div>
             <div class="group-btn">
                 <input type="submit" name="login" value="login">
+            </div>
+            <div class="mes">
+                <span><?php echo $p->mes ?></span>
+            </div>
+        </form>
+        <form id="reset-form" action="" method="POST" onsubmit="return validate_Reset_Form()">
+            <h2>Reset Password</h2>
+            <div class="group-item">
+                <label for="">Please input email :</label>
+                <input class="f_email" type="text" name="f_email" placeholder="email" onblur="email_check(f_email)">
+            </div>
+            <div class="group-btn">
+                <input type="submit" name="reset" value="Reset Password">
             </div>
             <div class="mes">
                 <span><?php echo $p->mes ?></span>
