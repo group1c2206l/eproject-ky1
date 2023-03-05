@@ -1,3 +1,30 @@
+<?php
+    include "config.php";
+    $user = "";
+    if(session_id() == "") {
+        session_start();
+    }
+    $ssid = "";
+    $cid = 1;
+    $cloggedin = 2;
+    if(isset($_SESSION["loggedin"])) {
+        $ssid = $_SESSION["loggedin"];
+    }
+    if(isset($_COOKIE["id"])) {
+        $cid = $_COOKIE["id"];
+    }
+    if(isset($_COOKIE["loggedin"])) {
+        $cloggedin = $_COOKIE["loggedin"];
+    }
+    if($ssid == TRUE || $cloggedin == $cid) { 
+        if(isset($_COOKIE["user_name"])) {
+            $user = $_COOKIE["user_name"];
+        }
+    } else {
+        $user = "";
+    }
+
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -20,22 +47,35 @@
         
         <nav class="navbar">
             <a href="./index.php">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
-            <a href="#">Trainer</a>
+            <a href="./about.php">About</a>
+            <a href="./service.php">Services</a>
+            <a href="./course.php">Course</a>
+            <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
-            <a href="./register.php">Login</a>
+            <?php
+                if($user == "") {
+                    echo '<a href="./register.php">Login</a>';
+                } else {
+                    echo '<a href="./logout.php">Logout</a>';
+                }
+            
+            ?>
         </nav>
 
         <div class="icons">
-            <a href="" class="btn">Become a memeber</a>
+            <?php 
+                if($user == "") {
+                    echo '<a href="./register.php" class="btn">Become a memeber</a>';
+                } else {
+                    echo '<a href="./member.php" class="btn">'.$user.'</a>';
+                }
+            ?>
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
     <div class="wrapper">
            <div class="container">
                 <?php
-                    require "config.php";
                     $c = new config;
                     $conn = $c->connect();
                     $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice,C.start_day,C.end_day FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";

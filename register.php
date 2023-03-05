@@ -40,12 +40,12 @@
                 $p->mes = "Please enter full information !";
             }
             break;
-        case "register":
+        case "register":   // form register
                 if(isset($_POST["r_pwd"])) {
                     $p->password_hash = sha1($_POST["r_pwd"]);
                 }
-                if(isset($_POST["repwd"])) {
-                    $p->re_password_hash = sha1($_POST["repwd"]);
+                if(isset($_POST["r_repwd"])) {
+                    $p->re_password_hash = sha1($_POST["r_repwd"]);
                 }
                 if(isset($_POST["fname"])) {
                     $p->fname = $_POST["fname"];
@@ -175,15 +175,15 @@
             <h2>REGISTRATION</h2>
             <div class="group-item">
                 <label for="">Email :</label>
-                <input class="r_email" type="email" name="email" placeholder="Email" onblur="email_check(r_email)">
+                <input class="r_email" type="email" name="r_email" placeholder="Email" onblur="email_check(r_email)">
             </div>
             <div class="group-item">
                 <label for="">Password :</label>
-                <input class="r_pwd" type="password" name="pwd" placeholder="Password" onblur="password_check(r_pwd)">
+                <input class="r_pwd" type="password" name="r_pwd" placeholder="Password" onblur="password_check(r_pwd)">
             </div>
             <div class="group-item">
                 <label for="">Repassword :</label>
-                <input class="r_repwd" type="password" name="repwd" placeholder="Re-password" onblur="re_password_check(r_repwd,r_pwd)"> 
+                <input class="r_repwd" type="password" name="r_repwd" placeholder="Re-password" onblur="re_password_check(r_repwd,r_pwd)"> 
             </div>
             <div class="group-item">
                 <label for="">First Name :</label>
