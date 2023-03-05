@@ -27,17 +27,16 @@
         }
 
         public function show_pagination($table) {
-            $row_current = 1;
+            $row_current = 0;
             echo '<ul class="pagination pt-3">
-                      <li class="page-item px-3"><a class="page-link" href="#">Page '.$this->page.'</a></li>
-                      <li class="page-item "><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
+                      <li class="page-item"><a class="page-link" href="#">Page '.$this->page.'</a></li>
+                      <li class="page-item ps-3"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
             for($s = 1;$s <= $this->total;$s++) {
                 echo '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$row_current.' ">'.$s.'</a></li>';
                 $row_current += $this->limit;
             }
             echo     '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->next.'">Next</a></li>
                  </ul>';
-
         }
 
         public function arr_result($table) {
@@ -133,16 +132,6 @@
         }
 
         
-    }
-
-    class pagination extends main {
-        public $limit;
-        public $page;
-        public $sql;
-        public $total;
-
-
-
     }
 
     class role extends main {
@@ -580,7 +569,6 @@
     // class utilities
     class utilities extends main {
         public $utilities_id;
-        public $name;
         public $points;
         public $flag;
         public $create_at;
@@ -653,7 +641,6 @@
 
     class device extends main{
         public $device_id;
-        public $name;
         public $brand;
         public $width;
         public $length;
@@ -1163,12 +1150,12 @@
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+86400,"/");
-                    header("location: ./trainer.php");
+                    setcookie("loggedin",md5($name),time()+86400,"/");
+                    header("location: ./index.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ./trainer.php");
+                    header("location: ./index.php");
                 }
             } else {
                 $this->mes = "Invalid username or password";
@@ -1193,7 +1180,6 @@
             $stmt->execute();
             return $stmt->fetchColumn();
         }
-
     }
 
     class galery_type extends main {

@@ -18,9 +18,8 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"rel="stylesheet"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-
+    <link rel="stylesheet" href="./assets/css/service.css">
     <style>
-
         :root{
         --main-color: #f05812;
         --back: #000;
@@ -55,7 +54,6 @@
             height: 600px;
             bottom: -100px;
             left: -220px;
-
         }
         @media (max-width: 950px){
             .item1-cycling img{
@@ -539,7 +537,6 @@
                     height: 560px;
                     position: absolute;
                     margin: 5% 3%;
-                    
                     border-radius: 40px;
                     background: #e0e0e0;
                     box-shadow:  22px 22px 44px #bebebe,
@@ -701,14 +698,14 @@
                 position: absolute;
             }
             .bgr-sp{
-                /* margin-top: 10px; */
-                width: 1385px;
+                margin-top: 20px;
+                width: 1400px;
                 height: 500px;
                 background: linear-gradient(to right, rgb(113, 111, 111),rgb(46, 45, 45));
                 opacity: 0.6;
                 position: absolute;
-                left: 15px;
                 z-index: 1;
+                /* top: 0;left: 0;right: 0;bottom: 0; */
             }
             .container-text h1{
                 text-align: center;
@@ -821,15 +818,21 @@
                     height: 100px;
                     background-color: transparent;
                     color: black;
+                    display: flex;
+                    justify-content: center;
+                    margin: 0 auto;
                 }
                 .title-sp h2{
                     text-align: center;
-                    position: relative;
-                    top: 45%;
-                    left: 50%;
-                    transform: translateX(-50%) translateY(-45%);
-                }
+                    margin-right: 74%;
+                    position: relative; 
+                    top: 50%;
+                    left: 50%; 
+                    transform: translateX(-50%) translateY(-40%);
+                } 
                 .product-sp{
+                    margin: 0 auto;
+                    width: 1400px;
                     display: grid;
                     grid-template-columns: repeat(auto-fit,minmax(300px,1fr));
                     gap: 13px;
@@ -995,12 +998,23 @@
                     color: var(--main-color);
                 }
                 /*footer end */
+                .container-fix{
+                    margin: 0 auto;
+                    width: 1400px;
+                    height: auto;
+                    display: flex;
+                    flex-direction: column;
+                    justify-content: center;
+                    align-items: center;
+                    position: relative;
+                    z-index: 2;
+                    overflow: hidden;
+                }
     </style>
 </head>
   <body>
         <header class="header">
             <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
-            
             <nav class="navbar">
                 <a href="./index.php">Home</a>
                 <a href="#">About</a>
@@ -1076,6 +1090,7 @@
                 </div>
             </div>
         </div>
+        <div class="container-fix">
         <div class="container-ex">  
             <div class="item-ex"></div>
             <div class="item-ex2">
@@ -1117,11 +1132,13 @@
                         </span>
                         <span class="button-text">Đăng Ký Ngay</span>
                       </button>
+                    </div>
                 </div>
             </div>
         </div>
+        </div>
         <div class="title-sp">
-            <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
+                <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
         </div>
         <div class="product-sp">
             <div class="product-sp-item">
@@ -1149,56 +1166,56 @@
                 <img src="https://th.bing.com/th/id/R.711b31753207fe9ed5b6227fe4045d78?rik=Ru4lW2gHP30u8g&pid=ImgRaw&r=0" alt="">
             </div>
         </div>
-    </div>
-        <section class="footer">
-            <div class="box-container">
-                <div class="box">
-                    <h1>about</h1>
-                    <div class="text">
-                        <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
-                    </div>
-                    <div class="icons">
-                        <a href=""><i class="fab fa-facebook"></i></a>
-                        <a href=""><i class="fab fa-twitter"></i></a>
-                        <a href=""><i class="fab fa-linkedin-in"></i></a>
-                        <a href=""><i class="fab fa-instagram"></i></a>
-                    </div>
+    
+    <section class="footer">
+        <div class="box-container">
+            <div class="box">
+                <h1>about</h1>
+                <div class="text">
+                    <p>I have found this fantastic gym and I couldn't be happier. The spacious and well-equipped facilities, along with the best workout equipment, have given me an amazing workout experience. The staff are attentive and helpful, and I have seen great improvements in my health and strength since I started working out here.</p>
                 </div>
-
-                <div class="box">
-                    <h1>contact info</h1>
-                    <div class="icon">
-                        <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                        <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                        <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
-                    </div>
+                <div class="icons">
+                    <a href=""><i class="fab fa-facebook"></i></a>
+                    <a href=""><i class="fab fa-twitter"></i></a>
+                    <a href=""><i class="fab fa-linkedin-in"></i></a>
+                    <a href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-        </section>
-        <script src="./assets/js/navbar.js"></script>
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
-        <!-- JQuery -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-        <!-- Bootstrap tooltips -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
-        <!-- Bootstrap core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
-        <!-- MDB core JavaScript -->
-        <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
-        <!-- Latest compiled JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
-        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-        <!-- MDBootstrap CSS -->
-        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdbootstrap/bootstrap-free@4.19.0/css/mdb.min.css" integrity="sha384-pK+jKzIx2N/ZN3qd5oy5NlX9MyIcR+z/F/0KjOv4/z+tMeOaMfWGm8TTJj9zm+0" crossorigin="anonymous">
+            <div class="box">
+                <h1>contact info</h1>
+                <div class="icon">
+                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
+                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
+                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    <script src="./assets/js/navbar.js"></script>
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-MrcW6ZMFYlzcLA8Nl+NtUVF0sA7MsXsP1UyJoMp4YLEuNSfAP+JcXn/tWtIaxVXM" crossorigin="anonymous"></script>
+    <!-- JQuery -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+    <!-- Bootstrap tooltips -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.4/umd/popper.min.js"></script>
+    <!-- Bootstrap core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/4.3.1/js/bootstrap.min.js"></script>
+    <!-- MDB core JavaScript -->
+    <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/mdbootstrap/4.10.1/js/mdb.min.js"></script>
+    <!-- Latest compiled JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/jquery@3.5.1/dist/jquery.min.js" integrity="sha384-ZvpUoO/+PpLXR1lu4jmpXWu80pZlYUAfxl5NsBMWOEPSjUn/6Z/hRTt8+pR6L4N2" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.min.js" integrity="sha384-w1Q4orYjBQndcko6MimVbzY0tgp4pWB4lZ7lr30WKz0vr/aWKhXdBNmNb5D92v7s" crossorigin="anonymous"></script>
 
-        <!-- MDBootstrap JavaScript -->
-        <script src="https://cdn.jsdelivr.net/npm/@mdbootstrap/bootstrap-free@4.19.0/js/mdb.min.js" integrity="sha384-iRHfQV91qxFc2h2zKtIV8L7W4OMvn5h5nZp5B8P5jlSxvx0anW4M/vSlHYltVt2" crossorigin="anonymous"></script>
- 
-        <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
-    </body>
+    <!-- MDBootstrap CSS -->
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@mdbootstrap/bootstrap-free@4.19.0/css/mdb.min.css" integrity="sha384-pK+jKzIx2N/ZN3qd5oy5NlX9MyIcR+z/F/0KjOv4/z+tMeOaMfWGm8TTJj9zm+0" crossorigin="anonymous">
+
+    <!-- MDBootstrap JavaScript -->
+    <script src="https://cdn.jsdelivr.net/npm/@mdbootstrap/bootstrap-free@4.19.0/js/mdb.min.js" integrity="sha384-iRHfQV91qxFc2h2zKtIV8L7W4OMvn5h5nZp5B8P5jlSxvx0anW4M/vSlHYltVt2" crossorigin="anonymous"></script>
+
+    <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
+</body>
 </html>
 
   

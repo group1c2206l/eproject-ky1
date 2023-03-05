@@ -8,5 +8,6 @@
     }
     setcookie("id",$ckname,time()-86400,"/");
     setcookie("loggedin",$ckname,time()-86400,"/");
+    setcookie("user_name",$_COOKIE["user_name"], time() - 86400,"/");
     header("location: ./index.php");
 ?>
