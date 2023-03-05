@@ -1,14 +1,14 @@
 let register = document.getElementById("register-form");
 let login = document.getElementById("login-form");
 let reset = document.getElementById("reset-form");
+let newPass = document.getElementById("new-pass-form");
 let menu_reg = document.getElementById("reg-menu");
 let menu_login = document.getElementById("login-menu");
 // login.style.display = "none";
 let num;
-
 num =Number.parseInt(localStorage.getItem("menu")) ;
 console.log(num);
-if(num == 1 || num == 2 || num == 3) {
+if(num == 1 || num == 2 || num == 3 || num == 4) {
     show(num);
 } else {
     show(1);
@@ -22,6 +22,7 @@ function show(a) {
             register.style.display = "block";
             login.style.display = "none";
             reset.style.display = "none";
+            newPass.style.display = "none";
             menu_login.classList.remove("active");
             menu_reg.classList.add("active");
         break;
@@ -29,6 +30,7 @@ function show(a) {
             register.style.display = "none";
             login.style.display = "block";
             reset.style.display = "none";
+            newPass.style.display = "none";
             menu_login.classList.add("active");
             menu_reg.classList.remove("active");
         break;
@@ -36,6 +38,15 @@ function show(a) {
             register.style.display = "none";
             login.style.display = "none";
             reset.style.display = "block";
+            newPass.style.display = "none";
+            menu_login.classList.remove("active");
+            menu_reg.classList.remove("active");
+        break;
+        case a = 4:
+            register.style.display = "none";
+            login.style.display = "none";
+            reset.style.display = "none";
+            newPass.style.display = "block";
             menu_login.classList.remove("active");
             menu_reg.classList.remove("active");
         break;
@@ -47,7 +58,9 @@ let l_email = document.querySelector(".l_email");
 let f_email = document.querySelector(".f_email");
 let l_pwd = document.querySelector('.l_pwd');
 let r_pwd = document.querySelector('.r_pwd');
-let repwd = document.querySelector('input[name="repwd"]');
+let n_pwd = document.querySelector('.n_pwd');
+let repwd = document.querySelector('.r_repwd');
+let n_repwd = document.querySelector('.n_repwd');
 let fname = document.querySelector('input[name="fname"]');
 let mname = document.querySelector('input[name="mname"]');
 let lname = document.querySelector('input[name="lname"]');
@@ -76,8 +89,8 @@ function password_check(pwd) {
     }
 }
 
-function re_password_check() {
-    if(repwd.value == r_pwd.value) {
+function re_password_check(repwd,pwd) {
+    if(repwd.value == pwd.value) {
         repwd.classList.add("validate");
         repwd.classList.remove("err");
     } else {
@@ -156,8 +169,21 @@ function validate_Login_Form() {
 }
 
 function validate_Reset_Form() {
-    if(!regexEmail.test(email.value.trim())) {
+    if(!regexEmail.test(f_email.value.trim())) {
         alert("Email khong hop le");
+        return false;
+    }
+    return true;
+}
+
+function validate_NewPass_Form() {
+    if(!regexPass.test(n_pwd.value.trim())) {
+        alert("pass khong hop le");
+        return false;
+    }
+
+    if(n_pwd.value.trim() !== n_repwd.value.trim()) {
+        alert("pass khong trung nhau");
         return false;
     }
     return true;

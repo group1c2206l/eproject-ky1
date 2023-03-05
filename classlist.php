@@ -1197,6 +1197,7 @@
             }
         }
 
+        //dem so dong 
         public function member_type_count() {
             $c = new config;
             $conn = $c->connect();
@@ -1208,8 +1209,29 @@
 
         //check email
         public function check_email() {
-            
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "SELECT email FROM member WHERE email = '".$this->email."';";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            if(count($results) == 1) {
+                return true;
+            } else {
+                return false;
+            }
         }
+
+        //new password
+        public function new_pass() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "UPDATE member SET  password_hash = '".$this->password_hash."' WHERE email = '".$this->email."';";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+        }
+
+
     }
 
     class galery_type extends main {
@@ -1400,6 +1422,19 @@
             return $stmt->fetchColumn();
         }
 
+    }
+
+    class mail extends main {
+        public $from ;
+        public $to  ;
+        public $subject  ;
+        public $message  ;
+        public $headers ;
+        public $link_reset;
+
+       public function send_mail() {
+            mail($this->to,$this->subject,$this->message,$this->headers);
+       }
     }
     
 

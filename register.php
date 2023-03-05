@@ -12,6 +12,12 @@
     if(isset($_POST["reset"])) {
         $select = "reset";
     }
+    if(isset($_POST["new_pass"])) {
+        $select = "new_pass";
+    }
+    if(isset($_GET["page"])) {
+        $page = $_GET["page"];
+    }
 
     echo $select;
     switch($select) {
@@ -58,22 +64,65 @@
                 }
                 $p->card_id = $p->member_type_count();
                 print_r($p);
-                // $p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && 
                 if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
-                    if($p->password_hash == $p->re_password_hash) {
-                        $p->addnew();
-                        header("location: ./index.php");
+                    if($p->regexp($_POST["r_pwd"])) {
+                        if($p->password_hash == $p->re_password_hash) {
+                            $p->addnew();
+                            header("location: ./index.php");
+                        } else {
+                            $p->mes = "The password is not the same !";
+                        }
                     } else {
-                        $p->mes = "The password is not the same !";
+                        $p->mes = "The password is not in the correct format!";
                     }
                 } else {
                     $p->mes = "Please enter full information !";
                 }
                 break;
-            case "Reset Password":
+            case "reset":
                 if(isset($_POST["f_email"])) {
                     $p->email = $_POST["f_email"];
                 }
+                echo $p->check_email();
+                if($p->check_email()) {
+                    $m = new mail;
+                    $m->to = $p->email;
+                    $m->subject = "Reset password!";
+                    $m->link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
+                    // Always set content-type when sending HTML email
+                    $m->headers = "MIME-Version: 1.0" . "\r\n";
+                    $m->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    $m->headers .= "From: <nampphaui91@gmail.com>" . "\r\n";
+                    $m->message = ' <html>
+                                        <head>
+                                        <title>HTML email</title>
+                                        </head>
+                                        <body>
+                                            <p>Please click below link to reset password:</p>
+                                            <a href="'.$m->link_reset.'">Click here</a>
+                                        </body>
+                                    </html>';
+                    // print_r($m);
+                    $m->send_mail();
+                } else {
+                    $p->mes = "Email not available";
+                }
+                break;
+            case "new_pass":
+                if(isset($_POST["n_pwd"])) {
+                    $p->password_hash = sha1($_POST["n_pwd"]);
+                }
+                if(isset($_POST["n_repwd"])) {
+                    $p->re_password_hash = sha1($_POST["n_repwd"]);
+                }
+                if($p->regexp($_POST["n_pwd"])) {
+                    if($p->password_hash == $p->re_password_hash) {
+                        $p->new_pass();
+                        $p->mes = "Update success, you can login.";
+                    }
+                }
+                
+                break;
     }
 ?>
 
@@ -113,7 +162,7 @@
             </div>
             <div class="group-item">
                 <label for="">Repassword :</label>
-                <input type="password" name="repwd" placeholder="Re-password" onblur="re_password_check()"> 
+                <input class="r_repwd" type="password" name="repwd" placeholder="Re-password" onblur="re_password_check(r_repwd,r_pwd)"> 
             </div>
             <div class="group-item">
                 <label for="">First Name :</label>
@@ -163,6 +212,8 @@
                 <span><?php echo $p->mes ?></span>
             </div>
         </form>
+
+        <!-- form reset password -->
         <form id="reset-form" action="" method="POST" onsubmit="return validate_Reset_Form()">
             <h2>Reset Password</h2>
             <div class="group-item">
@@ -170,13 +221,38 @@
                 <input class="f_email" type="text" name="f_email" placeholder="email" onblur="email_check(f_email)">
             </div>
             <div class="group-btn">
-                <input type="submit" name="reset" value="Reset Password">
+                <input type="submit" name="reset" value="reset">
+            </div>
+            <div class="mes">
+                <span><?php echo $p->mes ?></span>
+            </div>
+        </form>
+
+        <!-- form enter new password -->
+        <form id="new-pass-form" action="" method="POST" onsubmit="return validate_NewPass_Form()">
+            <h2>New Password</h2>
+            <div class="group-item">
+                <label for="">New Password :</label>
+                <input class="n_pwd" type="password" name="n_pwd" placeholder="New Password" onblur="password_check(n_pwd)">
+            </div>
+            <div class="group-item">
+                <label for="">New Password :</label>
+                <input class="n_repwd" type="password" name="n_repwd" placeholder="Re New Password" onblur="re_password_check(n_repwd,n_pwd)">
+            </div>
+            <div class="group-btn">
+                <input type="submit" name="new_pass" value="Update">
             </div>
             <div class="mes">
                 <span><?php echo $p->mes ?></span>
             </div>
         </form>
     </div>
+
+    <script>
+        let page = <?php echo $page ?>;
+        console.log(page);
+        localStorage.setItem("menu",page);
+    </script>
     <script src="./assets/js/register.js"></script>
 </body>
 </html>
