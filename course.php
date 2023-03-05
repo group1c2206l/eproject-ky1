@@ -139,7 +139,7 @@
                                         <div class="learn-about">
                                             <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                                             <div style="position: absolute; top: 40%; left: 10%; transform: translate(-50%, -50%); z-index: 1;">
-                                                <a href=""><p>More...</p></a>
+                                                <a href="./package.php"><p>Jont Now</p></a>
                                             </div>
                                         </div>
                                     </div>

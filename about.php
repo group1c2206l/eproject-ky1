@@ -1,5 +1,28 @@
 <?php
     require "config.php";
+    $user = "";
+    if(session_id() == "") {
+        session_start();
+    }
+    $ssid = "";
+    $cid = 1;
+    $cloggedin = 2;
+    if(isset($_SESSION["loggedin"])) {
+        $ssid = $_SESSION["loggedin"];
+    }
+    if(isset($_COOKIE["id"])) {
+        $cid = $_COOKIE["id"];
+    }
+    if(isset($_COOKIE["loggedin"])) {
+        $cloggedin = $_COOKIE["loggedin"];
+    }
+    if($ssid == TRUE || $cloggedin == $cid) { 
+        if(isset($_COOKIE["user_name"])) {
+            $user = $_COOKIE["user_name"];
+        }
+    } else {
+        $user = "";
+    }
 ?>
 
 <!DOCTYPE html>
@@ -19,19 +42,34 @@
     <link rel="stylesheet" href="./assets/css/trainer.css">
 </head>
 <body>
-    <header class="header">
+<header class="header">
         <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
         
         <nav class="navbar">
             <a href="./index.php">Home</a>
-            <a href="#">About</a>
-            <a href="#">Services</a>
+            <a href="./about.php">About</a>
+            <a href="./service.php">Services</a>
+            <a href="./course.php">Course</a>
             <a href="./trainer.php">Trainer</a>
             <a href="#">Contact</a>
+            <?php
+                if($user == "") {
+                    echo '<a href="./register.php">Login</a>';
+                } else {
+                    echo '<a href="./logout.php">Logout</a>';
+                }
+            
+            ?>
         </nav>
 
         <div class="icons">
-            <a href="" class="btn">Become a memeber</a>
+            <?php 
+                if($user == "") {
+                    echo '<a href="./register.php" class="btn">Become a memeber</a>';
+                } else {
+                    echo '<a href="./member.php" class="btn">'.$user.'</a>';
+                }
+            ?>
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
@@ -98,65 +136,29 @@
         <h1 class="heading">Senior<span> coach</span></h1>
         <div class="trainer-slider">
             <div class="wrapper">
-                <div class="box">
-                    <a href="./infomation-trainer.php">
-                        <div class="image">
-                            <img src="./assets/image/trainer_page/info-pt/đặng-đức-đông.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-1.png" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-2.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/trainer-4.jpeg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
-
-                <div class="box">
-                    <a href="">
-                        <div class="image">
-                            <img src="./assets/image/PT/swimming_pt.jpg" alt="">
-                        </div>
-                        <div class="info-trainer">
-                            <h1>name trainer</h1>
-                            <p>trainer job</p>
-                        </div>
-                    </a>
-                </div>
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job, P.person_id FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="swiper-slide box">
+                                    <a href="./infomation-trainer.php?trainerID='.$row["person_id"].'">
+                                        <div class="image">
+                                            <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                        </div>
+                                        <div class="info-trainer">
+                                            <h1>'.$row["lname"].'</h1>
+                                            <p>'.$row["trainer_job"].'</p>
+                                        </div>
+                                    </a>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
+                
             </div>
         </div>
     </section>
