@@ -1,8 +1,12 @@
 <?php
     require "classlist.php";
+    if(session_id() === '') {
+        session_start();
+    }
     $p = new member;
     $p->mes = "";
     $select = "";
+    $page = "";
     if(isset($_POST["login"])) {
         $select = "login";
     }
@@ -18,7 +22,6 @@
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
     }
-
     echo $select;
     switch($select) {
         case "login":
@@ -92,36 +95,54 @@
                     // Always set content-type when sending HTML email
                     $m->headers = "MIME-Version: 1.0" . "\r\n";
                     $m->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $m->headers .= "From: <nampphaui91@gmail.com>" . "\r\n";
+                    $m->headers .= "From: Prime Fitness" . "\r\n";
                     $m->message = ' <html>
                                         <head>
                                         <title>HTML email</title>
                                         </head>
                                         <body>
-                                            <p>Please click below link to reset password:</p>
+                                            <p style="color:red;font-size:20px;font-weight:bold;">Please click below link to reset password:</p>
                                             <a href="'.$m->link_reset.'">Click here</a>
                                         </body>
                                     </html>';
                     // print_r($m);
                     $m->send_mail();
+                    $_SESSION["mid"] = md5($p->email);
+                    setcookie("mide",md5($p->email),time() + 86400, "/");
+                    setcookie("email",$p->email,time() + 86400, "/"); // ghi dia chi email vao cookies
+                    $p->mes = "Please check mail to reset password !";
                 } else {
                     $p->mes = "Email not available";
                 }
                 break;
             case "new_pass":
-                if(isset($_POST["n_pwd"])) {
-                    $p->password_hash = sha1($_POST["n_pwd"]);
+                if(isset($_SESSION["mid"])) {
+                    $smid = $_SESSION["mid"];
                 }
-                if(isset($_POST["n_repwd"])) {
-                    $p->re_password_hash = sha1($_POST["n_repwd"]);
+                if(isset($_GET["mid"])) {
+                    $gmid = $_GET["mid"];
                 }
-                if($p->regexp($_POST["n_pwd"])) {
-                    if($p->password_hash == $p->re_password_hash) {
-                        $p->new_pass();
-                        $p->mes = "Update success, you can login.";
+                if(isset($_COOKIE["email"])) {
+                    $p->email = $_COOKIE["email"];
+                }
+                if($smid == $gmid) {
+                    if(isset($_POST["n_pwd"])) {
+                        $p->password_hash = sha1($_POST["n_pwd"]);
                     }
+                    if(isset($_POST["n_repwd"])) {
+                        $p->re_password_hash = sha1($_POST["n_repwd"]);
+                    }
+                    if($p->regexp($_POST["n_pwd"])) {
+                        if($p->password_hash == $p->re_password_hash) {
+                            $p->new_pass();
+                            $p->mes = "Update success, you can login.";
+                            header("location: register.php?page=2");
+                        }
+                    }
+                } else {
+
                 }
-                
+                print_r($p);
                 break;
     }
 ?>
@@ -203,7 +224,7 @@
                 <label for="save_me" class="lable-remember">Remember me</label>
             </div>
             <div class="remember">
-                <a href="" onclick="show(3)" style="color:antiquewhite">Forget password , click here.</a>
+                <a href="register.php?page=3"  style="color:antiquewhite">Forget password , click here.</a>
             </div>
             <div class="group-btn">
                 <input type="submit" name="login" value="login">
