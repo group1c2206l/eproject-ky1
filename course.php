@@ -7,7 +7,7 @@
     <title>Gym</title>
     <!-- link CSS -->
     <link rel="stylesheet" href="./assets/css/index.css">
-    <link rel="stylesheet" href="./assets/css/course.css">
+    <!-- <link rel="stylesheet" href="./assets/css/course.css"> -->
     <!-- link icon -->
     <link rel="stylesheet" href="https://kit.fontawesome.com/83128b721a.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
@@ -32,17 +32,16 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
-    <div class="wrapper">
            <div class="container">
 <<<<<<< HEAD
                 <div class="row1" style="background-image: url(./assets/image/anh/kickfit-mma.jpg);background-size: cover;height: 685px;position: relative;">
                     <div class="messenger">
                         <a href=""><img src="./assets/image/anh/fb-messenger.png" alt=""></a>
                     </div>
-                    <div class="row-content">
+                    <div class="row-content" style=" position: absolute;text-align: left;left: 160px;bottom: 250px;" >
                         <div class="tittle">
-                            <h1 font-size: 28px; >Matial arts</h1>
-                            <p style="font-size:16px;margin-bottom:20px; ">
+                            <h1 style="color: aliceblue;font-size: 28px;" >Matial arts</h1>
+                            <p style="font-size:16px;margin-bottom:20px;color: aliceblue; ">
                                 Võ thuật (martial arts) là một hình thức nghệ thuật, thể thao và tự vệ<br>
                                 được phát triển từ các kỹ năng và chiến thuật chiến đấu. Võ thuật bao gồm<br>
                                 nhiều phương pháp và hình thức khác nhau, từ các bộ môn truyền thống của<br>
@@ -50,19 +49,19 @@
                                 như Kickboxing, MMA (Mixed Martial Arts) và Krav Maga.
                             </p>
                         </div>
-                        <div class="learn-about" >
+                        <div class="learn-about" style="position: relative;" >
                             <a href="register.php"><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 17%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href="register.php"><p style="font-size:16px">Đăng ký ngay</p></a>
+                            <a href="register.php"><p style="font-size:16px;color: aliceblue;">Đăng ký ngay</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row2" style=" background-image: url(./assets/image/anh/c2.jpg); background-size: cover;height: 620px;position: relative;">
-                    <div class="row-content">
+                    <div class="row-content" style=" position: absolute;text-align: left;left: 160px;bottom: 250px;">
                         <div class="tittle">
-                            <h1 font-size: 28px;>Gym & fitness</h1>
-                            <p style="font-size:16px;margin-bottom:20px;">
+                            <h1 style="color: aliceblue;font-size: 28px;">Gym & fitness</h1>
+                            <p style="font-size:16px;margin-bottom:20px;color: aliceblue; ">
                                 Phòng tập gym và tập luyện fitness là nơi mà người tập thể dục và rèn luyện<br>
                                 sức khỏe bằng cách sử dụng các thiết bị tập luyện và các bài tập thể dục. Tập<br>
                                 luyện thể dục và rèn luyện sức khỏe là một phần quan trọng của một lối sống<br>
@@ -70,19 +69,19 @@
                                 tiện và chuyên nghiệp để thực hiện việc này.
                             </p>
                         </div>
-                        <div class="learn-about">
+                        <div class="learn-about" style="position: relative;">
                             <a href="register.php"><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 17%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href="register.php"><p style="font-size:16px" >Đăng ký ngay</p></a>
+                            <a href="register.php"><p style="font-size:16px;color: aliceblue;">Đăng ký ngay</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row3" style=" background-image: url(./assets/image/anh/dancee.jpg); background-size: cover;height: 620px;position: relative;">
-                    <div class="row-content">
+                        <div class="row-content" style=" position: absolute;text-align: left;left: 160px;bottom: 250px;" >
                         <div class="tittle">
-                            <h1 font-size: 28px;>Dance</h1>
-                            <p style="font-size:16px;margin-bottom:20px;">
+                            <h1 style="color: aliceblue;font-size: 28px;">Dance</h1>
+                            <p style="font-size:16px;margin-bottom:20px;color: aliceblue; ">
                                 Dance là một nghệ thuật biểu diễn mà nó thể hiện qua những bước nhảy phối</br>
                                 hợp với âm nhạc. Nó có thể được thực hiện một mình hoặc nhóm, trong phòng tập,</br>
                                 trên sân khấu hoặc trên đường phố. Dance đã trở thành một phần của nhiều nền</br>
@@ -90,19 +89,19 @@
                                 hip-hop đương đại.</br>
                             </p>
                         </div>
-                        <div class="learn-about">
+                        <div class="learn-about" style="position: relative;">
                             <a href="register.php"><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                             <div style="position: absolute; top: 40%; left: 17%; transform: translate(-50%, -50%); z-index: 1;">
-                            <a href="register.php"><p style="font-size:16px">Đăng ký ngay</p></a>
+                            <a href="register.php"><p style="font-size:16px;color: aliceblue;">Đăng ký ngay</p></a>
                             </div>
                         </div>
                     </div>
                 </div>
                 <div class="row4" style=" background-image: url(./assets/image/anh/zumm_auto_x2.jpg); background-size: cover;height: 620px;position: relative;">
-                   <div class="row-content">
+                    <div class="row-content" style=" position: absolute;text-align: left;left: 160px;bottom: 250px;" >
                     <div class="tittle">
-                        <h1 style="font-size: 28px;" >Zumba</h1>
-                        <p style="font-size:16px;margin-bottom:20px;">
+                        <h1 style="color: aliceblue;font-size: 28px;">Zumba</h1>
+                        <p style="font-size:16px;margin-bottom:20px;color: aliceblue; ">
                             Zumba là một loại hình thể dục thể thao kết hợp giữa các bài tập nhảy và nhạc latin.<br>
                             Nó đã trở thành một trào lưu tập thể dục phổ biến trên toàn thế giới với hàng triệu người<br>
                             tham gia mỗi ngày.<br>
@@ -112,10 +111,10 @@
                             cảm thấy vui vẻ và thư giãn.
                         </p>
                    </div>
-                    <div class="learn-about">
+                    <div class="learn-about" style="position: relative;">
                         <a href="register.php"><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
                         <div style="position: absolute; top: 40%; left: 17%; transform: translate(-50%, -50%); z-index: 1;">
-                        <a href="register.php"><p style="font-size:16px">Đăng ký ngay</p></a>
+                        <a href="register.php"><p style="font-size:16px;color: aliceblue;">Đăng ký ngay</p></a>
                         </div>
                     </div>
                    </div>
