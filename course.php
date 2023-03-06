@@ -82,7 +82,7 @@
                     $stmt->execute();
                     $results = $stmt->fetchAll();
                     foreach($results as $row) {
-                        echo '  <div class="row3" style=" background-image: url('.$row["gdir"].$row["gimgname"].'); background-size: cover;height: 620px;position: relative;">
+                        echo '  <div class="row" style=" background-image: url('.$row["gdir"].$row["gimgname"].'); background-size: cover;height: 620px;position: relative;">
                                     <div class="row-content">
                                         <div class="tittle">
                                             <h1>'.$row["cname"].'</h1>
