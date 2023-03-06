@@ -43,7 +43,7 @@ CREATE TABLE employee(
     CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
--- danh sach nguoi huong dan club
+-- list of person trainer
 CREATE TABLE person_trainer(
     person_trainer_id INT AUTO_INCREMENT NOT NULL,
     fname VARCHAR(50) NOT NULL,
@@ -101,16 +101,6 @@ CREATE TABLE service(
     update_at DATETIME,
     CONSTRAINT PK_service_id PRIMARY KEY (service_id)
 );
-
--- CREATE TABLE service_device(
---     service_device_id INT AUTO_INCREMENT NOT NULL ,
---     service_id INT NOT NULL,
---     device_id INT NOT NULL,
---     flag INT DEFAULT 1, 
---     create_at DATETIME,
---     update_at DATETIME,
---     CONSTRAINT PK_service_device_id PRIMARY KEY (service_device_id)
--- );
 
 CREATE TABLE package(
     package_id INT AUTO_INCREMENT NOT NULL ,
@@ -211,12 +201,6 @@ ADD CONSTRAINT FK_member_package_id FOREIGN KEY (package_id) REFERENCES package(
 
 ALTER TABLE member
 ADD CONSTRAINT FK_member_course_id FOREIGN KEY (course_id) REFERENCES course(course_id);
-
--- ALTER TABLE service_device
--- ADD CONSTRAINT FK_service_id FOREIGN KEY (service_id) REFERENCES service(service_id);
-
--- ALTER TABLE service_device
--- ADD CONSTRAINT FK_device_id FOREIGN KEY (device_id) REFERENCES device(device_id);
 
 ALTER TABLE course
 ADD CONSTRAINT FK_person_trainer_id FOREIGN KEY (person_trainer_id) REFERENCES person_trainer(person_trainer_id);
