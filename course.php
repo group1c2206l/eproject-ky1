@@ -73,35 +73,34 @@
             <div id="menu-btn" class="fas fa-bars"></div>
         </div>
     </header>
-           <div class="container">
-                <?php
-                    $c = new config;
-                    $conn = $c->connect();
-                    $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice,C.start_day,C.end_day FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute();
-                    $results = $stmt->fetchAll();
-                    foreach($results as $row) {
-                        echo '  <div class="row" style=" background-image: url('.$row["gdir"].$row["gimgname"].'); background-size: cover;height: 620px;position: relative;">
-                                    <div class="row-content">
-                                        <div class="tittle">
-                                            <h1>'.$row["cname"].'</h1>
-                                            <p>'.$row["description"].'</p>
-                                        </div>
-                                        <div class="learn-about">
-                                            <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                                            <div style="position: absolute; top: 40%; left: 10%; transform: translate(-50%, -50%); z-index: 1;">
-                                                <a href="./package.php"><p>Jont Now</p></a>
-                                            </div>
-                                        </div>
+    <div class="container">
+        <?php
+            $c = new config;
+            $conn = $c->connect();
+            $sql = "select G.dir gdir,G.img_name gimgname,C.name cname,C.description,C.price cprice,C.start_day,C.end_day FROM galery G INNER JOIN course C ON G.item_id = C.course_id WHERE G.galery_type_name = 'course' AND C.flag = '1';";
+            $stmt = $conn->prepare($sql);
+            $stmt->execute();
+            $results = $stmt->fetchAll();
+            foreach($results as $row) {
+                echo '  <div class="row" style=" background-image: url('.$row["gdir"].$row["gimgname"].'); background-size: cover;height: 620px;position: relative;">
+                            <div class="row-content">
+                                <div class="tittle">
+                                    <h1>'.$row["cname"].'</h1>
+                                    <p>'.$row["description"].'</p>
+                                </div>
+                                <div class="learn-about">
+                                    <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
+                                    <div style="position: absolute; top: 40%; left: 10%; transform: translate(-50%, -50%); z-index: 1;">
+                                        <a href="./package.php"><p>Jont Now</p></a>
                                     </div>
-                                </div>';
-                    }
-                    $conn = null;
-                ?>
-           </div>
-        </div>
-        <section class="footer">
+                                </div>
+                            </div>
+                        </div>';
+            }
+            $conn = null;
+        ?>
+    </div>
+    <section class="footer">
         <div class="box-container">
             <div class="box">
                 <h1>about</h1>
