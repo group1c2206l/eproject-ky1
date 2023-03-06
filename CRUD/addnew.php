@@ -701,14 +701,20 @@
                                     $p->item_id = $p->galery_type_count("about");
                                     $p->item_name = "about ".$p->item_id;
                                 break;
+                                case "photos":
+                                    $p->dir = './assets/image/photos/';
+                                    $p->item_id = $p->galery_type_count("photos");
+                                    $p->item_name = "photos ".$p->item_id;
+                                break;
                             }
                             
-                            print_r($p);
+                           
                             // echo $_FILES["img_name"]["size"];
 
                             if($_FILES["img_name"]["size"] < $p->maxfilesize) {
                                 if($p->galery_type_name != NULL) {
                                     $p->addnew();
+                                    print_r($p);
                                     header("location: dashboard.php?select=galery");
                                 } else {
                                     $mes = "Please enter full information";

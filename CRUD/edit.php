@@ -761,11 +761,11 @@
                         $p->galery_type_id = $_GET["galery_type_id"];
                     }
                     if(isset($_POST["save"])) {
-                        if(isset($_POST["name"])) {
-                            $p->name = $_POST["name"];
+                        if(isset($_POST["galery_type_name"])) {
+                            $p->galery_type_name = $_POST["galery_type_name"];
                         }
                       
-                        if($p->name != NULL) {
+                        if($p->galery_type_name != NULL) {
                             $p->edit();
                             header("location: dashboard.php?select=galery_type");
                         } else {
@@ -777,7 +777,7 @@
                                 <form action=""  method="POST">
                                     <div class="form-group mb-3 mt-6">
                                         <label for="name" class="text-white-50">Type name</label>
-                                        <input type="text" class="form-control bg-dark text-white" id="name" name="name" value="'.$_GET["name"].'">
+                                        <input type="text" class="form-control bg-dark text-white" id="name" name="galery_type_name" value="'.$_GET["galery_type_name"].'">
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>
                                     <button  class="btn btn-primary mb-2"> <a class="text-light" href="dashboard.php?select=galery_type">Back</a></button>

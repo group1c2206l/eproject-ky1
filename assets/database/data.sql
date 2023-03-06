@@ -190,6 +190,8 @@ CREATE TABLE about(
     CONSTRAINT PK_about_id PRIMARY KEY (about_id)
 );
 
+CREATE TABLE 
+
 ALTER TABLE galery_type
 ADD CONSTRAINT PK_galery_type_name PRIMARY KEY (galery_type_name);
 

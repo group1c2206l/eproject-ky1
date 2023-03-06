@@ -38,7 +38,7 @@
     <!-- link swiper -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.css"/>
     <!-- link css -->
-    <link rel="stylesheet" href="./assets/css/trainer.css">
+    <link rel="stylesheet" href="./assets/css/about.css">
 </head>
 <body>
 <header class="header">
@@ -104,9 +104,9 @@
             <div class="line"></div>
             <div class="box">
                 <div class="title">
-                    <p id="1">Đội ngũ Coach của Swequity không chỉ là người làm dịch vụ, họ còn là người anh em, người đồng đội, người thầy, người huấn luyện của riêng bạn. Họ vừa thúc đẩy bạn vượt qua mọi ranh giới, giới hạn của bản thân, vừa là chỗ dựa tinh thần khi bạn cảm thấy mỏi mệt, muốn từ bỏ.</p>
-                    <p id="2">Chúng tôi kinh doanh dựa trên nền tảng tri thức, nên mỗi người coach đều có bề dày kiến thức và kinh nghiệm. Không chỉ hiểu biết sâu rộng về lĩnh vực sức khỏe, dinh dưỡng và giải phẫu học về cơ và chuyển động của cơ thể người; họ còn là những người đồng hành đầy trách nhiệm và năng lượng để thúc đẩy hội viên vươn tới những giới hạn mới.</p>
-                    <p id="3">Hiểu được nhu cầu và thể trạng mỗi người một khác, không có chương trình tập luyện nào phù hợp cho tất cả. Vì thế với từng khách hàng, các coach đều có quá trình tìm hiểu, nghiên cứu, phân tích tình trạng cơ thể một cách kỹ lưỡng, và thiết kế ra chương trình tập luyện phù hợp dành riêng cho họ</p>
+                    <p id="1">Prime's Coach Team Aren't Just Servicemen, They Are Your Own Brother, Teammate, Teacher, Coach. They Both Motivate You To Overcome All Boundaries, Your Limits, And A Spiritual Support When You Feel Tired, Want To Give Up.</p>
+                    <p id="2">Our business is based on knowledge, so each coach has a wealth of knowledge and experience. Not only are they deeply knowledgeable in the fields of health, nutrition, and human anatomy and muscle movement, they are also responsible and energetic companions to push members to reach new heights, new term.</p>
+                    <p id="3">Understanding that each person's needs and physique are different, there is no one-size-fits-all exercise program. Therefore, for each client, the coaches have a process of thoroughly researching, researching and analyzing their body condition, and designing a suitable exercise program for them.</p>
                 </div>   
                 <div class="image">
                     <img src="./assets/image/trainer_page/title/title-1.jpeg" alt="">
@@ -143,100 +143,46 @@
         </div>
     </section>
 
-    <!-- photo libraly -->
-    <section class="blogs">
-        <div class="swiper blogs-slider">
-            <div class="swiper-wrapper wapper">
-                <?php
-                    $c = new config;
-                    $conn = $c->connect();
-                    $sql = "SELECT G.dir gdir,G.img_name gimgname,G.note,M.lname lname, M.mname, M.fname fname FROM galery G INNER JOIN member M ON G.item_id = M.member_id WHERE M.vip = 1 AND G.galery_type_name = 'member';";
-                    $stmt = $conn->prepare($sql);
-                    $stmt->execute();
-                    $results = $stmt->fetchAll();
-                    foreach($results as $row) {
-                        echo '<div class="swiper-slide box">
-                                    <div class="image">
-                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
-                                    </div>
-                                </div>';
-                    }
-                    $conn = null;
-                ?>
-            </div>
-        </div>
-    </section>
+
 
     <!-- slide -->
     <div class="galery">
         <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
-            <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                </div>
+            <div class="swiper-wrapper main">
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "SELECT * FROM galery  WHERE galery_type_name = 'photos';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '  <div class="swiper-slide">
+                                    <img src='.$row["dir"].$row["img_name"].' />
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
             <div class="swiper-button-next"></div>
             <div class="swiper-button-prev"></div>
         </div>
         <div thumbsSlider="" class="swiper mySwiper">
             <div class="swiper-wrapper">
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
-                </div>
-                <div class="swiper-slide">
-                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
-                </div>
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "SELECT * FROM galery  WHERE galery_type_name = 'photos';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '  <div class="swiper-slide">
+                                    <img src='.$row["dir"].$row["img_name"].' />
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
             </div>
         </div>
     </div>

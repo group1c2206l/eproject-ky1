@@ -51,7 +51,7 @@
             <a href="./about.php">About</a>
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
-            <a href="./trainer.php">Trainer</a>
+            <a href="./package.php">Member</a>
             <a href="#">Contact</a>
             <?php
                 if($user == "") {
