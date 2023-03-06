@@ -786,17 +786,14 @@ animation: fadeInLeft 1s;
             transform:translateX(-50%) translateY(-80%);
             }
         .title-sp{
-            width: 1400px;
+            width: 100%;
             height: 100px;
             background-color: transparent;
             color: black;
         }
         .title-sp h2{
             text-align: center;
-            position: relative;
-            top: 45%;
-            left: 50%;
-            transform: translateX(-50%) translateY(-45%);
+            padding-top: 20px;
         }
         .product-sp{
             display: grid;

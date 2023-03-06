@@ -201,34 +201,25 @@
             </div>
         </div>
         </div>
+       
         <div class="title-sp">
-                <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
+                <h2>Most advanced equipment !!</h2>
         </div>
         <div class="product-sp">
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/260352/pexels-photo-260352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/136404/pexels-photo-136404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://th.bing.com/th/id/R.576f831d695b2e6d23ebd53d879942ad?rik=gV6SXXK6gBmjaQ&pid=ImgRaw&r=0" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://toiyeugym.vn/wp-content/uploads/2020/09/phong-tap-gym-quan-go-vap-02.jpg" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://pt-fitness.com/wp-content/uploads/2020/06/tieu-chuan-thiet-ke-phong-tap-gym-1024x500.jpg" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://th.bing.com/th/id/R.711b31753207fe9ed5b6227fe4045d78?rik=Ru4lW2gHP30u8g&pid=ImgRaw&r=0" alt="">
-            </div>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,D.name FROM galery G INNER JOIN device D ON G.item_id = D.device_id WHERE G.galery_type_name = 'device' AND D.flag = '1' AND G.flag = '1';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                foreach($results as $row) {
+                    echo '<div class="product-sp-item">
+                                <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                            </div>';
+                }
+                $conn = null;
+            ?>
         </div>
     
     <section class="footer">

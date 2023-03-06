@@ -1406,11 +1406,11 @@
         public function delete() {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE galery SET flag = 0,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $sql = 'UPDATE galery SET flag = 0,update_at = NOW() WHERE galery_id = :galery_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":galery_type_id" => $this->galery_type_id
+                    ":galery_id" => $this->galery_id
                 )
             );
         }

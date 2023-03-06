@@ -102,7 +102,7 @@
 
     <section class="preview">
         <div class="box-container">
-            <h2>Đội ngũ giàu kinh nghiệm với nền tảng kiến thức vững chãi</h2>
+            <h2>EXPERIENCE TEAM WITH KNOWLEDGE BACKGROUND</h2>
             <div class="line"></div>
             <div class="box">
                 <div class="title">
@@ -116,19 +116,6 @@
             </div>
         </div>
 
-        <div class="box-container">
-            <h2>Phương pháp đào tạo Coach tại SUF</h2>
-            <div class="line"></div>
-            <div class="box">
-                <div class="image">
-                    <img src="./assets/image/trainer_page/title/title-1.jpeg" alt="">
-                </div> 
-                <div class="title">
-                    <p id="1">Đội ngũ coach ở Swequity phải trải qua một chương trình đào tạo 3 tháng bài bản và thực hiện những bài kiểm tra kiến thức ngặt nghèo. Chỉ những người xuất sắc nhất mới được giữ lại và trở thành coach chính thức ở Swequity.</p>
-                    <p>Phương pháp đào tạo của chúng tôi chú trọng vào kiến thức chuyên môn, kĩ năng sư phạm và kĩ năng tìm hiểu, phân tích, chẩn đoán vấn đề cơ thể, để mỗi người coach đều đủ năng lực thiết kế ra chương trình luyện tập mang lại hiệu quả cho khách hàng.</p>
-                </div>     
-            </div>
-        </div>
     </section>
 
     <!-- senior coach -->
