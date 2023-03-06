@@ -48,6 +48,7 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/service.css">
+<<<<<<< HEAD
     <style>
         :root{
         --main-color: #f05812;
@@ -1048,6 +1049,8 @@
                     overflow: hidden;
                 }
     </style>
+=======
+>>>>>>> 5ed41f7dcd371547e3ce7c3e23cf50cfb66b4abc
 </head>
   <body>
         <header class="header">
@@ -1082,34 +1085,45 @@
             </div>
         </header>
         <div class=" d-flex flex-wrap justify-content-center">
-            <div class="item-cycling " >
-                <div class="item-text-cycling d-flex flex-column fade-in-left ">
-                    <h1>Cycling</h1>
-                    <h2>ĐẲNG CẤP QUỐC TẾ</h2>
-                    <p>Hãy tới chúng tôi để cùng nhau phát triển bản thân<br>
-                        Cùng giúp nhau có một cơ thể khỏe mạnh</p>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title,S.description FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1' AND S.name = 'Cycling';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $fullpart = $results[0]["gdir"].$results[0]["gimgname"];
+                $conn = null;
+            ?>
+            <div class="item-cycling " style="background-image: url(<?php echo $fullpart;   ?>);">
+                <div class="item-text-cycling d-flex flex-column fade-in-left pt-5">
+                    <h1><?php echo $results[0]["sname"];   ?></h1>
+                    <h2><?php echo $results[0]["title"];   ?></h2>
+                    <p><?php echo $results[0]["description"];   ?></p>
                         <div class="text-box-cycling d-flex justify-content-center text-center">
-                            <p>TẶNG 1 BUỔI TRẢI NGHIỆM MIỄN PHÍ</p>
+                            <p>GET 1 FREE EXPERIENCE SESSION</p>
                         </div>
-                        <button class="btn-cycling d-flex justify-content-center text-center"><p>ĐĂNG KÝ NGAY</p></button>    
+                        <button class="btn-cycling d-flex justify-content-center text-center"><a href="./register.php">Register now</a></button>    
                 </div>
-                <div class="item-con-cycling "></div>
             </div>
             <div class="item1-cycling " >
-                <img class="fade-in-left" src="./assets/image/service/pexels-nathan-cowley-1089164-removebg.png" alt="Gym And Fitness">
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title,S.description FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1' AND S.name = 'Sports & Fitness';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    $fullpart = $results[0]["gdir"].$results[0]["gimgname"];
+                    $conn = null;
+                ?>
+                <img class="fade-in-left" src=<?php echo $fullpart; ?> alt="Gym And Fitness">
                 <div class="item-text2-cycling d-flex flex-column fade-in-right">
-                    <h1>Đạp xe chưa bao giờ tuyệt vời đến thế !</h1>
+                    <h1><?php echo $results[0]["sname"];   ?></h1>
                     <div class="item-hr-cycling"></div>
-                    <p>Cycling là một hoạt động giải trí và thể dục đầy mạnh mẽ, 
-                        với việc sử dụng một chiếc xe đạp để di chuyển từ nơi này đến nơi khác.
-                        Nó cũng là một hình thức hoạt động giải trí cực kỳ sức khỏe, giúp bạn giảm cân, 
-                        tăng sức mạnh và tốt cho sức khỏe của bạn. 
-                        Cycling có thể làm tại bất kỳ nơi nào, 
-                        từ đường phố của thành phố đến khu vực ngoại ô hoặc quần thể đồi núi. 
-                        Nó cũng có thể là một hoạt động cộng đồng, với nhiều nhóm đạp xe và sự kiện được tổ chức hàng năm. 
-                        Tất cả trong tất cả, cycling là một trải nghiệm tuyệt vời cho cả cơ thể và tâm hồn của bạn.</p>
+                    <p><?php echo $results[0]["description"];   ?></p>
                     <button class="cta-cycling">
-                        <span class="hover-underline-animation"> TÌM HIỂU THÊM </span>
+                        <span class="hover-underline-animation"> Find out more </span>
                         <svg viewBox="0 0 46 16" height="10" width="30" xmlns="http://www.w3.org/2000/svg" id="arrow-horizontal">
                             <path transform="translate(30)" d="M8,0,6.545,1.455l5.506,5.506H-30V9.039H12.052L6.545,14.545,8,16l8-8Z" data-name="Path 10" id="Path_10"></path>
                         </svg>
@@ -1118,65 +1132,64 @@
             </div>
         </div>
         <div class="container d-flex flex-wrap justify-content-center">
-            <div class="item-swim">
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title,S.description FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1' AND S.name = 'Swimming';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $conn = null;
+            ?>
+            <div class="item-swim" style="background-image: url(<?php echo $results[0]["gdir"].$results[0]["gimgname"]  ?>);">
                 <div class="item-text-swim"></div>
                 <div class="item-text1-swim d-flex flex-column justify-content-center">
-                    <h1>SWIMMING</h1>
-                    <h2>Bơi lội là một bộ môn thể thao vô cùng thú vị và bổ ích cho sức khỏe.
-                         Khi bạn bơi, cơ thể của bạn sẽ được hoạt động toàn diện,
-                         tăng cường sự dẻo dai và sức mạnh của cơ bắp, đồng thời giảm căng thẳng và tăng cường khả năng tập trung. 
-                         Nếu bạn muốn tìm một cách để tăng cường sức khỏe và thư giãn đồng thời khám phá thế giới dưới nước, hãy thử bơi lội và trải nghiệm sự tự do và nhẹ nhàng khi bạn bơi giữa những dòng nước trong xanh.</h2>
-                    <h3>ĐẾN VỚI CHÚNG TÔI ĐỂ KHÁM PHÁ !</h3>
+                    <h1><?php echo $results[0]["sname"];   ?></h1>
+                    <h2><?php echo $results[0]["description"];   ?></h2>
+                    <h3><?php echo $results[0]["title"];   ?></h3>
                     <button class="btnswimming">
-                        <span>Đăng ký ngay</span>
+                        <span>Register now</span>
                     </button>
                 </div>
             </div>
             <div class="item1-swim">
                 <div class="item1-con-swim">
-                    <img src="https://images.pexels.com/photos/2062708/pexels-photo-2062708.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                    <img src=<?php echo $results[1]["gdir"].$results[1]["gimgname"]  ?> alt="">
                 </div>
                 <div class="item1-con-swim">
-                    <img src="https://images.pexels.com/photos/1415810/pexels-photo-1415810.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                    <img src=<?php echo $results[2]["gdir"].$results[2]["gimgname"]  ?> alt="">
                 </div>
                 <div class="item1-con-swim">
-                    <img src="https://images.pexels.com/photos/73760/swimming-swimmer-female-race-73760.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
+                    <img src=<?php echo $results[3]["gdir"].$results[3]["gimgname"]  ?> alt="">
                 </div>
             </div>
         </div>
         <div class="container-fix">
-        <div class="container-ex">  
-            <div class="item-ex"></div>
+        <div class="container-ex"> 
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title,S.description FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1' AND S.name = 'Group Exercise';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                $conn = null;
+            ?>
+            <div class="item-ex" style="background-image: url(<?php echo $results[0]["gdir"].$results[0]["gimgname"]  ?>);"></div>
             <div class="item-ex2">
-                <h1>GROUP EXCERCISE</h1>
+                <h1><?php echo $results[0]["sname"];   ?></h1>
                 <ul>
-                    <li>1. TRẢI NGHIỆM THÚ VỊ</li>
-                    <li>2. HUẤN LUYỆN VIÊN CHUYÊN NGHIỆP</li>
-                    <li>3. MÔI TRƯỜNG LÀNH MẠNH</li>
-                    <li>4. MỘT CƠ THỂ KHỎE MẠNH</li>
+                    <li><?php echo $results[0]["description"]; ?></li>
                 </ul>
                 <div class="item-ex2-btn">
-                    <button class="btn-ex">THAM GIA NGAY</button>
+                    <button class="btn-ex">Register now</button>
                 </div>
             </div>
         </div>
-        <div class="content-ex">
-            <div class="item-content-ex">
-                <img src="https://images.pexels.com/photos/866021/pexels-photo-866021.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-                <button class="btn-content-ex">YOGA</button>
-            </div>
-            <div class="item-content-ex">
-                <img src="https://images.pexels.com/photos/690597/pexels-photo-690597.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-                <button class="btn-content-ex">KARATE</button>
-            </div>
-            <div class="item-content-ex">
-                <img src="https://images.pexels.com/photos/3340318/pexels-photo-3340318.jpeg" alt="">
-                <button class="btn-content-ex">JUMBA</button>
-            </div>
-        </div>
+
         <div class="spAndfn">
             <div class="bgr-sp"></div>
-            <div class="container-sp"></div>
+            <div class="container-sp" style="background-image: url(https://th.bing.com/th/id/R.5e3afdbc3df8ad43667e88420ede0417?rik=JjM%2fcj47oZPQ3w&riu=http%3a%2f%2fwww.musclemango.com%2fwp-content%2fuploads%2f2019%2f12%2f468884-PFZ4P2-187.jpg&ehk=AvU3cpcXr4j%2fjw6nR2e9EeCx69ODNcpeB0VMgYvAYGg%3d&risl=&pid=ImgRaw&r=0);"></div>
             <div class="container-text">    
                 <h1>ĐĂNG KÝ ĐỂ ĐƯỢC SỬ DỤNG NHỮNG TRANG THIẾT BỊ CAO CẤP NHẤT HIỆN NAY</h1>
                 <div class="btn-sp">
@@ -1184,41 +1197,32 @@
                         <span class="circle" aria-hidden="true">
                         <span class="icon arrow"></span>
                         </span>
-                        <span class="button-text">Đăng Ký Ngay</span>
+                        <span class="button-text">Register now</span>
                       </button>
                     </div>
                 </div>
             </div>
         </div>
         </div>
+       
         <div class="title-sp">
-                <h2>Một số sản phẩm hiện tại<br>của chúng tôi: </h2>
+                <h2>Most advanced equipment !!</h2>
         </div>
         <div class="product-sp">
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/841130/pexels-photo-841130.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/260352/pexels-photo-260352.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/4162449/pexels-photo-4162449.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://images.pexels.com/photos/136404/pexels-photo-136404.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://th.bing.com/th/id/R.576f831d695b2e6d23ebd53d879942ad?rik=gV6SXXK6gBmjaQ&pid=ImgRaw&r=0" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://toiyeugym.vn/wp-content/uploads/2020/09/phong-tap-gym-quan-go-vap-02.jpg" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://pt-fitness.com/wp-content/uploads/2020/06/tieu-chuan-thiet-ke-phong-tap-gym-1024x500.jpg" alt="">
-            </div>
-            <div class="product-sp-item">
-                <img src="https://th.bing.com/th/id/R.711b31753207fe9ed5b6227fe4045d78?rik=Ru4lW2gHP30u8g&pid=ImgRaw&r=0" alt="">
-            </div>
+            <?php
+                $c = new config;
+                $conn = $c->connect();
+                $sql = "select G.dir gdir,G.img_name gimgname,D.name FROM galery G INNER JOIN device D ON G.item_id = D.device_id WHERE G.galery_type_name = 'device' AND D.flag = '1' AND G.flag = '1';";
+                $stmt = $conn->prepare($sql);
+                $stmt->execute();
+                $results = $stmt->fetchAll();
+                foreach($results as $row) {
+                    echo '<div class="product-sp-item">
+                                <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                            </div>';
+                }
+                $conn = null;
+            ?>
         </div>
     
     <section class="footer">

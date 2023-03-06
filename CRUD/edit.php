@@ -376,7 +376,7 @@
                 case "device":
                     $p = new device;
                     $mes = "";
-                    if(isset($_GET["utilities_id"])) {
+                    if(isset($_GET["device_id"])) {
                         $p->device_id = $_GET["device_id"];
                     }
                     if(isset($_POST["save"])) {

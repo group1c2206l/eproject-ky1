@@ -302,6 +302,138 @@ section{
     grid-gap: 2rem;
 }
 
+/* photo library */
+.blogs .blogs-slider{
+    padding-bottom: 4rem;
+}
+
+.blogs .blogs-slider .box{
+    position: relative;
+    overflow: hidden;
+    margin: 1rem 0;
+    background: #fafafa;
+    box-shadow: 0 .5rem .5rem rgba(0,0,0,.3);
+}
+
+.blogs .blogs-slider .box .image{
+    height: 50rem;
+    width: 100%;
+    overflow: hidden;
+}
+
+.blogs .blogs-slider .box .image img{
+    height: 100%;
+    width: 100%;
+    object-fit: cover;
+}
+
+.blogs .blogs-slider .box:hover .image img{
+    transform: scale(1.2);
+}
+
+.blogs .blogs-slider .box .content{
+    padding: 2rem;
+    padding-bottom: 1rem;
+}
+
+.blogs .blogs-slider .box .content h3{
+    font-size: 2rem;
+    color: var(--back);
+    font-weight: bold;
+    padding-bottom: 1rem;
+}
+
+.blogs .blogs-slider .box .content span{
+    font-size: 1.3rem;
+    color:var(--main-color);
+}
+
+
+.blogs .blogs-slider .box .content p{
+    padding-top: 1rem;
+    color: #808080;
+    font-size: 1.5rem;
+    line-height: 1.8;
+}
+
+.blogs .blogs-slider .box .button{
+    text-align: center;
+    padding-bottom: 2rem;
+}
+
+.blogs .blogs-slider .box .button .btn{
+    background: var(--main-color);
+    color: #fff;
+}
+
+/* slide */
+.galery {
+    width: 80%;
+    margin: 0 10%;
+}
+.galery .swiper {
+    width: 100%;
+    height: 100%;
+ }
+
+.galery  .swiper-slide {
+    text-align: center;
+    font-size: 18px;
+    background: #fff;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+.galery  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 80%;
+    object-fit: cover;
+  }
+
+.galery .swiper {
+    width: 100%;
+    height: 200px;
+    margin-left: auto;
+    margin-right: auto;
+  }
+
+  .galery  .swiper-slide {
+    background-size: cover;
+    background-position: center;
+  }
+
+  .galery  .mySwiper2 {
+    height: 80%;
+    width: 100%;
+  }
+
+  .galery .mySwiper {
+    height: 20%;
+    box-sizing: border-box;
+    padding: 10px 0;
+  }
+
+  .galery  .mySwiper .swiper-slide {
+    width: 25%;
+    height: 100%;
+    opacity: 0.4;
+  }
+
+  .galery .mySwiper .swiper-slide-thumb-active {
+    opacity: 1;
+  }
+
+  .galery  .swiper-slide img {
+    display: block;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+  }
+
+
+
 /* footer starts */
 
 .footer{

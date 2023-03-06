@@ -597,12 +597,12 @@
                         $mes = "";
                         if(isset($_POST["save"])) {
                             if(isset($_POST["name"])) {
-                                $p->name = $_POST["name"];
+                                $p->galery_type_name = $_POST["name"];
                             }
                             if(isset($_POST["galery_type_id"])) {
                                 $p->galery_type_id = $_POST["galery_type_id"];
                             }
-                            if($p->name != NULL) {
+                            if($p->galery_type_name != NULL) {
                                 $p->addnew();
                                 header("location: dashboard.php?select=galery_type");
                             } else {
@@ -628,10 +628,12 @@
                         $mes = "";
                         // $p->item_id = $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->person_trainer_id = $p->member_id = "";
                         if(isset($_GET["option"])) {
-                            if(isset($_GET["galery_type_name"])) {
-                                $p->galery_type_name = $_GET["galery_type_name"];
+                            if(isset($_GET["galery_type_id"])) {
+                                $p->galery_type_id = $_GET["galery_type_id"];
+                                $p->galery_type_name = $p->id_to_name("galery_type_name","galery_type","galery_type_id",$p->galery_type_id);
                             }
                         }
+
                         if(isset($_POST["save"])) {
                             if(isset($_POST["item_id"])) {
                                 $p->item_id = $_POST["item_id"];
@@ -645,65 +647,64 @@
                             if(isset($_FILES["img_name"]["tmp_name"])) {
                                 $p->img_tmp = $_FILES["img_name"]["tmp_name"];
                             }
-                            if(isset($_GET["galery_type_name"])) {
-                                $p->galery_type_name = $_GET["galery_type_name"];
-                                switch($p->galery_type_name) {
-                                    case "slide":
-                                        $p->dir = './assets/image/slide/';
-                                        $p->item_id = $p->galery_type_count("slide");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                                    case "background":
-                                        $p->dir = './assets/image/background/';
-                                        $p->item_id = $p->galery_type_count("background");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                    
-                                    case "course":
-                                        $p->dir = './assets/image/course/';
-                                        $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
-                                    break;
-                                    case "logo":
-                                        $p->dir = './assets/image/logo/';
-                                        $p->item_id = $p->galery_type_count("slide");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                                    case "person_trainer":
-                                        $p->dir = './assets/image/PT/';
-                                        $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->item_id);
-                                    break;
-                                    case "device":
-                                        $p->dir = './assets/image/device/';
-                                        $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
-                                    break;
-                                    case "utilities":
-                                        $p->dir = './assets/image/utilities/';
-                                        $p->item_name = $p->id_to_name("name","utilities","utilities_id",$p->item_id);
-                                    break;
-                                    case "service":
-                                        $p->dir = './assets/image/service/';
-                                        $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
-                                    break;
-                                    case "package":
-                                        $p->dir = './assets/image/package/';
-                                        $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
-                                    break;
-                                    case "member":
-                                        $p->dir = './assets/image/member/';
-                                        $p->item_name = $p->id_to_name("lname","member","member_id",$p->item_id);
-                                    break;
-                                    case "talk_about_me":
-                                        $p->dir = './assets/image/talk_about_me/';
-                                    break;
-                                    case "about":
-                                        $p->dir = './assets/image/about/';
-                                        $p->item_id = $p->galery_type_count("about");
-                                        $p->item_name = "about ".$p->item_id;
-                                    break;
-                                }
+
+                            switch($p->galery_type_name) {
+                                case "slide":
+                                    $p->dir = './assets/image/slide/';
+                                    $p->item_id = $p->galery_type_count("slide");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                                case "background":
+                                    $p->dir = './assets/image/background/';
+                                    $p->item_id = $p->galery_type_count("background");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                
+                                case "course":
+                                    $p->dir = './assets/image/course/';
+                                    $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
+                                break;
+                                case "logo":
+                                    $p->dir = './assets/image/logo/';
+                                    $p->item_id = $p->galery_type_count("slide");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                                case "person_trainer":
+                                    $p->dir = './assets/image/PT/';
+                                    $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->item_id);
+                                break;
+                                case "device":
+                                    $p->dir = './assets/image/device/';
+                                    $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
+                                break;
+                                case "utilities":
+                                    $p->dir = './assets/image/utilities/';
+                                    $p->item_name = $p->id_to_name("name","utilities","utilities_id",$p->item_id);
+                                break;
+                                case "service":
+                                    $p->dir = './assets/image/service/';
+                                    $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
+                                break;
+                                case "package":
+                                    $p->dir = './assets/image/package/';
+                                    $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
+                                break;
+                                case "member":
+                                    $p->dir = './assets/image/member/';
+                                    $p->item_name = $p->id_to_name("lname","member","member_id",$p->item_id);
+                                break;
+                                case "talk_about_me":
+                                    $p->dir = './assets/image/talk_about_me/';
+                                break;
+                                case "about":
+                                    $p->dir = './assets/image/about/';
+                                    $p->item_id = $p->galery_type_count("about");
+                                    $p->item_name = "about ".$p->item_id;
+                                break;
                             }
+                            
                             print_r($p);
-                            echo $_FILES["img_name"]["size"];
+                            // echo $_FILES["img_name"]["size"];
 
                             if($_FILES["img_name"]["size"] < $p->maxfilesize) {
                                 if($p->galery_type_name != NULL) {
@@ -721,11 +722,11 @@
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center text-light">Add news Galery</h3>
                                     <form action="" method="get">
-                                        <label for="galery_type_name" class="text-white-50 ">Select Option</label>
+                                        <label for="galery_type_id" class="text-white-50 ">Select Option</label>
                                         <input type="text" name="select" value="'.$select.'" class="d-none">
-                                        <select name="galery_type_name" id="galery_type_name" class="form-control bg-dark text-white ">
+                                        <select name="galery_type_id" id="galery_type_id" class="form-control bg-dark text-white ">
                                             <option selected disabled>Please Select option below:</option>';
-                        echo                $p->list_data_name($p->galery_type_name,"galery_type_id","name","galery_type");
+                        echo                $p->list_data($p->galery_type_name,"galery_type_id","galery_type_name","galery_type");
                         echo            '</select>
                                          <button type="submit" class="btn btn-primary mb-2 mt-3" name="option" value="ok">option</button>
                                     </form>

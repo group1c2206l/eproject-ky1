@@ -43,7 +43,7 @@ CREATE TABLE employee(
     CONSTRAINT PK_employee PRIMARY KEY (employee_id)
 );
 
--- danh sach nguoi huong dan club
+-- list of person trainer
 CREATE TABLE person_trainer(
     person_trainer_id INT AUTO_INCREMENT NOT NULL,
     fname VARCHAR(50) NOT NULL,
@@ -102,16 +102,6 @@ CREATE TABLE service(
     CONSTRAINT PK_service_id PRIMARY KEY (service_id)
 );
 
-CREATE TABLE service_device(
-    service_device_id INT AUTO_INCREMENT NOT NULL ,
-    service_id INT NOT NULL,
-    device_id INT NOT NULL,
-    flag INT DEFAULT 1, 
-    create_at DATETIME,
-    update_at DATETIME,
-    CONSTRAINT PK_service_device_id PRIMARY KEY (service_device_id)
-);
-
 CREATE TABLE package(
     package_id INT AUTO_INCREMENT NOT NULL ,
     name VARCHAR(50) NOT NULL,
@@ -166,16 +156,18 @@ CREATE TABLE member(
 -- phan tach thu vien anh cho tung chuyen muc khac nhau
 CREATE TABLE galery_type(
     galery_type_id INT AUTO_INCREMENT NOT NULL,
-    name VARCHAR(50) NOT NULL, -- ex: slide, device, package, course, service, employee
+    galery_type_name VARCHAR(50) NOT NULL, -- ex: slide, device, package, course, service, employee
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
-    CONSTRAINT PK_galery_type_id PRIMARY KEY (galery_type_id)
+    CONSTRAINT PK_galery_type_id PRIMARY KEY (galery_type_id),
+    CONSTRAINT PK_galery_type_name PRIMARY KEY (galery_type_name)
 );
 
 CREATE TABLE galery(
     galery_id INT AUTO_INCREMENT NOT NULL ,
-    galery_type_id INT NOT NULL, 
+    galery_type_id INT NOT NULL,
+    galery_type_name VARCHAR(50) NOT NULL, 
     item_id INT,
     item_name VARCHAR(50),
     note INT VARCHAR(500),
@@ -184,7 +176,7 @@ CREATE TABLE galery(
     flag INT DEFAULT 1, 
     create_at DATETIME,
     update_at DATETIME,
-    CONSTRAINT PK_galery_id PRIMARY KEY (galery_id)
+    CONSTRAINT PK_galery_id PRIMARY KEY (galery_id),
 );
 
 CREATE TABLE about(
@@ -198,45 +190,23 @@ CREATE TABLE about(
     CONSTRAINT PK_about_id PRIMARY KEY (about_id)
 );
 
+ALTER TABLE galery_type
+ADD CONSTRAINT PK_galery_type_name PRIMARY KEY (galery_type_name);
 
 ALTER TABLE role
-CONSTRAINT FK_role_employee_id FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
+ADD FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
 
 ALTER TABLE member
-CONSTRAINT FK_member_package_id FOREIGN KEY (package_id) REFERENCES package(package_id);
+ADD CONSTRAINT FK_member_package_id FOREIGN KEY (package_id) REFERENCES package(package_id);
 
 ALTER TABLE member
-CONSTRAINT FK_member_course_id FOREIGN KEY (course_id) REFERENCES course(course_id);
-
-ALTER TABLE service_device
-CONSTRAINT FK_service_id FOREIGN KEY (service_id) REFERENCES service(service_id);
-
-ALTER TABLE service_device
-CONSTRAINT FK_device_id FOREIGN KEY (device_id) REFERENCES device(device_id);
+ADD CONSTRAINT FK_member_course_id FOREIGN KEY (course_id) REFERENCES course(course_id);
 
 ALTER TABLE course
-CONSTRAINT FK_device_id FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_member_id FOREIGN KEY (member_id) REFERENCES member(member_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_device_id FOREIGN KEY (device_id) REFERENCES device(device_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_service_id FOREIGN KEY (service_id) REFERENCES service(service_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_course_id FOREIGN KEY (course_id) REFERENCES course(course_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_employee_id FOREIGN KEY (employee_id) REFERENCES employee(employee_id);
-
-ALTER TABLE galery_option
-CONSTRAINT FK_go_package_id FOREIGN KEY (package_id) REFERENCES package(package_id);
+ADD CONSTRAINT FK_person_trainer_id FOREIGN KEY (person_trainer_id) REFERENCES person_trainer(person_trainer_id);
 
 ALTER TABLE galery
-CONSTRAINT FK_galery_go_id FOREIGN KEY (galery_option_id) REFERENCES galery_option(galery_option_id);
+ADD CONSTRAINT FK_galery_type FOREIGN KEY (galery_type_id) REFERENCES galery_type(galery_type_id);
 
 -- Mô hình kinh doanh :
 -- * các dịnh vụ luyện tập bao gồm:
