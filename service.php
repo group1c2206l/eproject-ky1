@@ -957,6 +957,14 @@
                     margin-top: 5px;
                     background: #222;
                     height: 300px;
+                    display: flex;
+                    flex-wrap: wrap;
+                }
+                
+                @media (max-width: 1140px){
+                    .footer{
+                        height: 600px;
+                    }
                 }
 
                 .footer .box-container{
