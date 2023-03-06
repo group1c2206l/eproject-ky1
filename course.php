@@ -33,7 +33,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym</title>
     <!-- link CSS -->
-    <link rel="stylesheet" href="./assets/css/index.css">
+    <!-- <link rel="stylesheet" href="./assets/css/index.css"> -->
+    <link rel="stylesheet" href="./assets/css/course.css">
     <!-- <link rel="stylesheet" href="./assets/css/course.css"> -->
     <!-- link icon -->
     <link rel="stylesheet" href="https://kit.fontawesome.com/83128b721a.css" crossorigin="anonymous">
@@ -90,7 +91,7 @@
                                 </div>
                                 <div class="learn-about">
                                     <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
-                                    <div style="position: absolute; top: 40%; left: 10%; transform: translate(-50%, -50%); z-index: 1;">
+                                    <div class="note">
                                         <a href="./package.php"><p>Jont Now</p></a>
                                     </div>
                                 </div>
