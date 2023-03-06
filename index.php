@@ -264,7 +264,6 @@
             </div>
         </div>
     </section>
-
     <!-- blogs section ends -->
 
     <!-- footer section starts -->

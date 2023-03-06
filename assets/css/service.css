@@ -794,6 +794,7 @@ animation: fadeInLeft 1s;
         .title-sp h2{
             text-align: center;
             padding-top: 20px;
+            padding-bottom: 20px;
         }
         .product-sp{
             display: grid;

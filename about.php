@@ -32,7 +32,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gym</title>
-
     <!-- link icon -->
     <link rel="stylesheet" href="https://kit.fontawesome.com/83128b721a.css" crossorigin="anonymous">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.4/css/all.css" integrity="sha384-DyZ88mC6Up2uqS4h/KRgHuoeGwBcD4Ng9SiP4dIRy0EXTlnuz47vAwmeGwVChigm" crossorigin="anonymous"/>
@@ -58,7 +57,6 @@
                 } else {
                     echo '<a href="./logout.php">Logout</a>';
                 }
-            
             ?>
         </nav>
 
@@ -118,37 +116,130 @@
 
     </section>
 
-    <!-- senior coach -->
-    <section class="trainers" style="background-image: url('./assets/image/trainer_page/info-pt/bg1.png');">
-        <h1 class="heading">Senior<span> coach</span></h1>
-        <div class="trainer-slider">
-            <div class="wrapper">
+
+    
+    <!-- photo libraly -->
+    <section class="blogs">
+        <h1 class="heading">Photos <span>GALLERY</span></h1>
+        <div class="swiper blogs-slider">
+            <div class="swiper-wrapper wapper">
                 <?php
                     $c = new config;
                     $conn = $c->connect();
-                    $sql = "select G.dir gdir,G.img_name gimgname,P.lname,P.trainer_job, P.person_id FROM galery G INNER JOIN person_trainer P ON G.item_id = P.person_trainer_id WHERE G.galery_type_name = 'person_trainer' AND P.flag = '1';";
+                    $sql = "SELECT G.dir gdir,G.img_name gimgname,G.note,M.lname lname, M.mname, M.fname fname FROM galery G INNER JOIN member M ON G.item_id = M.member_id WHERE M.vip = 1 AND G.galery_type_name = 'member';";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $results = $stmt->fetchAll();
                     foreach($results as $row) {
                         echo '<div class="swiper-slide box">
-                                    <a href="./infomation-trainer.php?trainerID='.$row["person_id"].'">
-                                        <div class="image">
-                                            <img src='.$row["gdir"].$row["gimgname"].' alt="">
-                                        </div>
-                                        <div class="info-trainer">
-                                            <h1>'.$row["lname"].'</h1>
-                                            <p>'.$row["trainer_job"].'</p>
-                                        </div>
-                                    </a>
+                                    <div class="image">
+                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                    </div>
                                 </div>';
                     }
                     $conn = null;
                 ?>
-                
             </div>
         </div>
     </section>
+
+    <!-- photo libraly -->
+    <section class="blogs">
+        <div class="swiper blogs-slider">
+            <div class="swiper-wrapper wapper">
+                <?php
+                    $c = new config;
+                    $conn = $c->connect();
+                    $sql = "SELECT G.dir gdir,G.img_name gimgname,G.note,M.lname lname, M.mname, M.fname fname FROM galery G INNER JOIN member M ON G.item_id = M.member_id WHERE M.vip = 1 AND G.galery_type_name = 'member';";
+                    $stmt = $conn->prepare($sql);
+                    $stmt->execute();
+                    $results = $stmt->fetchAll();
+                    foreach($results as $row) {
+                        echo '<div class="swiper-slide box">
+                                    <div class="image">
+                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                    </div>
+                                </div>';
+                    }
+                    $conn = null;
+                ?>
+            </div>
+        </div>
+    </section>
+
+    <!-- slide -->
+    <div class="galery">
+        <div style="--swiper-navigation-color: #fff; --swiper-pagination-color: #fff" class="swiper mySwiper2">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                </div>
+            </div>
+            <div class="swiper-button-next"></div>
+            <div class="swiper-button-prev"></div>
+        </div>
+        <div thumbsSlider="" class="swiper mySwiper">
+            <div class="swiper-wrapper">
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-1.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-2.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-3.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-4.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-5.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-6.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-7.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-8.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-9.jpg" />
+                </div>
+                <div class="swiper-slide">
+                    <img src="https://swiperjs.com/demos/images/nature-10.jpg" />
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- footer -->
 
     <section class="footer">
