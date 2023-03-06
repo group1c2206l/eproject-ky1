@@ -630,10 +630,11 @@
                         if(isset($_GET["option"])) {
                             if(isset($_GET["galery_type_id"])) {
                                 $p->galery_type_id = $_GET["galery_type_id"];
+                                $p->galery_type_name = $p->id_to_name("galery_type_name","galery_type","galery_type_id",$p->galery_type_id);
                             }
                         }
+
                         if(isset($_POST["save"])) {
-                            $p->galery_type_name = $p->id_to_name("galery_type_name","galery_type","galery_type_id",$p->galery_type_id);
                             if(isset($_POST["item_id"])) {
                                 $p->item_id = $_POST["item_id"];
                             }
@@ -646,64 +647,63 @@
                             if(isset($_FILES["img_name"]["tmp_name"])) {
                                 $p->img_tmp = $_FILES["img_name"]["tmp_name"];
                             }
-                            if(isset($_GET["galery_type_name"])) {
-                                $p->galery_type_name = $_GET["galery_type_name"];
-                                switch($p->galery_type_name) {
-                                    case "slide":
-                                        $p->dir = './assets/image/slide/';
-                                        $p->item_id = $p->galery_type_count("slide");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                                    case "background":
-                                        $p->dir = './assets/image/background/';
-                                        $p->item_id = $p->galery_type_count("background");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                    
-                                    case "course":
-                                        $p->dir = './assets/image/course/';
-                                        $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
-                                    break;
-                                    case "logo":
-                                        $p->dir = './assets/image/logo/';
-                                        $p->item_id = $p->galery_type_count("slide");
-                                        $p->item_name = "slide ".$p->item_id;
-                                    break;
-                                    case "person_trainer":
-                                        $p->dir = './assets/image/PT/';
-                                        $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->item_id);
-                                    break;
-                                    case "device":
-                                        $p->dir = './assets/image/device/';
-                                        $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
-                                    break;
-                                    case "utilities":
-                                        $p->dir = './assets/image/utilities/';
-                                        $p->item_name = $p->id_to_name("name","utilities","utilities_id",$p->item_id);
-                                    break;
-                                    case "service":
-                                        $p->dir = './assets/image/service/';
-                                        $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
-                                    break;
-                                    case "package":
-                                        $p->dir = './assets/image/package/';
-                                        $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
-                                    break;
-                                    case "member":
-                                        $p->dir = './assets/image/member/';
-                                        $p->item_name = $p->id_to_name("lname","member","member_id",$p->item_id);
-                                    break;
-                                    case "talk_about_me":
-                                        $p->dir = './assets/image/talk_about_me/';
-                                    break;
-                                    case "about":
-                                        $p->dir = './assets/image/about/';
-                                        $p->item_id = $p->galery_type_count("about");
-                                        $p->item_name = "about ".$p->item_id;
-                                    break;
-                                }
+
+                            switch($p->galery_type_name) {
+                                case "slide":
+                                    $p->dir = './assets/image/slide/';
+                                    $p->item_id = $p->galery_type_count("slide");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                                case "background":
+                                    $p->dir = './assets/image/background/';
+                                    $p->item_id = $p->galery_type_count("background");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                
+                                case "course":
+                                    $p->dir = './assets/image/course/';
+                                    $p->item_name = $p->id_to_name("name","course","course_id",$p->item_id);
+                                break;
+                                case "logo":
+                                    $p->dir = './assets/image/logo/';
+                                    $p->item_id = $p->galery_type_count("slide");
+                                    $p->item_name = "slide ".$p->item_id;
+                                break;
+                                case "person_trainer":
+                                    $p->dir = './assets/image/PT/';
+                                    $p->item_name = $p->id_to_name("lname","person_trainer","person_trainer_id",$p->item_id);
+                                break;
+                                case "device":
+                                    $p->dir = './assets/image/device/';
+                                    $p->item_name = $p->id_to_name("name","device","device_id",$p->item_id);
+                                break;
+                                case "utilities":
+                                    $p->dir = './assets/image/utilities/';
+                                    $p->item_name = $p->id_to_name("name","utilities","utilities_id",$p->item_id);
+                                break;
+                                case "service":
+                                    $p->dir = './assets/image/service/';
+                                    $p->item_name = $p->id_to_name("name","service","service_id",$p->item_id);
+                                break;
+                                case "package":
+                                    $p->dir = './assets/image/package/';
+                                    $p->item_name = $p->id_to_name("name","package","package_id",$p->item_id);
+                                break;
+                                case "member":
+                                    $p->dir = './assets/image/member/';
+                                    $p->item_name = $p->id_to_name("lname","member","member_id",$p->item_id);
+                                break;
+                                case "talk_about_me":
+                                    $p->dir = './assets/image/talk_about_me/';
+                                break;
+                                case "about":
+                                    $p->dir = './assets/image/about/';
+                                    $p->item_id = $p->galery_type_count("about");
+                                    $p->item_name = "about ".$p->item_id;
+                                break;
                             }
-                            // print_r($p);
+                            
+                            print_r($p);
                             // echo $_FILES["img_name"]["size"];
 
                             if($_FILES["img_name"]["size"] < $p->maxfilesize) {
