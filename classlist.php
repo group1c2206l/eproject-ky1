@@ -1236,6 +1236,7 @@
 
     class galery_type extends main {
         public $galery_type_id;
+        public $galery_type_name;
 
         public function show_header() {
             echo "<tr>
@@ -1250,7 +1251,7 @@
         public function show_item() {
             echo '<tr>
                     <td>'.$this->galery_type_id.'</td>
-                    <td>'.$this->name.'</td>
+                    <td>'.$this->galery_type_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&name='.$this->name.'">Edit</a></button></td>
@@ -1262,11 +1263,11 @@
             
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO galery_type(name,create_at) VALUES (:name,NOW())';
+            $sql = 'INSERT INTO galery_type(galery_type_name,create_at) VALUES (:galery_type_name,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":name" => $this->name,
+                    ":galery_type_name" => $this->galery_type_name,
                 )
             );
         }
@@ -1274,11 +1275,11 @@
         public function edit() {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'UPDATE galery_type SET name = :name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
+            $sql = 'UPDATE galery_type SET galery_type_name = :galery_type_name,update_at = NOW() WHERE galery_type_id = :galery_type_id;';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
-                    ":name" => $this->name,
+                    ":galery_type_name" => $this->galery_type_name,
                     ":galery_type_id" => $this->galery_type_id,
                 )
             );
@@ -1340,7 +1341,7 @@
                     <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
-                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'&dir='.$this->dir.'">Edit</a></button></td>
+                    <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_id='.$this->galery_type_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'&dir='.$this->dir.'">Edit</a></button></td>
                     <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
                 </tr>';
         }
@@ -1353,10 +1354,11 @@
             $allowtype = array('jpg','png','jpeg','gif','pdf');
             if(in_array($filetype,$allowtype)) {
                 if(move_uploaded_file($this->img_tmp,$file_path)) {
-                    $sql = "INSERT INTO galery(galery_type_name,item_id,item_name,note,dir,img_name,CREATE_AT) VALUES (:galery_type_name,:item_id,:item_name,:note,:dir,:img_name,NOW())";
+                    $sql = "INSERT INTO galery(galery_type_id,galery_type_name,item_id,item_name,note,dir,img_name,CREATE_AT) VALUES (:galery_type_id,:galery_type_name,:item_id,:item_name,:note,:dir,:img_name,NOW())";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute(
                         array (
+                            "galery_type_id" => $this->galery_type_id,
                             "galery_type_name" => $this->galery_type_name,
                             "item_id" => $this->item_id,
                             "item_name" => $this->item_name,

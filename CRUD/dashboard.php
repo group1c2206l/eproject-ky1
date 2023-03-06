@@ -788,7 +788,7 @@
                                     $p->flag = $row["flag"];
                                     if($p->flag == 1) {
                                         $p->galery_type_id = $row["galery_type_id"];
-                                        $p->name = $row["name"];
+                                        $p->galery_type_name = $row["galery_type_name"];
                                         $p->create_at = $row["create_at"];
                                         $p->update_at = $row["update_at"];
                                         $p->show_item();
@@ -836,6 +836,7 @@
                                     $p->flag = $row["flag"];
                                     if($p->flag == 1) {
                                         $p->galery_id = $row["galery_id"];
+                                        $p->galery_type_id = $row["galery_type_id"];
                                         $p->galery_type_name = $row["galery_type_name"];
                                         $p->item_id = $row["item_id"];
                                         $p->item_name = $row["item_name"];

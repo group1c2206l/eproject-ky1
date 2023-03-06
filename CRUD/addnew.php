@@ -597,12 +597,12 @@
                         $mes = "";
                         if(isset($_POST["save"])) {
                             if(isset($_POST["name"])) {
-                                $p->name = $_POST["name"];
+                                $p->galery_type_name = $_POST["name"];
                             }
                             if(isset($_POST["galery_type_id"])) {
                                 $p->galery_type_id = $_POST["galery_type_id"];
                             }
-                            if($p->name != NULL) {
+                            if($p->galery_type_name != NULL) {
                                 $p->addnew();
                                 header("location: dashboard.php?select=galery_type");
                             } else {
@@ -628,11 +628,12 @@
                         $mes = "";
                         // $p->item_id = $p->device_id = $p->service_id =  $p->package_id =  $p->course_id = $p->person_trainer_id = $p->member_id = "";
                         if(isset($_GET["option"])) {
-                            if(isset($_GET["galery_type_name"])) {
-                                $p->galery_type_name = $_GET["galery_type_name"];
+                            if(isset($_GET["galery_type_id"])) {
+                                $p->galery_type_id = $_GET["galery_type_id"];
                             }
                         }
                         if(isset($_POST["save"])) {
+                            $p->galery_type_name = $p->id_to_name("galery_type_name","galery_type","galery_type_id",$p->galery_type_id);
                             if(isset($_POST["item_id"])) {
                                 $p->item_id = $_POST["item_id"];
                             }
@@ -702,8 +703,8 @@
                                     break;
                                 }
                             }
-                            print_r($p);
-                            echo $_FILES["img_name"]["size"];
+                            // print_r($p);
+                            // echo $_FILES["img_name"]["size"];
 
                             if($_FILES["img_name"]["size"] < $p->maxfilesize) {
                                 if($p->galery_type_name != NULL) {
@@ -721,11 +722,11 @@
                         echo   '<div class="mt-5 num">
                                     <h3 class="text-center text-light">Add news Galery</h3>
                                     <form action="" method="get">
-                                        <label for="galery_type_name" class="text-white-50 ">Select Option</label>
+                                        <label for="galery_type_id" class="text-white-50 ">Select Option</label>
                                         <input type="text" name="select" value="'.$select.'" class="d-none">
-                                        <select name="galery_type_name" id="galery_type_name" class="form-control bg-dark text-white ">
+                                        <select name="galery_type_id" id="galery_type_id" class="form-control bg-dark text-white ">
                                             <option selected disabled>Please Select option below:</option>';
-                        echo                $p->list_data_name($p->galery_type_name,"galery_type_id","name","galery_type");
+                        echo                $p->list_data($p->galery_type_name,"galery_type_id","galery_type_name","galery_type");
                         echo            '</select>
                                          <button type="submit" class="btn btn-primary mb-2 mt-3" name="option" value="ok">option</button>
                                     </form>
