@@ -1057,22 +1057,20 @@
             <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
             
             <nav class="navbar">
-                <a href="./index.php">Home</a>
-                <a href="./about.php">About</a>
-                <a href="./service.php">Services</a>
-                <a href="./course.php">Course</a>
-                <a href="./trainer.php">Trainer</a>
-                <a href="#">Contact</a>
-                <?php
-                    if($user == "") {
-                        echo '<a href="./register.php">Login</a>';
-                    } else {
-                        echo '<a href="./logout.php">Logout</a>';
-                    }
-                
-                ?>
-            </nav>
-
+            <a href="./index.php">Home</a>
+            <a href="./about.php">About</a>
+            <a href="./service.php">Services</a>
+            <a href="./course.php">Course</a>
+            <a href="./package.php">Member</a>
+            <?php
+                if($user == "") {
+                    echo '<a href="./register.php">Login</a>';
+                } else {
+                    echo '<a href="./logout.php">Logout</a>';
+                }
+            
+            ?>
+        </nav>
             <div class="icons">
                 <?php 
                     if($user == "") {

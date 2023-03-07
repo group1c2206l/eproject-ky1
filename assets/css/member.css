@@ -201,6 +201,7 @@ section{
 }
 .home .btn-update button {
     padding: 4px;
+    width: 150px;
 }
 .home .edit-infor {
     width: 100%;
@@ -219,6 +220,8 @@ section{
 .home .edit-infor .group-item input {
     padding: 1rem 1rem;
     width: 60%;
+    /* min-width: 500px; */
+    /* max-width: 1000px; */
 }
 
 .home .edit-infor .about-you h4 {
@@ -231,7 +234,23 @@ section{
     margin-top: 1rem;
 }
 
-
+.home .faq h4 {
+    text-align: center;
+    color: #fff;
+    font-size: 2rem;
+    padding: 1rem 0;
+}
+.home .faq .faq-group {
+    margin-bottom: 2rem;
+}
+.home .faq h5 {
+    color: #868e96;
+    font-size: 1.5rem;
+}
+.home .faq p {
+    color: #868e96;
+    font-size: 1.1rem;
+}
 
 
 

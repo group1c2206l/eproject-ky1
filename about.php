@@ -49,14 +49,14 @@
             <a href="./about.php">About</a>
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
-            <a href="./trainer.php">Trainer</a>
-            <a href="#">Contact</a>
+            <a href="./package.php">Member</a>
             <?php
                 if($user == "") {
                     echo '<a href="./register.php">Login</a>';
                 } else {
                     echo '<a href="./logout.php">Logout</a>';
                 }
+            
             ?>
         </nav>
 

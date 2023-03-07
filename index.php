@@ -52,7 +52,6 @@
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
             <a href="./package.php">Member</a>
-            <a href="#">Contact</a>
             <?php
                 if($user == "") {
                     echo '<a href="./register.php">Login</a>';
@@ -274,11 +273,10 @@
                 <h1>quick Link</h1>
                 <div class="icon">
                     <a href="./index.php">Home</a>
-                    <a href="#">About</a>
-                    <a href="#">Services</a>
-                    <a href="./trainer.php">Trainer</a>
-                    <a href="#">Contact</a>
-                    <a href="./register.php">Login</a>
+                    <a href="./about.php">About</a>
+                    <a href="./service.php">Services</a>
+                    <a href="./course.php">Course</a>
+                    <a href="./package.php">Member</a>
                 </div>
             </div>
             <?php
