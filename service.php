@@ -48,7 +48,6 @@
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
     <link rel="stylesheet" href="./assets/css/service.css">
-<<<<<<< HEAD
     <style>
         :root{
         --main-color: #f05812;
@@ -1049,8 +1048,6 @@
                     overflow: hidden;
                 }
     </style>
-=======
->>>>>>> 5ed41f7dcd371547e3ce7c3e23cf50cfb66b4abc
 </head>
   <body>
         <header class="header">
