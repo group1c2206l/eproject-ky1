@@ -89,7 +89,7 @@
                                     <p>'.$row["description"].'</p>
                                 </div>
                                 <div class="learn-about">
-                                    <a href=""><img src="./assets/image/anh/btn-orange-1.png" alt=""></a>
+                                    <a href=""><img src="./assets/image/course/btn1.png" alt=""></a>
                                     <div class="note">
                                         <a href="./package.php"><p>Jont Now</p></a>
                                     </div>
