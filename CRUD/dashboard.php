@@ -98,6 +98,7 @@
 			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
 				<li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user_name"]  ?>">Change Password</a></li>
+				<li><a class="dropdown-item " href="../index.php">Home</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="../logout.php">Logout</a></li>
 			</ul>
@@ -110,24 +111,19 @@
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=role" ><i class="bi bi-person"></i>  Account</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=branch" ><i class="bi bi-building-add"></i>  Branch</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=employee" ><i class="bi bi-person-bounding-box"></i>  Employee</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-bookmarks"></i>  Member</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=member" ><i class="bi bi-person-fill-add"></i>  Member</a></div></td>
                 </tr>
                 <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=person_trainer" ><i class="bi bi-microsoft"></i>  Person Trainer</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=device" ><i class="bi bi-microsoft"></i>  Device</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-gift-fill"></i>  Service</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-images"></i>  Package</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=person_trainer" ><i class="bi bi-person-workspace"></i>  Person Trainer</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=device" ><i class="bi bi-motherboard"></i>  Device</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=service"><i class="bi bi-bank"></i>  Service</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=package" ><i class="bi bi-box-seam-fill"></i>  Package</a></div></td>
                 </tr>
                 <tr>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=utilities" ><i class="bi bi-apple"></i>  Utilities</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-images"></i>  Course</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_type" ><i class="bi bi-images"></i>  Galery Type</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=course" ><i class="bi bi-journal-check"></i>  Course</a></div></td>
+                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery_type" ><i class="bi bi-file-earmark-image"></i>  Galery Type</a></div></td>
                     <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="dashboard.php?select=galery" ><i class="bi bi-images"></i>  Galery</a></div></td>
-                </tr>
-                <tr>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../index.php"><i class="bi bi-house-heart-fill"></i>  Home</a></div></td>
-                    <td class="text-start align-middle mmm"><div class="dblink" ><a class="fw-bold text-light open text-decoration-none"  href="../logout.php"><i class="bi bi-box-arrow-in-left"></i>  Logout</a></div></td>
-
                 </tr>
             </table>
         </div>
@@ -730,6 +726,7 @@
                                     if($p->flag == 1) {
                                         $p->member_id = $row["member_id"];
                                         $p->card_id = $row["card_id"];
+                                        $p->password_hash = $row["password_hash"];
                                         $p->fname = $row["fname"];
                                         $p->mname = $row["mname"];
                                         $p->lname = $row["lname"];
