@@ -1,11 +1,12 @@
-let register = document.getElementById("register-form");
-let login = document.getElementById("login-form");
-let reset = document.getElementById("reset-form");
-let newPass = document.getElementById("new-pass-form");
-let menu_reg = document.getElementById("reg-menu");
-let menu_login = document.getElementById("login-menu");
+"use strict";
+var register = document.getElementById("register-form");
+var login = document.getElementById("login-form");
+var reset = document.getElementById("reset-form");
+var newPass = document.getElementById("new-pass-form");
+var menu_reg = document.getElementById("reg-menu");
+var menu_login = document.getElementById("login-menu");
 // login.style.display = "none";
-let num;
+var num;
 num =Number.parseInt(localStorage.getItem("menu")) ;
 console.log(num);
 if(num == 1 || num == 2 || num == 3 || num == 4) {
@@ -53,18 +54,18 @@ function show(a) {
     }
 }
 
-let r_email = document.querySelector(".r_email");
-let l_email = document.querySelector(".l_email");
-let f_email = document.querySelector(".f_email");
-let l_pwd = document.querySelector('.l_pwd');
-let r_pwd = document.querySelector('.r_pwd');
-let n_pwd = document.querySelector('.n_pwd');
-let repwd = document.querySelector('.r_repwd');
-let n_repwd = document.querySelector('.n_repwd');
-let fname = document.querySelector('input[name="fname"]');
-let mname = document.querySelector('input[name="mname"]');
-let lname = document.querySelector('input[name="lname"]');
-let phone = document.querySelector('input[name="phone_number"]');
+var r_email = document.querySelector(".r_email");
+var l_email = document.querySelector(".l_email");
+var f_email = document.querySelector(".f_email");
+var l_pwd = document.querySelector('.l_pwd');
+var r_pwd = document.querySelector('.r_pwd');
+var n_pwd = document.querySelector('.n_pwd');
+var r_repwd = document.querySelector('.r_repwd');
+var n_repwd = document.querySelector('.n_repwd');
+var fname = document.querySelector('input[name="fname"]');
+var mname = document.querySelector('input[name="mname"]');
+var lname = document.querySelector('input[name="lname"]');
+var phone = document.querySelector('input[name="phone_number"]');
 const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
 const regexPass = /^[a-zA-Z0-9@]{6,}$/;
 const regexPhone = /^0[0-9]{9}$/;
@@ -139,13 +140,13 @@ function validate_Register_Form() {
         return false;
     }
 
-    if(pwd.value.trim() !== repwd.value.trim()) {
+    if(r_pwd.value.trim() !== r_repwd.value.trim()) {
         alert("pass khong trung nhau");
         return false;
     }
 
     if(fname.value.trim() === "" || lname.value.trim() === "") {
-        alert("Khong de trong truong nay");
+        alert("Do not leave first and last name blank");
         return false;
     }
 

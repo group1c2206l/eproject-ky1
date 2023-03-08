@@ -1058,7 +1058,7 @@
             <a href="./about.php">About</a>
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
-            <a href="./package.php">Member</a>
+            <a href="./package.php">Package</a>
             <?php
                 if($user == "") {
                     echo '<a href="./register.php">Login</a>';
@@ -1186,7 +1186,7 @@
             <div class="bgr-sp"></div>
             <div class="container-sp" style="background-image: url(https://th.bing.com/th/id/R.5e3afdbc3df8ad43667e88420ede0417?rik=JjM%2fcj47oZPQ3w&riu=http%3a%2f%2fwww.musclemango.com%2fwp-content%2fuploads%2f2019%2f12%2f468884-PFZ4P2-187.jpg&ehk=AvU3cpcXr4j%2fjw6nR2e9EeCx69ODNcpeB0VMgYvAYGg%3d&risl=&pid=ImgRaw&r=0);"></div>
             <div class="container-text">    
-                <h1>ĐĂNG KÝ ĐỂ ĐƯỢC SỬ DỤNG NHỮNG TRANG THIẾT BỊ CAO CẤP NHẤT HIỆN NAY</h1>
+                <h1>REGISTER TO USE THE MOST HIGH-QUALITY EQUIPMENT TODAY</h1>
                 <div class="btn-sp">
                     <button class="learn-more">
                         <span class="circle" aria-hidden="true">

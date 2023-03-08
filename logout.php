@@ -1,8 +1,8 @@
 <?php
     if(session_id() == "") {
         session_start();
-        session_destroy();
     }
+    session_destroy();
     if(isset($_COOKIE["loggedin"])) {
         $ckname = $_COOKIE["loggedin"];
     }

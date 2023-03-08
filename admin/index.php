@@ -2,6 +2,30 @@
     require "../classlist.php";
     $p = new role;
     $mes = "";
+
+    if(session_id() == "") {
+        session_start();
+    }
+    $ss_admin_id = FALSE;
+    $ss_admin = FALSE;
+    $c_admin_id = 1;
+    $c_admin_loggedin = 2;
+    if(isset($_SESSION["loggedin"])) {
+        $ss_admin_id = $_SESSION["loggedin"];
+    }
+    if(isset($_SESSION["admin"])) {
+        $ss_admin = $_SESSION["admin"];
+    }
+    if(isset($_COOKIE["id"])) {
+        $c_admin_id = $_COOKIE["id"];
+    }
+    if(isset($_COOKIE["admin_loggedin"])) {
+        $c_admin_loggedin = md5($_COOKIE["admin_loggedin"]);
+    }
+    if($ss_admin_id == TRUE  && $ss_admin == TRUE || $c_admin_loggedin == $c_admin_id) { 
+        header("location: ../CRUD/dashboard.php");
+    } 
+    
     if(isset($_POST["login"])) {
         if(isset($_POST["l_user_name"])) {
             $p->user_name = $_POST["l_user_name"];
@@ -18,6 +42,7 @@
             $mes = "Please enter full information !";
         }
     }
+
 
 
 ?>

@@ -2,22 +2,25 @@
     if(session_id() == "") {
         session_start();
     }
-    $ssid = "";
-    $cid = 1;
-    $cloggedin = 2;
+    $ss_admin_id = "";
+    $c_admin_id = 1;
+    $c_admin_loggedin = 2;
     if(isset($_SESSION["loggedin"])) {
-        $ssid = $_SESSION["loggedin"];
+        $ss_admin_id = $_SESSION["loggedin"];
+    }
+    if(isset($_SESSION["admin"])) {    // xac định người dùng là admin không phải member
+        $ss_admin = $_SESSION["admin"];
     }
     if(isset($_COOKIE["id"])) {
-        $cid = $_COOKIE["id"];
+        $c_admin_id = $_COOKIE["id"];
     }
-    if(isset($_COOKIE["loggedin"])) {
-        $cloggedin = md5($_COOKIE["loggedin"]);
+    if(isset($_COOKIE["admin_loggedin"])) {
+        $c_admin_loggedin = md5($_COOKIE["admin_loggedin"]);
     }
-    if($ssid == TRUE || $cloggedin == $cid) { 
+    if($ss_admin_id == TRUE  && $ss_admin == TRUE || $c_admin_loggedin == $c_admin_id) { 
         
     } else {
-        header("location: ../register.php");
+        header("location: ../admin/index.php");
     }
 
 ?>

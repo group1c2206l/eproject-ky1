@@ -51,7 +51,7 @@
             <a href="./about.php">About</a>
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
-            <a href="./package.php">Member</a>
+            <a href="./package.php">Package</a>
             <?php
                 if($user == "") {
                     echo '<a href="./register.php">Login</a>';
@@ -89,7 +89,7 @@
                                     <p>'.$row["description"].'</p>
                                 </div>
                                 <div class="learn-about">
-                                    <a href=""><img src="./assets/image/course/btn1.png" alt=""></a>
+                                    <a href=""><img src="./assets/image/course/btn-orange-1.png" alt=""></a>
                                     <div class="note">
                                         <a href="./package.php"><p>Jont Now</p></a>
                                     </div>

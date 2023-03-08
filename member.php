@@ -49,7 +49,7 @@
             <a href="./about.php">About</a>
             <a href="./service.php">Services</a>
             <a href="./course.php">Course</a>
-            <a href="./package.php">Member</a>
+            <a href="./package.php">Package</a>
             <?php
                 if($user == "") {
                     echo '<a href="./register.php">Login</a>';
@@ -76,7 +76,7 @@
     <?php
         $c = new config;
         $conn = $c->connect();
-        $sql = "SELECT M.fname,M.mname,M.lname,M.card_id,M.dob,M.address,M.phone_number,M.points,M.create_at,P.name pname, C.name cname from member M INNER JOIN package P ON M.package_id = P.package_id INNER JOIN course C ON M.course_id = C.course_id WHERE M.email = 'nampv@aum.edu.vn'";
+        $sql = "SELECT M.fname,M.mname,M.lname,M.card_id,M.dob,M.address,M.phone_number,M.points,M.create_at,P.name pname, C.name cname from member M INNER JOIN package P ON M.package_id = P.package_id INNER JOIN course C ON M.course_id = C.course_id WHERE M.email = '".$user."' ";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
@@ -91,17 +91,19 @@
         </div>
         <div class="infor">
                 <div class="item-infor">
-                    <p><i class="fas fa-box-open"></i> Card ID : <?php  echo $results[0]["card_id"]  ?> </p>
-                    <p><i class="fas fa-box-open"></i> Join Date : <?php  echo $results[0]["create_at"]  ?> </p>
-                    
+                    <p><i class="fas fa-id-card"></i> Card ID : <?php  echo $results[0]["card_id"]  ?> </p>
+                    <p><i class="fas fa-calendar-week"></i> Join Date : <?php  echo $results[0]["create_at"]  ?> </p>
+                    <p><i class="fas fa-user-edit"></i> Full name : <?php  echo $results[0]["fname"]." ".$results[0]["mname"]." ".$results[0]["lname"]  ?> </p>
                 </div>
                 <div class="item-infor">
                     <p><i class="fas fa-box-open"></i> Package : <?php  echo $results[0]["pname"]  ?> </p>
-                    <p><i class="fas fa-box-open"></i> Course : <?php  echo $results[0]["cname"]  ?> </p>
+                    <p><i class="fas fa-book"></i> Course : <?php  echo $results[0]["cname"]  ?> </p>
+                    <p><i class="fas fa-birthday-cake"></i> Date Of Birth : <?php  echo $results[0]["dob"]  ?> </p>
                 </div>
                 <div class="item-infor">
-                    <p><i class="fas fa-box-open"></i> Point : <?php  echo $results[0]["points"]  ?> </p>
-                    <p><i class="fas fa-box-open"></i> Phone : <?php  echo $results[0]["phone_number"]  ?> </p>
+                    <p><i class="fas fa-gift"></i> Point : <?php  echo $results[0]["points"]  ?> </p>
+                    <p><i class="fas fa-phone-square-alt"></i> Phone : <?php  echo $results[0]["phone_number"]  ?> </p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address : <?php  echo $results[0]["address"]  ?> </p>
                 </div>
         </div>
        
@@ -109,15 +111,15 @@
             <form action="">
                 <div class="group-item">
                     <label for="">First name :</label>
-                    <input type="text" name="fname" placeholder="First name">
+                    <input type="text" name="fname" placeholder="First name" value="<?php  echo $results[0]["fname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Mid name :</label>
-                    <input type="text" name="mname" placeholder="Mid name">
+                    <input type="text" name="mname" placeholder="Mid name" value="<?php  echo $results[0]["mname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Last name :</label>
-                    <input type="text" name="lname" placeholder="Last name">
+                    <input type="text" name="lname" placeholder="Last name" value="<?php  echo $results[0]["lname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Dob :</label>

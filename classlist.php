@@ -28,7 +28,7 @@
 
         public function show_pagination($table) {
             $row_current = 0;
-            if($this->row_current == 0) {
+            if($this->row_current == 0) {             //neu dang o page 1
                 echo '<ul class="pagination pt-3">
                           <li class="page-item"><a class="page-link" href="#">Page '.$this->page.'</a></li>
                           <li class="page-item ps-3"><a class="page-link" href="#" style="color:#ccc;">Previous</a></li>';
@@ -39,7 +39,7 @@
                 echo     '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->next.'">Next</a></li>
                      </ul>';
 
-            } elseif ($this->row_current == $this->total*$this->limit - $this->limit) {
+            } elseif ($this->row_current == $this->total*$this->limit - $this->limit) {  //neu dang o page cuoi cung
                 echo '<ul class="pagination pt-3">
                           <li class="page-item"><a class="page-link" href="#">Page '.$this->page.'</a></li>
                           <li class="page-item ps-3"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
@@ -49,7 +49,7 @@
                 }
                 echo     '<li class="page-item"><a class="page-link" href="#" style="color:#ccc;">Next</a></li>
                      </ul>';
-            } else {
+            } else {  
                 echo '<ul class="pagination pt-3">
                           <li class="page-item"><a class="page-link" href="#">Page '.$this->page.'</a></li>
                           <li class="page-item ps-3"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->previous.'">Previous</a></li>';
@@ -224,11 +224,13 @@
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
-                    setcookie("loggedin",$name,time()+86400,"/");
+                    $_SESSION["admin"] = TRUE;
+                    setcookie("admin_loggedin",$name,time()+86400,"/");
                     header("location: ../CRUD/dashboard.php");
                 } else {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
+                    $_SESSION["admin"] = TRUE;
                     header("location: ../CRUD/dashboard.php");
                 }
             } else {
