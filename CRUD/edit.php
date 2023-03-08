@@ -649,6 +649,9 @@
                         $p->member_id = $_GET["member_id"];
                     }
                     if(isset($_POST["save"])) {
+                        if(isset($_POST["card_id"])) {
+                            $p->card_id = $_POST["card_id"];
+                        }
                         if(isset($_POST["fname"])) {
                             $p->fname = $_POST["fname"];
                         }
@@ -682,7 +685,7 @@
                         if(isset($_POST["points"])) {
                             $p->points = $_POST["points"];
                         }
-                        if($p->fname != NULL && $p->lname != NULL && $p->dob != NULL && $p->address != NULL && $p->phone_number != NULL && $p->vip != NULL && $p->email != NULL && $p->points != NULL) {    
+                        if($p->fname != NULL && $p->lname != NULL   && $p->phone_number != NULL && $p->vip != NULL && $p->email != NULL) {    
                             $p->edit();
                             header("location: dashboard.php?select=member");
                         } else {
@@ -735,16 +738,16 @@
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="package_id" class="text-white-50">Package</label>
-                                        <select name="package_id" id="package_id" class="form-control bg-dark text-white">
+                                        <select name="package_id" id="package_id" class="form-select bg-dark text-white">
                                              <option selected disabled>Select on list :</option>';
-                    echo                     $p->list_data("","package_id","name","package");
+                    echo                     $p->list_data($_GET["package_id"],"package_id","name","package");
                     echo                '</select>
                                     </div>
                                     <div class="form-group mb-3">
                                         <label for="course_id" class="text-white-50">Course</label>
-                                        <select name="course_id" id="course_id" class="form-control bg-dark text-white">
+                                        <select name="course_id" id="course_id" class="form-select bg-dark text-white">
                                              <option selected disabled>Select on list :</option>';
-                    echo                     $p->list_data("","course_id","name","course");
+                    echo                     $p->list_data($_GET["course_id"],"course_id","name","course");
                     echo                '</select>
                                     </div>
                                     <button type="submit" class="btn btn-primary mb-2" name="save">Save</button>

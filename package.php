@@ -31,7 +31,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gym</title>
+    <title>Package</title>
 
     <!-- link icon -->
     <link rel="stylesheet" href="https://kit.fontawesome.com/83128b721a.css" crossorigin="anonymous">
@@ -82,10 +82,15 @@
                     <?php
                         $c = new config;
                         $conn = $c->connect();
-                        $sql = "SELECT * FROM package";
+                        $sql = "SELECT * FROM package WHERE NOT name = 'NO'";
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $results = $stmt->fetchAll();
+                        if($user == "") {
+                            $link = "./register.php"; //if not login , go to the login page
+                        } else {
+                            $link = "#";
+                        }
                         foreach($results as $row) {
                             echo '  <div class="content">
                                         <h1>'.$row["name"].'</h1>
@@ -98,7 +103,7 @@
                                         <p>Points : '.$row["points"].'</p>
                                         <div class="button">
                                             <h1>'.$row["price"].'$</h1>
-                                            <a href="#" class="btn">Order Now</a>
+                                            <a href='.$link.' class="btn">Order Now</a>
                                         </div>
                                     </div>';
                         }

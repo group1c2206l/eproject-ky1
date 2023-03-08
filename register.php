@@ -24,7 +24,7 @@
     }
     echo $select;
     switch($select) {
-        case "login":
+        case "login":  //form login
             if(isset($_POST["l_email"])) {
                 $p->email = $_POST["l_email"];
             }
@@ -66,7 +66,9 @@
                     $p->email = $_POST["r_email"];
                 }
                 $p->card_id = $p->member_type_count();
-                print_r($p);
+                $p->package_id = $p->id_to_name("package_id","package","name","NO");
+                $p->course_id = $p->id_to_name("course_id","course","name","NO");
+                // print_r($p);
                 if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
                     if($p->regexp($_POST["r_pwd"])) {
                         if($p->password_hash == $p->re_password_hash) {
@@ -82,7 +84,7 @@
                     $p->mes = "Please enter full information !";
                 }
                 break;
-            case "reset":
+            case "reset":  //form reset
                 if(isset($_POST["f_email"])) {
                     $p->email = $_POST["f_email"];
                 }
@@ -109,7 +111,7 @@
                     $m->send_mail();
                     $_SESSION["mid"] = md5($p->email);
                     setcookie("mide",md5($p->email),time() + 86400, "/");
-                    setcookie("email",$p->email,time() + 86400, "/"); // ghi dia chi email vao cookies
+                    setcookie("email",$p->email,time() + 86400, "/"); // write email address to cookies
                     $p->mes = "Please check mail to reset password !";
                 } else {
                     $p->mes = "Email not available";
