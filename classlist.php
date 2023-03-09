@@ -60,8 +60,27 @@
                 echo     '<li class="page-item"><a class="page-link" href="dashboard.php?select='.$table.'&row_current='.$this->next.'">Next</a></li>
                      </ul>';
             }
+        }
 
-            
+        public function show_page($table) {
+            $this->total = $this->total_page($table);
+            if(isset($_GET["row_current"])) {
+                $this->row_current = $_GET["row_current"];
+            } else {
+                $this->row_current = 0;
+            };
+            $this->page = ceil($this->row_current/$this->limit)+1;
+            if($this->page >1 && $this->page <= $this->total) {
+                $this->previous = $this->row_current - $this->limit;
+            } else {
+                $this->previous = 0;
+            };
+            if($this->page < $this->total) {
+                $this->next = $this->row_current + $this->limit;
+            } else {
+                $this->next = $this->page*$this->limit - $this->limit;
+            }
+            $this->show_pagination($table);
         }
 
         public function arr_result($table) {
@@ -172,13 +191,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ROLE_ID</td>
-                    <td class='table-dark text-warning fw-bold'>USER NAME</td>
-                    <td class='table-dark text-warning fw-bold'>PASSWORD</td>
-                    <td class='table-dark text-warning fw-bold'>EMPLOYEE NAME</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ROLE_ID</td>
+                    <td class=' text-warning fw-bold'>USER NAME</td>
+                    <td class=' text-warning fw-bold'>PASSWORD</td>
+                    <td class=' text-warning fw-bold'>EMPLOYEE NAME</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -220,7 +239,7 @@
             if($this->check_current_pass()) {
                 $name = $this->user_name;
                 setcookie("id",md5($name),time()+86400,"/");
-                setcookie("user_name",$name, time() + 86400,"/");
+                setcookie("user",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
                     session_start();
                     $_SESSION["loggedin"] = TRUE;
@@ -291,13 +310,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
-                    <td class='table-dark text-warning fw-bold'>HOTLINE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>ADDRESS</td>
+                    <td class=' text-warning fw-bold'>HOTLINE</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -309,7 +328,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=branch&branch_id='.$this->branch_id.'&name='.$this->name.'&address='.$this->address.'&hotline='.$this->hotline.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=branch&branch_id='.$this->branch_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=branch&branch_id='.$this->branch_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -378,21 +397,21 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>FNAME</td>
-                    <td class='table-dark text-warning fw-bold'>MNAME</td>
-                    <td class='table-dark text-warning fw-bold'>LNAME</td>
-                    <td class='table-dark text-warning fw-bold'>DOB</td>
-                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
-                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
-                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
-                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
-                    <td class='table-dark text-warning fw-bold'>CONTACT NAME</td>
-                    <td class='table-dark text-warning fw-bold'>CONTACT PHONE</td>
-                    <td class='table-dark text-warning fw-bold'>TYPE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>FNAME</td>
+                    <td class=' text-warning fw-bold'>MNAME</td>
+                    <td class=' text-warning fw-bold'>LNAME</td>
+                    <td class=' text-warning fw-bold'>DOB</td>
+                    <td class=' text-warning fw-bold'>ADDRESS</td>
+                    <td class=' text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class=' text-warning fw-bold'>PERSON ID</td>
+                    <td class=' text-warning fw-bold'>EMAIL</td>
+                    <td class=' text-warning fw-bold'>CONTACT NAME</td>
+                    <td class=' text-warning fw-bold'>CONTACT PHONE</td>
+                    <td class=' text-warning fw-bold'>TYPE</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -412,7 +431,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=employee&employee_id='.$this->employee_id.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&contact_name='.$this->contact_name.'&contact_phone='.$this->contact_phone.'&type='.$this->type.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=employee&employee_id='.$this->employee_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=employee&employee_id='.$this->employee_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -496,22 +515,22 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>FNAME</td>
-                    <td class='table-dark text-warning fw-bold'>MNAME</td>
-                    <td class='table-dark text-warning fw-bold'>LNAME</td>
-                    <td class='table-dark text-warning fw-bold'>CODE</td>
-                    <td class='table-dark text-warning fw-bold'>DOB</td>
-                    <td class='table-dark text-warning fw-bold'>GENDER</td>
-                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
-                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
-                    <td class='table-dark text-warning fw-bold'>PERSON ID</td>
-                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
-                    <td class='table-dark text-warning fw-bold'>TRAINER JOB</td>
-                    <td class='table-dark text-warning fw-bold'>EVALUATE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>FNAME</td>
+                    <td class=' text-warning fw-bold'>MNAME</td>
+                    <td class=' text-warning fw-bold'>LNAME</td>
+                    <td class=' text-warning fw-bold'>CODE</td>
+                    <td class=' text-warning fw-bold'>DOB</td>
+                    <td class=' text-warning fw-bold'>GENDER</td>
+                    <td class=' text-warning fw-bold'>ADDRESS</td>
+                    <td class=' text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class=' text-warning fw-bold'>PERSON ID</td>
+                    <td class=' text-warning fw-bold'>EMAIL</td>
+                    <td class=' text-warning fw-bold'>TRAINER JOB</td>
+                    <td class=' text-warning fw-bold'>EVALUATE</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -532,7 +551,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&code='.$this->code.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=person_trainer&person_trainer_id='.$this->person_trainer_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=person_trainer&person_trainer_id='.$this->person_trainer_id.' ">Delete</a></button></td> 
                 </tr>';
         }
         public function addnew() {
@@ -603,12 +622,12 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>POINT</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>POINT</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -619,7 +638,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=utilities&utilities_id='.$this->utilities_id.'&name='.$this->name.'&points='.$this->points.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=utilities&utilities_id='.$this->utilities_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=utilities&utilities_id='.$this->utilities_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -681,18 +700,18 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>BRAND</td>
-                    <td class='table-dark text-warning fw-bold'>WIDTH</td>
-                    <td class='table-dark text-warning fw-bold'>LENGTH</td>
-                    <td class='table-dark text-warning fw-bold'>HEIGHT</td>
-                    <td class='table-dark text-warning fw-bold'>WEIGHT</td>
-                    <td class='table-dark text-warning fw-bold'>TITLE</td>
-                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>BRAND</td>
+                    <td class=' text-warning fw-bold'>WIDTH</td>
+                    <td class=' text-warning fw-bold'>LENGTH</td>
+                    <td class=' text-warning fw-bold'>HEIGHT</td>
+                    <td class=' text-warning fw-bold'>WEIGHT</td>
+                    <td class=' text-warning fw-bold'>TITLE</td>
+                    <td class=' text-warning fw-bold'>DESCRIPTION</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -709,7 +728,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=device&device_id='.$this->device_id.'&name='.$this->name.'&brand='.$this->brand.'&width='.$this->width.'&length='.$this->length.'&height='.$this->height.'&weight='.$this->weight.'&title='.$this->title.'&description='.$this->description.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=device&device_id='.$this->device_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=device&device_id='.$this->device_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -775,13 +794,13 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>TITLE</td>
-                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>TITLE</td>
+                    <td class=' text-warning fw-bold'>DESCRIPTION</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -793,7 +812,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=service&service_id='.$this->service_id.'&name='.$this->name.'&title='.$this->title.'&description='.$this->description.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=service&service_id='.$this->service_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=service&service_id='.$this->service_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -850,16 +869,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
-                    <td class='table-dark text-warning fw-bold'>POINTER</td>
-                    <td class='table-dark text-warning fw-bold'>PRICE ($)</td>
-                    <td class='table-dark text-warning fw-bold'>EXPIRY (MONTH)</td>
-                    <td class='table-dark text-warning fw-bold'>DAY ACTIVE (DAY/WEEK)</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>MENTOR</td>
+                    <td class=' text-warning fw-bold'>POINTER</td>
+                    <td class=' text-warning fw-bold'>PRICE ($)</td>
+                    <td class=' text-warning fw-bold'>EXPIRY (MONTH)</td>
+                    <td class=' text-warning fw-bold'>DAY ACTIVE (DAY/WEEK)</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -875,7 +894,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=package&package_id='.$this->package_id.'&name='.$this->name.'&mentor='.$this->mentor.'&points='.$this->points.'&price='.$this->price.'&expiry='.$this->expiry.'&day_active='.$this->day_active.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=package&package_id='.$this->package_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -945,16 +964,16 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>MENTOR</td>
-                    <td class='table-dark text-warning fw-bold'>DESCRIPTION</td>
-                    <td class='table-dark text-warning fw-bold'>START DAY</td>
-                    <td class='table-dark text-warning fw-bold'>END DAY</td>
-                    <td class='table-dark text-warning fw-bold'>PRICE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>MENTOR</td>
+                    <td class=' text-warning fw-bold'>DESCRIPTION</td>
+                    <td class=' text-warning fw-bold'>START DAY</td>
+                    <td class=' text-warning fw-bold'>END DAY</td>
+                    <td class=' text-warning fw-bold'>PRICE</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -970,7 +989,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=course&course_id='.$this->course_id.'&name='.$this->name.'&person_trainer_id='.$this->person_trainer_id.'&description='.$this->description.'&start_day='.$this->start_day.'&end_day='.$this->end_day.'&price='.$this->price.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=course&course_id='.$this->course_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=course&course_id='.$this->course_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -1048,24 +1067,24 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>CARD ID</td>
-                    <td class='table-dark text-warning fw-bold'>PW HASH</td>
-                    <td class='table-dark text-warning fw-bold'>FNAME</td>
-                    <td class='table-dark text-warning fw-bold'>MNAME</td>
-                    <td class='table-dark text-warning fw-bold'>LNAME</td>
-                    <td class='table-dark text-warning fw-bold'>DOB</td>
-                    <td class='table-dark text-warning fw-bold'>ADDRESS</td>
-                    <td class='table-dark text-warning fw-bold'>PHONE NUMBER</td>
-                    <td class='table-dark text-warning fw-bold'>EMAIL</td>
-                    <td class='table-dark text-warning fw-bold'>VIP</td>
-                    <td class='table-dark text-warning fw-bold'>PACKAGE</td>
-                    <td class='table-dark text-warning fw-bold'>COURSE</td>
-                    <td class='table-dark text-warning fw-bold'>POINTS</td>
-                    <td class='table-dark text-warning fw-bold'>TYPE</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>CARD ID</td>
+                    <td class=' text-warning fw-bold'>PW HASH</td>
+                    <td class=' text-warning fw-bold'>FNAME</td>
+                    <td class=' text-warning fw-bold'>MNAME</td>
+                    <td class=' text-warning fw-bold'>LNAME</td>
+                    <td class=' text-warning fw-bold'>DOB</td>
+                    <td class=' text-warning fw-bold'>ADDRESS</td>
+                    <td class=' text-warning fw-bold'>PHONE NUMBER</td>
+                    <td class=' text-warning fw-bold'>EMAIL</td>
+                    <td class=' text-warning fw-bold'>VIP</td>
+                    <td class=' text-warning fw-bold'>PACKAGE</td>
+                    <td class=' text-warning fw-bold'>COURSE</td>
+                    <td class=' text-warning fw-bold'>POINTS</td>
+                    <td class=' text-warning fw-bold'>TYPE</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
         public function show_item() {
@@ -1087,7 +1106,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=member&member_id='.$this->member_id.'&card_id='.$this->card_id.'&password_hash='.$this->password_hash.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&vip='.$this->vip.'&email='.$this->email.'&package_id='.$this->package_id.'&course_id='.$this->course_id.'&points='.$this->points.' ">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=member&member_id='.$this->member_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=member&member_id='.$this->member_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -1242,11 +1261,11 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>NAME</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>NAME</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -1257,7 +1276,7 @@
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery_type&galery_type_id='.$this->galery_type_id.'&galery_type_name='.$this->galery_type_name.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=galery_type&galery_type_id='.$this->galery_type_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 
@@ -1317,17 +1336,15 @@
 
         public function show_header() {
             echo "<tr>
-                    <td class='table-dark text-warning fw-bold'>ID</td>
-                    <td class='table-dark text-warning fw-bold'>GALERY TYPE</td>
-                    <td class='table-dark text-warning fw-bold'>ITEM ID</td>
-                    <td class='table-dark text-warning fw-bold'>ITEM NAME</td>
-                    <td class='table-dark text-warning fw-bold'>NOTE</td>
-                    <td class='table-dark text-warning fw-bold'>VIEW</td>
-                    <td class='table-dark text-warning fw-bold'>DIR</td>
-                    <td class='table-dark text-warning fw-bold'>IMAGE NAME</td>
-                    <td class='table-dark text-warning fw-bold'>CREATE_AT</td>
-                    <td class='table-dark text-warning fw-bold'>UPDATE_AT</td>
-                    <td class='table-dark text-warning fw-bold' colspan='2'>ACTION</td>
+                    <td class=' text-warning fw-bold'>ID</td>
+                    <td class=' text-warning fw-bold'>GALERY TYPE</td>
+                    <td class=' text-warning fw-bold'>ITEM ID</td>
+                    <td class=' text-warning fw-bold'>ITEM NAME</td>
+                    <td class=' text-warning fw-bold'>NOTE</td>
+                    <td class=' text-warning fw-bold'>VIEW</td>
+                    <td class=' text-warning fw-bold'>CREATE_AT</td>
+                    <td class=' text-warning fw-bold'>UPDATE_AT</td>
+                    <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
                 </tr>";
         }
 
@@ -1339,12 +1356,10 @@
                     <td>'.$this->item_name.'</td>
                     <td>'.$this->note.'</td>
                     <td><img width="80px" height="auto" src=".'.$this->dir.$this->img_name.'" /></td>
-                    <td>'.$this->dir.'</td>
-                    <td>'.$this->img_name.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=galery&galery_id='.$this->galery_id.'&galery_type_id='.$this->galery_type_id.'&galery_type_name='.$this->galery_type_name.'&item_id='.$this->item_id.'&item_name='.$this->item_name.'&note='.$this->note.'&dir='.$this->dir.'">Edit</a></button></td>
-                    <td><button class="btn btn-primary"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
+                    <td><button class="btn btn-danger"><a  class="text-light del" href="delete.php?delete_id=galery&galery_id='.$this->galery_id.' ">Delete</a></button></td> 
                 </tr>';
         }
 

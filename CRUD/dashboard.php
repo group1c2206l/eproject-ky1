@@ -39,7 +39,7 @@
     	.mmm {
             min-width: 25%;
             display: inline-block;
-            height: 50px;
+            height: 35px;
         }
         .mmm .dblink {
             width: 150px; 
@@ -95,9 +95,9 @@
 <body class="bg-secondary">
 	<div class="dashboard container-fluid position-relative ">
 		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
-			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user_name"]  ?></a>
+			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user"]  ?></a>
 			<ul class="dropdown-menu bg-warning">
-				<li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user_name"]  ?>">Change Password</a></li>
+				<li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user"]  ?>">Change Password</a></li>
 				<li><a class="dropdown-item " href="../index.php">Home</a></li>
 				<li><hr class="dropdown-divider"></li>
 				<li><a class="dropdown-item" href="../logout.php">Logout</a></li>
@@ -206,7 +206,7 @@
         </div>
      
         <!-- Show data -->
-         <table class="table table-result mt-2">
+         <table class="table table-dark table-hover table-result mt-2 table-bordered ">
             <?php
                 
                     switch($select) {
@@ -214,25 +214,7 @@
                         case "role":
                             $p = new role;
                             $p->show_header();
-                            $p->total = $p->total_page("role");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("role");
+                            $p->show_page("role");
                             if($search_data == NULL) {
                                 $results = $p->arr_result("role");
                                 
@@ -260,24 +242,7 @@
                         case "branch":
                             $p = new branch;
                             $p->show_header();
-                            $p->total = $p->total_page("branch");
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("branch");
+                            $p->show_page("branch");
                             if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
                                 $results = $p->arr_result("branch");
                             } else {
@@ -309,25 +274,7 @@
                         case "employee":
                             $p = new employee;
                             $p->show_header();
-                            $p->total = $p->total_page("employee");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("employee");
+                            $p->show_page("employee");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("employee");
                             } else {
@@ -367,25 +314,7 @@
                         case "person_trainer":
                             $p = new person_trainer;
                             $p->show_header();
-                            $p->total = $p->total_page("person_trainer");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("person_trainer");
+                            $p->show_page("person_trainer");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("person_trainer");
                             } else {
@@ -426,25 +355,7 @@
                         case "utilities":
                             $p = new utilities;
                             $p->show_header();
-                            $p->total = $p->total_page("utilities");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("utilities");
+                            $p->show_page("utilities");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("utilities");
                             } else {
@@ -475,25 +386,7 @@
                         case "device":
                             $p = new device;
                             $p->show_header();
-                            $p->total = $p->total_page("device");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("device");
+                            $p->show_page("device");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("device");
                             } else {
@@ -530,25 +423,7 @@
                         case "service":
                             $p = new service();
                             $p->show_header();
-                            $p->total = $p->total_page("service");
-
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("service");
+                            $p->show_page("service");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('service');
                             } else {
@@ -581,24 +456,7 @@
                         case "package":
                             $p = new package();
                             $p->show_header();
-                            $p->total = $p->total_page("package");
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("package");
+                            $p->show_page("package");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('package');
                             } else {
@@ -634,24 +492,7 @@
                         case "course":
                             $p = new course();
                             $p->show_header();
-                            $p->total = $p->total_page("course");
-                            if(isset($_GET["row_current"])) {
-                                $p->row_current = $_GET["row_current"];
-                            } else {
-                                $p->row_current = 0;
-                            };
-                            $p->page = ceil($p->row_current/$p->limit)+1;
-                            if($p->page >1 && $p->page <= $p->total) {
-                                $p->previous = $p->row_current - $p->limit;
-                            } else {
-                                $p->previous = 0;
-                            };
-                            if($p->page < $p->total) {
-                                $p->next = $p->row_current + $p->limit;
-                            } else {
-                                $p->next = $p->page*$p->limit - $p->limit;
-                            }
-                            $p->show_pagination("course");
+                            $p->show_page("course");
                             if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result('course');
                             } else {
@@ -689,24 +530,7 @@
                             case "member":
                                 $p = new member;
                                 $p->show_header();
-                                $p->total = $p->total_page("member");
-                                if(isset($_GET["row_current"])) {
-                                    $p->row_current = $_GET["row_current"];
-                                } else {
-                                    $p->row_current = 0;
-                                };
-                                $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->page >1 && $p->page <= $p->total) {
-                                    $p->previous = $p->row_current - $p->limit;
-                                } else {
-                                    $p->previous = 0;
-                                };
-                                if($p->page < $p->total) {
-                                    $p->next = $p->row_current + $p->limit;
-                                } else {
-                                    $p->next = $p->page*$p->limit - $p->limit;
-                                }
-                                $p->show_pagination("member");
+                                $p->show_page("member");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("member");
                                 } else {
@@ -748,25 +572,7 @@
                             case "galery_type":
                                 $p = new galery_type;
                                 $p->show_header();
-                                $p->total = $p->total_page("galery_type");
-
-                                if(isset($_GET["row_current"])) {
-                                    $p->row_current = $_GET["row_current"];
-                                } else {
-                                    $p->row_current = 0;
-                                };
-                                $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->page >1 && $p->page <= $p->total) {
-                                    $p->previous = $p->row_current - $p->limit;
-                                } else {
-                                    $p->previous = 0;
-                                };
-                                if($p->page < $p->total) {
-                                    $p->next = $p->row_current + $p->limit;
-                                } else {
-                                    $p->next = $p->page*$p->limit - $p->limit;
-                                }
-                                $p->show_pagination("galery_type");
+                                $p->show_page("galery_type");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("galery_type");
                                 } else {
@@ -796,25 +602,7 @@
                             case "galery":
                                 $p = new galery;
                                 $p->show_header();
-                                $p->total = $p->total_page("galery");
-                                if(isset($_GET["row_current"])) {
-                                    $p->row_current = $_GET["row_current"];
-                                } else {
-                                    $p->row_current = 0;
-                                };
-                                $p->page = ceil($p->row_current/$p->limit)+1;
-                                if($p->page >1 && $p->page <= $p->total) {
-                                    $p->previous = $p->row_current - $p->limit;
-                                } else {
-                                    $p->previous = 0;
-                                };
-                                if($p->page < $p->total) {
-                                    $p->next = $p->row_current + $p->limit;
-                                } else {
-                                    $p->next = $p->page*$p->limit - $p->limit;
-                                }
-                                $p->show_pagination("galery");
-                                
+                                $p->show_page("galery");
                                 if($search_data == NULL && $search_list == NULL) {
                                     $results = $p->arr_result("galery");
                                 } else {
