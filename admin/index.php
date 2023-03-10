@@ -56,112 +56,112 @@
     <title>admin</title>
     <style>
         * {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
-    }
-    body {
-        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
-        background-repeat: no-repeat;
-        background: linear-gradient(180deg,#39373d,#18061b);
-        height:100vh;
-        /* background-size: cover ; */
-        /* background-position: center; */
-        /* background-attachment: fixed; */
-        /* background-color: rgb(26, 23, 23); */
-    }
-    .container {
-        background-color: rgba(104, 97, 104, 0.336);
-        box-shadow: 2px 2px 5px rgba(238, 130, 238, 0.342);
-        background-size: cover;
-        background-repeat: no-repeat;
-        width: 600px;
-        margin: 100px auto 0 auto;
-        border-radius: 10px;
-    }
-    form {
-    width: 100%;
-    padding: 20px 50px;
-
-    }
-    h2 {
-        font-size: 30px;
-        text-align: center;
-        color:aliceblue;
-        margin-bottom: 20px;
-    }
-    .group-item {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        }
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-repeat: no-repeat;
+            background: linear-gradient(180deg,#39373d,#18061b);
+            height:100vh;
+            /* background-size: cover ; */
+            /* background-position: center; */
+            /* background-attachment: fixed; */
+            /* background-color: rgb(26, 23, 23); */
+        }
+        .container {
+            background-color: rgba(104, 97, 104, 0.336);
+            box-shadow: 2px 2px 5px rgba(238, 130, 238, 0.342);
+            background-size: cover;
+            background-repeat: no-repeat;
+            width: 600px;
+            margin: 100px auto 0 auto;
+            border-radius: 10px;
+        }
+        form {
         width: 100%;
-        display: flex;
-        justify-content:space-between;
-        margin-bottom: 10px;
-    }
-    .group-item label {
-        width: 100px;
-        align-self: center;
-        font-weight: 500;
-        display: inline-block;
-        color: aliceblue;
-    }
-    .group-item input {
-        font-size: 16px;
-        width: 300px;
-        padding: 10px 10px;
-        border: none;
-        border-radius: 3px;
-    }
-    .group-item input:hover {
-        border: chocolate;
-        box-shadow: 2px 2px 5px violet;
-    }
-    .remember {
-    
-        width: 100%;
-        height: 50px;
-        color: aliceblue;
-    }
-    .lable-remember:hover {
-        cursor: pointer;
-        text-shadow: 0 0 3px #FF0000;
-    }
-    input[type = "checkbox"] {
-        cursor: pointer;
-        width: 15px;
-        height: 15px;
-    }
+        padding: 20px 50px;
 
-    input[type="submit"] {
-        display:inline-block;
-        padding: 10px 60px;
-        background-color: yellow;
-        font-size: 16px;
-        border-radius: 5px;
-        text-align:center;
-        border: none;
-        color: rgb(19, 68, 39);
-        cursor: pointer;
-    }
-    input[type="submit"]:hover {
-        box-shadow: 2px 2px 9px rgb(226, 73, 219);
-    }
-    input[type="submit"]:active {
-        transform: translateY(5px);
-    }
-    .group-btn {
-        display: flex;
-        justify-content: center;
-    }
+        }
+        h2 {
+            font-size: 30px;
+            text-align: center;
+            color:aliceblue;
+            margin-bottom: 20px;
+        }
+        .group-item {
+            width: 100%;
+            display: flex;
+            justify-content:space-between;
+            margin-bottom: 10px;
+        }
+        .group-item label {
+            width: 100px;
+            align-self: center;
+            font-weight: 500;
+            display: inline-block;
+            color: aliceblue;
+        }
+        .group-item input {
+            font-size: 16px;
+            width: 300px;
+            padding: 10px 10px;
+            border: none;
+            border-radius: 3px;
+        }
+        .group-item input:hover {
+            border: chocolate;
+            box-shadow: 2px 2px 5px violet;
+        }
+        .remember {
+        
+            width: 100%;
+            height: 50px;
+            color: aliceblue;
+        }
+        .lable-remember:hover {
+            cursor: pointer;
+            text-shadow: 0 0 3px #FF0000;
+        }
+        input[type = "checkbox"] {
+            cursor: pointer;
+            width: 15px;
+            height: 15px;
+        }
 
-    .active {
-        background-color: violet !important;
-        color: rgb(255, 253, 253) !important;
-    }
+        input[type="submit"] {
+            display:inline-block;
+            padding: 10px 60px;
+            background-color: yellow;
+            font-size: 16px;
+            border-radius: 5px;
+            text-align:center;
+            border: none;
+            color: rgb(19, 68, 39);
+            cursor: pointer;
+        }
+        input[type="submit"]:hover {
+            box-shadow: 2px 2px 9px rgb(226, 73, 219);
+        }
+        input[type="submit"]:active {
+            transform: translateY(5px);
+        }
+        .group-btn {
+            display: flex;
+            justify-content: center;
+        }
 
-    .mes {
-        margin-top: 20px;
-        text-align: center;
-        color: rgb(245, 253, 206);
-    }
+        .active {
+            background-color: violet !important;
+            color: rgb(255, 253, 253) !important;
+        }
+
+        .mes {
+            margin-top: 20px;
+            text-align: center;
+            color: rgb(245, 253, 206);
+        }
     </style>
 </head>
 <body>

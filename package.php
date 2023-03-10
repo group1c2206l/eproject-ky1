@@ -25,6 +25,42 @@
     }
 ?>
 
+<!-- order package -->
+<?php
+    if(isset($_GET["order"])) {
+        if(isset($_GET["email"])) {
+            $email = $_GET["email"];
+        }
+        if(isset($_GET["package_id"])) {
+            $package_id = $_GET["package_id"];
+        }
+        if(isset($_GET["name"])) {
+            $name = $_GET["name"];
+        }
+        if(isset($_GET["points"])) {
+            $points = $_GET["points"];
+        }
+        switch($name) {
+            case "BASIC":
+                $points += 1000;
+            break;
+            case "STANDARD":
+                $points += 2000;
+            break;
+            case "PREMIUM":
+                $points += 3000;
+            break;
+        }
+
+        $c = new config;
+        $conn = $c->connect();
+        $sql = 'UPDATE  member SET package_id = "'.$package_id.'", points = '.$points.' WHERE email = "'.$email.'" ';
+        $stmt = $conn->prepare($sql);
+        $stmt->execute();
+        $conn = null;
+    }
+?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -57,7 +93,6 @@
                 } else {
                     echo '<a href="./logout.php">Logout</a>';
                 }
-            
             ?>
         </nav>
 
@@ -80,6 +115,7 @@
             <div class="wapper">
                 <div class="box">
                     <?php
+                        $link = "#";
                         $c = new config;
                         $conn = $c->connect();
                         $sql = "SELECT * FROM package WHERE NOT name = 'NO'";
@@ -88,9 +124,7 @@
                         $results = $stmt->fetchAll();
                         if($user == "") {
                             $link = "./register.php"; //if not login , go to the login page
-                        } else {
-                            $link = "#";
-                        }
+                        } 
                         foreach($results as $row) {
                             echo '  <div class="content">
                                         <h1>'.$row["name"].'</h1>
@@ -103,7 +137,9 @@
                                         <p>Points : '.$row["points"].'</p>
                                         <div class="button">
                                             <h1>'.$row["price"].'$</h1>
-                                            <a href='.$link.' class="btn">Order Now</a>
+                                            <form action="" method="get">
+                                                <a href="package.php?order=done&email='.$user.'&package_id='.$row['package_id'].'&name='.$row["name"].'&points='.$row["points"].' " class="btn" onclick="pay()">Order Now</a> 
+                                            </form>
                                         </div>
                                     </div>';
                         }
@@ -137,8 +173,6 @@
             </div>
         </div>
     </section>
-
-
 <!-- senior coach -->
 
 <!-- footer -->
@@ -168,6 +202,11 @@
             </div>
         </div>
     </section>
+    <script>
+        function pay() {
+            let m = confirm("Are you sure to order this package?");
+        }
+    </script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="./assets/js/template.js"></script>
     <!-- <script src="./assets/js/index.js"></script> -->
