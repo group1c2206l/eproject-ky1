@@ -536,6 +536,7 @@ section{
 }
 
 .blogs .blogs-slider .box{
+    min-height: 630px;
     position: relative;
     overflow: hidden;
     margin: 1rem 0;
@@ -730,6 +731,9 @@ section{
     .testimonial .box-container .box{
         margin-top: 6rem;
     }
+    .blogs .blogs-slider .box{
+        min-height: 450px;
+     }
 }
 
 /* maxwidth 450 */

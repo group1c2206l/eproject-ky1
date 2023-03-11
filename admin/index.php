@@ -62,10 +62,6 @@
             background-repeat: no-repeat;
             background: linear-gradient(180deg,#39373d,#18061b);
             height:100vh;
-            /* background-size: cover ; */
-            /* background-position: center; */
-            /* background-attachment: fixed; */
-            /* background-color: rgb(26, 23, 23); */
         }
         .container {
             background-color: rgba(104, 97, 104, 0.336);
@@ -77,9 +73,8 @@
             border-radius: 10px;
         }
         form {
-        width: 100%;
-        padding: 20px 50px;
-
+            width: 100%;
+            padding: 20px 50px;
         }
         h2 {
             font-size: 30px;
@@ -112,7 +107,6 @@
             box-shadow: 2px 2px 5px violet;
         }
         .remember {
-        
             width: 100%;
             height: 50px;
             color: aliceblue;
@@ -159,11 +153,48 @@
             text-align: center;
             color: rgb(245, 253, 206);
         }
+
+        @media (max-width:700px){
+            .container {
+                width: 90%;
+                margin: 100px auto 0 auto;
+            }
+            form {
+                width: 100%;
+                padding: 10px 5px;
+            }
+            .group-item {
+                width: 100%;
+                display: flex;
+                flex-direction: column;
+                margin-bottom: 10px;
+            }
+            .group-item label {
+                width: 100%;
+                align-self: center;
+                font-weight: 500;
+                display: inline-block;
+                color: aliceblue;
+            }
+            .group-item input {
+                width: 100%;
+                font-size: 16px;
+                padding: 10px 10px;
+                border: none;
+                border-radius: 3px;
+            }
+            }
+            @media (max-width:450px){
+                .container {
+                    width: 90%;
+                    margin: 100px auto 0 auto;
+                }
+            }
     </style>
 </head>
 <body>
     <div class="container">
-    <form id="login-form" action="" method="POST">
+        <form id="login-form" action="" method="POST">
             <h2>Login</h2>
             <div class="group-item">
                 <label for="">Username</label>

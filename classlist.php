@@ -241,13 +241,17 @@
                 setcookie("id",md5($name),time()+86400,"/");
                 setcookie("user",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
-                    session_start();
+                    if(session_id() === '') {
+                        session_start();
+                    }
                     $_SESSION["loggedin"] = TRUE;
                     $_SESSION["admin"] = TRUE;
                     setcookie("admin_loggedin",$name,time()+86400,"/");
                     header("location: ../CRUD/dashboard.php");
                 } else {
-                    session_start();
+                    if(session_id() === '') {
+                        session_start();
+                    }
                     $_SESSION["loggedin"] = TRUE;
                     $_SESSION["admin"] = TRUE;
                     header("location: ../CRUD/dashboard.php");
@@ -1209,14 +1213,18 @@
                 setcookie("id",md5($name),time()+86400,"/");
                 setcookie("user_name",$name, time() + 86400,"/");
                 if($this->saveme == "saveme") {
-                    session_start();
+                    if(session_id() === '') {
+                        session_start();
+                    }
                     $_SESSION["loggedin"] = TRUE;
                     setcookie("loggedin",md5($name),time()+86400,"/");
-                    header("location: ./index.php");
+                    // header("location: ./index.php");
                 } else {
-                    session_start();
+                    if(session_id() === '') {
+                        session_start();
+                    }
                     $_SESSION["loggedin"] = TRUE;
-                    header("location: ./index.php");
+                    // header("location: ./index.php");
                 }
             } else {
                 $this->mes = "Invalid username or password";

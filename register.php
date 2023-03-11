@@ -36,6 +36,7 @@
                     $p->saveme = $_POST["saveme"];
                 }
                 $p->logins();
+                $p->mes = "Login successfully !";
             } else {
                 $p->mes = "Please enter full information !";
             }
@@ -74,7 +75,7 @@
                         if($p->password_hash == $p->re_password_hash) {
                             $p->addnew();
                             $p->mes = "Registered successfully, Please login ! !";
-                            // header("location: ./index.php");
+                            header("location: ./index.php");
                         } else {
                             $p->mes = "The password is not the same !";
                         }

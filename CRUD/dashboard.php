@@ -23,88 +23,25 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Dashboard</title>
     <link rel="stylesheet" href="../assets/css/bootstrap.min.css">
+    <link rel="stylesheet" href="../assets/css/dashboard.css">
     <script src="../assets/js/bootstrap.bundle.min.js"></script>
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.2/font/bootstrap-icons.css">
-    <style>
-        body {
-            position: relative;
-            z-index: 0;
-        }
-        .dashboard {
-            min-width: 1200px;
-         }
-         .menu-body {
-            width: 100%;
-         }
-    	.mmm {
-            min-width: 25%;
-            display: inline-block;
-            height: 35px;
-        }
-        .mmm .dblink {
-            width: 150px; 
-            margin-left: calc(50% - 50px);
-        }
-        .mmm .dblink a:hover {
-            color: chocolate !important;
-            text-shadow: 0 0 3px #FF0000, 0 0 5px #0000FF;
-        }
-        .table-result td {
-            color: white;
-        }
-        .search-bar {
-            width: 100%;
-            height: 40px;
-            margin-top: 10px;
-        }
-        #search_data {
-            width: 250px;
-            margin-left: 40px;
-            height: 100%;
-            padding: 0 5px;
-            border-radius: 5px;
-            margin-top: 2px;
-        }
-        #search_list {
-            height: 100%;
-            padding: 0 5px;
-            border-radius: 5px;
-        }
-        .btns {
-            height: 100%;
-            padding: 0 10px;
-            border: none;
-            border-radius: 5px;
-            background-color: orange;
-            color: white;
-        }
-        .noti {
-            display: inline-block;
-            padding: 30px;
-            border: 1px solid chocolate;
-            background-color: orange;
-            position: absolute;
-            z-index: 10;
-            top: 0;
-        } 
-        .pagination {
-            padding-left: 0 !important;
-        }
-    </style>
-</head>
-<body class="bg-secondary">
-	<div class="dashboard container-fluid position-relative ">
-		<div class="dropdown  position-absolute top-0 start-40 border border-warning rounded rounded-3">
-			<a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user"]  ?></a>
-			<ul class="dropdown-menu bg-warning">
-				<li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user"]  ?>">Change Password</a></li>
-				<li><a class="dropdown-item " href="../index.php">Home</a></li>
-				<li><hr class="dropdown-divider"></li>
-				<li><a class="dropdown-item" href="../logout.php">Logout</a></li>
-			</ul>
-		</div>
 
+</head>
+<body class="container-fluid bg-secondary ">
+   
+	<div class="dashboard container-fluid  pt-4">
+        
 		<h1 class="text-center text-warning mt-3">DASHBOARD PAGE</h1>
+        <div class="user dropdown border border-warning rounded rounded-3 mb-2">
+            <a class="nav-link  table-hover dropdown-toggle p-1 text-light " href="" role="button" data-bs-toggle="dropdown" aria-expanded="false"> USER: <?php echo $_COOKIE["user"]  ?></a>
+            <ul class="dropdown-menu bg-warning">
+                <li><a class="dropdown-item " href="edit.php?edit_id=role&user_name=<?php echo $_COOKIE["user"]  ?>">Change Password</a></li>
+                <li><a class="dropdown-item " href="../index.php">Home</a></li>
+                <li><hr class="dropdown-divider"></li>
+                <li><a class="dropdown-item" href="../logout.php">Logout</a></li>
+            </ul>
+        </div>
         <div class="menu-body bg-dark border border-warning rounded rounded-3">
             <table class="table table-dark home-menu container-lg mt-2">
                 <tr>
@@ -652,18 +589,6 @@
         </div>            
     </div>
 
-    <!-- <script>
-        function searchq() {
-            let a = document.getElementById("search_data");
-            console.log(a.value);
-            if(a.value =='') {
-                alert("not null");
-                return false;
-            }
-            return true;
-            
-        }
-    </script> -->
     <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

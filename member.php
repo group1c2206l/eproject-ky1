@@ -23,6 +23,7 @@
         }
     } else {
         $user = "";
+        header("location: register.php");
     }
 ?>
 

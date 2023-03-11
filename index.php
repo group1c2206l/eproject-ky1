@@ -231,7 +231,7 @@
 
     <!-- testimonial section ends -->
 
-    <!-- blogs section starts -->
+    <!-- famous member section starts -->
     <section class="blogs">
         <h1 class="heading">Famous <span>members</span></h1>
         <div class="swiper blogs-slider">
@@ -260,7 +260,7 @@
             </div>
         </div>
     </section>
-    <!-- blogs section ends -->
+    <!-- famous member section ends -->
 
     <!-- footer section starts -->
 

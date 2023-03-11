@@ -354,7 +354,7 @@ section{
 
 /* for maxwidth 768px */
 
-@media (max-width:768px){
+@media (max-width:900px){
     html{
         font-size: 50%;
     }
@@ -393,6 +393,18 @@ section{
     .testimonial .box-container .box{
         margin-top: 6rem;
     }
+    .home .edit-infor .group-item label {
+        display:inline;
+        width: 100%;
+        color: white;
+        font-size: 1.4rem;
+        text-align: end;
+        padding-right: 3rem;
+    }
+    .home .edit-infor .group-item input {
+        padding: 1rem 1rem;
+        width: 100%;
+    }
 }
 
 /* maxwidth 450 */
@@ -405,5 +417,17 @@ section{
         letter-spacing: none;
         font-size: 1.3rem;
         padding: 1rem;
+    }
+    .home .edit-infor .group-item label {
+        display:inline;
+        width: 60%;
+        color: white;
+        font-size: 1.4rem;
+        text-align: end;
+        padding-right: 3rem;
+    }
+    .home .edit-infor .group-item input {
+        padding: 1rem 1rem;
+        width: 100%;
     }
 }

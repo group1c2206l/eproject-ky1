@@ -23,7 +23,7 @@
 }
 
 html{
-    font-size: 62.5%;  
+    font-size: 70%;  
     scroll-behavior: smooth;
     overflow-x: hidden;
     scroll-padding-top: 7rem;
@@ -156,6 +156,9 @@ section{
 }
 
 /* body */
+.row {
+    background-position: center;
+}
 .row-content{
     position: absolute;
     text-align: left;
@@ -164,7 +167,7 @@ section{
 }
 .tittle{
     color: #fff;
-    font-size: 18px;
+    font-size: 1.5rem;
     max-width: 600px;
 }
 .tittle p{
@@ -190,7 +193,7 @@ section{
 }
 .note p{
     color:whitesmoke;
-    font-size: 16px;
+    font-size: 1rem;
 }
 
 
@@ -285,6 +288,9 @@ section{
     selection{
         padding: 2rem;
     }
+    .row-content {
+        left: 100px;
+    } 
 }
 
 /* for maxwidth 768px */
@@ -328,6 +334,9 @@ section{
     .testimonial .box-container .box{
         margin-top: 6rem;
     }
+    .row-content {
+        left: 60px;
+    } 
 }
 
 /* maxwidth 450 */
@@ -341,4 +350,7 @@ section{
         font-size: 1.3rem;
         padding: 1rem;
     }
+    .row-content {
+        left: 40px;
+    } 
 }

@@ -113,5 +113,20 @@ var swiper = new Swiper(".blogs-slider", {
         991:{
             slidesPerView: 3,
         },
+        1200:{
+            slidesPerView: 4,
+        },
+        1500:{
+            slidesPerView: 5,
+        },
+        1800:{
+            slidesPerView: 6,
+        },
+        2100:{
+            slidesPerView: 7,
+        },
+        2500:{
+            slidesPerView: 8,
+        },
     },
 }); 
