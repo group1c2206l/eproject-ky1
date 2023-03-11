@@ -16,9 +16,6 @@
     <div class="container">
 
 <?php
-    
-    
-
     if(isset($_GET["edit_id"])) {
         $edit_id = $_GET["edit_id"];
         
@@ -852,14 +849,7 @@
                 break;    
         
     }
-
-
-
-
-
 ?>
-
-
     </div>
 </body>
 </html>

@@ -42,9 +42,6 @@
             $mes = "Please enter full information !";
         }
     }
-
-
-
 ?>
 
 <!DOCTYPE html>

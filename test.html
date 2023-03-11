@@ -1,13 +1,53 @@
-hello
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <form action="" method="get" onsubmit="return search()">
+        <input type="text" id="test" >
+        <input type="submit" name="btn" value="save">
+    </form>
+    <a href="google.com" id="link">nha</a>
+</body>
+</html>
 
 <script>
-    const arr = [1, 2, 3, 4];
+    function search() {
+        let a = document.getElementById("test");
+        console.log(a.value);
+        if(a.value =='') {
+            alert("not null");
+            return false;
+        }
+        return true;
+        
+    }
 
-    for (var i = 0; i < arr.length; i++) {
-        // console.log(i);
 
-        setInterval(function() {
-            console.log(i);
-        }, 2000);
+    $link = document.getElementById("link");
+    $link.addEventListener("click", function(){
+        let a = confirm("assaa");
+        if(a==false) {
+            window.location.href = "./index.php";
+        } else {
+
+        }
+        // e.preventDefault();
+    });
+
+
+
+    function paysss(e) {
+        let a = confirm("assaa");
+        if(a==true) {
+            window.location.href = "./index.php";
+        } else {
+            window.location.href = "https://www.w3schools.com";
+        }
+        e.preventDefault();
     }
 </script>

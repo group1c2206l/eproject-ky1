@@ -88,27 +88,51 @@
                 if(isset($_POST["f_email"])) {
                     $p->email = $_POST["f_email"];
                 }
-                echo $p->check_email();
                 if($p->check_email()) {
-                    $m = new mail;
-                    $m->to = $p->email;
-                    $m->subject = "Reset password!";
-                    $m->link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
-                    // Always set content-type when sending HTML email
-                    $m->headers = "MIME-Version: 1.0" . "\r\n";
-                    $m->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    $m->headers .= "From: Prime Fitness" . "\r\n";
-                    $m->message = ' <html>
-                                        <head>
-                                        <title>HTML email</title>
-                                        </head>
-                                        <body>
-                                            <p style="color:red;font-size:20px;font-weight:bold;">Please click below link to reset password:</p>
-                                            <a href="'.$m->link_reset.'">Click here</a>
-                                        </body>
-                                    </html>';
-                    // print_r($m);
-                    $m->send_mail();
+                    // $m = new mail;
+                    // $m->to = $p->email;
+                    // $m->subject = "Reset password!";
+                    // $m->link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
+                    // // Always set content-type when sending HTML email
+                    // $m->headers = "MIME-Version: 1.0" . "\r\n";
+                    // $m->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+                    // $m->headers .= "From: Prime Fitness" . "\r\n";
+                    // $m->message = ' <html>
+                    //                     <head>
+                    //                     <title>HTML email</title>
+                    //                     </head>
+                    //                     <body>
+                    //                         <p style="color:red;font-size:20px;font-weight:bold;">Please click below link to reset password:</p>
+                    //                         <a href="'.$m->link_reset.'">Click here</a>
+                    //                     </body>
+                    //                 </html>';
+                    // // print_r($m);
+                    // $m->send_mail();
+                    $link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
+                    $to = $p->email;
+                    $subject = "Reset password!";
+
+                    $message = "
+                    <html>
+                    <head>
+                    <title>This is a test HTML email</title>
+                    </head>
+                    <body>
+                        <p style='color:red;font-size:20px;font-weight:bold;'>Please click below link to reset password:</p>
+                        <a href=".$link_reset.">Click here</a>
+                    </body>
+                    </html>
+                    ";
+
+                    // It is mandatory to set the content-type when sending HTML email
+                    $headers = "MIME-Version: 1.0" . "\r\n";
+                    $headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
+
+                    // More headers. From is required, rest other headers are optional
+                    $headers .= 'From: <info@example.com>' . "\r\n";
+                    $headers .= 'Cc: nampphaui@gmail.com' . "\r\n";
+
+                    mail($to,$subject,$message,$headers);
                     $_SESSION["mid"] = md5($p->email);
                     setcookie("mide",md5($p->email),time() + 86400, "/");
                     setcookie("email",$p->email,time() + 86400, "/"); // write email address to cookies
@@ -171,8 +195,8 @@
             </div>
 
         </div>
-        <!-- onsubmit="return validateForm()" -->
-        <!-- onchange="re_password_check()" -->
+
+        <!-- form register -->
         <form id="register-form" action="" method="POST" onsubmit="return validate_Register_Form()">
             <h2>REGISTRATION</h2>
             <div class="group-item">
@@ -211,6 +235,8 @@
                 <span><?php echo $p->mes ?></span>
             </div>
         </form>
+
+        <!-- form login -->
         <form id="login-form" action="" method="POST" onsubmit="return validate_Login_Form()">
             <h2>Login</h2>
             <div class="group-item">

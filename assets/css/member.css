@@ -126,7 +126,6 @@ section{
 }
 
 .header .icons div:hover{
-    /* transform: rotate(180deg); */
     color: var(--main-color);
 }
 
@@ -199,7 +198,7 @@ section{
     border-bottom: 1px solid chocolate;
     padding-bottom: 2rem;
 }
-.home .btn-update button {
+.home .btn-update .btn-submit {
     padding: 4px;
     width: 150px;
 }
@@ -213,25 +212,27 @@ section{
     display: inline-block;
     width: 20%;
     color: white;
-    font-size: 1.2rem;
+    font-size: 1.4rem;
     text-align: end;
     padding-right: 3rem;
 }
 .home .edit-infor .group-item input {
     padding: 1rem 1rem;
     width: 60%;
-    /* min-width: 500px; */
-    /* max-width: 1000px; */
 }
 
-.home .edit-infor .about-you h4 {
+.home  .about-you h4 {
     text-align: center;
     color: #fff;
     font-size: 2rem;
     padding: 1rem 0;
 }
-.home .edit-infor .about-you button {
+.home  .about-you button {
     margin-top: 1rem;
+}
+
+.home .about-you {
+    width: 100%;
 }
 
 .home .faq h4 {

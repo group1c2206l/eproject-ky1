@@ -121,6 +121,7 @@
             $sql = 'SELECT '.$select.' FROM '.$from.' WHERE '.$where.' = "'.$value.'" ';
             $stmt = $conn->prepare($sql);
             $stmt->execute();
+            $conn = null;
             return $stmt->fetchColumn();
         }
 
@@ -215,7 +216,6 @@
 
         //kiem tra current pass co chinh xac 
         public function check_current_pass() {
-            require_once "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'SELECT * FROM role WHERE user_name = :user_name AND password_hash = :password_hash;';
@@ -268,7 +268,6 @@
         }
     
         public function addnew() {
-            require_once "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO role(user_name,password_hash,create_at) VALUES (:user_name,:password_hash,NOW() )';
@@ -282,7 +281,6 @@
         }
 
         public function edit() {
-            require_once "config.php";
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE role SET password_hash = :new_password_hash,update_at = NOW() WHERE user_name = :user_name;';
@@ -1030,7 +1028,6 @@
         }
 
         public function delete() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'UPDATE course SET flag = 0,update_at = NOW() WHERE course_id = :course_id;';
@@ -1081,7 +1078,6 @@
                     <td class=' text-warning fw-bold'>PACKAGE</td>
                     <td class=' text-warning fw-bold'>COURSE</td>
                     <td class=' text-warning fw-bold'>POINTS</td>
-                    <td class=' text-warning fw-bold'>TYPE</td>
                     <td class=' text-warning fw-bold'>CREATE_AT</td>
                     <td class=' text-warning fw-bold'>UPDATE_AT</td>
                     <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
@@ -1281,7 +1277,6 @@
         }
 
         public function addnew() {
-            
             $c = new config;
             $conn = $c->connect();
             $sql = 'INSERT INTO galery_type(galery_type_name,create_at) VALUES (:galery_type_name,NOW())';

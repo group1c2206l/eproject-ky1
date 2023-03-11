@@ -1,5 +1,6 @@
 <?php
-    require "config.php";
+
+    require "classlist.php";
     $user = "";
     if(session_id() == "") {
         session_start();
@@ -24,6 +25,7 @@
         $user = "";
     }
 ?>
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -76,7 +78,7 @@
     <?php
         $c = new config;
         $conn = $c->connect();
-        $sql = "SELECT M.fname,M.mname,M.lname,M.card_id,M.dob,M.address,M.phone_number,M.points,M.create_at,P.name pname, C.name cname from member M INNER JOIN package P ON M.package_id = P.package_id INNER JOIN course C ON M.course_id = C.course_id WHERE M.email = '".$user."' ";
+        $sql = "SELECT M.member_id,M.fname,M.mname,M.lname,M.card_id,M.dob,M.address,M.phone_number,M.vip,M.points,M.create_at,P.package_id,P.name pname,C.course_id,C.name cname from member M INNER JOIN package P ON M.package_id = P.package_id INNER JOIN course C ON M.course_id = C.course_id WHERE M.email = '".$user."' ";
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $results = $stmt->fetchAll();
@@ -87,66 +89,98 @@
             <a href=""><img  src="./assets/image/logo/logo.png" alt=""></a>
         </div>
         <div class="uname">
-            <p ><?php  echo $user  ?> </p>
+            <p ><?= $user  ?> </p>
         </div>
         <div class="infor">
                 <div class="item-infor">
-                    <p><i class="fas fa-id-card"></i> Card ID : <?php  echo $results[0]["card_id"]  ?> </p>
-                    <p><i class="fas fa-calendar-week"></i> Join Date : <?php  echo $results[0]["create_at"]  ?> </p>
-                    <p><i class="fas fa-user-edit"></i> Full name : <?php  echo $results[0]["fname"]." ".$results[0]["mname"]." ".$results[0]["lname"]  ?> </p>
+                    <p><i class="fas fa-id-card"></i> Card ID : <?= $results[0]["card_id"]  ?> </p>
+                    <p><i class="fas fa-calendar-week"></i> Join Date : <?= $results[0]["create_at"]  ?> </p>
+                    <p><i class="fas fa-user-edit"></i> Full name : <?= $results[0]["fname"]." ".$results[0]["mname"]." ".$results[0]["lname"]  ?> </p>
                 </div>
                 <div class="item-infor">
-                    <p><i class="fas fa-box-open"></i> Package : <?php  echo $results[0]["pname"]  ?> </p>
-                    <p><i class="fas fa-book"></i> Course : <?php  echo $results[0]["cname"]  ?> </p>
-                    <p><i class="fas fa-birthday-cake"></i> Date Of Birth : <?php  echo $results[0]["dob"]  ?> </p>
+                    <p><i class="fas fa-box-open"></i> Package : <?= $results[0]["pname"]  ?> </p>
+                    <p><i class="fas fa-book"></i> Course : <?= $results[0]["cname"]  ?> </p>
+                    <p><i class="fas fa-birthday-cake"></i> Date Of Birth : <?= $results[0]["dob"]  ?> </p>
                 </div>
                 <div class="item-infor">
-                    <p><i class="fas fa-gift"></i> Point : <?php  echo $results[0]["points"]  ?> </p>
-                    <p><i class="fas fa-phone-square-alt"></i> Phone : <?php  echo $results[0]["phone_number"]  ?> </p>
-                    <p><i class="fas fa-map-marker-alt"></i> Address : <?php  echo $results[0]["address"]  ?> </p>
+                    <p><i class="fas fa-gift"></i> Point : <?= $results[0]["points"]  ?> </p>
+                    <p><i class="fas fa-phone-square-alt"></i> Phone : <?= $results[0]["phone_number"]  ?> </p>
+                    <p><i class="fas fa-map-marker-alt"></i> Address : <?= $results[0]["address"]  ?> </p>
                 </div>
         </div>
-       
+        <?php
+            $p = new member;
+            if(isset($_POST["submit"])) {
+                if(isset($_POST["fname"])) {
+                    $p->fname = $_POST["fname"];
+                }
+                if(isset($_POST["mname"])) {
+                    $p->mname = $_POST["mname"];
+                }
+                if(isset($_POST["lname"])) {
+                    $p->lname = $_POST["lname"];
+                }
+                if(isset($_POST["dob"])) {
+                    $p->dob = $_POST["dob"];
+                }
+                if(isset($_POST["address"])) {
+                    $p->address = $_POST["address"];
+                }
+                if(isset($_POST["phone_number"])) {
+                    $p->phone_number = $_POST["phone_number"];
+                }
+                $p->member_id = $results[0]["member_id"];
+                $p->card_id = $results[0]["card_id"];
+                $p->vip = $results[0]["vip"];
+                $p->package_id = $results[0]["package_id"];
+                $p->course_id = $results[0]["course_id"];
+                $p->points = $results[0]["points"];
+                $p->email = $user;
+                $p->edit();
+                header("location: ./member.php");
+                // print_r($p);
+            }
+        ?>
+        
         <div class="edit-infor">
-            <form action="">
+            <form action="<?= $_SERVER["PHP_SELF"] ?>" method="post" onsubmit="return edit_infor()">
                 <div class="group-item">
                     <label for="">First name :</label>
-                    <input type="text" name="fname" placeholder="First name" value="<?php  echo $results[0]["fname"] ?>">
+                    <input type="text" name="fname" placeholder="First name" value="<?= $results[0]["fname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Mid name :</label>
-                    <input type="text" name="mname" placeholder="Mid name" value="<?php  echo $results[0]["mname"] ?>">
+                    <input type="text" name="mname" placeholder="Mid name" value="<?= $results[0]["mname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Last name :</label>
-                    <input type="text" name="lname" placeholder="Last name" value="<?php  echo $results[0]["lname"] ?>">
+                    <input type="text" name="lname" placeholder="Last name" value="<?= $results[0]["lname"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Dob :</label>
-                    <input type="text" name="dob" placeholder="Dob">
+                    <input type="date" name="dob" placeholder="Dob" value="<?=$results[0]["dob"] ?>">
                 </div>
                 <div class="group-item">
                     <label for="">Address :</label>
-                    <input type="text" name="address" placeholder="Address">
+                    <input type="text" name="address" placeholder="Address" value="<?=$results[0]["address"] ?>">
                 </div>
-                <div class="group-item">
+                <div class= "group-item">
                     <label for="">Phone :</label>
-                    <input type="text" name="phone_number" placeholder="Phone">
+                    <input type="text" name="phone_number" placeholder="Phone" value="<?=$results[0]["phone_number"] ?>">
                 </div>
                 <div class="btn-update">
-                    <button type="button">Update Information  </button>
+                    <input class="btn-submit" type="submit" name="submit" value="Update Information">
                 </div>
             </form>
+        </div>
+        <div class="about-you">
             <form action="">
-                <div class="about-you">
-                    <h4>What do you think about us?</h4>
-                    <textarea name="about_u" id="about_u" cols="20" rows="10"></textarea>
-                    <div class="btn-update">
-                        <button type="button">Save  </button>
-                    </div>
+                <h4>What do you think about us?</h4>
+                <textarea name="about_u" id="about_u" cols="20" rows="10"></textarea>
+                <div class="btn-update">
+                    <button type="button">Save  </button>
                 </div>
             </form>
-
         </div>
         <div class="faq">
             <h4>FAQ</h4>
@@ -219,7 +253,17 @@
            
         </div>
     </section>
-
+    <script>
+        function edit_infor() {
+            var mes = confirm("Are you sure all the information is correct?");
+            if(mes == true) {
+                return true;
+            } else {
+                location.reload();
+                return false;
+            };
+        }
+    </script>
     
     <script src="./ckeditor/ckeditor.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>

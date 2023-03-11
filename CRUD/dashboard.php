@@ -57,7 +57,7 @@
             height: 40px;
             margin-top: 10px;
         }
-        #search-box {
+        #search_data {
             width: 250px;
             margin-left: 40px;
             height: 100%;
@@ -70,7 +70,7 @@
             padding: 0 5px;
             border-radius: 5px;
         }
-        .btn-search {
+        .btns {
             height: 100%;
             padding: 0 10px;
             border: none;
@@ -129,10 +129,10 @@
         </div>
         <!-- Khoi tim kiem -->
         <div class="">
-            <form action="" method="GET" class="search-bar <?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>">
-                <button class="btn-search <?php if($select == "member") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
-                <input type="text" class="d-none" name="select" value="<?php  echo $select ?>">
-                <input type="text" id="search-box" name="search_data" placeholder="Input content here:">
+            <form action="" method="GET" class="search-bar <?php if($select == "") {echo "d-none";} else {echo "d-block";}  ?>" onsubmit="return search_item()">
+                <button class="btns <?php if($select == "member") echo "d-none"  ?>"><a class="text-light" href="addnew.php?select=<?php  echo $select ?>">Add new</a></button>
+                <input type="hidden" class="d-none" name="select" value="<?php  echo $select ?>">
+                <input type="text" id="search_data"  name="search_data" placeholder="Input content here:">
                 <select name="search_list" id="search_list">
                     <option selected disabled>Open this select menu :</option>
                    <?php
@@ -201,14 +201,28 @@
                    ?>
                 </select>
                 
-                <button type="submit" class="btn-search" value="send" name="search">Search</button>
+                <input type="submit" class="btns" value="search" name="search">
             </form>
         </div>
-     
+        <script>
+            function search_item() {
+                let search_data = document.getElementById("search_data");
+                let search_list = document.getElementById("search_list");
+                console.log(search_list.value);
+                if(search_data.value == '') {
+                    alert("nhap du lieu tim kiem");
+                    return false;
+                }
+                if(search_list.value == "Open this select menu :") {
+                    alert("chon kieu du lieu tim kiem");
+                    return false;
+                }
+                return true;
+            }
+        </script>
         <!-- Show data -->
          <table class="table table-dark table-hover table-result mt-2 table-bordered ">
             <?php
-                
                     switch($select) {
                         
                         case "role":
@@ -243,20 +257,14 @@
                             $p = new branch;
                             $p->show_header();
                             $p->show_page("branch");
-                            if($search_data == NULL && $search_list == NULL) {  //neu khong phai tim kiem thi hien danh sach data
+                            if($search_data == NULL && $search_list == NULL) {
                                 $results = $p->arr_result("branch");
                             } else {
-                                if($search_data == "") { //neu co bien $search_data rong (chua dien gia tri vao o tim kiem) thi hien thong bao 
-                                    $results = [];
-                                    echo "
-                                        <script>alert('Please enter value on search box !')</script>
-                                    ";
-                                } else {
-                                    $results = $p->search_item('branch', $search_list,$search_data); //neu co noi dung tim kiem thi chay phuong thuc tim kiem
-                                    if(count($results)<1) {
-                                        echo "khong co gia tri nao phu hop";
-                                    }}
+                                $results = $p->search_item('branch', $search_list,$search_data);
+                                if(count($results)<1) {
+                                    echo "khong co gia tri nao phu hop";
                                 }
+                            }
                             foreach($results as $row) {
                                 $p->flag = $row["flag"];
                                 if($p->flag == 1) {
@@ -269,7 +277,7 @@
                                     $p->show_item();
                                 }
                             }
-                            break;
+                        break;
 
                         case "employee":
                             $p = new employee;
@@ -643,6 +651,19 @@
             <h5>vui long nhap du thong tin</h5>
         </div>            
     </div>
+
+    <!-- <script>
+        function searchq() {
+            let a = document.getElementById("search_data");
+            console.log(a.value);
+            if(a.value =='') {
+                alert("not null");
+                return false;
+            }
+            return true;
+            
+        }
+    </script> -->
     <script src="../assets/js/dashboard.js"></script>
 </body>
 </html>

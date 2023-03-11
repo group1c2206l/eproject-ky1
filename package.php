@@ -1,5 +1,6 @@
 <?php
-    require "config.php";
+    // require "config.php";
+    require "classlist.php";
     $user = "";
     if(session_id() == "") {
         session_start();
@@ -27,10 +28,12 @@
 
 <!-- order package -->
 <?php
+    $p = new member;
     if(isset($_GET["order"])) {
         if(isset($_GET["email"])) {
             $email = $_GET["email"];
         }
+        $current_points = $p->id_to_name("points","member","email",$email);
         if(isset($_GET["package_id"])) {
             $package_id = $_GET["package_id"];
         }
@@ -38,26 +41,15 @@
             $name = $_GET["name"];
         }
         if(isset($_GET["points"])) {
-            $points = $_GET["points"];
+            $points =$current_points + $_GET["points"];
         }
-        switch($name) {
-            case "BASIC":
-                $points += 1000;
-            break;
-            case "STANDARD":
-                $points += 2000;
-            break;
-            case "PREMIUM":
-                $points += 3000;
-            break;
-        }
-
         $c = new config;
         $conn = $c->connect();
         $sql = 'UPDATE  member SET package_id = "'.$package_id.'", points = '.$points.' WHERE email = "'.$email.'" ';
         $stmt = $conn->prepare($sql);
         $stmt->execute();
         $conn = null;
+        header("location: ./member.php");
     }
 ?>
 
@@ -122,10 +114,16 @@
                         $stmt = $conn->prepare($sql);
                         $stmt->execute();
                         $results = $stmt->fetchAll();
-                        if($user == "") {
-                            $link = "./register.php"; //if not login , go to the login page
-                        } 
+                        $link = '';
+                        $num = 1;
                         foreach($results as $row) {
+                            if($user == "") {
+                                $order_link = '<a class="btn" href="./register.php"  >Order Now</a>' ; //if not login , go to the login page
+                            } else {
+                                $order_link = '<a href="" class="btn link-order" id="link-order-'.$num.'" >Order Now</a> ';
+                                $link = './package.php?order=done&email='.$user.'&package_id='.$row["package_id"].'&name='.$row["name"].'&points='.$row["points"].'';
+                                
+                            }
                             echo '  <div class="content">
                                         <h1>'.$row["name"].'</h1>
                                         <div><span></span></div>
@@ -137,17 +135,33 @@
                                         <p>Points : '.$row["points"].'</p>
                                         <div class="button">
                                             <h1>'.$row["price"].'$</h1>
-                                            <form action="" method="get">
-                                                <a href="package.php?order=done&email='.$user.'&package_id='.$row['package_id'].'&name='.$row["name"].'&points='.$row["points"].' " class="btn" onclick="pay()">Order Now</a> 
-                                            </form>
+                                            '.$order_link.'
                                         </div>
                                     </div>';
+                            echo '
+                                    <script>
+                                        let link_order_'.$num.' = document.getElementById("link-order-'.$num.'");
+                                        link_order_'.$num.'.addEventListener("click", function(e){
+                                            let noti = confirm("are you sure order this package ?");
+                                            if(noti == true) {
+                                                window.location.href = "'.$link.'";
+                                            } else {
+                                                window.location.href = "./package.php";
+                                            }
+                                            e.preventDefault();
+                                        });
+                                    </script>';
+                            $num++;
+                            
                         }
+                       
                     ?>
+
                 </div>
             </div>
         </div>
     </section>
+
 <!-- home ends -->
     <section class="feature">
         <h1 class="heading"><span>accompanying </span>utilities</h1>
@@ -202,11 +216,7 @@
             </div>
         </div>
     </section>
-    <script>
-        function pay() {
-            let m = confirm("Are you sure to order this package?");
-        }
-    </script>
+    
     <script src="https://cdn.jsdelivr.net/npm/swiper@8/swiper-bundle.min.js"></script>
     <script src="./assets/js/template.js"></script>
     <!-- <script src="./assets/js/index.js"></script> -->

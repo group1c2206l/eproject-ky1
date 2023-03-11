@@ -10,4 +10,3 @@ for(let s=0; s<del.length; s++) {
     });
 }
 
-
