@@ -1059,6 +1059,7 @@
         public $package_id;
         public $course_id;
         public $points;
+        public $feedback;
         public $saveme;
         public $mes;
 
@@ -1078,6 +1079,7 @@
                     <td class=' text-warning fw-bold'>PACKAGE</td>
                     <td class=' text-warning fw-bold'>COURSE</td>
                     <td class=' text-warning fw-bold'>POINTS</td>
+                    <td class=' text-warning fw-bold'>FEEDBACK</td>
                     <td class=' text-warning fw-bold'>CREATE_AT</td>
                     <td class=' text-warning fw-bold'>UPDATE_AT</td>
                     <td class=' text-warning fw-bold' colspan='2'>ACTION</td>
@@ -1099,6 +1101,7 @@
                     <td>'.$this->package_id.'</td>
                     <td>'.$this->course_id.'</td>
                     <td>'.$this->points.'</td>
+                    <td>'.$this->feedback.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=member&member_id='.$this->member_id.'&card_id='.$this->card_id.'&password_hash='.$this->password_hash.'&fname='.$this->fname.'&mname='.$this->mname.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&vip='.$this->vip.'&email='.$this->email.'&package_id='.$this->package_id.'&course_id='.$this->course_id.'&points='.$this->points.' ">Edit</a></button></td>
@@ -1109,7 +1112,7 @@
         public function addnew() {
             $c = new config;
             $conn = $c->connect();
-            $sql = 'INSERT INTO member(card_id,password_hash,fname,mname,lname,phone_number,email,create_at) VALUES (:card_id,:password_hash,:fname,:mname,:lname,:phone_number,:email,NOW())';
+            $sql = 'INSERT INTO member(card_id,password_hash,fname,mname,lname,phone_number,email,package_id,course_id,create_at) VALUES (:card_id,:password_hash,:fname,:mname,:lname,:phone_number,:email,:package_id,:course_id,NOW())';
             $stmt = $conn->prepare($sql);
             $stmt->execute(
                 array (
@@ -1120,6 +1123,8 @@
                     ":lname" => $this->lname,
                     ":phone_number" => $this->phone_number,
                     ":email" => $this->email,
+                    ":package_id" => $this->package_id,
+                    ":course_id" => $this->course_id,
                 )
             );
             $conn = NULL;
@@ -1145,6 +1150,20 @@
                     ":course_id" => $this->course_id,
                     ":points" => $this->points,
                     ":member_id" => $this->member_id,
+                )
+            );
+            $conn = NULL;
+        }
+
+        public function feedback() {
+            $c = new config;
+            $conn = $c->connect();
+            $sql = 'UPDATE member SET feedback = :feedback,update_at = NOW() WHERE member_id = :member_id;';
+            $stmt = $conn->prepare($sql);
+            $stmt->execute(
+                array (
+                    ":member_id" => $this->member_id,
+                    ":feedback" => $this->feedback
                 )
             );
             $conn = NULL;
@@ -1363,7 +1382,7 @@
             $conn = $c->connect();
             $file_path = '.'.$this->dir.$this->img_name;    //file addnew.php nam o ben trong thu muc
             $filetype = pathinfo($file_path,PATHINFO_EXTENSION);
-            $allowtype = array('jpg','png','jpeg','gif','pdf');
+            $allowtype = array('jpg','png','jpeg','gif','pdf','webp');
             if(in_array($filetype,$allowtype)) {
                 if(move_uploaded_file($this->img_tmp,$file_path)) {
                     $sql = "INSERT INTO galery(galery_type_id,galery_type_name,item_id,item_name,note,dir,img_name,CREATE_AT) VALUES (:galery_type_id,:galery_type_name,:item_id,:item_name,:note,:dir,:img_name,NOW())";

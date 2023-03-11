@@ -73,7 +73,8 @@
                     if($p->regexp($_POST["r_pwd"])) {
                         if($p->password_hash == $p->re_password_hash) {
                             $p->addnew();
-                            header("location: ./index.php");
+                            $p->mes = "Registered successfully, Please login ! !";
+                            // header("location: ./index.php");
                         } else {
                             $p->mes = "The password is not the same !";
                         }

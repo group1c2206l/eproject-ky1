@@ -239,7 +239,7 @@
                 <?php
                     $c = new config;
                     $conn = $c->connect();
-                    $sql = "SELECT G.dir gdir,G.img_name gimgname,G.note,M.lname lname, M.mname, M.fname fname FROM galery G INNER JOIN member M ON G.item_id = M.member_id WHERE M.vip = 1 AND G.galery_type_name = 'member';";
+                    $sql = "SELECT G.dir gdir,G.img_name gimgname,G.note,M.lname lname, M.mname, M.fname fname,M.feedback,M.update_at mupdate FROM galery G INNER JOIN member M ON G.item_id = M.member_id WHERE M.vip = 1 AND G.galery_type_name = 'member';";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $results = $stmt->fetchAll();
@@ -250,13 +250,10 @@
                                     </div>
                                     <div class="content">
                                         <h3>'.$row["fname"].' '.$row["lname"].'</h3>
-                                        <span><i class="fad fa-calendar-alt"></i>april 12,2023</span>
-                                        <p>'.$row["note"].'</p>
+                                        <span><i class="fad fa-calendar-alt"></i>'.$row["mupdate"].'</span>
+                                        <p>'.$row["feedback"].'</p>
                                     </div>
-                                    <div class="button">
-                                        <a href="#" class="btn">Read more</a>
-                                    </div>
-                                </div>';
+                            </div>';
                     }
                     $conn = null;
                 ?>

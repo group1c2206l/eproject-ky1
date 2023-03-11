@@ -174,11 +174,20 @@
             </form>
         </div>
         <div class="about-you">
-            <form action="">
+            <?php
+                if(isset($_POST["btn_submit"])) {
+                    if(isset($_POST["about_u"])) {
+                        $p->feedback = $_POST["about_u"];
+                    }
+                    $p->member_id = $p->id_to_name("member_id","member","email",$user);
+                    $p->feedback();
+                }
+            ?>
+            <form action="<?= $_SERVER["PHP_SELF"] ?>" method="POST">
                 <h4>What do you think about us?</h4>
                 <textarea name="about_u" id="about_u" cols="20" rows="10"></textarea>
                 <div class="btn-update">
-                    <button type="button">Save  </button>
+                    <button type="submit" name="btn_submit">Save  </button>
                 </div>
             </form>
         </div>
