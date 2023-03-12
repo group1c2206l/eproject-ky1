@@ -157,7 +157,7 @@ section{
 
 /* body */
 .row {
-    background-position: center;
+    /* background-position: center; */
 }
 .row-content{
     position: absolute;
