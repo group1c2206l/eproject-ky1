@@ -21,7 +21,7 @@ body {
     background-repeat: no-repeat;
     /* background-color: rgb(68, 7, 87); */
     width: 600px;
-    margin: 100px auto 0 auto;
+    margin: 100px auto 100px auto;
     border-radius: 10px;
 }
 .select {
@@ -70,7 +70,6 @@ body {
 form {
     width: 100%;
     padding: 20px 50px;
-
 }
 h2 {
     font-size: 30px;
@@ -90,7 +89,6 @@ h2 {
     font-weight: 500;
     display: inline-block;
     color: aliceblue;
-    
 }
 .group-item input {
     font-size: 16px;
@@ -170,4 +168,26 @@ input[type="submit"]:active {
     border: 1px solid rgb(1, 226, 1) !important;
     box-shadow: 2px 2px 4px rgb(0, 248, 42);
     background-color: #74f07063 !important;
+}
+
+@media screen {
+    @media(max-width: 600px) {
+        .container {
+            width: 90%;
+        }
+        .group-item {
+            flex-direction: column;
+        }
+        .group-item label {
+            width: 100%;
+        }
+        .group-item input {
+            width: 100%;
+            padding: 10px 10px;
+        }
+        form {
+            width: 100%;
+            padding: 20px 20px;
+        }
+    }
 }

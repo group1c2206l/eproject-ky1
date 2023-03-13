@@ -186,14 +186,15 @@ section{
 .note{
     position: absolute;
     top: 45%;
-    left: 20%;
+    left: 18%;
     transform: translate(-50%, -50%);
     z-index: 1;
     text-decoration: none;
 }
 .note p{
     color:whitesmoke;
-    font-size: 1rem;
+    font-size: 2rem;
+    font-weight: bold;
 }
 
 
