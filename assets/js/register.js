@@ -62,13 +62,16 @@ var r_pwd = document.querySelector('.r_pwd');
 var n_pwd = document.querySelector('.n_pwd');
 var r_repwd = document.querySelector('.r_repwd');
 var n_repwd = document.querySelector('.n_repwd');
-var fname = document.querySelector('input[name="fname"]');
+var fname = document.querySelector('.fname');
 var mname = document.querySelector('input[name="mname"]');
 var lname = document.querySelector('input[name="lname"]');
 var phone = document.querySelector('input[name="phone_number"]');
-const regexEmail = /^\w+([\.-]?\w+)*@\w+([\.-]?\w+)*(\.\w{2,3})+$/;
+const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const regexPass = /^[a-zA-Z0-9@]{6,}$/;
 const regexPhone = /^0[0-9]{9}$/;
+const regexFname = /^[a-zA-Z]{1,10}$/;
+const regexMname = /^[a-zA-Z]+[\s|-]?[a-zA-Z]+[\s|-]?$/;
+console.log(fname.value);
 
 function email_check(email) {
     console.log(email.value);
@@ -101,7 +104,7 @@ function re_password_check(repwd,pwd) {
 }
 
 function fname_check() {
-    if(fname.value !== "") {
+    if(regexFname.test(fname.value)) {
         fname.classList.add("validate");
         fname.classList.remove("err");
     } else {
@@ -110,12 +113,21 @@ function fname_check() {
     }
 }
 function lname_check() {
-    if(lname.value !== "") {
+    if(regexFname.test(lname.value)) {
         lname.classList.add("validate");
         lname.classList.remove("err");
     } else {
         lname.classList.add("err");
         lname.classList.remove("validate");
+    }
+}
+function mname_check() {
+    if(regexMname.test(mname.value)) {
+        mname.classList.add("validate");
+        mname.classList.remove("err");
+    } else {
+        mname.classList.add("err");
+        mname.classList.remove("validate");
     }
 }
 

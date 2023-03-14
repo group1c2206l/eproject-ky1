@@ -76,6 +76,7 @@
     </header>
 <!-- <<<<<<< HEAD -->
 <!-- home starts -->
+    <!-- Member information -->
     <?php
         $c = new config;
         $conn = $c->connect();
@@ -109,6 +110,7 @@
                     <p><i class="fas fa-map-marker-alt"></i> Address : <?= $results[0]["address"]  ?> </p>
                 </div>
         </div>
+        <!-- Edit member information -->
         <?php
             $p = new member;
             if(isset($_POST["submit"])) {
@@ -184,11 +186,11 @@
                     $p->feedback();
                 }
             ?>
-            <form action="<?= $_SERVER["PHP_SELF"] ?>" method="POST">
+            <form action="<?= $_SERVER["PHP_SELF"] ?>" method="POST" onsubmit="return edit_infor()">
                 <h4>What do you think about us?</h4>
                 <textarea name="about_u" id="about_u" cols="20" rows="10"></textarea>
                 <div class="btn-update">
-                    <button type="submit" name="btn_submit">Save  </button>
+                    <button class="btn-submit" type="submit" name="btn_submit">Save  </button>
                 </div>
             </form>
         </div>
@@ -269,9 +271,9 @@
             if(mes == true) {
                 return true;
             } else {
-                location.reload();
                 return false;
             };
+            location.reload();
         }
     </script>
     

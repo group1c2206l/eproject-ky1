@@ -13,7 +13,7 @@
                 $snt[] = $s;
             } else {
                 $flag = 1;
-                for($j=2; $j<$a/2; $j++) {
+                for($j=2; $j<$s; $j++) {
                     if($s%$j == 0) {
                         $flag++;
                         break;
@@ -24,7 +24,15 @@
                 }
             }
         }
-        print_r($snt);
+
+        for($i=0; $i<count($snt); $i++) {
+            
+            while($a % $snt[$i] == 0) {
+                $result[] = $snt[$i];
+                $a = $a/$snt[$i];
+            }
+        }
+        $mes = print_r($result);
         
     }
 
@@ -38,5 +46,5 @@
 
 </form>
 <p><?=$mes ?></p>
-<p>let test text</p>
+
 

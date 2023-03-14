@@ -158,7 +158,8 @@
             }
         </script>
         <!-- Show data -->
-         <table class="table table-dark table-hover table-result mt-2 table-bordered ">
+         <table class="table table-dark caption-top table-hover table-result mt-2 table-bordered ">
+            <caption class="text-light">Table: <?=$select ?></caption>
             <?php
                     switch($select) {
                         

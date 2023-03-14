@@ -176,6 +176,52 @@
             }
         }
 
+        //kiem tra password moi nhap vao co chinh quy
+        public function regexp_pass($str) {
+            $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //kiem tra email moi nhap vao co chinh quy
+        public function regexp_email($str) {
+            $pattern = '/^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //kiem tra user name moi nhap vao co chinh quy
+        public function regexp_username($str) {
+            $pattern = '/^[a-z0-9_-]{3,16}$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //kiem tra user name moi nhap vao co chinh quy
+        public function regexp_first_last_name($str) {
+            $pattern = '/^[a-zA-Z]+$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+        //kiem tra user name moi nhap vao co chinh quy
+        public function regexp_mid_name($str) {
+            $pattern = '/^[a-zA-Z]+[\s|-]?[a-zA-Z]+[\s|-]?$/';
+            if(preg_match($pattern,$str)) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+
         
     }
 
@@ -261,15 +307,7 @@
             }
         }
 
-        //kiem tra password moi nhap vao co chinh quy
-        public function regexp($str) {
-            $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
-            if(preg_match($pattern,$str)) {
-                return true;
-            } else {
-                return false;
-            }
-        }
+
     
         public function addnew() {
             $c = new config;
@@ -549,7 +587,7 @@
                     <td>'.$this->person_id.'</td>
                     <td>'.$this->email.'</td>
                     <td>'.$this->trainer_job.'</td>
-                    <td>'.$this->evaluate.'</td>
+                    <td class="overflow-hidden">'.$this->evaluate.'</td>
                     <td>'.$this->create_at.'</td>
                     <td>'.$this->update_at.'</td>
                     <td><button class="btn btn-primary"><a  class="text-light" href="edit.php?edit_id=person_trainer&person_trainer_id='.$this->person_trainer_id.'&fname='.$this->fname.'&mname='.$this->mname.'&code='.$this->code.'&lname='.$this->lname.'&dob='.$this->dob.'&address='.$this->address.'&phone_number='.$this->phone_number.'&person_id='.$this->person_id.'&email='.$this->email.'&trainer_job='.$this->trainer_job.'&evaluate='.$this->evaluate.' ">Edit</a></button></td>
@@ -1218,26 +1256,16 @@
                     }
                     $_SESSION["loggedin"] = TRUE;
                     setcookie("loggedin",md5($name),time()+86400,"/");
-                    // header("location: ./index.php");
+                    header("location: ./index.php");
                 } else {
                     if(session_id() === '') {
                         session_start();
                     }
                     $_SESSION["loggedin"] = TRUE;
-                    // header("location: ./index.php");
+                   
                 }
             } else {
                 $this->mes = "Invalid username or password";
-            }
-        }
-
-        //kiem tra password moi nhap vao co chinh quy
-        public function regexp($str) {
-            $pattern = '/^[a-zA-Z0-9@]{6,20}$/';
-            if(preg_match($pattern,$str)) {
-                return true;
-            } else {
-                return false;
             }
         }
 

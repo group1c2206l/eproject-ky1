@@ -22,7 +22,7 @@
                 switch($select) {
                     case "role":
                         echo   '<div class="mt-5 num">
-                                    <h3 class="text-center text-white">Add new roles</h3>
+                                    <h3 class="text-center text-white">Create new User</h3>
                                     <form action=""  method="POST">
                                         <div class="form-group mb-3 mt-6">
                                             <label  for="user_name" class="text-white">User name</label>

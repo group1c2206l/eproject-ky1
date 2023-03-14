@@ -17,6 +17,9 @@ body {
  .menu-body {
     width: 100%;
  }
+ .table-result tr{
+    max-height: 300px !important;
+ }
 .mmm {
     min-width: 25%;
     display: inline-block;

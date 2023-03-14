@@ -22,7 +22,6 @@
     if(isset($_GET["page"])) {
         $page = $_GET["page"];
     }
-    echo $select;
     switch($select) {
         case "login":  //form login
             if(isset($_POST["l_email"])) {
@@ -36,7 +35,7 @@
                     $p->saveme = $_POST["saveme"];
                 }
                 $p->logins();
-                $p->mes = "Login successfully !";
+                header("location: ./member.php");
             } else {
                 $p->mes = "Please enter full information !";
             }
@@ -71,11 +70,11 @@
                 $p->course_id = $p->id_to_name("course_id","course","name","NO");
                 // print_r($p);
                 if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
-                    if($p->regexp($_POST["r_pwd"])) {
+                    if($p->regexp_pass($_POST["r_pwd"])) {
                         if($p->password_hash == $p->re_password_hash) {
                             $p->addnew();
                             $p->mes = "Registered successfully, Please login ! !";
-                            header("location: ./index.php");
+                            header("location: ./member.php");
                         } else {
                             $p->mes = "The password is not the same !";
                         }
@@ -160,7 +159,7 @@
                     if(isset($_POST["n_repwd"])) {
                         $p->re_password_hash = sha1($_POST["n_repwd"]);
                     }
-                    if($p->regexp($_POST["n_pwd"])) {
+                    if($p->regexp_pass($_POST["n_pwd"])) {
                         if($p->password_hash == $p->re_password_hash) {
                             $p->new_pass();
                             $p->mes = "Update success, you can login.";
@@ -215,7 +214,7 @@
             </div>
             <div class="group-item">
                 <label for="">First Name :</label>
-                <input type="text" name="fname" placeholder="" onblur="fname_check()">
+                <input class="fname" type="text" name="fname" placeholder="" onblur="fname_check()">
             </div>
             <div class="group-item">
                 <label for="">Mid Name :</label>

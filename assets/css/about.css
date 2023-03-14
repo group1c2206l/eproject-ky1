@@ -295,9 +295,6 @@ section{
     color: #f7f2f2;
 }
 
-.trainers .trainer-slider .info-trainer{
-}
-
 .trainers .swiper-slide {
     box-shadow: 0 5rem 5rem rgba(0,0,0,.3)
 }
@@ -309,10 +306,7 @@ section{
 }
 
 /* photo library */
-.blogs {
-    /* max-width: 1400px; */
-    /* margin: 0 auto; */
-}
+
 .blogs .heading {
     color: white !important;
 }
