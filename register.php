@@ -214,11 +214,11 @@
             </div>
             <div class="group-item">
                 <label for="">First Name :</label>
-                <input class="fname" type="text" name="fname" placeholder="" onblur="fname_check()">
+                <input class="fname" type="text" name="fname" placeholder="First name" onblur="fname_check()">
             </div>
             <div class="group-item">
                 <label for="">Mid Name :</label>
-                <input type="text" name="mname" placeholder="">
+                <input type="text" name="mname" placeholder="Mid name" onblur="mname_check()">
             </div>
             <div class="group-item">
                 <label for="">Last Name :</label>
