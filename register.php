@@ -69,46 +69,24 @@
                 $p->package_id = $p->id_to_name("package_id","package","name","NO");
                 $p->course_id = $p->id_to_name("course_id","course","name","NO");
                 // print_r($p);
-                if($p->fname != NULL && $p->lname != NULL && $p->password_hash != NULL && $p->re_password_hash != NULL && $p->phone_number != NULL && $p->email != NULL) {   
-                    if($p->regexp_pass($_POST["r_pwd"])) {
-                        if($p->password_hash == $p->re_password_hash) {
-                            $p->addnew();
-                            $p->mes = "Registered successfully, Please login ! !";
-                            header("location: ./member.php");
-                        } else {
-                            $p->mes = "The password is not the same !";
-                        }
+                 
+                if($p->regexp_pass($_POST["r_pwd"])==true && $p->regexp_first_last_name($p->fname)==true && $p->regexp_email($p->email)==true || $p->regexp_mid_name($p->mname)==true) {
+                    if($p->password_hash == $p->re_password_hash) {
+                        $p->addnew();
+                        $p->mes = "Registered successfully, Please login ! !";
+                        header("location: ./register.php?page=2");
                     } else {
-                        $p->mes = "The password is not in the correct format!";
+                        $p->mes = "The password is not the same !";
                     }
                 } else {
-                    $p->mes = "Please enter full information !";
-                }
+                    $p->mes = "The password is not in the correct format!";
+                } 
                 break;
             case "reset":  //form reset
                 if(isset($_POST["f_email"])) {
                     $p->email = $_POST["f_email"];
                 }
                 if($p->check_email()) {
-                    // $m = new mail;
-                    // $m->to = $p->email;
-                    // $m->subject = "Reset password!";
-                    // $m->link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
-                    // // Always set content-type when sending HTML email
-                    // $m->headers = "MIME-Version: 1.0" . "\r\n";
-                    // $m->headers .= "Content-type:text/html;charset=UTF-8" . "\r\n";
-                    // $m->headers .= "From: Prime Fitness" . "\r\n";
-                    // $m->message = ' <html>
-                    //                     <head>
-                    //                     <title>HTML email</title>
-                    //                     </head>
-                    //                     <body>
-                    //                         <p style="color:red;font-size:20px;font-weight:bold;">Please click below link to reset password:</p>
-                    //                         <a href="'.$m->link_reset.'">Click here</a>
-                    //                     </body>
-                    //                 </html>';
-                    // // print_r($m);
-                    // $m->send_mail();
                     $link_reset = "http://localhost/eproject-ky1/register.php?page=4&mid=".md5($p->email);
                     $to = $p->email;
                     $subject = "Reset password!";
@@ -222,7 +200,7 @@
             </div>
             <div class="group-item">
                 <label for="">Last Name :</label>
-                <input type="text" name="lname" placeholder="" onblur="lname_check()">
+                <input type="text" name="lname" placeholder="Last name" onblur="lname_check()">
             </div>
             <div class="group-item">
                 <label for="">Phone :</label>

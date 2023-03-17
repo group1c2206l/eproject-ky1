@@ -214,7 +214,7 @@
         }
         //kiem tra user name moi nhap vao co chinh quy
         public function regexp_mid_name($str) {
-            $pattern = '/^[a-zA-Z]+[\s|-]?[a-zA-Z]+[\s|-]?$/';
+            $pattern = '/^[a-zA-Z\s]{0,20}$/';
             if(preg_match($pattern,$str)) {
                 return true;
             } else {

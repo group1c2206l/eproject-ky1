@@ -1,4 +1,4 @@
-"use strict";
+
 var register = document.getElementById("register-form");
 var login = document.getElementById("login-form");
 var reset = document.getElementById("reset-form");
@@ -19,7 +19,7 @@ function show(a) {
     num = a;
     localStorage.setItem("menu",num);
     switch(a) {
-        case a = 1:
+        case a = 1:    //show form register
             register.style.display = "block";
             login.style.display = "none";
             reset.style.display = "none";
@@ -27,7 +27,7 @@ function show(a) {
             menu_login.classList.remove("active");
             menu_reg.classList.add("active");
         break;
-        case a = 2:
+        case a = 2:  //show form login
             register.style.display = "none";
             login.style.display = "block";
             reset.style.display = "none";
@@ -35,7 +35,7 @@ function show(a) {
             menu_login.classList.add("active");
             menu_reg.classList.remove("active");
         break;
-        case a = 3:
+        case a = 3:  //show form reset password
             register.style.display = "none";
             login.style.display = "none";
             reset.style.display = "block";
@@ -43,7 +43,7 @@ function show(a) {
             menu_login.classList.remove("active");
             menu_reg.classList.remove("active");
         break;
-        case a = 4:
+        case a = 4:  //show form enter new password
             register.style.display = "none";
             login.style.display = "none";
             reset.style.display = "none";
@@ -66,15 +66,15 @@ var fname = document.querySelector('.fname');
 var mname = document.querySelector('input[name="mname"]');
 var lname = document.querySelector('input[name="lname"]');
 var phone = document.querySelector('input[name="phone_number"]');
+
 const regexEmail = /^[a-zA-Z0-9._-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/;
 const regexPass = /^[a-zA-Z0-9@]{6,}$/;
 const regexPhone = /^0[0-9]{9}$/;
 const regexFname = /^[a-zA-Z]{1,10}$/;
-const regexMname = /^[a-zA-Z]+[\s|-]?[a-zA-Z]+[\s|-]?$/;
-console.log(fname.value);
+const regexMname = /^[a-zA-Z\s]{0,20}$/;
+
 
 function email_check(email) {
-    console.log(email.value);
     if(regexEmail.test(email.value)) {
         email.classList.add("validate");
         email.classList.remove("err");
@@ -122,6 +122,7 @@ function lname_check() {
     }
 }
 function mname_check() {
+    console.log(mname.value);
     if(regexMname.test(mname.value)) {
         mname.classList.add("validate");
         mname.classList.remove("err");
@@ -143,39 +144,39 @@ function phone_check() {
 
 function validate_Register_Form() {    
     if(!regexEmail.test(r_email.value.trim())) {
-        alert("Email khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
 
     if(!regexPass.test(r_pwd.value.trim())) {
-        alert("pass khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
 
     if(r_pwd.value.trim() !== r_repwd.value.trim()) {
-        alert("pass khong trung nhau");
+        alert("Passwords do not match");
         return false;
     }
 
     if(fname.value.trim() === "" || lname.value.trim() === "") {
-        alert("Do not leave first and last name blank");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
 
     if(!regexPhone.test(phone.value.trim())) {
-        alert("Phone khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
     return true;
 }
 
-function validate_Login_Form() {
+function validate_Login_Form() {   //validate form login
     if(!regexEmail.test(l_email.value.trim())) {
-        alert("Email khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
     if(!regexPass.test(l_pwd.value.trim())) {
-        alert("pass khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
     return true;
@@ -183,7 +184,7 @@ function validate_Login_Form() {
 
 function validate_Reset_Form() {
     if(!regexEmail.test(f_email.value.trim())) {
-        alert("Email khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
     return true;
@@ -191,12 +192,12 @@ function validate_Reset_Form() {
 
 function validate_NewPass_Form() {
     if(!regexPass.test(n_pwd.value.trim())) {
-        alert("pass khong hop le");
+        alert("This field cannot be left blank or the content is invalid");
         return false;
     }
 
     if(n_pwd.value.trim() !== n_repwd.value.trim()) {
-        alert("pass khong trung nhau");
+        alert("Passwords do not match");
         return false;
     }
     return true;
