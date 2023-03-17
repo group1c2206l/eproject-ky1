@@ -47,7 +47,7 @@
     <link href="https://cdnjs.cloudflare.com/ajax/libs/mdb-ui-kit/6.1.0/mdb.min.css"rel="stylesheet"/>
     <!-- Latest compiled and minified CSS -->
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/css/bootstrap.min.css" integrity="sha384-TX8t27EcRE3e/ihU7zmQxVncDAy5uIKz4rEkgIXeMed4M0jlfIDPvg6uqKI2xXr2" crossorigin="anonymous">
-    <link rel="stylesheet" href="./assets/css/service.css">
+    <!-- <link rel="stylesheet" href="./assets/css/service.css"> -->
     <style>
         :root{
         --main-color: #f05812;
@@ -1054,20 +1054,20 @@
             <a href="./index.php" class="logo">Prime<span>Fitness</span></a>
             
             <nav class="navbar">
-            <a href="./index.php">Home</a>
-            <a href="./about.php">About</a>
-            <a href="./service.php">Services</a>
-            <a href="./course.php">Course</a>
-            <a href="./package.php">Package</a>
-            <?php
-                if($user == "") {
-                    echo '<a href="./register.php">Login</a>';
-                } else {
-                    echo '<a href="./logout.php">Logout</a>';
-                }
-            
-            ?>
-        </nav>
+                <a href="./index.php">Home</a>
+                <a href="./about.php">About</a>
+                <a href="./service.php">Services</a>
+                <a href="./course.php">Course</a>
+                <a href="./package.php">Package</a>
+                <?php
+                    if($user == "") {
+                        echo '<a href="./register.php">Login</a>';
+                    } else {
+                        echo '<a href="./logout.php">Logout</a>';
+                    }
+                
+                ?>
+            </nav>
             <div class="icons">
                 <?php 
                     if($user == "") {
@@ -1079,7 +1079,7 @@
                 <div id="menu-btn" class="fas fa-bars"></div>
             </div>
         </header>
-        <div class=" d-flex flex-wrap justify-content-center">
+        <div class=" d-flex flex-wrap flex-column  justify-content-center align-items-center">
             <?php
                 $c = new config;
                 $conn = $c->connect();
