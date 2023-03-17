@@ -1222,6 +1222,7 @@
     
     <section class="footer">
         <div class="box-container">
+            
             <div class="box">
                 <h1>about</h1>
                 <div class="text">
@@ -1234,15 +1235,17 @@
                     <a href=""><i class="fab fa-instagram"></i></a>
                 </div>
             </div>
-
             <div class="box">
-                <h1>contact info</h1>
+                <h1>quick Link</h1>
                 <div class="icon">
-                    <a href="#"><i class="fas fa-map-marker-alt"></i>Doi can, </a>
-                    <a href=""><i class="fas fa-phone-alt"></i>030303030</a>
-                    <a href=""><i class="fas fa-envelope"></i>primefitness@gmail.com</a>
+                    <a href="./index.php">Home</a>
+                    <a href="./about.php">About</a>
+                    <a href="./service.php">Services</a>
+                    <a href="./course.php">Course</a>
+                    <a href="./package.php">Member</a>
                 </div>
             </div>
+            
         </div>
     </section>
     <script src="./assets/js/navbar.js"></script>

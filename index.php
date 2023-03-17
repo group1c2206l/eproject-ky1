@@ -112,7 +112,7 @@
                 <?php
                     $c = new config;
                     $conn = $c->connect();
-                    $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1';";
+                    $sql = "select G.dir gdir,G.img_name gimgname,S.name sname,S.title FROM galery G INNER JOIN service S ON G.item_id = S.service_id WHERE G.galery_type_name = 'service' AND S.flag = '1' AND G.flag = '1';";
                     $stmt = $conn->prepare($sql);
                     $stmt->execute();
                     $results = $stmt->fetchAll();
@@ -132,7 +132,7 @@
             </div>
         </div>
     </section>
-<!-- schedule starts -->
+<!-- course -->
     <section class="schedule">
         <h1 class="heading"><span>FEATURED</span> CLASS</h1>
 
