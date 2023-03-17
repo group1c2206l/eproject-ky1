@@ -1,8 +1,15 @@
 <?php
     class config {
-        public $server_name = "103.200.23.160";
-        public $user_name = "digishop_group2";
-        public $password = "c2206lgroup2";
+        // public $server_name = "103.200.23.160";
+        // public $user_name = "digishop_group2";
+        // public $password = "c2206lgroup2";
+        // public $database_name = "digishop_prime_fitness";
+        // public $port = "3306";
+        // public $conn;
+
+        public $server_name = "localhost";
+        public $user_name = "root";
+        public $password = "";
         public $database_name = "digishop_prime_fitness";
         public $port = "3306";
         public $conn;

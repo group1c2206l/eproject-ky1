@@ -190,7 +190,7 @@
 
     <section class="footer">
         <div class="box-container">
-        <div class="box">
+            <div class="box">
                 <h1>quick Link</h1>
                 <div class="icon">
                     <a href="./index.php">Home</a>
