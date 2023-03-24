@@ -119,7 +119,7 @@
                     foreach($results as $row) {
                         echo '<div class="swiper-slide box">
                                     <div class="image">
-                                        <img src='.$row["gdir"].$row["gimgname"].' alt="">
+                                       <a href="./service.php"> <img src='.$row["gdir"].$row["gimgname"].' alt=""></a>
                                     </div>
                                     <div class="content">
                                         <h3>'.$row["sname"].'</h3>
