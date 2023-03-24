@@ -58,7 +58,7 @@
                     $p->password_hash = sha1($_POST["current_password"]);
                     $p->new_password_hash = sha1($_POST["new_password"]);
                     if($p->check_current_pass()) {   //kiem tra current password
-                        if($p->regexp($_POST["new_password"])) {
+                        if($p->regexp_pass($_POST["new_password"])) {
                             $p->edit();
                             header("location: dashboard.php?select=role");
                         } else {
